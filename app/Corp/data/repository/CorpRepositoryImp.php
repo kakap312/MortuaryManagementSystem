@@ -1,0 +1,63 @@
+<?php
+namespace App\Corp\data\repository;
+use App\Corp\data\db\dao\CorpDao;
+use App\Corp\domain\repository\CorpRepository;
+use App\core\domain\Result;
+use App\Corp\data\mappers\DomainToDbCorpMapper;
+use App\Corp\data\mappers\DbCorpToDomainMapper;
+
+class CorpRepositoryImp implements CorpRepository{
+
+    static function createCorp($savedCorpInfo)
+    {
+        if(CorpDao::insertCorp(DomainToDbCorpMapper::map($savedCorpInfo))){
+            return new Result(null,true);
+        }else{
+            return new Result(null,false);
+        }  
+    }
+    public static function fetchCorps(){
+        if(is_null(CorpDao::findAllCorps())){
+            return new Result(null,false);
+        }else{
+            $dbCorps = CorpDao::findAllCorps();
+            $corps = array();
+            foreach ($dbCorps as $dbcorp) {
+                array_push($corps,DbCorpToDomainMapper::map($dbcorp));
+            }
+            return new Result($corps,true);
+        }
+    }
+
+    public static function updateCorp($id,$savedCorpInfo){
+        if(CorpDao::updateCorp($id,DomainToDbCorpMapper::map($savedCorpInfo))){
+            return new Result(null,true);
+        }else{
+            return new Result(null,false);
+        } 
+    }
+    public static function searchCorpById($nameOrId)
+    {
+        $dbCorp = CorpDao::findCoprById($nameOrId);
+        if(is_null($dbCorp)){
+            return new Result(null,false);
+        }else{
+            $corp = DbCorpToDomainMapper::map($dbCorp);
+            // foreach ($dbCorps as $dbcorp) {
+            //     array_push($corps,DbCorpToDomainMapper::map($dbcorp));
+            // }
+            return new Result($corp,true);
+        }
+
+    }
+   
+    public static function  deleteCorp($id){
+        if(!(CorpDao::deleteCorpById($id))){
+            return new Result(null,false);
+        }else{
+            return new Result(null,true);
+        }
+    }
+
+    
+}

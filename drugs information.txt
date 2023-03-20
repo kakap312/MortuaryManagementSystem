@@ -1,0 +1,15 @@
+drug type 
+
+tablet 
+capsules 
+syrup ( thick liquid )
+suspension ( dissolves but have separation )
+powder ( ready to be dissolved)
+cream / gel ( like tooth paste and semi solid)
+ointiments
+suppositoires ( all drugs used in anus)
+
+drug group 
+internal ( oral )
+eternal ( non oral )
+
