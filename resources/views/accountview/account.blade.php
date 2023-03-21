@@ -6,8 +6,8 @@
             <div class="img-holder">
                 <div class="bg"></div>
                 <div class="info-holder">
-                    <h3>Get more things done with our PMS</h3>
-                    <p>Access to the most powerfull tool to manage your pharmacy shop</p>
+                    <h3>Get more things done with our MMS</h3>
+                    <p>Access to the most powerfull tool to manage your Mortuary shop</p>
                     <img src="{{ asset('img/graphic5.svg')}}" alt="">
                 </div>
             </div>
@@ -29,7 +29,7 @@
                             <input class="form-control" id='dbroute' data-action="{{ route('dbroute')}}" type='hidden' >
                                 <input class="form-control" data-action="{{route('username')}}" type="text" id='username' name="username" placeholder="Username" required>
                                 <p class='usernamemessage'></p><br>
-                                <input class="form-control password" data-action="{{route('password.validation')}}" type="password" name="password" placeholder="Password" required>
+                                <input class="form-control password" data-action="{{route('validatepassword')}}" type="password" name="password" placeholder="Password" required>
                                 <img class='password-eye' src="{{ asset('img/passwordeye.png')}}"/>
                                 <p class='passwordmessage'></p>
                                 <div class="form-button">

@@ -11,6 +11,9 @@
 */
 
 // route for corpse feature
+Route::get('/', function(){
+    return "hello";
+});
 Route::post('/userdashboard/createcorp','CorpController@registerCorp')->name('createcorp');
 Route::post('/userdashboard/update','CorpController@updateCorp')->name('updatecorp');
 Route::get('/userdashboard/fetchcorps','CorpController@viewAllCorps')->name('fetchcorps');
@@ -32,6 +35,7 @@ Route::get('/userdashboard/viewbillings','BillingController@viewBills')->name('v
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
 Route::get('/account','AccountController@renderAccountView');
 Route::post('/account/validateusername','AccountController@validateUsername')->name('username');
+Route::post('/account/validatepassword','AccountController@validatePassword')->name('validatepassword');
 Route::get('/userdashboard',function(){
     return view('dashboard.userdashboard');
 })->name('dbroute');

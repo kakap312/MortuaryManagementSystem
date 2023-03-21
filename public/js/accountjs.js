@@ -13,7 +13,6 @@ $(document).ready(function(){
         var accountUsernameValidationRoute = $('#username').attr('data-action');
         var formData = createFormData(null,['username'],[$("#username").val()]);
         var response = requestDataFromSever(accountUsernameValidationRoute,requestMethod,formData);
-        isUsernameValid = response.isUsernameValid;
         showMessage(response.isUsernameValid,"USERNAME_VALIDATION_ERROR",'.usernamemessage');
     });
 
@@ -21,7 +20,6 @@ $(document).ready(function(){
         var accountPasswordValidationRoute = $('.password').attr('data-action');
         var formData  = createFormData(null,['password'],[$(".password").val()]);
         var response = requestDataFromSever(accountPasswordValidationRoute,requestMethod,formData);
-        isPasswordValid = response.isPasswordValid;
         showMessage(response.isPasswordValid,"PASSWORD_VALIDATION_ERROR",'.passwordmessage');
     });
 
