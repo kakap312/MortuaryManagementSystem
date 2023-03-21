@@ -30,7 +30,9 @@ $(document).ready(function(){
         var formData  = createFormData($("#loginform")[0],['action'],['login']);
         var response = requestDataFromSever(accountLoginRoute,requestMethod,formData);
         if(response.content != null){
-            window.location.href = $('#dbroute').attr('data-action');;
+            window.location.href = $('#dbroute').attr('data-action');
+        }else{
+            showMessage(response.isAccountFound,"ACCOUNT_NOT_FOUND","",true);
         }
     });//end of loginformsubmit
 });

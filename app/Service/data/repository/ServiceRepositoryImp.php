@@ -22,7 +22,7 @@ class ServiceRepositoryImp implements ServiceRepository{
             $services = array_map(function($dbService){
                 $service = DbServiceToDomainMapper::map($dbService);
                 return $service;
-            },$dbServices);
+            },$dbServices->toArray());
             return new Result($services,true);
         }
     }

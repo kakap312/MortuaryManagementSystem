@@ -108,15 +108,14 @@ function fetchCorpse(){
 function populateCorpView(){
     $('.datarow').remove();
     var position = 0;
-    if(corps.length > 1 ){
+    if(corps.length >= 1 ){
         corps.forEach(corp => {
             viewCorpseInformation(corp,position)
             position++;
         });
-    }else if(corps != null){
-        viewCorpseInformation(corps,position);
-    }else{
-        showMessage((corps.length == 0) || (corps == null) ,"CORP_NOT_FOUND",null,true);
+    }
+    else{
+        showMessage("" ,"CORP_NOT_FOUND",null,true);
     }
 function viewCorpseInformation(corpse,position) {
     $('.corpsviewtable').append(
@@ -174,7 +173,7 @@ function populateFridges(){
 function populateSlots(){
     $('.slotnames').remove();
     slots.forEach(slot => {
-        (slot.state == 'free')?$('.availableslots').append('<option class="slotnames">'+slot.name+'</option>'):null  
+        (slot.state == 'free')?$('.availableslots').append('<option class="slotnames">'+slot.name+'</option>'):$('#sloterrormessage').show(); 
     });
 }
 function populateCorpDetail(){

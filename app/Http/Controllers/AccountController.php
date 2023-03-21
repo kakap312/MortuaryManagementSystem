@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use Session;
 use Illuminate\Http\Request;
 use App\Account\data\db\dao\AccountDao;
 use App\Account\data\AccountRepositoryImp;
@@ -18,12 +18,14 @@ class AccountController extends Controller
     function accountLogin(Request $req){
 
         $result = (new AccountRepositoryImp())->Login($req->get('username'),$req->get('password'));
-        if(count($result->getData()) == 0){
+        if(is_null($result->getData())){
             $accountViewModel = new AccountViewModel(false,false,false,null);
             return response()->json(json_decode(json_encode($accountViewModel),true));
         }else{
             $accountViewModel = new AccountViewModel(false,false,false,$result->getData());
+            Session::put("username",$req->get('username'));
             return response()->json(json_decode(json_encode($accountViewModel),true));
+
         }
     }
     function validateUsername(Request $req){

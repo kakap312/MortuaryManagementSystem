@@ -54,9 +54,10 @@
     </div>
     <div class="form-floating mb-3 col" id='slotsurl' data-action="{{route('fetchslots')}}">
     <label for="floatingInput">Available Slots</label>
-    <select  class="availableslots js-example-basic-single form-control" id='slots' name='availableslots' data-action="{{ route('fetchavailableslots')}}">
+    <select  class="availableslots js-example-basic-single form-control" id='slots' name='availableslots' data-action="{{ route('fetchavailableslots')}}" required>
     <option disabled selected>choose a slot</option>
     </select>
+    <p id='sloterrormessage' style='display:none; color:red;'>No Slot available for the Fridge Selected.</p>
     <button id='freeslot' style='display:none' data-action="{{ route('freeslot')}}"  class='btn btn-info' type='button'>Free Slot</button>
     </div>
     </div>

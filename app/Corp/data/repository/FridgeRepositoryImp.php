@@ -10,10 +10,11 @@ class FridgeRepositoryImp implements FridgeRepository{
 
     static function createFridge($savedCorpInfo){}
     public static function fetchFridge(){
-        if(is_null(FridgeDao::findAllFridge())){
+        $dbFridges = FridgeDao::findAllFridge();
+        if(is_null($dbFridges)){
             return new Result(null,false);
         }else{
-            $dbFridges = FridgeDao::findAllFridge();
+            
             $fridges = array();
             foreach ($dbFridges as $dbFridge) {
                 array_push($fridges,DbFridgeToDomainMapper::map($dbFridge));

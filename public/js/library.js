@@ -78,7 +78,8 @@ export function stringValue(name){
         ["CREATE_CORPSE_CONFIRMATION","Are you sure you want to add Corpse"],
         ["CREATE_BILLING_CONFIRMATION","Are you sure you want to add Bill"],
         ["UPDATE_CORPSE_CONFIRMATION","Are you sure you want to update Corpse"],
-        ["BILL_CREATION_SUCCESS","Congratulation Bill created successfully"]
+        ["BILL_CREATION_SUCCESS","Congratulation Bill created successfully"],
+        ["ACCOUNT_NOT_FOUND","Sorry Account is not found"]
     ]
         )
     return stringMap.get(name);

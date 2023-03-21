@@ -5,9 +5,9 @@ use App\Corp\domain\model\Slot;
 class DbSlotToDomainMapper{
     static function map($dbSlot){
         return new  Slot(
-            $dbSlot->slotId,
-            $dbSlot->name,
-            $dbSlot->state,
+            is_null($dbSlot->slotId)?"":$dbSlot->slotId,
+            is_null($dbSlot->name)?"":$dbSlot->name,
+            is_null($dbSlot->state)?"":$dbSlot->state,
         );
     }
 }

@@ -33,11 +33,20 @@ Route::post('/userdashboard/createbilling','BillingController@createBill')->name
 Route::get('/userdashboard/viewbillings','BillingController@viewBills')->name('viewbills');
 //Account Route
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
-Route::get('/account','AccountController@renderAccountView');
+Route::get('/account','AccountController@renderAccountView')->name('account');
+Route::get('/logout',function(){
+    Session::forget('username');
+    return  redirect()->route('account');
+})->name('logout');
 Route::post('/account/validateusername','AccountController@validateUsername')->name('username');
 Route::post('/account/validatepassword','AccountController@validatePassword')->name('validatepassword');
 Route::get('/userdashboard',function(){
-    return view('dashboard.userdashboard');
+    if(Session::get('username')){
+        return view('dashboard.userdashboard');
+    }else{
+       return  redirect()->route('account');
+    }
+    
 })->name('dbroute');
 
 // route for services 
