@@ -12,6 +12,7 @@ use App\Corp\presentation\mappers\CorpToUiModelMapper;
 use App\Corp\presentation\mappers\FridgeToUiModelMapper;
 use App\Corp\presentation\mappers\SlotToUiModelMapper;
 use App\Corp\domain\validation\CorpseDataValidation;
+use App\Corp\domain\validation\FieldValidation;
 
 class CorpController extends Controller
 {
@@ -19,13 +20,18 @@ class CorpController extends Controller
     function registerCorp(Request $req)
     {
         $savedCorpInfo = CorpFactory::makeSaveCorpInfo($req);
-        $isCorpCreated = CorpRepositoryImp::createCorp($savedCorpInfo)->getSuccess();
-        if($isCorpCreated){
-            if(SlotRepositoryImp::updateSlot($req->get('slotId'),['state'=>'used'])->getSuccess()){
-                return response()->json(CorpViewModel::mapOfSuccess($isCorpCreated));
+        $corpseFieldValidator = new FieldValidation($savedCorpInfo);
+        if($corpseFieldValidator->isAllFieldValid()){
+            $savedCorpInfo = CorpFactory::makeSaveCorpInfo($req);
+            $isCorpCreated = CorpRepositoryImp::createCorp($savedCorpInfo)->getSuccess();
+                if($isCorpCreated){
+                    if(SlotRepositoryImp::updateSlot($req->get('slotId'),['state'=>'used'])->getSuccess()){
+                    return response()->json(CorpViewModel::mapOfSuccess($isCorpCreated));
+                }
             }
-        }
-        
+        }else{
+            return response()->json($corpseFieldValidator->mapOfFieldValidation());
+        } 
     }
     function updateCorp(Request $req)
     {
@@ -74,9 +80,10 @@ class CorpController extends Controller
     
     function viewAllFridges()
     {
-        if(FridgeRepositoryImp::fetchFridge()->getSuccess()){
+        $fridges = FridgeRepositoryImp::fetchFridge();
+        if($fridges->getSuccess()){
             $uiFridges = array();
-            foreach (FridgeRepositoryImp::fetchFridge()->getData() as $fridge) {
+            foreach ($fridges->getData() as $fridge) {
                array_push($uiFridges,FridgeToUiModelMapper::map($fridge));
             }
             return response()->json(CorpViewModel::mapOfFridges($uiFridges));

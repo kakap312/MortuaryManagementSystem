@@ -7,6 +7,7 @@ class CorpFactory{
         $id = $rquest->get('corpId');
         return new SavedCorpInfo(
             $id = isset($id)?$rquest->get('corpId'):"",
+            $corpseCode = is_null($rquest->get('corpseCode'))?"":$rquest->get('corpseCode'),
             $admissionDAte = is_null($rquest->get('admissionDate'))?"":$rquest->get('admissionDate') ,
             $collectionDate = is_null($rquest->get('collectionDate'))?"":$rquest->get('collectionDate'),
             $name = is_null($rquest->get('name'))?"": $rquest->get('name'),
@@ -20,7 +21,8 @@ class CorpFactory{
             $updatedAt = is_null($rquest->get('updatedAt'))?"":$rquest->get('releasedBy'),
             $hometown = is_null($rquest->get('hometown'))?"":$rquest->get('hometown'),
             $fridgeId = is_null($rquest->get('fridgeId'))?"":$rquest->get('fridgeId'),
-            $slotId = is_null($rquest->get('slotId'))?"":$rquest->get('slotId')
+            $slotId = is_null($rquest->get('slotId'))?"":$rquest->get('slotId'),
+            $category = is_null($rquest->get('category'))?"":$rquest->get('category')
         );
     }
 }

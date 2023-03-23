@@ -5,6 +5,7 @@
     <div class="card-body">
     
     <form id='registercorpform' data-action= "{{route('createcorp')}}"  enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class='forminstructon' data-action= "{{route('updatecorp')}}" >
     <p id='topdecoration' ></p>
     <h2 id='corpseregistrationtext'>Corpse Registration Form</h2>
@@ -14,10 +15,12 @@
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Admission Date</label>
     <input class="form-control" type="date" id='admissionDate' name="admissionDate" required>
+    <p id="admissiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Colection Date</label>
     <input class="form-control" type="date" id='collectionDate' name="collectionDate" required>
+    <p id="collectiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     </div>
     <div class="form-floating mb-3 validatename"  data-action="{{ route('validatename')}}">
@@ -37,25 +40,35 @@
     <option value='M'>M</option>
     <option value='F'>F</option>
     </select>
+    <p id='sexError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, Kindly choose sex.</p>
     </div>
     </div>
-    <div class="form-floating mb-3">
+    <div class='form-row'>
+    <div class="form-floating mb-3 col">
     <label for="floatingInput">Hometown</label>
     <input class="form-control" type="text" id='hometown' name="hometown" required>
     <p id='hometownError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, hometown must be 30 characters and must not contain numbers</p>
+    </div>
+    <div class="form-floating mb-3 col">
+    <label for="floatingInput">Category</label>
+    <select class="js-example-basic-single form-control"  name='category'>
+    <option value='VIP'>VIP</option>
+    <option value='Normal'>Regular</option>
+    </select>
+    <p id='hometownError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, hometown must be 30 characters and must not contain numbers</p>
+    </div>
     </div>
 
     <div class='form-row'>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Fridge Name</label>
     <select class="fridgename js-example-basic-single form-control" data-action="{{ route('fetchfridges')}}" id='fridgename' name='fridgename'>
-    <option disabled selected>choose a fridge</option>
     </select>
+    <p id='fridgeerrormessage' style='display:none; color:red;'>Please choose a  Fridge</p>
     </div>
     <div class="form-floating mb-3 col" id='slotsurl' data-action="{{route('fetchslots')}}">
     <label for="floatingInput">Available Slots</label>
     <select  class="availableslots js-example-basic-single form-control" id='slots' name='availableslots' data-action="{{ route('fetchavailableslots')}}" required>
-    <option disabled selected>choose a slot</option>
     </select>
     <p id='sloterrormessage' style='display:none; color:red;'>No Slot available for the Fridge Selected.</p>
     <button id='freeslot' style='display:none' data-action="{{ route('freeslot')}}"  class='btn btn-info' type='button'>Free Slot</button>

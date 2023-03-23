@@ -11,6 +11,51 @@ $(document).ready(function(){
     fetchCorpse();
     
     validation();
+    var list = [1,2,3,4,5,6,7,8,4,7,9,3];
+    var maximumDisplayDigit = 5; 
+    var startDisplayFrom = maximumDisplayDigit; //2
+
+
+    $('.next').click(function(){
+        var currentNumberOfElementInList = list.length - startDisplayFrom // (12) - (5) = 7; //3
+        if(currentNumberOfElementInList > 5){
+            for ( var i = startDisplayFrom; i < (startDisplayFrom+5); i++){
+                console.log(list[i]);
+            }
+            startDisplayFrom = startDisplayFrom + 5; //
+            console.log(currentNumberOfElementInList);
+        }else if (currentNumberOfElementInList > 0  && currentNumberOfElementInList < 5 ){
+            for (var i=startDisplayFrom; i< startDisplayFrom + currentNumberOfElementInList; i++){
+                console.log(list[i]);
+                //populatetable(index,bound);
+            }
+            startDisplayFrom = startDisplayFrom + currentNumberOfElementInList;
+            console.log(currentNumberOfElementInList);
+        }else if ((startDisplayFrom + currentNumberOfElementInList) == list.length){
+            console.log("No item to display");
+        }
+        
+    });
+    $('.previous').click(function(){
+        var currentNumberOfElementInList = list.length + startDisplayFrom // (12) - (5) = 7; //3
+        if(currentNumberOfElementInList < 5){
+            for ( var i = startDisplayFrom; i < (startDisplayFrom+5); i++){
+                console.log(list[i]);
+            }
+            startDisplayFrom = startDisplayFrom + 5; //
+            console.log(currentNumberOfElementInList);
+        }else if (currentNumberOfElementInList > 5){
+            for (var i=startDisplayFrom; i< startDisplayFrom + currentNumberOfElementInList; i++){
+                console.log(list[i]);
+                //populatetable(index,bound);
+            }
+            startDisplayFrom = startDisplayFrom + currentNumberOfElementInList;
+            console.log(currentNumberOfElementInList);
+        }else if ((startDisplayFrom + currentNumberOfElementInList) == list.length){
+            console.log("No item to display");
+        }
+        
+    });
     $("#addcorplink").click(function(){
         showOrHideSection('.addcorpsection');
         resetForm('#registercorpform');
@@ -37,7 +82,7 @@ $(document).ready(function(){
             importCSS:true,
             loadCSS:"/css/style.css",
             importStyle: true,
-            base:"https://localhost/MMS/public/"
+            base:"http://localhost/MortuaryManagementSystem/public/"
         });
     });
     $("#registercorpbtn").click(function(e){
@@ -47,11 +92,25 @@ $(document).ready(function(){
         var createCorpUrl = $('#registercorpform').attr('data-action');
         if(state == 'Register'){
             if(confirm(stringValue("CREATE_CORPSE_CONFIRMATION"))){
-            var response = requestDataFromSever(createCorpUrl,"POST",createFormData($("#registercorpform")[0],['fridgeId','slotId'],[fridgeId,slotId]));
+                var corpseCode = generateCorpseUniqueId();
+                var response = requestDataFromSever(createCorpUrl,"POST",createFormData($("#registercorpform")[0],['fridgeId','slotId','corpseCode'],[fridgeId,slotId,corpseCode]));
             if(response.success){
                 showMessage(response.success,"REGISTERED_SUCCESS",null,true);
                 resetForm('#registercorpform');
             }else{
+                response.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
+                response.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
+                response.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
+                response.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
+                response.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
+                response.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
+                response.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
+                response.isSexValid ?$('#sexError').hide(): $('#sexError').show();
+                response.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
+                response.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
+                response.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
+                response.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
+                response.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
                 showMessage(response.isCorpCreated,"REGISTERED_ERROR",null,true);
             }
         }
@@ -92,8 +151,11 @@ function fetchAvailableSlotByFidgeId(fridgeId){
 }
 function fetchFridges(){
     var fridgesUrl = $('.fridgename').attr('data-action');
-    var response = requestDataFromSever(fridgesUrl,"GET",createFormData(null,[''],['']));
-    fridges = response.fridges;
+    requestDataFromSever(fridgesUrl,"GET",createFormData(null,[''],['']))
+    .then((data)=>{
+        fridges = data.fridges;
+    });
+    
 }
 function fetchSlots(){
     var slotUrl = $('#slotsurl').attr('data-action');
@@ -120,12 +182,12 @@ function populateCorpView(){
 function viewCorpseInformation(corpse,position) {
     $('.corpsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
-        corpse.slotName +"</td><td>"+
+        corpse.corpseCode +"</td><td>"+
         corpse.name +"</td><td>"+
         corpse.sex +"</td><td>"+
-        corpse.dueDays +"</td><td>"+
         corpse.admissionDate +"</td><td>"+
         corpse.collectionDate +"</td><td>"+
+        corpse.dueDays +"</td><td>"+
         corpse.category + "</td><td>"+
         corpse.relativeName + "</td><td>"+
         corpse.relativeContactOne + "</td><td>"+
@@ -173,7 +235,7 @@ function populateFridges(){
 function populateSlots(){
     $('.slotnames').remove();
     slots.forEach(slot => {
-        (slot.state == 'free')?$('.availableslots').append('<option class="slotnames">'+slot.name+'</option>'):$('#sloterrormessage').show(); 
+        (slot.state == 'free')?$('.availableslots').append('<option class="slotnames">'+slot.name+'</option>'):""; 
     });
 }
 function populateCorpDetail(){
@@ -292,6 +354,16 @@ function validation(){
     });
 
     
+}
+function generateCorpseUniqueId(){
+    var splittedCorpseName = $('#name').val().split(' ');
+    var morgeInitials ="OVM";
+    var corpseInitials = splittedCorpseName[0].charAt(0) + splittedCorpseName[1].charAt(0)
+    var fridgeInitials = "FRG";
+    var FridgeName = $(".fridgename").val();
+    var slotNumber = $(".availableslots").val();
+    return morgeInitials + "-" + corpseInitials + "-" + fridgeInitials + "-" + FridgeName + "-" + slotNumber;
+
 }
 
 

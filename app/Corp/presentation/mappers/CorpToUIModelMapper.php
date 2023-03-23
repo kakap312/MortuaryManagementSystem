@@ -8,6 +8,7 @@ class CorpToUiModelMapper{
     {
         return new CorpUiModel(
             $corp->getId(),
+            $corp->getCorpseCode(),
             $corp->getAdmissionDate(),
             $corp->getCollectionDate(),
             $corp->getName(),
@@ -20,7 +21,7 @@ class CorpToUiModelMapper{
             $corp->getRelativeContactTwo(),
             is_null($fridgeName)?"":$fridgeName,
             is_null($slotName)?"":$slotName,
-            "VIP",
+            $corp->getCategory(),
             $corp->getReleasedBy(),
             $corp->getRemarks(),
             $corp->getHometown()

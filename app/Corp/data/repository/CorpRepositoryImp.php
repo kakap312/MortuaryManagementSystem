@@ -10,17 +10,19 @@ class CorpRepositoryImp implements CorpRepository{
 
     static function createCorp($savedCorpInfo)
     {
-        if(CorpDao::insertCorp(DomainToDbCorpMapper::map($savedCorpInfo))){
+        $dbCorps = DomainToDbCorpMapper::map($savedCorpInfo);
+        $isCorpseCreated = CorpDao::insertCorp($dbCorps);
+        if($isCorpseCreated){
             return new Result(null,true);
         }else{
             return new Result(null,false);
         }  
     }
     public static function fetchCorps(){
-        if(is_null(CorpDao::findAllCorps())){
+        $dbCorps = CorpDao::findAllCorps();
+        if(is_null($dbCorps)){
             return new Result(null,false);
         }else{
-            $dbCorps = CorpDao::findAllCorps();
             $corps = array();
             foreach ($dbCorps as $dbcorp) {
                 array_push($corps,DbCorpToDomainMapper::map($dbcorp));

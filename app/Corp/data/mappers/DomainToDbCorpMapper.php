@@ -5,6 +5,7 @@ class DomainToDbcorpMapper{
         
         if($corp->getId() != ""){
             return array(
+                "corpseCode"=>$corp->getCorpseCode(),
                 "admissionDate"=>$corp->getAdmissionDate(),
                 "name"=>$corp->getName(),
                 "age"=>$corp->getAge(),
@@ -18,11 +19,13 @@ class DomainToDbcorpMapper{
                 "releasedBy" => $corp->getReleasedBy(),
                 "updatedAt" => $corp->getUpdatedAt(),
                 "fridgeId"=> $corp->getFridgeId(),
-                "slotId"=>$corp->getSlotId()
+                "slotId"=>$corp->getSlotId(),
+                "category"=>$corp->getCategory()
             );
         }else{
             return array(
                 "corpId"=>uniqid(),
+                "corpseCode"=>$corp->getCorpseCode(),
                 "admissionDate"=>$corp->getAdmissionDate(),
                 "name"=>$corp->getName(),
                 "age"=>$corp->getAge(),
@@ -36,7 +39,8 @@ class DomainToDbcorpMapper{
                 "releasedBy" => $corp->getReleasedBy(),
                 "updatedAt" => $corp->getUpdatedAt(),
                 "fridgeId"=> $corp->getFridgeId(),
-                "slotId"=>$corp->getSlotId()
+                "slotId"=>$corp->getSlotId(),
+                "category"=>$corp->getCategory()
             );
 
         }

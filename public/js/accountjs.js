@@ -12,15 +12,21 @@ $(document).ready(function(){
     $("#username").change(function(){
         var accountUsernameValidationRoute = $('#username').attr('data-action');
         var formData = createFormData(null,['username'],[$("#username").val()]);
-        var response = requestDataFromSever(accountUsernameValidationRoute,requestMethod,formData);
-        showMessage(response.isUsernameValid,"USERNAME_VALIDATION_ERROR",'.usernamemessage');
+        requestDataFromSever(accountUsernameValidationRoute,requestMethod,formData).
+        then((data)=>{
+            showMessage(data.isUsernameValid,"USERNAME_VALIDATION_ERROR",'.usernamemessage');
+        })
+        
     });
 
     $('.password').change(function(){
         var accountPasswordValidationRoute = $('.password').attr('data-action');
         var formData  = createFormData(null,['password'],[$(".password").val()]);
-        var response = requestDataFromSever(accountPasswordValidationRoute,requestMethod,formData);
-        showMessage(response.isPasswordValid,"PASSWORD_VALIDATION_ERROR",'.passwordmessage');
+        requestDataFromSever(accountPasswordValidationRoute,requestMethod,formData).
+        then((data)=>{
+            showMessage(data.isPasswordValid,"PASSWORD_VALIDATION_ERROR",'.passwordmessage');
+        });
+        
     });
 
     // login , register call
@@ -28,11 +34,14 @@ $(document).ready(function(){
         e.preventDefault();
         var accountLoginRoute = $('#loginform').attr('data-action');
         var formData  = createFormData($("#loginform")[0],['action'],['login']);
-        var response = requestDataFromSever(accountLoginRoute,requestMethod,formData);
-        if(response.content != null){
-            window.location.href = $('#dbroute').attr('data-action');
-        }else{
-            showMessage(response.isAccountFound,"ACCOUNT_NOT_FOUND","",true);
-        }
+        requestDataFromSever(accountLoginRoute,requestMethod,formData).
+        then((data)=>{
+            if(data.content.length == 1){
+                window.location.href = $('#dbroute').attr('data-action');
+            }else{
+                showMessage(data.isAccountFound,"ACCOUNT_NOT_FOUND","",true);
+            }
+        })
+        
     });//end of loginformsubmit
 });

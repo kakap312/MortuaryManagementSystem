@@ -12,10 +12,18 @@ class Validator{
         return $isValid;
     }
     static function validateDate($date){
-        $isValid;
+        $isValid =true;
         if($date == ""){
             $isValid = false;
         }
+        return $isValid;
+    }
+    static function validateSex($sex){
+        $isValid = true;
+        if($sex == ""){
+            $isValid = false;
+        }
+        return $isValid;
     }
     static function validateAge($age){
         $isValid = true;
@@ -29,6 +37,13 @@ class Validator{
     static function validateFridge($fridge){
         $isValid=true;
         if($fridge == ""){
+            $isValid = false;
+        }
+        return $isValid;
+    }
+    static function validateSlot($slot){
+        $isValid=true;
+        if($slot == ""){
             $isValid = false;
         }
         return $isValid;

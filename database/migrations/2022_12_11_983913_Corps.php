@@ -16,6 +16,7 @@ class Corps extends Migration
         //
         Schema::create('corps', function (Blueprint $table){
             $table->string("corpId",100)->primary();
+            $table->string("corpseCode",100)->index();
             $table->date("admissionDate",10);
             $table->string("name",30)->index();
             $table->smallInteger("age");
@@ -31,7 +32,9 @@ class Corps extends Migration
             $table->string("fridgeId",100)->index();
             $table->string("slotId",100)->index();
             $table->foreign("slotId")->references("slotId")->on('slots')->onDelete('cascade');
+            $table->string("category",30);
             $table->foreign("fridgeId")->references("fridgeId")->on('fridges')->onDelete('cascade');
+          
         });
     }
 

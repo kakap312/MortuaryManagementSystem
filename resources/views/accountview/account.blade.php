@@ -26,6 +26,7 @@
                             <!--<a id='registerlink' href='#'>Register</a>-->
                         </div>
                         <form id="loginform" data-action="{{route('userlogin')}}" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <input class="form-control" id='dbroute' data-action="{{ route('dbroute')}}" type='hidden' >
                                 <input class="form-control" data-action="{{route('username')}}" type="text" id='username' name="username" placeholder="Username" required>
                                 <p class='usernamemessage'></p><br>

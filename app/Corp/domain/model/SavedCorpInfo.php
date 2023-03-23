@@ -2,6 +2,7 @@
 namespace App\Corp\domain\model;
 class SavedCorpInfo{
     private $id;
+    private $corpseCode;
     private $admissionDAte;
     private $collectionDate;
     private $name;
@@ -16,10 +17,12 @@ class SavedCorpInfo{
     private $updatedAt;
     private $fridgeId;
     private $slotId;
+    private $category;
    
 
-    public function __construct($id,$admissionDAte,$collectionDate,$name,$age,$sex,$relativeName,$relativeContactOne,$relativeContactTwo,$remarks,$releasedBy,$updatedAt,$hometown,$fridgeId,$slotId){
+    public function __construct($id,$corpseCode,$admissionDAte,$collectionDate,$name,$age,$sex,$relativeName,$relativeContactOne,$relativeContactTwo,$remarks,$releasedBy,$updatedAt,$hometown,$fridgeId,$slotId,$category){
         $this->id = $id;
+        $this->corpseCode = $corpseCode;
         $this->admissionDAte = $admissionDAte;
         $this->collectionDate = $collectionDate;
         $this->name = $name;
@@ -34,6 +37,7 @@ class SavedCorpInfo{
         $this->updatedAt = $updatedAt;
         $this->fridgeId = $fridgeId;
         $this->slotId = $slotId;
+        $this->category = $category;
     }
 
     public function setId($id){$this->id = $id;}
@@ -66,5 +70,10 @@ class SavedCorpInfo{
     public function getSlotId(){return $this->slotId;}
     public function setFridgeId($fridgeId){$this->fridgeId = $fridgeId;}
     public function getFridgeId(){return $this->fridgeId;}
+    public function getCorpseCode(){return $this->corpseCode;}
+    public function setCorpseCode($corpseCode){$this->corpseCode = $corpseCode;}
+    public function getCategory(){return $this->category;}
+    public function setCategory($category){$this->category = $corpseCode;}
+
 }
 

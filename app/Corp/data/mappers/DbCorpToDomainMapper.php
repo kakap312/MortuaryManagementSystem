@@ -6,6 +6,7 @@ class DbCorpToDomainMapper{
     static function map($dbCorp){
         return new  Corp(
             $dbCorp->corpId,
+            $dbCorp->corpseCode,
             $dbCorp->admissionDate,
             $dbCorp->collectionDate,
             $dbCorp->name,
@@ -20,6 +21,7 @@ class DbCorpToDomainMapper{
             $dbCorp->hometown,
             $dbCorp->fridgeId,
             $dbCorp->slotId,
+            $dbCorp->category
         );
     }
 }

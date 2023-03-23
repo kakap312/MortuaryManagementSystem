@@ -2,6 +2,7 @@
 namespace App\Corp\presentation\model;
 class CorpUiModel{
     public $id;
+    public $corpseCode;
     public $admissionDate;
     public $collectionDate;
     public $name;
@@ -19,8 +20,10 @@ class CorpUiModel{
     public $remarks;
     public $hometown;
 
-    public function __construct($id,$admissionDate,$collectionDate,$name,$age,$sex,$dueDays,$extraDays,$relativeName,$relativeContactOne,$relativeContactTwo,$fridgeName,$slotName,$category,$releasedBy,$remarks,$hometown){
+
+    public function __construct($id,$corpseCode,$admissionDate,$collectionDate,$name,$age,$sex,$dueDays,$extraDays,$relativeName,$relativeContactOne,$relativeContactTwo,$fridgeName,$slotName,$category,$releasedBy,$remarks,$hometown){
         $this->id = $id;
+        $this->corpseCode = $corpseCode;
         $this->admissionDate = $admissionDate;
         $this->collectionDate = $collectionDate;
         $this->name = $name;
@@ -60,5 +63,8 @@ class CorpUiModel{
     public function getRelativeContactOne(){return $this->relativeContactOne;}
     public function setRelativeContactTwo($relativeContactTwo){$this->relativeContactTwo = $relativeContactTwo;}
     public function getRelativeContactTwo(){return $this->relativeContactTwo;}
-  
+    public function setCorpseCode($corpseCode){$this->corpseCode = $corpseCode;}
+    public function getCorpseCode(){return $this->corpseCode;}
+    public function setCategory($category){$this->category = $category;}
+    public function getCategory(){return $this->category;}
 }

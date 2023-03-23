@@ -30,25 +30,26 @@ export function showMessage(status,stringName,messageContainer,alertStatus=false
 }
 
 export function requestDataFromSever(url,method,formdata){
-    var requestData;
-    $.ajax({
-        url:url,
-        type:method,
-        data:formdata,
-        processData:false,
-        cache:false,
-        async:false,
-        headers:{'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')},
-        contentType:false,
-        dataType:"JSON",
-        success:function(data){
-            requestData = data;
-        },
-        error: function(XMLHTTPRequest, textStatus, errorThrown){
-            alert(errorThrown);
-        }
-    });//end of ajax
-    return requestData;
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url:url,
+            type:method,
+            data:formdata,
+            processData:false,
+            cache:false,
+            async:false,
+            headers:{'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')},
+            contentType:false,
+            dataType:"JSON",
+            success:function(data){
+                resolve(data);
+            },
+            error: function(XMLHTTPRequest, textStatus, errorThrown){
+                reject(errorThrown)
+            }
+        });//end of ajax
+
+    });
 }
 export function showOrHideSection(sectionname){
      var sections = ['.renamedrugssection','.addbillingsection','.viewbillingsection','.viewcorpsection','.addcorpsection','.statisticssection','.corpdetailsection']

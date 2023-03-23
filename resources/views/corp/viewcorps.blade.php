@@ -14,9 +14,9 @@
     <th>ID</th>
     <th>CORP NAME</th>
     <th>SEX</th>
-    <th>DAY(S)</th>
     <th>ADMI DATE</th>
     <th>COLL DATE</th>
+    <th>DAY(S)</th>
     <th>CATEGORY</th>
     <th>REL NAME</th>
     <th>REL #1</th>
@@ -24,7 +24,19 @@
     <th>ACTION</th>
     </tr>
     </table> 
-</div>
+    </div>
+    <div style='margin-top:30px;' >
+        <divid='status' style='background-color:red;float:left;'>
+        <span>1</span><span>/</span><span>200</span>
+        </div>
+        <div  id='next-previous' style='float:right;'>
+            <button type='button' class="ibtn btn-primary previous">< Previous</button>
+            <button type='button' class="ibtn btn-primary next">Next ></button>
+
+        </div>
+        
+        
+    </div>
     </div>
     </div>
 </div><!-- End Sales Card -->
