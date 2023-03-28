@@ -38,10 +38,18 @@ class CorpRepositoryImp implements CorpRepository{
             return new Result(null,false);
         } 
     }
+    public static function totalCorpse(){
+        $totalNumberOfCorpse = CorpDao::totalNumberOfCorpse();
+        if(is_null($totalNumberOfCorpse)){
+            return new Result(null,false);
+        }else{
+            return new Result($totalNumberOfCorpse,false);
+        }
+    }
     public static function searchCorpById($nameOrId)
     {
         $dbCorp = CorpDao::findCoprById($nameOrId);
-        if(is_null($dbCorp)){
+        if(is_null($dbCorp) || ($dbCorp->count() === 0)){
             return new Result(null,false);
         }else{
             $corp = DbCorpToDomainMapper::map($dbCorp);

@@ -5,6 +5,8 @@ class CorpFactory{
 
     public static function makeSaveCorpInfo($rquest){
         $id = $rquest->get('corpId');
+        $sId = $rquest->get('slotId');
+        $frgId = $rquest->get('fridgeId');
         return new SavedCorpInfo(
             $id = isset($id)?$rquest->get('corpId'):"",
             $corpseCode = is_null($rquest->get('corpseCode'))?"":$rquest->get('corpseCode'),
@@ -20,8 +22,8 @@ class CorpFactory{
             $releasedBy = is_null($rquest->get('releasedBy'))?"":$rquest->get('releasedBy'),
             $updatedAt = is_null($rquest->get('updatedAt'))?"":$rquest->get('releasedBy'),
             $hometown = is_null($rquest->get('hometown'))?"":$rquest->get('hometown'),
-            $fridgeId = is_null($rquest->get('fridgeId'))?"":$rquest->get('fridgeId'),
-            $slotId = is_null($rquest->get('slotId'))?"":$rquest->get('slotId'),
+            $fridgeId = $frgId == "undefined"?"":$frgId,
+            $slotId =  $sId == "null"?"":$sId,
             $category = is_null($rquest->get('category'))?"":$rquest->get('category')
         );
     }

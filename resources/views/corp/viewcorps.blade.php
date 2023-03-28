@@ -5,7 +5,7 @@
     <div class="card-body ">
     <div id='corpsearchbar'>
         <button type='button' id="searchbtn"  class="ibtn btn-primary">Search</button>
-        <input  class='form-control searchcorp' data-action="{{ route('searchcorp')}}" type='text' placeholder='Search corps' />
+        <input  class='form-control searchcorp' data-action="{{ route('searchcorp')}}" type='text' placeholder='Search corps by Id' />
     </div>
         <div class='table-responsive'>
     <table class='table-sm table-striped corpsviewtable' border=1>
@@ -26,14 +26,15 @@
     </table> 
     </div>
     <div style='margin-top:30px;' >
-        <divid='status' style='background-color:red;float:left;'>
-        <span>1</span><span>/</span><span>200</span>
+        <div id='status'>
+        <span id='displayNumber'></span><span>/</span><span id='totalNumber'></span><span style='color:red;margin-left:10px;'>Please Use the search bar to find your corpse.</span>
+        
         </div>
-        <div  id='next-previous' style='float:right;'>
+        <!-- <div  id='next-previous' style='float:right;'>
             <button type='button' class="ibtn btn-primary previous">< Previous</button>
             <button type='button' class="ibtn btn-primary next">Next ></button>
 
-        </div>
+        </div> -->
         
         
     </div>

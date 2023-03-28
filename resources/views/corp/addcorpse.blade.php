@@ -5,7 +5,6 @@
     <div class="card-body">
     
     <form id='registercorpform' data-action= "{{route('createcorp')}}"  enctype="multipart/form-data">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class='forminstructon' data-action= "{{route('updatecorp')}}" >
     <p id='topdecoration' ></p>
     <h2 id='corpseregistrationtext'>Corpse Registration Form</h2>
@@ -63,15 +62,16 @@
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Fridge Name</label>
     <select class="fridgename js-example-basic-single form-control" data-action="{{ route('fetchfridges')}}" id='fridgename' name='fridgename'>
+    <option diabled>choose a fridge</option>    
     </select>
     <p id='fridgeerrormessage' style='display:none; color:red;'>Please choose a  Fridge</p>
     </div>
-    <div class="form-floating mb-3 col" id='slotsurl' data-action="{{route('fetchslots')}}">
+    <div class="form-floating mb-3 col" id='slotsurl' >
     <label for="floatingInput">Available Slots</label>
-    <select  class="availableslots js-example-basic-single form-control" id='slots' name='availableslots' data-action="{{ route('fetchavailableslots')}}" required>
-    </select>
+    <select  class="availableslots js-example-basic-single form-control" id='slots' name='availableslots' data-action="{{route('fetchavailableslots')}}">
+    </select><br>
     <p id='sloterrormessage' style='display:none; color:red;'>No Slot available for the Fridge Selected.</p>
-    <button id='freeslot' style='display:none' data-action="{{ route('freeslot')}}"  class='btn btn-info' type='button'>Free Slot</button>
+    <button id='freeslot' style='display:none; width:inherit;' data-action="{{ route('freeslot')}}"  class='btn btn-info' type='button'>Free Slot</button>
     </div>
     </div>
     <div class="form-floating mb-3">
@@ -106,7 +106,7 @@
     </div>
     <div class="form-floating mb-3">
     <div class="form-button">
-    <button type='button' id="registercorpbtn"  class="ibtn btn-primary">Register</button>
+    <button type='button' id='registerbtn'  class="ibtn btn-primary registerbtn">Register</button>
     </div>      
     </div>
     </form>   

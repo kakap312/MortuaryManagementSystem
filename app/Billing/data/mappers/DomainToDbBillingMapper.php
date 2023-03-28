@@ -7,6 +7,8 @@ class DomainToDbBillingMapper{
             'corpId'=>$savedBillingInfo->getCorpseId(),
             'billfor'=>$savedBillingInfo->getBillFor(),
             'amount'=>$savedBillingInfo->getAmount(),
+            'dueDays'=>$savedBillingInfo->getDueDays(),
+            'extraDays'=>$savedBillingInfo->getExtraDays(),
             'createdAt'=>$savedBillingInfo->getCreatedAt(),
             'updatedAt'=>$savedBillingInfo->getCreatedAt()
         ];

@@ -21,7 +21,11 @@ $(document).ready(function(){
 
     $('.password').change(function(){
         var accountPasswordValidationRoute = $('.password').attr('data-action');
-        var formData  = createFormData(null,['password'],[$(".password").val()]);
+        var formData;
+        createFormData(null,['password'],[$(".password").val()]).
+        then((data)=>{
+            formData = data;
+        })
         requestDataFromSever(accountPasswordValidationRoute,requestMethod,formData).
         then((data)=>{
             showMessage(data.isPasswordValid,"PASSWORD_VALIDATION_ERROR",'.passwordmessage');
@@ -33,11 +37,11 @@ $(document).ready(function(){
     $("#loginform").submit(function(e){
         e.preventDefault();
         var accountLoginRoute = $('#loginform').attr('data-action');
-        var formData  = createFormData($("#loginform")[0],['action'],['login']);
+       var formData = createFormData($("#loginform")[0],['action'],['login'])
         requestDataFromSever(accountLoginRoute,requestMethod,formData).
         then((data)=>{
             if(data.content.length == 1){
-                window.location.href = $('#dbroute').attr('data-action');
+                window.location.href = $('#dashboardroute').attr('data-action');
             }else{
                 showMessage(data.isAccountFound,"ACCOUNT_NOT_FOUND","",true);
             }

@@ -16,6 +16,7 @@ class BillingController extends Controller
     }
     function createBill(Request $req){
         $savedBillingInfo =  BillingFactory::makeSavedBillingInfo($req);
+        // validate inputs
         $resultSet = $this->repositoryFactory->getBillingRepositoryImp()->createBilling($savedBillingInfo);
         return response()->json(MapOfUIModel::mapOfSuccess($resultSet->getSuccess()));
     }
@@ -41,5 +42,23 @@ class BillingController extends Controller
         }else{
             // return empty resultSet to view 
         }
+    }
+    function viewBillsByCorpseId(Request $req){
+    $result = $this->repositoryFactory->getBillingRepositoryImp()->fetchBillingByCorpseId($req->get('corpseId'));
+        if($result->getSuccess()){
+            if(count($result->getData()) >= 1){
+                $uibillings = array_map(function($billing){
+                    return DomainBillingToUiMapper::map($billing);
+                },$result->getData());
+                return response()->json(MapOfUIModel::mapOfBilling($uibillings));
+            }else{
+                //$uiBilling = DomainBillingToUiMapper::map($result->getData());
+                return response()->json(MapOfUIModel::mapOfBilling($result->getData()));
+            }  
+        }else{
+            return response()->json(MapOfUIModel::mapOfBilling($result->getData()));// return a uibiling model to the ui element to display
+
+        }
+
     }
 }

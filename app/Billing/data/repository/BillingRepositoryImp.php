@@ -39,11 +39,18 @@ class BillingRepositoryImp implements BillingRepository{
     
     public  function fetchBillingByCorpseId($corpseId){
         $dbBilling = BillingDao::fetchBillingByCoprseId($corpseId);
-        if($dbBilling){
-            $billing = DbBillingToDomainMapper::map($dbBilling);
-            return new Result($billing,true);
-        }else{
+        if(is_null($dbBilling) || count($dbBilling) == 0 ){
             return new Result(null,false);
+        }else{
+            if(count($dbBilling) >= 1){
+                $billing = array();
+                foreach ($dbBilling as $dbBill) {
+                    array_push($billing,DbBillingToDomainMapper::map($dbBill));
+                }
+                return new Result($billing,true);
+            }
+            
+            
         }
     }
     

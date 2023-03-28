@@ -10,7 +10,8 @@ class DomainBillingToUiMapper {
             $billing->getCreatedAt(),
             $billing->getAmount(),
             self::getServiceName($billing->getService()),
-            $billing->getType()
+            $billing->getExtraDays(),
+            $billing->getDueDays(),
         );
     }
     static function getServiceName($services){

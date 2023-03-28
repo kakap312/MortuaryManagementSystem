@@ -10,12 +10,16 @@ class SlotDao{
     public static function findAllSlots(){
         return DbSlot::all();
     }
-    public static function findAvailableSlotByFridgeId($id){
+    public static function findAvailableSlotByFridgeId($fridgeId){
+
         try {
-           return DbSlot::where([
-               'fridgeId' => $id
-            ]
-        )->get();
+            $GLOBALS['frigeid'] = $fridgeId;
+            $GLOBALS['state'] = "free";
+            return DbSlot::where(function($query){
+                $query->where('fridgeId','=',$GLOBALS['frigeid']);
+            })->where(function($query){
+                $query->where('state','=',$GLOBALS['state']);
+            })->get();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

@@ -5,4 +5,5 @@ interface BillingRepository{
     public  function updateBilling($id,$dbBilling);
     public  function fetchBilling($corpseId);
     public  function fetchAllBillings();
+    public  function fetchBillingByCorpseId($corpseId);
 }

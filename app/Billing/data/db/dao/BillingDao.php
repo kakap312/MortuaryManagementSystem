@@ -23,6 +23,16 @@ class BillingDao{
     static function findBillingById($billId){
 
     }
+    static function fetchBillingByCoprseId($corpseId){
+        try {
+            $GLOBALS['id'] = $corpseId;
+            return DbBilling::where(function($query){
+                $query->where('corpId','=',$GLOBALS['id']);
+            })->get()->toArray();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
     static function fetchAllBillings(){
         try{
             return DbBilling::skip(0)->take(5)->get()->toArray();

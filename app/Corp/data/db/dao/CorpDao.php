@@ -30,12 +30,15 @@ class CorpDao{
         try {
             $GLOBALS['id'] = $id;
             return DbCorp::where(function($query){
-                $query->where('corpId','=',$GLOBALS['id']);
+                $query->where('corpseCode','=',$GLOBALS['id']);
             })->get()->first();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
        
+    }
+    static function totalNumberOfCorpse(){
+        return DbCorp::all()->count();
     }
     
     static function  deleteCorpById($id){

@@ -43,7 +43,7 @@ class Validator{
     }
     static function validateSlot($slot){
         $isValid=true;
-        if($slot == ""){
+        if($slot == "" || $slot == null){
             $isValid = false;
         }
         return $isValid;

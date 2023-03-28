@@ -17,6 +17,7 @@ Route::get('/', function(){
 Route::post('/userdashboard/createcorp','CorpController@registerCorp')->name('createcorp');
 Route::post('/userdashboard/update','CorpController@updateCorp')->name('updatecorp');
 Route::get('/userdashboard/fetchcorps','CorpController@viewAllCorps')->name('fetchcorps');
+Route::get('/userdashboard/totalcorpse','CorpController@totalCorpse')->name('totalcorpse');
 Route::get('/userdashboard/fetchfridges','CorpController@viewAllFridges')->name('fetchfridges');
 Route::post('/userdashboard/availableslot','CorpController@viewAvailableSlot')->name('fetchavailableslots');
 Route::get('/userdashboard/fetchslot','CorpController@viewSlots')->name('fetchslots');
@@ -31,6 +32,7 @@ Route::post('/userdashboard/validatecontacr','CorpController@validateContact')->
 // route for billing feature
 Route::post('/userdashboard/createbilling','BillingController@createBill')->name('createbill');
 Route::get('/userdashboard/viewbillings','BillingController@viewBills')->name('viewbills');
+Route::post('/userdashboard/viewbillingsbycorpsid','BillingController@viewBillsByCorpseId');
 //Account Route
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
 Route::get('/account','AccountController@renderAccountView')->name('account');

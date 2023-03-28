@@ -36,16 +36,22 @@ class CorpController extends Controller
     function updateCorp(Request $req)
     {
         $savedCorpInfo = CorpFactory::makeSaveCorpInfo($req);
-        $isCorpUpdated = CorpRepositoryImp::updateCorp($req->get('corpId'),$savedCorpInfo)->getSuccess();
-        if($isCorpUpdated){
-            if(SlotRepositoryImp::updateSlot($req->get('slotId'),['state'=>'used'])->getSuccess()){
-                return response()->json(CorpViewModel::mapOfSuccess($isCorpUpdated));
+        $corpseFieldValidator = new FieldValidation($savedCorpInfo);
+        if($corpseFieldValidator->isAllFieldValid()){
+            $isCorpUpdated = CorpRepositoryImp::updateCorp($req->get('corpId'),$savedCorpInfo)->getSuccess();
+            if($isCorpUpdated){
+                if(SlotRepositoryImp::updateSlot($req->get('slotId'),['state'=>'used'])->getSuccess()){
+                    return response()->json(CorpViewModel::mapOfSuccess($isCorpUpdated));
+                }
             }
+            
+        }else{
+            return response()->json($corpseFieldValidator->mapOfFieldValidation());
         }
-        
     }
     function searchCorp(Request $req)
     {
+        $uiCorpse = null;
         $corpseResult = CorpRepositoryImp::searchCorpById($req->get('corpId'));
         if($corpseResult->getSuccess()){
             $corp = $corpseResult->getData(); 
@@ -61,19 +67,23 @@ class CorpController extends Controller
             //    array_push($uiCorps,CorpToUiModelMapper::map($corp,$fridge->getName(),$slot->getName()));
             // }
             return response()->json(CorpViewModel::mapOfCorpse($uiCorpse));
+        }else{
+            return response()->json(CorpViewModel::mapOfCorpse($uiCorpse));
         }
     }
     function viewAllCorps()
     {
         $corpseResult = CorpRepositoryImp::fetchCorps();
+        $uiCorps = array();
         if($corpseResult->getSuccess()){
             $corpse =  $corpseResult->getData(); 
-            $uiCorps = array();
             foreach ($corpse as $corp) {
                 $fridge = (FridgeRepositoryImp::searchFridgeByNameOrId($corp->getFridgeId()))->getData();
                 $slot = (SlotRepositoryImp::searchSlotByNameOrId($corp->getSlotId()))->getData();
                array_push($uiCorps,CorpToUiModelMapper::map($corp,$fridge->getName(),$slot->getName()));
             }
+            return response()->json(CorpViewModel::mapOfCorpse($uiCorps));
+        }else{
             return response()->json(CorpViewModel::mapOfCorpse($uiCorps));
         }
     }
@@ -92,9 +102,10 @@ class CorpController extends Controller
     function viewAvailableSlot(Request $req)
     {
        
-        if(SlotRepositoryImp::fetchAvailableSlots($req->get("fridgeid"))->getSuccess()){
+        $result = SlotRepositoryImp::fetchAvailableSlots($req->get("fridgeid"));
+        if($result->getSuccess()){
             $uiSlots = array();
-            foreach (SlotRepositoryImp::fetchAvailableSlots($req->get("fridgeid"))->getData() as $slot) {
+            foreach ($result->getData() as $slot) {
                array_push($uiSlots,SlotToUiModelMapper::map($slot));
             }
             return response()->json(CorpViewModel::mapOfSlots($uiSlots));
@@ -113,7 +124,9 @@ class CorpController extends Controller
     }
     function deleteCorp(Request $req)
     {
+        // plx when ever you are deleteing a corp kindly free the Slot
         $deleteResponse = CorpRepositoryImp::deleteCorp($req->get("corpid"))->getSuccess();
+
         if($deleteResponse){return response()->json(CorpViewModel::mapOfSuccess($deleteResponse));}
     }
     function freeSlot(Request $req)
@@ -122,6 +135,10 @@ class CorpController extends Controller
         if($isSlotFree){
             return response()->json(CorpViewModel::mapOfSuccess($isSlotFree));
         }
+    }
+    function totalcorpse(){
+        $result = CorpRepositoryImp::totalCorpse();
+        return response()->json(CorpViewModel::mapOfTotalCorpse($result->getData()));
     }
     function validateName(Request $req){
         return response()->json(CorpseDataValidation::mapOfNameValidation($req->get('name')));

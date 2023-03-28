@@ -6,14 +6,16 @@ class Billing{
     private $services; // list of billing services domain object
     private $amount;
     private $createdAt;
-    private $type;
+    private $dueDays;
+    private $extraDays;
 
-    public function __construct($billId,$services,$amount,$createdAt,$type){
+    public function __construct($billId,$services,$amount,$createdAt,$dueDays,$extraDays){
         $this->billId = $billId;
         $this->services = $services;
         $this->amount = $amount;
         $this->createdAt = $createdAt;
-        $this->type = $type;
+        $this->dueDays = $dueDays;
+        $this->extraDays = $extraDays;
         
     }
 
@@ -27,7 +29,8 @@ class Billing{
     function getAmount(){return $this->amount;}
     function setCreatedAt($createdAt){$this->createdAt = $createdAt;}
     function getCreatedAt(){return $this->createdAt;}
-    function setType($type){$this->type = $type;}
-    function getType(){return $this->type;}
-
+    function setDueDays($dueDays){$this->dueDays = $dueDays;}
+    function getDueDays(){return $this->dueDays;}
+    function setExtraDays($extraDays){$this->extraDays = $extraDays;}
+    function getExtraDays(){return $this->extraDays;}
 }

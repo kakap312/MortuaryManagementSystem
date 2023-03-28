@@ -14,7 +14,6 @@ class FridgeRepositoryImp implements FridgeRepository{
         if(is_null($dbFridges)){
             return new Result(null,false);
         }else{
-            
             $fridges = array();
             foreach ($dbFridges as $dbFridge) {
                 array_push($fridges,DbFridgeToDomainMapper::map($dbFridge));

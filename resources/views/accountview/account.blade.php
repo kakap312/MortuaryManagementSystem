@@ -25,12 +25,11 @@
                             <a id='loginlink' href="#" class="active">Login</a>
                             <!--<a id='registerlink' href='#'>Register</a>-->
                         </div>
-                        <form id="loginform" data-action="{{route('userlogin')}}" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                            <input class="form-control" id='dbroute' data-action="{{ route('dbroute')}}" type='hidden' >
-                                <input class="form-control" data-action="{{route('username')}}" type="text" id='username' name="username" placeholder="Username" required>
+                        <form id="loginform" data-action="account/login" enctype="multipart/form-data">
+                            <input type='hidden' id='dashboardroute' data-action="{{route('dbroute')}}" ></input>
+                                <input class="form-control" data-action="account/validateusername" type="text" id='username' name="username" placeholder="Username" required>
                                 <p class='usernamemessage'></p><br>
-                                <input class="form-control password" data-action="{{route('validatepassword')}}" type="password" name="password" placeholder="Password" required>
+                                <input class="form-control password" data-action="account/validatepassword" type="password" name="password" placeholder="Password" required>
                                 <img class='password-eye' src="{{ asset('img/passwordeye.png')}}"/>
                                 <p class='passwordmessage'></p>
                                 <div class="form-button">

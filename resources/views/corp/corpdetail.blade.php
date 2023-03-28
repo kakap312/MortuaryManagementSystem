@@ -29,10 +29,6 @@
                     <td id='corpSex'>M</td>
                 </tr>
                 <tr>
-                    <td>Status:  </td>
-                    <td id='corpStatus'></td>
-                </tr>
-                <tr>
                     <td>Category:</td>
                     <td id='corpCategory'></td>
                 </tr>

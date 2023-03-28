@@ -6,5 +6,6 @@ interface CorpRepository{
     public static function searchCorpById($Id);
     public static function fetchCorps();
     public static function  deleteCorp($id);
+    public static function totalCorpse();
 
 }

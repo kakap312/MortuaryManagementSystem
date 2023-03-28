@@ -8,4 +8,9 @@ class MapOfUIModel{
             "success"=> $data
         ];
     }
+    public static function mapOfBilling($data){
+        return [
+            "bill"=> $data
+        ];
+    }
 }

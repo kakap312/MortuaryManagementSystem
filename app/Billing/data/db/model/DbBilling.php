@@ -11,6 +11,6 @@ class DbBilling extends Model
     public $incrementing = false;
     protected $primaryKey = 'billId';
     protected $table = 'billings';
-    protected $fillable =['billId','corpId','billfor','amount','createdAt','updatedAt'];
+    protected $fillable =['billId','corpId','billfor','amount','dueDays','extraDays','createdAt','updatedAt'];
     protected $hidden = ['created_at','updated_at'];
 }

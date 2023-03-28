@@ -19,6 +19,8 @@ class Billing extends Migration
             $table->string("billId",100)->primary();
             $table->string("corpId",100)->index();
             $table->string("billfor",100);
+            $table->smallInteger("dueDays");
+            $table->smallInteger("extraDays");
             $table->double("amount",8,2);
             $table->foreign("corpId")->references("corpId")->on('corps')->onDelete('cascade');
             $table->date("createdAt",10);

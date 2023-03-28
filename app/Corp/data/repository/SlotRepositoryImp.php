@@ -10,10 +10,10 @@ class SlotRepositoryImp implements SlotRepository{
 
     static function createSlot($savedCorpInfo){}
     public static function fetchSlots(){
-        if(is_null(SlotDao::findAllSlots())){
+        $dbSlots = SlotDao::findAllSlots();
+        if(is_null($dbSlots)){
             return new Result(null,false);
         }else{
-            $dbSlots = SlotDao::findAllSlots();
             $slots = array();
             foreach ($dbSlots as $dbSlot) {
                 array_push($slots,DbSlotToDomainMapper::map($dbSlot));
@@ -22,10 +22,10 @@ class SlotRepositoryImp implements SlotRepository{
         }
     }
     public static function fetchAvailableSlots($id){
-        if(is_null(SlotDao::findAvailableSlotByFridgeId($id))){
+        $dbSlots = SlotDao::findAvailableSlotByFridgeId($id);
+        if(is_null($dbSlots)){
             return new Result(null,false);
         }else{
-            $dbSlots = SlotDao::findAvailableSlotByFridgeId($id);
             $slots = array();
             foreach ($dbSlots as $dbSlot) {
                 array_push($slots,DbSlotToDomainMapper::map($dbSlot));

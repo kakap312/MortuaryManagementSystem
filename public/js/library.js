@@ -5,20 +5,20 @@ existingFormData - is an already existing formData which needs an append
 */
 
 export function createFormData(existingFormData,parameters,values){
-   let  createdFormData;
-    if(existingFormData == null){
-        createdFormData = new FormData();
-        for (let index = 0; index < parameters.length; index++) {
-            createdFormData.append(parameters[index],values[index]);
+        let  createdFormData;
+        if(existingFormData == null){
+            createdFormData = new FormData();
+            for (let index = 0; index < parameters.length; index++) {
+                createdFormData.append(parameters[index],values[index]);
+            }
+        }else{
+            createdFormData = new FormData(existingFormData);
+            for (let index = 0; index < parameters.length; index++) {
+                createdFormData.append(parameters[index],values[index]);
+            }
         }
         return createdFormData;
-    }else{
-        createdFormData = new FormData(existingFormData);
-        for (let index = 0; index < parameters.length; index++) {
-            createdFormData.append(parameters[index],values[index]);
-        }
-        return createdFormData;
-    }
+   
 }
 export function showMessage(status,stringName,messageContainer,alertStatus=false){
     if(!alertStatus){
@@ -30,17 +30,17 @@ export function showMessage(status,stringName,messageContainer,alertStatus=false
 }
 
 export function requestDataFromSever(url,method,formdata){
+    var baseUrl = 'http://localhost/MortuaryManagementSystem/public/';
     return new Promise((resolve, reject) => {
         $.ajax({
-            url:url,
+            url:baseUrl + url,
             type:method,
             data:formdata,
             processData:false,
             cache:false,
-            async:false,
-            headers:{'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')},
             contentType:false,
-            dataType:"JSON",
+            async:false,
+            dataType:"json",
             success:function(data){
                 resolve(data);
             },
@@ -50,6 +50,26 @@ export function requestDataFromSever(url,method,formdata){
         });//end of ajax
 
     });
+}
+export function requestData(url,method,formdata){
+    var response;
+        $.ajax({
+            url:url,
+            type:method,
+            data:formdata,
+            processData:false,
+            cache:false,
+            contentType:false,
+            async:false,
+            dataType:"json",
+            success:function(data){
+                response = data;
+            },
+            error: function(XMLHTTPRequest, textStatus, errorThrown){
+                
+            }
+        });//end of ajax
+        return response;
 }
 export function showOrHideSection(sectionname){
      var sections = ['.renamedrugssection','.addbillingsection','.viewbillingsection','.viewcorpsection','.addcorpsection','.statisticssection','.corpdetailsection']
@@ -80,7 +100,8 @@ export function stringValue(name){
         ["CREATE_BILLING_CONFIRMATION","Are you sure you want to add Bill"],
         ["UPDATE_CORPSE_CONFIRMATION","Are you sure you want to update Corpse"],
         ["BILL_CREATION_SUCCESS","Congratulation Bill created successfully"],
-        ["ACCOUNT_NOT_FOUND","Sorry Account is not found"]
+        ["ACCOUNT_NOT_FOUND","Sorry Account is not found"],
+        ["CONFIRM_FREE_SLOT","Are you sure you want to free slot"]
     ]
         )
     return stringMap.get(name);

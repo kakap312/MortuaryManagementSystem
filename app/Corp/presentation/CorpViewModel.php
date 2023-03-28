@@ -5,6 +5,9 @@ class CorpViewModel {
     static function mapOfCorpse($data){
         return ["corps"=>$data];
     }
+    static function mapOfTotalCorpse($data){
+        return ["totalCorpse"=>$data];
+    }
     static function mapOfFridges($data){
         return ["fridges"=>$data];
     }

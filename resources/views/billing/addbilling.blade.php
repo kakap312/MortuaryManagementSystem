@@ -23,20 +23,23 @@
     <input class="form-control searchcorp"  type="text" id='corpseId' name="corpseId" data-action="{{ route('searchcorp')}}" required>
     <p id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
     </div>
+    
+
+    <div class='form-row' id='fetchservices' data-action="{{ route('fetchservices')}}">
+    <div class="form-floating mb-3 col">
+    <label for="floatingInput">Service Fee</label>
+    <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='services'></input>
+    <!-- <select class="form-control js-example-basic-multiple" id='services' name='services' multiple='multiple' style='width:100%;'>
+    </select> -->
+    </div>
+    </div>
+
     <div class='form-row'>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Bill Purpose</label>
     <textarea class="form-control" id='billfor' name='billfor' style='width:100%;'>
         
     </textarea>
-    </div>
-    </div>
-
-    <div class='form-row' id='fetchservices' data-action="{{ route('fetchservices')}}">
-    <div class="form-floating mb-3 col">
-    <label for="floatingInput">Service</label>
-    <select class="form-control js-example-basic-multiple" id='services' name='services' multiple='multiple' style='width:100%;'>
-    </select>
     </div>
     </div>
 
