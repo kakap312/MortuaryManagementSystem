@@ -11,9 +11,9 @@ class SavedBillingInfo{
     private $dueDays;
     private $serviceFee;
 
-    public function __construct($billingId,$createdAt,$serviceIds,$corpseId,$billfor,$amount,$extraDays,$dueDays,$serviceFee){
+    public function __construct($billingId,$createdAt,$corpseId,$billfor,$amount,$extraDays,$dueDays,$serviceFee){
         $this->billingId = $billingId;
-        $this->serviceIds = $serviceIds;
+        //$this->serviceIds = $serviceIds;
         $this->createdAt = $createdAt;
         $this->corpseId = $corpseId;
         $this->billfor = $billfor;

@@ -6,6 +6,8 @@ class CorpToUiModelMapper{
 
     public static function map($corp,$fridgeName,$slotName)
     {
+        $extraDays = DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d"));
+        $dueDays = DateToDaysConversion::convert($corp->getAdmissionDate(),$corp->getCollectionDate());
         return new CorpUiModel(
             $corp->getId(),
             $corp->getCorpseCode(),
@@ -14,8 +16,8 @@ class CorpToUiModelMapper{
             $corp->getName(),
             $corp->getAge(),
             $corp->getSex(),
-            DateToDaysConversion::convert($corp->getAdmissionDate(),$corp->getCollectionDate()),
-            DateToDaysConversion::convert($corp->getCollectionDate(), date("Y-m-d")),
+            ($dueDays < 0)? 0 : $dueDays,
+            ($extraDays < 0)? 0 : $extraDays,
             $corp->getRelativeName(),
             $corp->getRelativeContactOne(),
             $corp->getRelativeContactTwo(),

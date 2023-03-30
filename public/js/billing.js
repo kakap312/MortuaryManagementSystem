@@ -4,10 +4,13 @@ import {requestData,createFormData,showMessage,showOrHideSection,stringValue,pri
 var services;
 var corpse;
 var bill;
+var bills;
+var billId;
 
 $(document).ready(function(){
     fetchServices();
     populateServices();
+    fetchAllBills()
 
     $('#addbilling').attr('disabled',true);
     $('.js-example-basic-multiple').select2({
@@ -20,6 +23,8 @@ $(document).ready(function(){
     });
     $('#viewbillinglink').click(function() {
         showOrHideSection('.viewbillingsection');
+        populateBillView(bills);
+        
     });
     $('#corpseId').change(function(){
         $('#addbilling').attr('disabled',true);
@@ -36,6 +41,18 @@ $(document).ready(function(){
                 clearForm();
             }    
     })
+    $('.searchbtn').click(function(){
+        var searchBillUrl = $('.searchbtn').attr('data-action');
+        var response = requestData(searchBillUrl,"POST",createFormData(null,['id'],[$('.searbill').val()]));
+        if(response.bill == null){
+            showMessage(true,"CORP_NOT_FOUND",null,true)
+        }else{
+            bill = response.bill;
+            populateBillView(bill);
+        }
+        $('.searchcorp').val("");
+    });
+    
 
     $('#services').on('keypress keyup',function(){
         var serviceFee =(parseInt($('#services').val()) == null || parseInt($('#services').val()) == 0 )? 0:parseInt($('#services').val())
@@ -62,24 +79,38 @@ $(document).ready(function(){
     $('#addbilling').click(function() {
         if(confirm(stringValue("CREATE_BILLING_CONFIRMATION"))){
             var createBillingURL = $('#createbillingform').attr('data-action');
-            var serviceIds = getServiceIds(services,$('#services').val());
+            //var serviceIds = getServiceIds(services,$('#services').val());
             var dueDays = 0;
             var extraDays = 0;
             if(bill == null){
                 dueDays = corpse.dueDays;
                 extraDays = corpse.extraDays;
             }
-            var response = requestDataFromSever(createBillingURL,"POST",createFormData($("#createbillingform")[0],['serviceIds','amount','extraDays','dueDays'],[serviceIds,$('#subtotal').val(),extraDays,dueDays]));
+            var response = requestData(createBillingURL,"POST",createFormData($("#createbillingform")[0],['amount','extraDays','dueDays'],[$('#subtotal').val(),extraDays,dueDays]));
             if(response.success){
                 showMessage(response.success,"BILL_CREATION_SUCCESS",null,true);
-                clearForm();
+                resetForm('#createbillingform');
+            }else{
+                showErrorMessage(response.validationresult)
             }
-            console.log(response.success)
         }
         });
 
 
 }); // end of $(document).ready function
+function fetchAllBills(){
+    var serviceUrl = 'userdashboard/viewbillings'
+    var response = requestData(serviceUrl,"POST",createFormData(null,[''],['']));
+    bills = response.bills;
+}
+function showErrorMessage(validationData){
+    (validationData.isBillAmountValid)?$('#billamounterror').hide():$('#billamounterror').show()
+    (validationData.isBillDescriptionValid)?$('#descriptionerror').hide():$('#descriptionerror').show()
+    (validationData.isCorpseIdValid)?$('#corpseIdError').hide():$('#corpseIdError').show()
+    (validationData.isDateValid)?$('#dateerror').hide():$('#dateerror').show()
+    (validationData.isServiceFeeValid)?$('#feeerror').hide():$('#feeerror').show()
+
+}
 function fetchBillByCorpseId(id){
     var serviceUrl = 'userdashboard/viewbillingsbycorpsid'; 
 var response = requestData(serviceUrl,"POST",createFormData(null,['corpseId'],[id]));
@@ -155,4 +186,70 @@ function getServiceIds(services,serviceNames) {
         })
     })
     return serviceids;
+}
+function populateBillView(bills){
+    //fetchAllBills();
+    $('.displayNumber').html(bills.length);
+    $('.totalNumber').html((bills.length));
+    $('.datarow').remove();
+    // $('#displayNumber').html(corps.length);
+    // $('#totalNumber').html(totalCorpse);
+    var position = 0;
+    if(bills.length >= 1 ){
+        bills.forEach(bill => {
+            viewCorpseInformation(bill,position)
+            position++;
+        });
+    }
+    else{
+        showMessage("" ,"CORP_NOT_FOUND",null,true);
+    }
+function viewCorpseInformation(bill,position) {
+    $('.billsviewtable').append(
+        "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
+        bill.date +"</td><td>"+
+        bill.corpseCode +"</td><td>"+
+        bill.amount +"</td>"+
+        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Update</option><option>Details</option></select></td></tr>"
+        )
+}
+ 
+    $('.choose').change(function(){
+        if(($(this).val() == "Delete")){
+            if(confirm("Are you sure you want to delete this Bill")){
+                var deleteBillUrl = $('#deletebill').attr('data-action');
+                console.log(parseInt($(this).parent().siblings('.sn').html())-1)
+                billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
+              var  response = requestData(deleteBillUrl,"POST",createFormData(null,['billId'],[billId]));
+              if(response.success){
+                showMessage(response.success,"DELETE_SUCCESS",null,true);
+                populateBillView();
+            }
+            }
+        }else if(($(this).val() == "Update")){
+            showOrHideSection('.addbillingsection');
+            $('#addbilling').html('Update');
+            billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
+            var currentBillIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;
+            populateBillForm(bills[currentBillIndexNumber]);
+             
+        }else if(($(this).val() == "Details")){
+            showOrHideSection('.corpdetailsection');
+            corpId = getCorpIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
+            populateCorpDetail();
+        }
+    });
+    function populateBillForm(bill){
+        resetForm('#createbillingform');
+        $('#datecreated').val(bill.date);
+        $('#corpseId').val(bill.corpseCode)
+        $('#services').val(bill.servicefee)
+        $('#subtotal').val(bill.amount)
+
+    }
+
+    function getBillId(index){
+        return  bills[index].id;
+    }
+    
 }

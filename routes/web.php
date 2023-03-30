@@ -31,8 +31,10 @@ Route::post('/userdashboard/validatecontacr','CorpController@validateContact')->
 
 // route for billing feature
 Route::post('/userdashboard/createbilling','BillingController@createBill')->name('createbill');
-Route::get('/userdashboard/viewbillings','BillingController@viewBills')->name('viewbills');
+Route::post('/userdashboard/viewbillings','BillingController@viewBills')->name('viewbills');
 Route::post('/userdashboard/viewbillingsbycorpsid','BillingController@viewBillsByCorpseId');
+Route::post('/userdashboard/deletebill','BillingController@deleteBillById')->name('deletebill');
+Route::post('/userdashboard/searchbill','BillingController@searchBillById')->name('searchbill');
 //Account Route
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
 Route::get('/account','AccountController@renderAccountView')->name('account');

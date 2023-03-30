@@ -14,21 +14,34 @@ class BillingDao{
         }
 
     }
-    static function delete($billId){
+    static function deleteBillById($billId){
+        try {
+            DbBilling::where('billId',$billId)->delete();
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
 
     }
     static function update($billId){
 
     }
-    static function findBillingById($billId){
+    static function findBillingById($id){
 
     }
-    static function fetchBillingByCoprseId($corpseId){
+    static function findBillingByCoprseId($corpseId){
         try {
             $GLOBALS['id'] = $corpseId;
             return DbBilling::where(function($query){
-                $query->where('corpId','=',$GLOBALS['id']);
+                $query->where('corpId','=',$GLOBALS['id'])
+                ->orWhere('billId','=',$GLOBALS['id']);
             })->get()->toArray();
+            
+            
+            
+            // where(function($query){
+            //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);
+            // })->get()->toArray();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

@@ -3,17 +3,21 @@ namespace App\Billing\presentation\model;
 class UiBilling {
     public $id;
     public $date;
-    public $serviceNames;
+    //public $serviceNames;
+    public $servicefee;
+    public $corpseCode;
     public $amount;
     public $extraDays;
     public $dueDays;
 
 
-    function __construct($id,$date,$amount,$serviceNames,$extraDays,$dueDays){
+    function __construct($id,$date,$amount,$servicefee,$corpseCode,$extraDays,$dueDays){
         $this->id = $id;
         $this->date = $date;
         $this->amount = $amount;
-        $this->serciceNames = $serviceNames;
+        //$this->serciceNames = $serviceNames;
+        $this->servicefee = $servicefee;
+        $this->corpseCode = $corpseCode;
         $this->extraDays = $extraDays;
         $this->dueDays = $dueDays;
     }

@@ -124,10 +124,14 @@ class CorpController extends Controller
     }
     function deleteCorp(Request $req)
     {
-        // plx when ever you are deleteing a corp kindly free the Slot
+        $corpseResult = CorpRepositoryImp::searchCorpById($req->get('corpid'))->getData();
+        
+        $isSlotFree = SlotRepositoryImp::updateSlot($corpseResult->getSlotId(),['state'=>'free'])->getSuccess();
+        
         $deleteResponse = CorpRepositoryImp::deleteCorp($req->get("corpid"))->getSuccess();
-
-        if($deleteResponse){return response()->json(CorpViewModel::mapOfSuccess($deleteResponse));}
+        if($isSlotFree &&  $deleteResponse){
+            return response()->json(CorpViewModel::mapOfSuccess($deleteResponse));
+        }
     }
     function freeSlot(Request $req)
     {

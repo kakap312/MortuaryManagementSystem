@@ -13,4 +13,14 @@ class MapOfUIModel{
             "bill"=> $data
         ];
     }
+    public static function mapOfBillings($data){
+        return [
+            "bills"=> $data
+        ];
+    }
+    public static function mapOfValidation($data){
+        return [
+            "validationresult"=> $data
+        ];
+    }
 }

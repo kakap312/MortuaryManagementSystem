@@ -7,10 +7,13 @@ class BillingFactory{
         return new SavedBillingInfo(
             "",
             $req->get('datecreated'),
-            explode(',', $req->get('serviceIds')),
+            //explode(',', $req->get('serviceIds')),
             $req->get('corpseId'),
             $req->get('billfor'),
-            number_format(doubleval($req->get('amount')),2,'.','')
+            number_format(doubleval($req->get('amount')),2,'.',''),
+            $req->get('extraDays'),
+            $req->get('dueDays'),
+            number_format(doubleval($req->get('servicefee')),2,'.',''),
         );
     }
 }

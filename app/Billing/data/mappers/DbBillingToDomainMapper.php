@@ -10,6 +10,8 @@ class DbBillingToDomainMapper{
             $dbBilling['createdAt'],
             $dbBilling['dueDays'],
             $dbBilling['extraDays'],
+            $dbBilling['fee'],
+            $dbBilling['corpId']
 
         );
     }

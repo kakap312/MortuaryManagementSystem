@@ -9,7 +9,9 @@ class DomainBillingToUiMapper {
             $billing->getBillId(),
             $billing->getCreatedAt(),
             $billing->getAmount(),
-            self::getServiceName($billing->getService()),
+            //self::getServiceName($billing->getService()),
+            $billing->getServiceFee(),
+            $billing->getCorpseCode(),
             $billing->getExtraDays(),
             $billing->getDueDays(),
         );

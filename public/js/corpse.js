@@ -318,8 +318,7 @@ function viewCorpseInformation(corpse,position) {
                 requestDataFromSever(deleteCorpUrl,"POST",createFormData(null,['corpid'],[corpId])).
                 then((data)=>{
                     if(data.success){
-                        showMessage(response.isCorpDeleted,"DELETE_SUCCESS",null,true);
-                        fetchCorpse();
+                        showMessage(data.success,"DELETE_SUCCESS",null,true);
                         populateCorpView();
                     }
                 })
@@ -377,8 +376,7 @@ function populateAvailableSlots(data){
 }
 function populateCorpDetail(){
     corps.forEach(corp => {
-        if(corp.id == corpId){
-            $('#date').html(new Date().toISOString().slice(0,10))
+        $('#date').html(new Date().toISOString().slice(0,10))
             $('#coprseId').html(corp.corpseCode)  
             $('#corpName').html(corp.name)
             $('#corpSex').html(corp.sex)
@@ -386,7 +384,6 @@ function populateCorpDetail(){
             $('#corpAdmissionDate').html(corp.admissionDate)
             $('#corpCollectionDate').html(corp.collectionDate)
             $('#dayInFridge').html(corp.dueDays);
-        }
     });
 }
 function populateCoprsForm(corp,status){
@@ -448,7 +445,7 @@ function checkSlotEquality(){
 }
 
 function getCorpIdByName(index){
-    var id=corps[index].id;
+    var id=corps[index].corpseCode;
     return id;
 }
 

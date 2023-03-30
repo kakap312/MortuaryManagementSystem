@@ -18,7 +18,7 @@ class CorpDao{
     }
     public static function updateCorp($id,$dbCorp){
         try {
-            DbCorp::where('corpId','=',$id)->update($dbCorp);
+            DbCorp::where('corpseCode','=',$id)->update($dbCorp);
             return true;
         } catch (\Throwable $th) {
             //return false;
@@ -43,7 +43,7 @@ class CorpDao{
     
     static function  deleteCorpById($id){
         try {
-            DbCorp::where('corpId',$id)->delete();
+            DbCorp::where('corpseCode',$id)->delete();
             return true;
         } catch (\Throwable $th) {
             return $th->getMessage();

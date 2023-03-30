@@ -8,14 +8,18 @@ class Billing{
     private $createdAt;
     private $dueDays;
     private $extraDays;
+    private $servicefee;
+    private $corpseCode;
 
-    public function __construct($billId,$services,$amount,$createdAt,$dueDays,$extraDays){
+    public function __construct($billId,$services,$amount,$createdAt,$dueDays,$extraDays,$servicefee,$corpseCode){
         $this->billId = $billId;
         $this->services = $services;
         $this->amount = $amount;
         $this->createdAt = $createdAt;
         $this->dueDays = $dueDays;
         $this->extraDays = $extraDays;
+        $this->$servicefee = $servicefee;
+        $this->corpseCode = $corpseCode;
         
     }
 
@@ -33,4 +37,8 @@ class Billing{
     function getDueDays(){return $this->dueDays;}
     function setExtraDays($extraDays){$this->extraDays = $extraDays;}
     function getExtraDays(){return $this->extraDays;}
+    function setServiceFee($servicefee){$this->servicefee = $servicefee;}
+    function getServiceFee(){return $this->servicefee;}
+    function setCorpseCode($code){$this->corpseCode = $code;}
+    function getCorpseCode(){return $this->corpseCode;}
 }

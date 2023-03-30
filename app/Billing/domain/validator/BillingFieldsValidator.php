@@ -1,7 +1,7 @@
 <?php
 namespace App\Billing\domain\validator;
 use App\core\domain\validation\Validator;
-class BillingFieldValidator {
+class BillingFieldsValidator {
     private $isDateCreatedValid=false;
     private $isCorpseIdValid=false;
     private $isServiceFeeValid=false;

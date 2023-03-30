@@ -6,4 +6,5 @@ interface BillingRepository{
     public  function fetchBilling($corpseId);
     public  function fetchAllBillings();
     public  function fetchBillingByCorpseId($corpseId);
+    public function deleteBill($id);
 }

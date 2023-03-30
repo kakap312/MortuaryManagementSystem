@@ -15,6 +15,7 @@
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Date</label>
     <input class="form-control" type="date" id='datecreated' name="datecreated" required>
+    <p id='dateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, date is invalid</p>
     </div>
     </div>
 
@@ -28,9 +29,10 @@
     <div class='form-row' id='fetchservices' data-action="{{ route('fetchservices')}}">
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Service Fee</label>
-    <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='services'></input>
+    <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='servicefee'></input>
     <!-- <select class="form-control js-example-basic-multiple" id='services' name='services' multiple='multiple' style='width:100%;'>
     </select> -->
+    <p id='feeerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
     </div>
     </div>
 
@@ -40,6 +42,7 @@
     <textarea class="form-control" id='billfor' name='billfor' style='width:100%;'>
         
     </textarea>
+    <p id='descriptionerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, your description is invalid.</p>
     </div>
     </div>
 
@@ -47,7 +50,6 @@
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Due Amount(GHC)</label>
     <input class="form-control" type="text" id='duedays' name="days" disabled>
-    <p id='ageError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, Age shouldnt contain letters and must not be empty.</p>
     </div>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Extra Amount(GHC)</label>
@@ -59,6 +61,7 @@
     <div class="form-floating mb-3">
     <label for="floatingInput">Sub-Total (GHC)</label>
     <input class="form-control" type="text" id='subtotal' name="amount" disabled>
+    <p id='billamounterror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, amount is invalid.</p>
     </div>
     
     <div class="form-floating mb-3">

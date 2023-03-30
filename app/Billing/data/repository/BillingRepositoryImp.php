@@ -15,13 +15,13 @@ class BillingRepositoryImp implements BillingRepository{
         $dbBilling = DomainToDbBillingMapper::map($savedBillingInfo);
             if(BillingDao::insert($dbBilling)){
                 
-                foreach($savedBillingInfo->getServiceIds() as $serviceId ) {
-                    $billingServiceInfo = BillingServiceFactory::makeBillingServiceInfo($dbBilling['billId'],$serviceId);
-                    BillingServiceRepositoryImp::createBillingService($billingServiceInfo);
-                }
+                // foreach($savedBillingInfo->getServiceIds() as $serviceId ) {
+                //     $billingServiceInfo = BillingServiceFactory::makeBillingServiceInfo($dbBilling['billId'],$serviceId);
+                //     BillingServiceRepositoryImp::createBillingService($billingServiceInfo);
+                // }
                 return new Result( null,true);
             }else{
-                return new Result( BillingDao::insert($dbBilling),false);
+                return new Result( null,false);
             }
     }
     public  function fetchAllBillings(){
@@ -38,7 +38,7 @@ class BillingRepositoryImp implements BillingRepository{
     }
     
     public  function fetchBillingByCorpseId($corpseId){
-        $dbBilling = BillingDao::fetchBillingByCoprseId($corpseId);
+        $dbBilling = BillingDao::findBillingByCoprseId($corpseId);
         if(is_null($dbBilling) || count($dbBilling) == 0 ){
             return new Result(null,false);
         }else{
@@ -57,5 +57,13 @@ class BillingRepositoryImp implements BillingRepository{
     public  function updateBilling($id,$dbBilling){}
     
     public  function fetchBilling($corpse){}
+
+    public function deleteBill($id){
+        if(!(BillingDao::deleteBillById($id))){
+            return new Result(null,false);
+        }else{
+            return new Result(null,true);
+        }
+    }
     
 }
