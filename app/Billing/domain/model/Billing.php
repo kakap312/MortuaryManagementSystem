@@ -3,23 +3,26 @@ namespace App\Billing\domain\model;
 
 class Billing{
     private $billId;
-    private $services; // list of billing services domain object
+    //private $services; // list of billing services domain object
     private $amount;
     private $createdAt;
     private $dueDays;
     private $extraDays;
     private $servicefee;
     private $corpseCode;
+    private $billPurpose;
 
-    public function __construct($billId,$services,$amount,$createdAt,$dueDays,$extraDays,$servicefee,$corpseCode){
+    public function __construct($billId,$amount,$createdAt,$dueDays,$extraDays,$servicefee,$corpseCode,$billPurpose){
         $this->billId = $billId;
-        $this->services = $services;
+        //$this->services = $services;
         $this->amount = $amount;
         $this->createdAt = $createdAt;
         $this->dueDays = $dueDays;
         $this->extraDays = $extraDays;
-        $this->$servicefee = $servicefee;
+        $this->servicefee = $servicefee;
         $this->corpseCode = $corpseCode;
+        $this->billPurpose = $billPurpose;
+
         
     }
 
@@ -41,4 +44,6 @@ class Billing{
     function getServiceFee(){return $this->servicefee;}
     function setCorpseCode($code){$this->corpseCode = $code;}
     function getCorpseCode(){return $this->corpseCode;}
+    function setBillPurpose($billpurpose){$this->billPurpose = $billpurpose;}
+    function getBillPurpose(){return $this->billPurpose;}
 }

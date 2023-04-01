@@ -9,9 +9,10 @@ class UiBilling {
     public $amount;
     public $extraDays;
     public $dueDays;
+    public $billPurpose;
 
 
-    function __construct($id,$date,$amount,$servicefee,$corpseCode,$extraDays,$dueDays){
+    function __construct($id,$date,$amount,$servicefee,$corpseCode,$extraDays,$dueDays,$billPurpose){
         $this->id = $id;
         $this->date = $date;
         $this->amount = $amount;
@@ -20,6 +21,7 @@ class UiBilling {
         $this->corpseCode = $corpseCode;
         $this->extraDays = $extraDays;
         $this->dueDays = $dueDays;
+        $this->billPurpose = $billPurpose;
     }
 
 }

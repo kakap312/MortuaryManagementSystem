@@ -14,6 +14,7 @@ class DomainBillingToUiMapper {
             $billing->getCorpseCode(),
             $billing->getExtraDays(),
             $billing->getDueDays(),
+            $billing->getBillPurpose(),
         );
     }
     static function getServiceName($services){

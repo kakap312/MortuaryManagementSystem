@@ -23,9 +23,18 @@ $(document).ready(function(){
     });
     $('#viewbillinglink').click(function() {
         showOrHideSection('.viewbillingsection');
-        populateBillView(bills);
+        populateBillView();
         
     });
+    $('.printbtn').click(function(){
+        //printPageSection('#corpsecontent');
+        $('.billcontent').printThis({
+           importCSS:true,
+           loadCSS:"/css/style.css",
+           importStyle: true,
+           base:"http://localhost/MortuaryManagementSystem/public/"
+       });
+   });
     $('#corpseId').change(function(){
         $('#addbilling').attr('disabled',true);
         var corpseId = $('#corpseId').val();
@@ -187,8 +196,8 @@ function getServiceIds(services,serviceNames) {
     })
     return serviceids;
 }
-function populateBillView(bills){
-    //fetchAllBills();
+function populateBillView(){
+    fetchAllBills();
     $('.displayNumber').html(bills.length);
     $('.totalNumber').html((bills.length));
     $('.datarow').remove();
@@ -210,7 +219,7 @@ function viewCorpseInformation(bill,position) {
         bill.date +"</td><td>"+
         bill.corpseCode +"</td><td>"+
         bill.amount +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Update</option><option>Details</option></select></td></tr>"
+        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Details</option></select></td></tr>"
         )
 }
  
@@ -225,26 +234,29 @@ function viewCorpseInformation(bill,position) {
                 showMessage(response.success,"DELETE_SUCCESS",null,true);
                 populateBillView();
             }
-            }
-        }else if(($(this).val() == "Update")){
-            showOrHideSection('.addbillingsection');
-            $('#addbilling').html('Update');
-            billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
-            var currentBillIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;
-            populateBillForm(bills[currentBillIndexNumber]);
-             
+        }
         }else if(($(this).val() == "Details")){
-            showOrHideSection('.corpdetailsection');
-            corpId = getCorpIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
-            populateCorpDetail();
+            showOrHideSection('.billdetailsection');
+            var currentIndexOfBill = parseInt($(this).parent().siblings('.sn').html())-1;
+            populateBillDetail(currentIndexOfBill);
         }
     });
+    function populateBillDetail(index){
+        fetchAllBills();
+            $('.date').html(new Date().toISOString().slice(0,10))
+                $('.billId').html(bills[index].id)  
+                $('.corpseId').html(bills[index].corpseCode)
+                $('#fee').html(bills[index].servicefee)
+                $('#day').html(bills[index].dueDays + bills[index].extraDays);
+                $('#total').html(parseInt(bills[index].amount).toFixed(2));
+    }
     function populateBillForm(bill){
         resetForm('#createbillingform');
         $('#datecreated').val(bill.date);
         $('#corpseId').val(bill.corpseCode)
         $('#services').val(bill.servicefee)
         $('#subtotal').val(bill.amount)
+        $('#billfor').val(bill.billPurpose)
 
     }
 

@@ -2353,7 +2353,7 @@ input.sm-content {
 }
 
 /* add corp styling*/
-.addcorpsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
+.addcorpsection, .billdetailsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
     padding-bottom: 20px;
     display: none;
 }
@@ -2379,7 +2379,7 @@ input.sm-content {
     float:right;
 
 }
-#printbtn{
+#printbtn,.printbtn{
     width:220px;
     height: 30px;
     margin: auto;  
