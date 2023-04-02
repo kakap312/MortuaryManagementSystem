@@ -2418,6 +2418,9 @@ margin-bottom: 50px;
 .corpsedetailtable td:nth-child(even){
     text-align: left;
 }
+th,td{
+    padding:10px;
+}
 .seemorebtn{
     margin-top: 50px;
     width:300px;

@@ -16,7 +16,7 @@ class FridgesTableSeeder extends Seeder
         $id = uniqid();
         DB::table('fridges')->insert([
             'fridgeId'=> $id,
-            'name'=>"C",
+            'name'=>"B",
             'location'=>"first floor room 4",
             'state'=>"free"
         ]);

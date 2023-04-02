@@ -19,7 +19,7 @@ class SlotSeeder extends Seeder
             DB::table('slots')->insert([
                 'slotId'=> $id,
                 'name'=>$name,
-                'fridgeId'=>'6398d3af52f06',
+                'fridgeId'=>'642963889c50f',
                 'state'=>"free"
             ]);
         }

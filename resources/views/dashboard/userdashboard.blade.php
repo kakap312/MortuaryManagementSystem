@@ -156,16 +156,27 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#payment-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Payment</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="payment-nav" class="nav-content collapse">
           <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
+            <a id='' href="#">
+              <i class="bi bi-circle"></i><span>Make Payment</span>
+            </a>
+          </li>
+          <li>
+            <a id='viewbillinglink' href="#">
+              <i class="bi bi-circle"></i><span>View Payment</span>
             </a>
           </li>
         </ul>
+      </li><!-- End Icons Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed"  data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gem"></i><span>Clearance</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
