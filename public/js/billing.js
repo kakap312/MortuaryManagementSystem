@@ -8,8 +8,8 @@ var bills;
 var billId;
 
 $(document).ready(function(){
-    fetchServices();
-    populateServices();
+   // fetchServices();
+   // populateServices();
     fetchAllBills()
 
     $('#addbilling').attr('disabled',true);
@@ -218,7 +218,7 @@ function viewCorpseInformation(bill,position) {
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         bill.date +"</td><td>"+
         bill.corpseCode +"</td><td>"+
-        bill.amount +"</td>"+
+        parseInt(bill.amount).toFixed(2) +"</td>"+
         "<td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Details</option></select></td></tr>"
         )
 }

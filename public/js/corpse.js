@@ -1,5 +1,5 @@
 
-import {requestDataFromSever,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
 var corps;
 var fridges;
 var slots;
@@ -99,7 +99,7 @@ $(document).ready(function(){
     //     if(state == 'Register'){
     //         if(confirm(stringValue("CREATE_CORPSE_CONFIRMATION"))){
     //             var formData = createFormData($("#registercorpform")[0],['fridgeId','slotId','corpseCode'],[fridgeId,slotId,code])
-    //             requestDataFromSever('userdashboard/createcorp',"POST",formData).
+    //             requestData('userdashboard/createcorp',"POST",formData).
     //             then((data)=>{
     //                 if(data.success){
     //                     showMessage(data.success,"REGISTERED_SUCCESS",null,true);
@@ -126,7 +126,7 @@ $(document).ready(function(){
     // }else if(state == 'Update'){
     //     createCorpUrl = $('.forminstructon').attr('data-action')
     //     if(confirm(stringValue('UPDATE_CORPSE_CONFIRMATION'))){
-    //         response = requestDataFromSever(createCorpUrl,"POST",createFormData($("#registercorpform")[0],['fridgeId','slotId','corpId','corpseCode'],[fridgeId,slotId,corpId,code])). 
+    //         response = requestData(createCorpUrl,"POST",createFormData($("#registercorpform")[0],['fridgeId','slotId','corpId','corpseCode'],[fridgeId,slotId,corpId,code])). 
     //         then((data)=>{
     //             (data.success)?showMessage(data.success,"UPDATE_SUCCESS",null,true):showMessage(data.success,"UPDATE_ERROR",null,true);
     //         })
@@ -143,139 +143,121 @@ $(document).ready(function(){
         var code = generateCorpseUniqueId();
         if(state == 'Register'){
             if(confirm(stringValue("CREATE_CORPSE_CONFIRMATION"))){
+                var createCorpseUrl = $('#registercorpform').attr('data-action');
                 var formData = createFormData($("#registercorpform")[0],['fridgeId','slotId','corpseCode'],[fridgeId,slotsId,code])
-                requestDataFromSever('userdashboard/createcorp',"POST",formData).
-                then((data)=>{
-                    if(data.success){
-                        showMessage(data.success,"REGISTERED_SUCCESS",null,true);
-                        resetForm('#registercorpform');
-                        fetchCorpse();
-                    }else{
-                        data.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
-                        data.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
-                        data.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
-                        data.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
-                        data.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
-                        data.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
-                        data.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
-                        data.isSexValid ?$('#sexError').hide(): $('#sexError').show();
-                        data.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
-                        data.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
-                        data.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
-                        data.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
-                        data.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
-                        showMessage(data.isCorpCreated,"REGISTERED_ERROR",null,true);
-                    }
-                })
+                var response = requestData(createCorpseUrl,"POST",formData);
+                if(response.success){
+                    showMessage(response.success,"REGISTERED_SUCCESS",null,true);
+                    resetForm('#registercorpform');
+                    fetchCorpse();
+                }else{
+                    response.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
+                    response.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
+                    response.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
+                    response.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
+                    response.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
+                    response.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
+                    response.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
+                    response.isSexValid ?$('#sexError').hide(): $('#sexError').show();
+                    response.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
+                    response.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
+                    response.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
+                    response.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
+                    response.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
+                    showMessage(response.isCorpCreated,"REGISTERED_ERROR",null,true);
+                }
             
         }
     }else if(state == 'Update'){
-       var  createCorpUrl = "userdashboard/update";
+       var  createCorpUrl = $('.forminstructon').attr('data-action');
         if(confirm(stringValue('UPDATE_CORPSE_CONFIRMATION'))){
             slotId = getSlotIdByName($('.availableslots').val());
             // if($('.availableslots').val() != null){
             //     slotId = getSlotIdByName($('.availableslots').val());
             // }
-            requestDataFromSever(createCorpUrl,"POST",createFormData($("#registercorpform")[0],['fridgeId','slotId','corpId','corpseCode'],[fridgeId,slotId,corpId,code])). 
-            then((data)=>{
-                if(data.success){
-                    showMessage(data.success,"UPDATE_SUCCESS",null,true);
-                    fetchCorpse();
-                    $('#freeslot').show()
-                    $('.availableslots').hide();
-                }else{
-                    showMessage(data.isCorpCreated,"UPDATE_ERROR",null,true);
-                    data.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
-                    data.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
-                    data.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
-                    data.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
-                    data.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
-                    data.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
-                    data.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
-                    data.isSexValid ?$('#sexError').hide(): $('#sexError').show();
-                    data.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
-                    data.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
-                    data.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
-                    data.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
-                    data.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
-                    
-                }
-            })    
+            var response = requestData(createCorpUrl,"POST",createFormData($("#registercorpform")[0],['fridgeId','slotId','corpId','corpseCode'],[fridgeId,slotId,corpId,code])); 
+            if(response.success){
+                showMessage(response.success,"UPDATE_SUCCESS",null,true);
+                fetchCorpse();
+                $('#freeslot').show()
+                $('.availableslots').hide();
+            }else{
+                showMessage(response.isCorpCreated,"UPDATE_ERROR",null,true);
+                response.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
+                response.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
+                response.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
+                response.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
+                response.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
+                response.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
+                response.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
+                response.isSexValid ?$('#sexError').hide(): $('#sexError').show();
+                response.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
+                response.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
+                response.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
+                response.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
+                response.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
+                
+            }  
         }
     } 
     });
     $('#freeslot').click(function(){
         if(confirm(stringValue('UPDATE_CORPSE_CONFIRMATION'))){
-            var freeSlotURL = 'userdashboard/freeslot';
+            var freeSlotURL = $('#freeslot').attr('data-action');
             //fetchAvailableSlotByFidgeId(getFridgeIdByName($('.fridgename').val()));
-            requestDataFromSever(freeSlotURL,"POST",createFormData(null,['slotId'],[slotId])). 
-            then((data)=>{
-                if(data.success){
-                    showMessage(data.success,"SLOT_FREE",null,true);
-                    $('.availableslots').show();
-                    $('#freeslot').hide();
-                    fetchAvailableSlotByFidgeId(getFridgeIdByName(($('.fridgename').val())));
-                    //populateSlots();
-                }else{
-                    //$('#sloterrormessage').show();
-                }
-            });
+            var response = requestData(freeSlotURL,"POST",createFormData(null,['slotId'],[slotId]));
+            if(response.success){
+                showMessage(response.success,"SLOT_FREE",null,true);
+                $('.availableslots').show();
+                $('#freeslot').hide();
+                fetchAvailableSlotByFidgeId(getFridgeIdByName(($('.fridgename').val())));
+                //populateSlots();
+            }else{
+                //$('#sloterrormessage').show();
+            }
         }
         
     });
     $('#searchbtn').click(function(){
-        var searchCorpUrl = 'userdashboard/searchcorp';
-        requestDataFromSever(searchCorpUrl,"POST",createFormData(null,['corpId'],[$('.searchcorp').val()])). 
-        then((data)=>{
-            if(data.corps == null){
-                showMessage(true,"CORP_NOT_FOUND",null,true)
-            }else{
-                corps = [data.corps];
-                populateCorpView();
-            }
-            $('.searchcorp').val("");
-        });
+        var searchCorpUrl = $('#searchcorp').attr('data-action');
+        var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[$('.searchcorp').val()]));
+        if(response.corps == null){
+            showMessage(true,"CORP_NOT_FOUND",null,true)
+        }else{
+            corps = [response.corps];
+            populateCorpView();
+        }
+        $('.searchcorp').val("");
     });
     
 }); // end of $(document).ready function
 
 function fetchAvailableSlotByFidgeId(fridgeId){
-    var availableSlotUrl = 'userdashboard/availableslot'; 
-        requestDataFromSever(availableSlotUrl,"POST",createFormData(null,['fridgeid'],[fridgeId])).
-        then((data)=>{
-            (data.length == 0 || data==null)?$('.sloterrormessage').show():populateAvailableSlots(data.slots);
-        });   
+    var availableSlotUrl = $('#slots').attr('data-action'); 
+    var response = requestData(availableSlotUrl,"POST",createFormData(null,['fridgeid'],[fridgeId]));
+    (response.length == 0 || response==null)?$('.sloterrormessage').show():populateAvailableSlots(response.slots);  
 }
 function fetchFridges(){
-    var fridgesUrl = 'userdashboard/fetchfridges';
+    var fridgesUrl = $('.fridgename').attr('data-action');
     var formData = createFormData(null,[''],['']);
-    requestDataFromSever(fridgesUrl,"GET",formData)
-    .then((data)=>{
-        fridges = data.fridges;
-    });
+    var response = requestData(fridgesUrl,"POST",formData);
+    fridges = response.fridges;
     
 }
 function fetchTotalCorpse(){
-    requestDataFromSever('userdashboard/totalcorpse',"GET",createFormData(null,[''],[''])).
-    then((data)=>{
-        totalCorpse = data.totalCorpse;
-    });
+    var response = requestData($('.totalcorpse').attr('data-action'),"GET",createFormData(null,[''],['']));
+    totalCorpse = response.totalCorpse;
 }
 function fetchSlots(){
-    var slotUrl = 'userdashboard/fetchslot';
-    requestDataFromSever(slotUrl,"GET",createFormData(null,[''],[''])).
-    then((data)=>{
-        slots = data.slots;
-    })
-    
+    var slotUrl = $('.fetchslot').attr('data-action');
+    var response = requestData(slotUrl,"GET",createFormData(null,[''],['']));
+    slots = response.slots;
 }
 function fetchCorpse(){
-    var fetchCorpUrl = 'userdashboard/fetchcorps';
+    var fetchCorpUrl = $('.fetchcorpse').attr('data-action');
     var formData = createFormData(null,[''],[""]);
-    requestDataFromSever(fetchCorpUrl,"GET",formData).
-    then((data)=>{
-        corps = data.corps;
-    });
+    var response = requestData(fetchCorpUrl,"GET",formData);
+    corps = response.corps;
     
 }
 function populateCorpView(){
@@ -315,7 +297,7 @@ function viewCorpseInformation(corpse,position) {
             if(confirm("Are you sure you want to delete corp")){
                 var deleteCorpUrl = 'userdashboard/deletecorp';
                 corpId = getCorpIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
-                requestDataFromSever(deleteCorpUrl,"POST",createFormData(null,['corpid'],[corpId])).
+                requestData(deleteCorpUrl,"POST",createFormData(null,['corpid'],[corpId])).
                 then((data)=>{
                     if(data.success){
                         showMessage(data.success,"DELETE_SUCCESS",null,true);
@@ -452,43 +434,43 @@ function getCorpIdByName(index){
 // function validation(){
 //     $("#name").change(function(){
 //         var CorpseValidatonURL = $('.validatename').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#name').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#name').val()]));
 //         response.isNameValid?$('#nameError').hide():$('#nameError').show();
 //     });
 //     $("#age").change(function(){
 //         var CorpseValidatonURL = $('#validateage').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['age'],[$('#age').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['age'],[$('#age').val()]));
 //         response.isAgeValid?$('#ageError').hide():$('#ageError').show();
 //     });
 //     $('#hometown').change(function () {
 //         var CorpseValidatonURL = $('.validatename').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#hometown').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#hometown').val()]));
 //         response.isNameValid?$('#hometownError').hide():$('#hometownError').show();
 //     });
 //     $('#relativeName').change(function () {
 //         var CorpseValidatonURL = $('.validatename').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#relativeName').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#relativeName').val()]));
 //         response.isNameValid?$('#relativeNameError').hide():$('#relativeNameError').show();
 //     });
     
 //     $('#remarks').change(function () {
 //         var CorpseValidatonURL = $('#remarksURL').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['remarks'],[$('#remarks').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['remarks'],[$('#remarks').val()]));
 //         response.isRemarksValid?$('#remarksError').hide():$('#remarksError').show();
 //     });
 //     $('#releasedBy').change(function () {
 //         var CorpseValidatonURL = $('.validatename').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#releasedBy').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['name'],[$('#releasedBy').val()]));
 //         response.isNameValid?$('#releasedByError').hide():$('#releasedByError').show();
 //     });
 //     $('#relativeContactOne').change(function () {
 //         var CorpseValidatonURL = $('#contactURL').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['contact'],[$('#relativeContactOne').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['contact'],[$('#relativeContactOne').val()]));
 //         response.isContactValid?$('#contactOneError').hide():$('#contactOneError').show();
 //     });
 //     $('#relativeContactTwo').change(function () {
 //         var CorpseValidatonURL = $('#contactURL').attr('data-action');
-//         var response = requestDataFromSever(CorpseValidatonURL,"POST",createFormData(null,['contact'],[$('#relativeContactTwo').val()]));
+//         var response = requestData(CorpseValidatonURL,"POST",createFormData(null,['contact'],[$('#relativeContactTwo').val()]));
 //         response.isContactValid?$('#contactTwoError').hide():$('#contactTwoError').show();
 //     });
 

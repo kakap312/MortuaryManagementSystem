@@ -18,7 +18,7 @@ Route::post('/userdashboard/createcorp','CorpController@registerCorp')->name('cr
 Route::post('/userdashboard/update','CorpController@updateCorp')->name('updatecorp');
 Route::get('/userdashboard/fetchcorps','CorpController@viewAllCorps')->name('fetchcorps');
 Route::get('/userdashboard/totalcorpse','CorpController@totalCorpse')->name('totalcorpse');
-Route::get('/userdashboard/fetchfridges','CorpController@viewAllFridges')->name('fetchfridges');
+Route::post('/userdashboard/fetchfridges','CorpController@viewAllFridges')->name('fetchfridges');
 Route::post('/userdashboard/availableslot','CorpController@viewAvailableSlot')->name('fetchavailableslots');
 Route::get('/userdashboard/fetchslot','CorpController@viewSlots')->name('fetchslots');
 Route::post('/userdashboard/freeslot','CorpController@freeSlot')->name('freeslot');

@@ -7,11 +7,11 @@
     <form id='registercorpform' data-action= "{{route('createcorp')}}"  enctype="multipart/form-data">
     <div class='forminstructon' data-action= "{{route('updatecorp')}}" >
     <p id='topdecoration' ></p>
-    <h2 id='corpseregistrationtext'>Corpse Registration Form</h2>
-    <p id='corpseinstruction'>Complete the registration below to create a new Corp registration</p>
+    <h2 id='corpseregistrationtext' class='fetchslot' data-action= "{{route('fetchslots')}}">Corpse Registration Form</h2>
+    <p id='corpseinstruction' class='totalcorpse' data-action= "{{route('totalcorpse')}}">Complete the registration below to create a new Corp registration</p>
     </div><hr/>
     <div class='form-row'>
-    <div class="form-floating mb-3 col">
+    <div class="form-floating mb-3 col fetchcorpse" data-action="{{route('fetchcorps')}}">
     <label for="floatingInput">Admission Date</label>
     <input class="form-control" type="date" id='admissionDate' name="admissionDate" required>
     <p id="admissiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
@@ -61,7 +61,7 @@
     <div class='form-row'>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Fridge Name</label>
-    <select class="fridgename js-example-basic-single form-control" data-action="{{ route('fetchfridges')}}" id='fridgename' name='fridgename'>
+    <select class="fridgename js-example-basic-single form-control" data-action="{{ route('fetchfridges')}}" id='fridges' name='fridgename'>
     <option diabled>choose a fridge</option>    
     </select>
     <p id='fridgeerrormessage' style='display:none; color:red;'>Please choose a  Fridge</p>

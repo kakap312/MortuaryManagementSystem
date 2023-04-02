@@ -91,11 +91,13 @@ class CorpController extends Controller
     function viewAllFridges()
     {
         $fridges = FridgeRepositoryImp::fetchFridge();
+        $uiFridges = array();
         if($fridges->getSuccess()){
-            $uiFridges = array();
             foreach ($fridges->getData() as $fridge) {
                array_push($uiFridges,FridgeToUiModelMapper::map($fridge));
             }
+            return response()->json(CorpViewModel::mapOfFridges($uiFridges));
+        }else{
             return response()->json(CorpViewModel::mapOfFridges($uiFridges));
         }
     }

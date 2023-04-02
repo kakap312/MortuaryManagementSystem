@@ -17,7 +17,9 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style1.css" rel="stylesheet">
   <link href="css/style2.css" rel="stylesheet">
-  
+  <script src="js/corpse.js" type='module'></script>
+  <!-- <script src="js/bill.js" type='module'></script> -->
+  <script src="js/billing.js" type='module'></script>
         
     </head>
     <body id='mainbody'>
