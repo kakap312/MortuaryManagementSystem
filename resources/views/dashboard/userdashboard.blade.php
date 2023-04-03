@@ -242,8 +242,6 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <script src="js/corpse.js" type='module'></script>
-  <!-- <script src="js/bill.js" type='module'></script> -->
-  <script src="js/billing.js" type='module'></script>
+  
   
 @endsection

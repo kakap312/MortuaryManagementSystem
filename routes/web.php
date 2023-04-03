@@ -55,3 +55,6 @@ Route::get('/userdashboard',function(){
 
 // route for services 
 Route::get('/userdashboard/fetchservices','ServiceController@viewServices')->name('fetchservices');
+
+// route for payment
+Route::get('/userdashboard/createpayment','PaymentController@createPayment')->name('createpayment');

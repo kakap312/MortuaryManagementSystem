@@ -18,6 +18,7 @@ class Payments extends Migration
             $table->string("paymentId",100)->primary();
             $table->double("amount",8,2);
             $table->string("billId",100)->index();
+            $table->string("description",100);
             $table->foreign("billId")->references("billId")->on('billings')->onDelete('cascade');
             $table->date("createdAt",10);
             $table->date("updatedAt",10);

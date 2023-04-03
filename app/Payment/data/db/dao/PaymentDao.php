@@ -4,13 +4,13 @@ use  App\Payment\data\db\model\DbPayment;
 
 class PaymentDao {
     
-    function insertPayment($dbPayment){
+    static function insertPayment($dbPayment){
         try {
             DbPayment::create($dbPayment);
             return true;
         } catch (\Throwable $th) {
-            return false;
-           // return $th->getMessage();
+            //return false;
+           return $th->getMessage();
         }
 
     }

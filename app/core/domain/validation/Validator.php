@@ -11,6 +11,13 @@ class Validator{
         }
         return $isValid;
     }
+    static function validateId($id){
+        $isValid =true;
+        if($id == ""){
+            $isValid = false;
+        }
+        return $isValid;
+    }
     static function validateDate($date){
         $isValid =true;
         if($date == ""){

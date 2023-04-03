@@ -1,8 +1,8 @@
 <?php
 namespace App\payment\domain\repository;
-abstract class PaymentRepository {
-    public abstract  function makePayment($savedPaymentInfo);
-    public abstract function fetchAllPayment();
-    public abstract function fetchPaymentById();
-    public abstract function deletePayment($id);
+interface  PaymentRepository {
+    public  function makePayment($savedPaymentInfo);
+    public  function fetchAllPayment();
+    public  function fetchPaymentById();
+    public  function deletePayment($id);
 }

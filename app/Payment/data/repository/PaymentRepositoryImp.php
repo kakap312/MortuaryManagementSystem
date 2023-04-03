@@ -1,16 +1,16 @@
 <?php
+namespace App\payment\data\repository;
 use App\payment\domain\repository\PaymentRepositroy;
 use App\payment\data\db\dao\PaymentDao;
-use App\payment\domain\factory\PaymentFactory;
+use App\payment\data\mappers\DomainToDbPaymentMapper;
+use App\payment\domain\repository\PaymentRepository;
+use App\core\domain\Result;
+
 class PaymentRepositoryImp implements PaymentRepository {
 
-    public   function makePayment($savedPaymentInfo){
-        // validateInputs
-        //maps domain to db model
-        //insert data into database
-        $savedPaymentInfo = PaymentFactory::makeSavedPaymentInfo();
-        $validationResult = new paymentFieldValidation($savedPaymentInfo);
-            return (PaymentDao::insertPayment(DomainToDbPaymentMapper::map($savedPaymentInfo)))? new Result(null,true): new Result(null,false);
+    public function makePayment($savedPaymentInfo){
+       $result =  PaymentDao::insertPayment(DomainToDbPaymentMapper::map($savedPaymentInfo));
+        return($result)?new Result(null,true):  new Result($result,false);     
     }
     public  function fetchAllPayment(){}
     public  function fetchPaymentById(){}
