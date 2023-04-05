@@ -12,6 +12,9 @@
         <link href="css/select2.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/all.css">
+        <link rel="stylesheet" type="text/css" href="css/regular.min.css">
+        <link rel="stylesheet" type="text/css" href="css/solid.min.css">
   <link href="css/bootstrap-icons.css" rel="stylesheet">
   <link href="css/boxicons.min.css" rel="stylesheet">
   <link href="css/quill.snow.css" rel="stylesheet">

@@ -10,7 +10,7 @@
         <img alt="">
         <span class="d-none d-lg-block">UserDashboard</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      <i class="fas fa-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -81,7 +81,7 @@
 
       <li class="nav-item">
         <a class="nav-link " href="#">
-          <i class="bi bi-grid"></i>
+          <i class="fas fa-globe"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
@@ -122,12 +122,12 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Corpse</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="fas fa-restroom"></i><span>Corpse</span><i class="fas fa-caret-down"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a id='addcorplink' href='#'>
-              <i class="bi bi-circle"></i><span>Add Corpse</span>
+              <i class="fa-solid fa-caret-down"></i><span>Add Corpse</span>
             </a>
           </li>
           <li>
@@ -139,7 +139,7 @@
       </li><!-- End Forms Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Billing</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="fas fa-file-invoice"></i><span>Billing</span><i class="fas fa-caret-down ms-auto"></i>
         </a>
         <ul id="icons-nav" class="nav-content collapse">
           <li>
@@ -157,7 +157,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#payment-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Payment</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="fas fa-money"></i><span>Payment</span><i class="fas fa-caret-down ms-auto"></i>
         </a>
         <ul id="payment-nav" class="nav-content collapse">
           <li>
@@ -175,7 +175,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#clearnace-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Clearance</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="fas fa-check-circle"></i><span>Clearance</span><i class="fas fa-caret-down ms-auto"></i>
         </a>
         <ul id="clearnace-nav" class="nav-content collapse">
           <li>
@@ -188,7 +188,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Report</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="fas fa-file"></i><span>Report</span><i class="fas fa-caret-down ms-auto"></i>
         </a>
         <ul id="" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>

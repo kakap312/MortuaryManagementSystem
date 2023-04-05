@@ -6,9 +6,10 @@
             <div class="img-holder">
                 <div class="bg"></div>
                 <div class="info-holder">
-                    <h3>Get more things done with our MMS</h3>
+                    <img style='width:150px; height:150px; margin-top:50px; margin-bottom:10px;' src="{{ asset('img/companylogo.jpg')}}" />
+                    <h3>O.V OHIO Mortuary Management System</h3>
                     <p>Access to the most powerfull tool to manage your Mortuary shop</p>
-                    <img src="{{ asset('img/graphic5.svg')}}" alt="">
+                    <img src="{{ asset('img/mortuary.png')}}" alt="">
                 </div>
             </div>
             <div class="form-holder">
@@ -17,7 +18,7 @@
                         <div class="website-logo-inside">
                             <a href="#">
                                 <div class="logo">
-                                    <img class="logo-size" src="{{ asset('img/logo-light.svg') }}" alt="">
+                                    <img class="logo-size">
                                 </div>
                             </a>
                         </div>
