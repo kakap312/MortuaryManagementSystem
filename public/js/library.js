@@ -72,7 +72,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.addbillingsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
+     var sections = ['.renamedrugssection','.addbillingsection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()
@@ -101,7 +101,11 @@ export function stringValue(name){
         ["UPDATE_CORPSE_CONFIRMATION","Are you sure you want to update Corpse"],
         ["BILL_CREATION_SUCCESS","Congratulation Bill created successfully"],
         ["ACCOUNT_NOT_FOUND","Sorry Account is not found"],
-        ["CONFIRM_FREE_SLOT","Are you sure you want to free slot"]
+        ["CONFIRM_FREE_SLOT","Are you sure you want to free slot"],
+        ["CREATE_PAYMENT_CONFIRMATION","Are you sure you want to make Payment?"],
+        ["PAYMENT_CREATION_SUCCESS","Congratulation Payment created successfully?"],
+        ["PAYMENT_UPDATION_SUCCESS","Congratulation payment updation successfully?"],
+        ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"]
     ]
         )
     return stringMap.get(name);

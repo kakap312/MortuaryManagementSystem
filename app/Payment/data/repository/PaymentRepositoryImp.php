@@ -12,7 +12,20 @@ class PaymentRepositoryImp implements PaymentRepository {
        $result =  PaymentDao::insertPayment(DomainToDbPaymentMapper::map($savedPaymentInfo));
         return($result)?new Result(null,true):  new Result($result,false);     
     }
-    public  function fetchAllPayment(){}
-    public  function fetchPaymentById(){}
-    public  function deletePayment($id){}
+    public  function fetchAllPayment(){
+       $result =  PaymentDao::findAllPayements();
+       return (is_null($result) || $result->count() == 0 )?new Result(null,false): new Result($result,true);
+    }
+    public  function fetchPaymentById($id){
+        $result = PaymentDao::findPaymentById($id);
+        return (is_null($result) || count($result) == 0 )?new Result(null,false): new Result($result,true);
+    }
+    public  function deletePayment($id){
+        $result = PaymentDao::deletePayment($id);
+        return (($result))?new Result(null,true): new Result(null,false);
+    }
+    public  function updatePaymentById($savedPaymentInfo,$id){
+        $result = PaymentDao::updatePayment(DomainToDbPaymentMapper::map($savedPaymentInfo),$id);
+        return (($result))?new Result(null,true): new Result(null,false);
+    }
 }

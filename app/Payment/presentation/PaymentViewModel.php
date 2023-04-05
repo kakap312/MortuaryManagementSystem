@@ -3,7 +3,7 @@ namespace App\payment\presentation;
 class PaymentViewModel {
     
     static function mapOfPayment($data){
-        return ["corps"=>$data];
+        return ["payments"=>$data];
     }
     static function mapOfTotalPayment($data){
         return ["totalCorpse"=>$data];

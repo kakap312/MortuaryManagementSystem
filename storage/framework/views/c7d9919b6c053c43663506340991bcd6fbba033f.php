@@ -4,7 +4,7 @@
     <div class="card info-card sales-card">
     <div class="card-body">
     
-    <form id='createPaymentform' class='createPaymentform' data-action="{{ route('makepayment')}}"  enctype="multipart/form-data">
+    <form id='createPaymentform' class='createPaymentform' data-action="<?php echo e(route('makepayment')); ?>"  enctype="multipart/form-data">
     <div class='forminstructon'>
     <p id='topdecoration' ></p>
     <h2 id='paymentregistrationtext'>Create Payment  Form</h2>
@@ -19,14 +19,14 @@
     </div>
     </div>
 
-    <div class="form-floating mb-3 updatepayment"  data-action="{{ route('updatepayment')}}">
+    <div class="form-floating mb-3 updatepayment"  data-action="<?php echo e(route('updatepayment')); ?>">
     <label for="floatingInput">Bill ID:</label>
-    <input class="form-control searchbill"  type="text" id='billId' name="billId" data-action="{{ route('searchbill')}}" required>
+    <input class="form-control searchbill"  type="text" id='billId' name="billId" data-action="<?php echo e(route('searchbill')); ?>" required>
     <p class='billIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, Bill not found</p>
     </div>
     
 
-    <div class='form-row' id='fetchservices' data-action="{{ route('fetchservices')}}">
+    <div class='form-row' id='fetchservices' data-action="<?php echo e(route('fetchservices')); ?>">
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Amount</label>
     <input type='number' class="form-control amount" placeholder='Please Enter service Fee' id='services' name='amount'></input>

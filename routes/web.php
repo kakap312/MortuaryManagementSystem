@@ -57,4 +57,8 @@ Route::get('/userdashboard',function(){
 Route::get('/userdashboard/fetchservices','ServiceController@viewServices')->name('fetchservices');
 
 // route for payment
-Route::get('/userdashboard/createpayment','PaymentController@createPayment')->name('createpayment');
+Route::post('/userdashboard/createpayment','PaymentController@createPayment')->name('makepayment');
+Route::get('/userdashboard/payments','PaymentController@viewAllPayment')->name('fetchpayments');
+Route::post('/userdashboard/searchpayment','PaymentController@searchPayment')->name('searchpayment');
+Route::post('/userdashboard/deletepayment','PaymentController@erasePayment')->name('deletepayment');
+Route::post('/userdashboard/updatepayment','PaymentController@correctPayment')->name('updatepayment');

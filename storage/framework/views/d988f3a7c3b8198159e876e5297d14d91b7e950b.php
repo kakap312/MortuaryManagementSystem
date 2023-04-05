@@ -160,12 +160,12 @@
         </a>
         <ul id="payment-nav" class="nav-content collapse">
           <li>
-            <a id='' href="#">
+            <a id='addpayment' href="#">
               <i class="bi bi-circle"></i><span>Make Payment</span>
             </a>
           </li>
           <li>
-            <a id='viewbillinglink' href="#">
+            <a id='viewpayment' href="#">
               <i class="bi bi-circle"></i><span>View Payment</span>
             </a>
           </li>
@@ -173,9 +173,16 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#clearnace-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Clearance</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="clearnace-nav" class="nav-content collapse">
+          <li>
+            <a id='clearacne' href="#">
+              <i class="bi bi-circle"></i><span>Clear Corpse</span>
+            </a>
+          </li>
+        </ul>
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
@@ -220,6 +227,8 @@
           <?php echo $__env->make('billing.addbilling', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('billing.viewbilling', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('billing.billdetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('payment.addpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('payment.viewpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           </div>
 
         </div><!-- End Left side columns -->
@@ -241,9 +250,7 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <script src="js/corpse.js" type='module'></script>
-  <!-- <script src="js/bill.js" type='module'></script> -->
-  <script src="js/billing.js" type='module'></script>
+  
   
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('masterview', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

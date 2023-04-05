@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <script src="js/corpse.js" type='module'></script>
+  <!-- <script src="js/bill.js" type='module'></script> -->
+  <script src="js/billing.js" type='module'></script>
+  <script src="js/payment.js" type='module'></script>
         <title><?php echo $__env->yieldContent('title'); ?></title>
         <meta charset="UTF-8">
         <meta name='csrf-token' content='<?php echo e(csrf_token()); ?>' />
@@ -17,16 +21,14 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style1.css" rel="stylesheet">
   <link href="css/style2.css" rel="stylesheet">
-  <script src="js/corpse.js" type='module'></script>
-  <!-- <script src="js/bill.js" type='module'></script> -->
-  <script src="js/billing.js" type='module'></script>
+
         
     </head>
     <body id='mainbody'>
         <?php echo $__env->yieldContent('content'); ?>
 
 
-  <div id-"printarea"></div>
+  <div id="printarea"></div>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/printThis.js"></script>
         <script src="js/bootstrap.min.js"></script>

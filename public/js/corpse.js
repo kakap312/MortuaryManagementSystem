@@ -238,7 +238,7 @@ function fetchAvailableSlotByFidgeId(fridgeId){
     (response.length == 0 || response==null)?$('.sloterrormessage').show():populateAvailableSlots(response.slots);  
 }
 function fetchFridges(){
-    var fridgesUrl = $('.fridgename').attr('data-action');
+    var fridgesUrl = $('#fridges').attr('data-action');
     var formData = createFormData(null,[''],['']);
     var response = requestData(fridgesUrl,"POST",formData);
     fridges = response.fridges;

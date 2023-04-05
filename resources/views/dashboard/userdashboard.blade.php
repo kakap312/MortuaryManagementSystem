@@ -161,12 +161,12 @@
         </a>
         <ul id="payment-nav" class="nav-content collapse">
           <li>
-            <a id='' href="#">
+            <a id='addpayment' href="#">
               <i class="bi bi-circle"></i><span>Make Payment</span>
             </a>
           </li>
           <li>
-            <a id='viewbillinglink' href="#">
+            <a id='viewpayment' href="#">
               <i class="bi bi-circle"></i><span>View Payment</span>
             </a>
           </li>
@@ -174,9 +174,16 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#clearnace-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Clearance</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="clearnace-nav" class="nav-content collapse">
+          <li>
+            <a id='clearacne' href="#">
+              <i class="bi bi-circle"></i><span>Clear Corpse</span>
+            </a>
+          </li>
+        </ul>
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
@@ -221,6 +228,8 @@
           @include ('billing.addbilling')
           @include ('billing.viewbilling')
           @include ('billing.billdetails')
+          @include ('payment.addpayment')
+          @include ('payment.viewpayment')
           </div>
 
         </div><!-- End Left side columns -->

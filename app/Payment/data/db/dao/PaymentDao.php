@@ -22,7 +22,7 @@ class PaymentDao {
             return $th->getMessage();
         }
     }
-    static function  updatePayment($dbPayment){
+    static function  updatePayment($dbPayment,$id){
         try {
             DbPayment::where('paymentId','=',$id)->update($dbPayment);
             return true;
@@ -39,7 +39,22 @@ class PaymentDao {
         }
 
     }
-    static function findPaymentById(){
+    static function findPaymentById($id){
+        try {
+            $GLOBALS['id'] = $id;
+            return DbPayment::where(function($query){
+                $query->where('paymentId','=',$GLOBALS['id'])
+                ->orWhere('billId','=',$GLOBALS['id']);
+            })->get()->toArray();
+            
+            
+            
+            // where(function($query){
+            //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);
+            // })->get()->toArray();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
 
     }
 }

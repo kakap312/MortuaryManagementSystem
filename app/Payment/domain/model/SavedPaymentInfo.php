@@ -1,13 +1,15 @@
 <?php
 namespace App\payment\domain\model;
 class SavedPaymentInfo{
+    private $id;
     private $billId;
     private $amount;
     private $description;
     private $createdAt;
     private $updatedAt;
 
-    public function __construct($billId,$amount,$description,$createdAt,$updatedAt){
+    public function __construct($paymentId,$billId,$amount,$description,$createdAt,$updatedAt){
+        $this->paymentId = $paymentId;
         $this->billId = $billId;
         $this->amount = $amount;
         $this->createdAt = $createdAt;
@@ -24,4 +26,6 @@ class SavedPaymentInfo{
     public function getUpdatedAt(){return $this->updatedAt;}
     public function setDescription($description){$this->description = $description;}
     public function getDescription(){return $this->description;}
+    public function setPaymentId($id){$this->paymentId = $paymentId;}
+    public function getPaymentId(){return $this->paymentId;}
 }
