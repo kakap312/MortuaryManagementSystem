@@ -301,7 +301,7 @@ function viewCorpseInformation(corpse,position) {
         corpse.relativeName + "</td><td>"+
         corpse.relativeContactOne + "</td><td>"+
         corpse.relativeContactTwo+
-        "</td><td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Update</option><option>Details</option></select></td></tr>"
+        "</td><td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Details</option></select></td></tr>"
         )
 }
  
