@@ -7,23 +7,19 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img alt="">
-        <span class="d-none d-lg-block">UserDashboard</span>
+        <span class="d-none d-lg-block" style='font-size:17px;'>UserDashboard</span>
       </a>
-      <i class="fas fa-list toggle-sidebar-btn" style='width:20px;'></i>
+      <i class="fas fa-list toggle-sidebar-btn" style='font-size:16px;'></i>
     </div><!-- End Logo -->
-
-    <nav class="header-nav ms-auto">
+    <nav class="header-nav ms-auto" >
       <ul class="d-flex align-items-center">
 
         <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0 float-right" href="#" data-bs-toggle="dropdown" style='float:right;'>
             <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -49,12 +45,6 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
               <hr class="dropdown-divider">
             </li>
 
@@ -79,9 +69,9 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="#">
+        <a class="nav-link statisticsview" href="#">
           <i class="fas fa-globe"></i>
-          <span>Dashboard</span>
+          <span>Statistics</span>
         </a>
       </li><!-- End Dashboard Nav -->
 

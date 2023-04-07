@@ -49,4 +49,12 @@ class CorpDao{
             return $th->getMessage();
         }
     }
+    static function getTotalNumberOfCorpseDueForColectionToday(){
+        $todayDate = date('y-m-d');
+        try {
+            return DbCorp::where('collectionDate',$todayDate)->get()->count();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

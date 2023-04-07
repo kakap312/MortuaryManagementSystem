@@ -5,6 +5,7 @@
   <!-- <script src="js/bill.js" type='module'></script> -->
   <script src="js/billing.js" type='module'></script>
   <script src="js/payment.js" type='module'></script>
+  <script src="js/statistics.js" type='module'></script>
         <title><?php echo $__env->yieldContent('title'); ?></title>
         <meta charset="UTF-8">
         <meta name='csrf-token' content='<?php echo e(csrf_token()); ?>' />

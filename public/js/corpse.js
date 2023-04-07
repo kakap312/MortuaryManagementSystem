@@ -71,6 +71,7 @@ $(document).ready(function(){
     });
 
     $("#viewcorplink").click(function(){
+        fetchCorpse();
         fetchTotalCorpse();
         showOrHideSection('.viewcorpsection');
         populateCorpView();
@@ -219,7 +220,7 @@ $(document).ready(function(){
         
     });
     $('#searchbtn').click(function(){
-        var searchCorpUrl = $('#searchcorp').attr('data-action');
+        var searchCorpUrl = $('.searchcorp').attr('data-action');
         var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[$('.searchcorp').val()]));
         if(response.corps == null){
             showMessage(true,"CORP_NOT_FOUND",null,true)
@@ -261,7 +262,7 @@ function fetchCorpse(){
     
 }
 function populateCorpView(){
-    fetchCorpse();
+    
     $('.datarow').remove();
     $('#displayNumber').html(corps.length);
     $('#totalNumber').html(totalCorpse);
@@ -349,7 +350,7 @@ function populateSlots(){
 function populateAvailableSlots(data){
     $('.slotnames').remove();
     if(data.length == 0 || data == null){
-       $('#sloterrormessage').show();
+       //$('#sloterrormessage').show();
     }else{
         data.forEach(availableslot => {
             $('#slots').append('<option class="slotnames">'+availableslot.name+'</option>') 

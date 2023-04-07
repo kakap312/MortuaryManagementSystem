@@ -62,3 +62,6 @@ Route::get('/userdashboard/payments','PaymentController@viewAllPayment')->name('
 Route::post('/userdashboard/searchpayment','PaymentController@searchPayment')->name('searchpayment');
 Route::post('/userdashboard/deletepayment','PaymentController@erasePayment')->name('deletepayment');
 Route::post('/userdashboard/updatepayment','PaymentController@correctPayment')->name('updatepayment');
+
+// Statistics
+Route::get('/userdashboard/statistic','StatisticController@getStatistics')->name('statistics');

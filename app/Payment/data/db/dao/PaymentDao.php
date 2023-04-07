@@ -57,4 +57,7 @@ class PaymentDao {
         }
 
     }
+    static function totalPayment(){
+        return DbPayment::all()->count();
+    }
 }

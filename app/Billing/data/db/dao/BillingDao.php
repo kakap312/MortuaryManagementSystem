@@ -53,5 +53,8 @@ class BillingDao{
             return $th->getMessage();
         }
     }
+    static function totalBilling(){
+        return DbBilling::all()->count();
+    }
 
 }

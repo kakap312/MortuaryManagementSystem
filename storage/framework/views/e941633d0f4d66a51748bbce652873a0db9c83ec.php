@@ -1,5 +1,5 @@
  <!-- Sales Card -->
- <div class="col-xxl-4 col-md-6 statisticssection">
+ <div class="col-xxl-4 col-md-6 statisticssection" data-action="<?php echo e(route('statistics')); ?>">
               <div class="card info-card sales-card">
 
                 <div class="filter">
@@ -16,13 +16,13 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Total Corpse <span>| Today</span></h5>
+                  <h5 class="card-title">Total Corpse</h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="fas fa-restroom"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6 class='totalCorpse'>0</h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -58,7 +58,7 @@
                       <i class="bi bi-cart"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6 class='corpsedueforcollectiontoday'>0</h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -89,13 +89,13 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Total Bills <span>| Today</span></h5>
+                  <h5 class="card-title">Total Bills</h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="fas fa-file-invoice"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6 class='totalbill'>0</h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -125,13 +125,13 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Total Payment Done <span>| Today</span></h5>
+                  <h5 class="card-title">Total Payment Done</h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="fas fa-money"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6 class='totalpayments'>0</h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>

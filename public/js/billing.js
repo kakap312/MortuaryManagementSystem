@@ -22,6 +22,7 @@ $(document).ready(function(){
         resetForm('#createbillingform');
     });
     $('#viewbillinglink').click(function() {
+        fetchAllBills();
         showOrHideSection('.viewbillingsection');
         populateBillView();
         
@@ -56,8 +57,8 @@ $(document).ready(function(){
         if(response.bill == null){
             showMessage(true,"CORP_NOT_FOUND",null,true)
         }else{
-            bill = response.bill;
-            populateBillView(bill);
+            bills = response.bill;
+            populateBillView();
         }
         $('.searchcorp').val("");
     });
@@ -197,7 +198,6 @@ function getServiceIds(services,serviceNames) {
     return serviceids;
 }
 function populateBillView(){
-    fetchAllBills();
     $('.displayNumber').html(bills.length);
     $('.totalNumber').html((bills.length));
     $('.datarow').remove();
