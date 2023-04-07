@@ -90,7 +90,7 @@ export function stringValue(name){
         ["USERNAME_VALIDATION_ERROR","Sory username is invalid, username must be like [Stephen@1995] with maximum lenght of eight"],
         ["PASSWORD_VALIDATION_ERROR","Sory Password is invalid, Password maximum lenght must be eight"],
         ["REGISTERED_SUCCESS","Congratulation!, Registration is done successfully"],
-        ["REGISTERED_ERROR","Sorry!, Registration was unsuccessfully. Kindly check your data inputed and try again"],
+        ["REGISTERED_ERROR","Sorry!, Registration was unsuccessful. Kindly check your data inputted and try again"],
         ["CORP_NOT_FOUND","Sorry No corp was found. Kindly Try again"],
         ["DELETE_SUCCESS","Congratulation, you have successfully deleted the corpse"],
         ["SLOT_FREE","Congratulation, you have successfully freed this slot"],

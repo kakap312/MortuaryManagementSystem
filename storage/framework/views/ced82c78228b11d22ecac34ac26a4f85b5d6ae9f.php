@@ -17,7 +17,7 @@
     <p id="admissiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Colection Date</label>
+    <label for="floatingInput">Collection Date</label>
     <input class="form-control" type="date" id='collectionDate' name="collectionDate" required>
     <p id="collectiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="form-floating mb-3">
-    <label for="floatingInput">Released By</label>
+    <label for="floatingInput">Received By</label>
     <input class="form-control" type="text" id='releasedBy' name="releasedBy" required>
     <p id='releasedByError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, remarks must have a maximum of 100 characters and must not be empty</p>
     </div>

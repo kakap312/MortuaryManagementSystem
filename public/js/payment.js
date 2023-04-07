@@ -124,7 +124,7 @@ function viewPaymentInformation(payment,position) {
         payment.createdAt +"</td><td>"+
         payment.billId +"</td><td>"+
         parseInt(payment.amount).toFixed(2) +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Update</option></select></td></tr>"
+        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option></select></td></tr>"
         )
 
         $('.choose').change(function(){
