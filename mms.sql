@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 01:34 PM
+-- Generation Time: Apr 07, 2023 at 10:20 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -61,6 +61,15 @@ CREATE TABLE `billings` (
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `billings`
+--
+
+INSERT INTO `billings` (`billId`, `corpId`, `billfor`, `dueDays`, `extraDays`, `fee`, `amount`, `createdAt`, `updatedAt`) VALUES
+('642ae03a84551', 'OVM-A-FRG-A-A1', 'new billing', 1, 0, 12.00, 12.00, '2023-04-03', '2023-04-03'),
+('642dc1fd78098', 'OVM-K-FRG-A-A2', 'no purpose', 1, 0, 35.00, 35.00, '2023-04-05', '2023-04-05'),
+('642f6574cf328', 'OVM-K-FRG-A-A4', 'this is a bill for both dyas', 1, 1, 12.00, 24.00, '2023-04-06', '2023-04-06');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +95,18 @@ CREATE TABLE `corps` (
   `slotId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `corps`
+--
+
+INSERT INTO `corps` (`corpId`, `corpseCode`, `admissionDate`, `name`, `age`, `sex`, `hometown`, `relativeName`, `relativeContactOne`, `relativeContactTwo`, `collectionDate`, `remarks`, `releasedBy`, `updatedAt`, `fridgeId`, `slotId`, `category`) VALUES
+('642a06ddb0d33', 'OVM-A-FRG-A-A1', '2023-04-02', 'Albertaaa Kojofii', 12, 'M', 'Toki Krom', 'wewewe', '0540533008', '0540533008', '2023-04-03', 'no comment', 'dzzcxv', '0000-00-00', '6429635a440b6', '642963e3997fb', 'Normal'),
+('642dc1d39c401', 'OVM-K-FRG-A-A4', '2023-04-05', 'Kofi Minta', 29, 'M', 'Kwemuman', 'stephany', '0540533008', '0540533008', '2023-04-06', 'no comment', 'Stephen Odiodiodio', '0000-00-00', '6429635a440b6', '642963e3d9560', 'VIP'),
+('642efe8e9e695', 'OVM-T-FRG-A-A16', '2023-04-06', 'TonaDur Akanpoi', 23, 'M', 'Namolo', 'Atimbire Magdalin', '0540533008', '0540533008', '2023-04-07', 'Corpse was placed in a fridge successfully', 'Stephen Odiodiodio', '0000-00-00', '6429635a440b6', '642963e44f75e', 'Normal'),
+('642f725f85c82', 'OVM-K-FRG-B-B1', '2023-04-06', 'Kofi Minta', 23, 'F', 'Kwemuman', 'stephany', '0540533008', '0540533008', '2023-04-07', 'no comment', 'Stephen Odiodiodio', '0000-00-00', '642963889c50f', '642964d113153', 'Normal'),
+('642f738728283', 'OVM-M-FRG-B-B2', '2023-04-07', 'Mavis Atimpoi', 12, 'F', 'Kontena', 'Kofi Ntampoi', '0540533008', '0540533008', '2023-04-08', 'No comment', 'Major Motuary Man', '0000-00-00', '642963889c50f', '642964d12aaa6', 'Normal'),
+('642f73f011514', 'OVM-N-FRG-B-B3', '2023-04-06', 'Nimo Atah Kwame', 32, 'M', 'Kronimfa', 'stephany', '0540533008', '0540533008', '2023-04-07', 'no comment', 'Stephen Odiodiodio', '0000-00-00', '642963889c50f', '642964d131723', 'VIP');
 
 -- --------------------------------------------------------
 
@@ -142,9 +163,17 @@ CREATE TABLE `payments` (
   `paymentId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` double(8,2) NOT NULL,
   `billId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`paymentId`, `amount`, `billId`, `description`, `createdAt`, `updatedAt`) VALUES
+('642d2bb78479c', 50.00, '642ae03a84551', 'comment is there oo', '2023-04-08', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -187,10 +216,10 @@ CREATE TABLE `slots` (
 --
 
 INSERT INTO `slots` (`slotId`, `name`, `fridgeId`, `state`) VALUES
-('642963e3997fb', 'A1', '6429635a440b6', 'free'),
+('642963e3997fb', 'A1', '6429635a440b6', 'used'),
 ('642963e3b7589', 'A2', '6429635a440b6', 'free'),
 ('642963e3c1ef7', 'A3', '6429635a440b6', 'free'),
-('642963e3d9560', 'A4', '6429635a440b6', 'free'),
+('642963e3d9560', 'A4', '6429635a440b6', 'used'),
 ('642963e3e51d6', 'A5', '6429635a440b6', 'free'),
 ('642963e3ec4cc', 'A6', '6429635a440b6', 'free'),
 ('642963e40130e', 'A7', '6429635a440b6', 'free'),
@@ -202,7 +231,7 @@ INSERT INTO `slots` (`slotId`, `name`, `fridgeId`, `state`) VALUES
 ('642963e4346c3', 'A13', '6429635a440b6', 'free'),
 ('642963e43bb3c', 'A14', '6429635a440b6', 'free'),
 ('642963e444b4f', 'A15', '6429635a440b6', 'free'),
-('642963e44f75e', 'A16', '6429635a440b6', 'free'),
+('642963e44f75e', 'A16', '6429635a440b6', 'used'),
 ('642963e456b8a', 'A17', '6429635a440b6', 'free'),
 ('642963e45fa6c', 'A18', '6429635a440b6', 'free'),
 ('642963e466ef1', 'A19', '6429635a440b6', 'free'),
@@ -362,9 +391,9 @@ INSERT INTO `slots` (`slotId`, `name`, `fridgeId`, `state`) VALUES
 ('642963e9a8c8e', 'A173', '6429635a440b6', 'free'),
 ('642963e9b18e6', 'A174', '6429635a440b6', 'free'),
 ('642963e9b90d6', 'A175', '6429635a440b6', 'free'),
-('642964d113153', 'B1', '642963889c50f', 'free'),
-('642964d12aaa6', 'B2', '642963889c50f', 'free'),
-('642964d131723', 'B3', '642963889c50f', 'free'),
+('642964d113153', 'B1', '642963889c50f', 'used'),
+('642964d12aaa6', 'B2', '642963889c50f', 'used'),
+('642964d131723', 'B3', '642963889c50f', 'used'),
 ('642964d13a87d', 'B4', '642963889c50f', 'free'),
 ('642964d141c9f', 'B5', '642963889c50f', 'free'),
 ('642964d14ac05', 'B6', '642963889c50f', 'free'),
