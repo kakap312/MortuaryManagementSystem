@@ -1,29 +1,7 @@
 FROM composer:latest
-COPY app /mms/
-COPY bootstrap /mms/
-COPY config /mms/
-COPY database /mms/
-COPY public /mms/
-COPY resources /mms/
-COPY route /mms/
-COPY storage /mms/
-COPY tests /mms/
-COPY vendor /mms/
-COPY .env /mms/
-COPY .gitattributes /mms/
-COPY .gitignore /mms/
-COPY artisan /mms/
-COPY composer.json /mms/
-COPY composer.lock /mms/
-COPY mms.sql /mms/
-COPY package.json /mms/
-COPY phpunit.xml /mms/
-COPY README.md /mms/
-COPY server.php /mms/
-COPY webpack.mix.js /mms/
-COPY DockerFile /mms/
-
 WORKDIR /mms
+COPY package.json  ./
+copy . ./
 
 RUN composer dump-autoload
 
