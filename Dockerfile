@@ -6,4 +6,4 @@ FROM composer:latest
 
  RUN composer dump-autoload
 
- CMD[ 'php artisan', 'serve']
+ CMD [ 'php artisan', 'serve']
