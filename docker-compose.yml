@@ -4,8 +4,8 @@ services:
     image: php:latest
   www:
     build: 
-      context: /
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: dockerfile
     ports:
       - 8000:8000
   
