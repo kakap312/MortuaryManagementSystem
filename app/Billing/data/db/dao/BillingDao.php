@@ -36,9 +36,6 @@ class BillingDao{
                 $query->where('corpId','=',$GLOBALS['id'])
                 ->orWhere('billId','=',$GLOBALS['id']);
             })->get()->toArray();
-            
-            
-            
             // where(function($query){
             //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);
             // })->get()->toArray();

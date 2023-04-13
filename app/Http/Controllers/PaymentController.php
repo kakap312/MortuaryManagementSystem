@@ -5,6 +5,7 @@ use App\payment\domain\factory\PaymentFactory;
 use App\payment\domain\validation\PaymentFieldValidation;
 use App\payment\presentation\PaymentViewModel;
 use App\payment\domain\factory\RepositoryImpFactory;
+use App\Payment\presentation\mappers\DomainToUiPaymentMapper;
 
 use Illuminate\Http\Request;
 
@@ -35,7 +36,11 @@ class PaymentController extends Controller
     public function viewAllPayment(){
         $result = $this->repositoryFactoryImp->makePaymentRepositoryImp()->fetchAllPayment();
         if($result->getSuccess()){
-            return response()->json(PaymentViewModel::mapOfPayment($result->getData()));
+            $payments = $result->getData();
+            $uiPayments = array_map(function($payment){
+                return DomainToUiPaymentMapper::map($payment);
+            },$payments);
+            return response()->json(PaymentViewModel::mapOfPayment($uiPayments));
         }else{
             return response()->json(PaymentViewModel::mapOfPayment($result->getData()));
         }
@@ -44,9 +49,13 @@ class PaymentController extends Controller
     public function searchPayment(Request $req){
         $result = $this->repositoryFactoryImp->makePaymentRepositoryImp()->fetchPaymentById($req->get('id'));
         if($result->getSuccess()){
-            return response()->json(PaymentViewModel::mapOfPayment($result->getData()));
+            $payments = $result->getData();
+            $uiPayments = array_map(function($payment){
+                return DomainToUiPaymentMapper::map($payment);
+            },$payments);
+            return response()->json(PaymentViewModel::mapOfPayment($uiPayments));
         }else{
-            return response()->json(PaymentViewModel::mapOfPayment($result->getData()));
+            return response()->json(PaymentViewModel::mapOfPayment($result->getSuccess()));
         }
     }
     public function erasePayment(Request $req){

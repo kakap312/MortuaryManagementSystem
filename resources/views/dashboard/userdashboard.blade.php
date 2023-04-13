@@ -169,8 +169,11 @@
         </a>
         <ul id="clearnace-nav" class="nav-content collapse">
           <li>
-            <a id='clearacne' href="#">
+            <a id='clearacnelink' href="#">
               <i class="bi bi-circle"></i><span>Clear Corpse</span>
+            </a>
+            <a id='viewclearancelink' href="#">
+              <i class="bi bi-circle"></i><span>view Clearance.</span>
             </a>
           </li>
         </ul>
@@ -220,6 +223,8 @@
           @include ('billing.billdetails')
           @include ('payment.addpayment')
           @include ('payment.viewpayment')
+          @include ('clearance.addclearance')
+          @include ('clearance.viewclearance')
           </div>
 
         </div><!-- End Left side columns -->

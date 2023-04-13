@@ -33,7 +33,7 @@ class PaymentDao {
     }
     static function findAllPayements(){
         try {
-            return DbPayment::skip(0)->take(5)->get();
+            return  DbPayment::skip(0)->take(5)->get();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -45,13 +45,7 @@ class PaymentDao {
             return DbPayment::where(function($query){
                 $query->where('paymentId','=',$GLOBALS['id'])
                 ->orWhere('billId','=',$GLOBALS['id']);
-            })->get()->toArray();
-            
-            
-            
-            // where(function($query){
-            //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);
-            // })->get()->toArray();
+            })->get();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

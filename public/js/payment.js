@@ -94,7 +94,7 @@ function showErrors(validationResult){
 (validationResult.isIdValid)?$('.billIdError').hide():$('.billIdError').show();
  }
  function populateUpdateScreen(){
-    $('.datecreated').val(payment.createdAt);
+    $('.datecreated').val(payment.dateCreated);
     $('.searchbill').val(payment.billId);
     $('.amount').val(payment.amount);
     $('.billfor').val(payment.description);
@@ -121,7 +121,7 @@ function showErrors(validationResult){
 function viewPaymentInformation(payment,position) {
     $('.billsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
-        payment.createdAt +"</td><td>"+
+        payment.dateCreated +"</td><td>"+
         payment.billId +"</td><td>"+
         parseInt(payment.amount).toFixed(2) +"</td>"+
         "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option></select></td></tr>"

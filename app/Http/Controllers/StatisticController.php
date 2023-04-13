@@ -19,9 +19,10 @@ class StatisticController extends Controller
         $BillStatisticsResult = $this->StatisticsRepositoryImp->getBillingStatistis();
         $paymentStatisticsResult = $this->StatisticsRepositoryImp->getPaymentStatistics();
         $statisticsModel = array_merge(
-            $corpseStatisticsResult->getData(),
-            $BillStatisticsResult->getData(),
-            $paymentStatisticsResult->getData()
+        is_null($corpseStatisticsResult->getData())?array():$corpseStatisticsResult->getData(),
+        is_null($BillStatisticsResult->getData())?array():$BillStatisticsResult->getData(),
+        is_null($paymentStatisticsResult->getData())?array():$paymentStatisticsResult->getData(),
+            
 
         );
         return response()->json(StatisticsViewModel::mapOfStatistics($statisticsModel));

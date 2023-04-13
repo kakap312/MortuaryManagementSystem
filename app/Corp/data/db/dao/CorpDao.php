@@ -30,7 +30,8 @@ class CorpDao{
         try {
             $GLOBALS['id'] = $id;
             return DbCorp::where(function($query){
-                $query->where('corpseCode','=',$GLOBALS['id']);
+                $query->where('corpseCode','=',$GLOBALS['id'])
+                ->orWhere('name','=',$GLOBALS['id']);
             })->get()->first();
         } catch (\Throwable $th) {
             return $th->getMessage();

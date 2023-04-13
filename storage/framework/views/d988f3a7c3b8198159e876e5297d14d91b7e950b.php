@@ -168,8 +168,11 @@
         </a>
         <ul id="clearnace-nav" class="nav-content collapse">
           <li>
-            <a id='clearacne' href="#">
+            <a id='clearacnelink' href="#">
               <i class="bi bi-circle"></i><span>Clear Corpse</span>
+            </a>
+            <a id='viewclearancelink' href="#">
+              <i class="bi bi-circle"></i><span>view Clearance.</span>
             </a>
           </li>
         </ul>
@@ -219,6 +222,8 @@
           <?php echo $__env->make('billing.billdetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('payment.addpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('payment.viewpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('clearance.addclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('clearance.viewclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           </div>
 
         </div><!-- End Left side columns -->

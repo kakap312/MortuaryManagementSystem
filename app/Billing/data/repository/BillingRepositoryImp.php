@@ -36,6 +36,23 @@ class BillingRepositoryImp implements BillingRepository{
             return new Result($billings,true);
         }
     }
+    public function sumBillAmount($corpseId){
+        $dbBilling = BillingDao::findBillingByCoprseId($corpseId);
+        if(is_null($dbBilling) || count($dbBilling) == 0 ){
+            return new Result(null,false);
+        }else{
+            $billAmount = 0;
+            if(count($dbBilling) >= 1){
+                foreach ($dbBilling as $dbBill) {
+                   $billing =  DbBillingToDomainMapper::map($dbBill);
+                   $billAmount += $billAmount->getAmount();
+                }
+                return new Result($billAmount,true);
+            }
+            
+            
+        }
+    }
     
     public  function fetchBillingByCorpseId($corpseId){
         $dbBilling = BillingDao::findBillingByCoprseId($corpseId);

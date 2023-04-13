@@ -1,0 +1,9 @@
+VERSION: "3.8"
+SERVICES:
+  db:
+    image: php:latest
+  www:
+    build: ./
+    port:
+      - 8000:8000
+  

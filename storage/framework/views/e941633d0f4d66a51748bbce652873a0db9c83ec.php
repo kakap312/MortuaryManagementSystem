@@ -1,5 +1,5 @@
  <!-- Sales Card -->
- <div class="col-xxl-4 col-md-6 statisticssection" data-action="<?php echo e(route('statistics')); ?>">
+ <div class="col-xxl-4 col-md-6 statisticssection" data-action="<?php echo e(route('statistic')); ?>">
               <div class="card info-card sales-card">
 
                 <div class="filter">

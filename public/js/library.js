@@ -72,7 +72,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.addbillingsection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
+     var sections = ['.renamedrugssection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()
@@ -105,7 +105,10 @@ export function stringValue(name){
         ["CREATE_PAYMENT_CONFIRMATION","Are you sure you want to make Payment?"],
         ["PAYMENT_CREATION_SUCCESS","Congratulation Payment created successfully?"],
         ["PAYMENT_UPDATION_SUCCESS","Congratulation payment updation successfully?"],
-        ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"]
+        ["CORPSE_CLEARED_SUCCESS","Congratulation corpse  cleared  successfully."],
+        ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"],
+        ["CLEAR_CORPSE_CONFIRMATION","Are you sure you want to clear this corpse?"],
+        ["CORPSE_CLEARED_ERROR","sorry, corpse already cleared"],
     ]
         )
     return stringMap.get(name);

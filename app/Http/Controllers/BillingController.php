@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Billing\domain\factory\BillingFactory;
-use App\Billing\data\factory\RepositoryFactory;
+use App\Billing\data\factory\BillRepositoryFactory;
 use App\Billing\presentation\MapOfUIModel;
 use App\Billing\presentation\mapper\DomainBillingToUiMapper;
 use App\Billing\domain\validator\BillingFieldsValidator;
@@ -13,7 +13,7 @@ class BillingController extends Controller
     private $repositoryFactory;
     
     function __construct(){
-        $this->repositoryFactory  = new RepositoryFactory();
+        $this->repositoryFactory  = new BillRepositoryFactory();
     }
     function createBill(Request $req){
         $savedBillingInfo =  BillingFactory::makeSavedBillingInfo($req);

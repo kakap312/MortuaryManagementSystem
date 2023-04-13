@@ -64,4 +64,9 @@ Route::post('/userdashboard/deletepayment','PaymentController@erasePayment')->na
 Route::post('/userdashboard/updatepayment','PaymentController@correctPayment')->name('updatepayment');
 
 // Statistics
-Route::get('/userdashboard/statistic','StatisticController@getStatistics')->name('statistics');
+Route::get('/userdashboard/statistic','StatisticController@getStatistics')->name('statistic');
+
+//clearance
+Route::post('/userdashboard/clearance','ClearanceController@makeClearance')->name('createclearance');
+Route::get('/userdashboard/fetchclearance','ClearanceController@viewAllClearance')->name('allclearance');
+Route::post('/userdashboard/searchclearance','ClearanceController@searchClearance')->name('searchclearance');

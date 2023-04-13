@@ -2353,7 +2353,7 @@ input.sm-content {
 }
 
 /* add corp styling*/
-.addcorpsection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
+.addcorpsection, .addclearancesection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
     padding-bottom: 20px;
     display: none;
 }

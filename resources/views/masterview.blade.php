@@ -6,6 +6,7 @@
   <script src="js/billing.js" type='module'></script>
   <script src="js/payment.js" type='module'></script>
   <script src="js/statistics.js" type='module'></script>
+  <script src="js/clearance.js" type='module'></script>
   
         <title>@yield('title')</title>
         <meta charset="UTF-8">
@@ -48,7 +49,8 @@
         <script src="js/tinymce.min.js"></script>
         <script src="js/validate.js"></script>
         <script src="js/jquery.PrintArea.js"></script>
-        <script src="js/account.js" type='nodule'></script>
+        <script src="js/account.js" type='module'></script>
+        <script src="js/clearance.js"></script>
         
 
   <!-- Template Main JS File -->
