@@ -4,6 +4,6 @@ FROM composer:latest
  COPY . .
  COPY composer.json /mms/
 
- RUN composer dump-autoloader
+ RUN composer dump-autoload
 
  CMD php artisan serve
