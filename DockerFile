@@ -21,7 +21,7 @@ COPY phpunit.xml /mms/
 COPY README.md /mms/
 COPY server.php /mms/
 COPY webpack.mix.js /mms/
-
+COPY DockerFile /mms/
 
 WORKDIR /mms
 
