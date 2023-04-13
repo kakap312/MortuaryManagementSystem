@@ -3,6 +3,5 @@ WORKDIR /mms
 COPY package.json  ./
 copy . ./
 
-RUN composer dump-autoload
 
 CMD php artisan serve
