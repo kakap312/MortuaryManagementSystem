@@ -1,5 +1,5 @@
 VERSION: "3.8"
-SERVICES:
+SERVICE:
   db:
     image: php:latest
   www:
