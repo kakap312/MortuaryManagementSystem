@@ -3,7 +3,7 @@ services:
   db:
     image: php:latest
   www:
-    build: ./DockerFile
+    build: ./Dockerfile
     ports:
       - 8000:8000
   
