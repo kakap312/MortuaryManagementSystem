@@ -8,4 +8,4 @@ FROM composer:latest
 
  EXPOSE 8000
 
- CMD [ 'php artisan serve']
+ CMD php artisan serve
