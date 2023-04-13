@@ -24,8 +24,13 @@ class ClearanceRepositoryImp implements CLearanceRepository{
             return new Result($clearance,true);
         }
     }
-    public function updateClearance($id,$dbClearance){
-
+    public function updateClearance($id,$savedClearanceInfo){
+        $dbClearances = ClearanceDao::updateClearance($id,DomainToDbClearanceMapper::map($savedClearanceInfo));
+        if(! $dbClearances){
+            return new Result(null,false);
+        }else{
+            return new Result(null,true);
+        }
     }
     public function deleteClearance($id){
 

@@ -180,16 +180,9 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="fas fa-file"></i><span>Report</span><i class="fas fa-caret-down ms-auto"></i>
+        <a class="nav-link collapsed reportlink" data-bs-target="#icons-nav" href="#">
+          <i class="fas fa-file"></i><span>Report</span>
         </a>
-        <ul id="" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
       </li><!-- End Icons Nav -->
 
     </ul>
@@ -225,6 +218,7 @@
           @include ('payment.viewpayment')
           @include ('clearance.addclearance')
           @include ('clearance.viewclearance')
+          @include ('clearance.clearancedetails')
           </div>
 
         </div><!-- End Left side columns -->

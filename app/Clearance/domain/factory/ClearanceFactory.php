@@ -4,14 +4,14 @@ use App\Clearance\domain\model\SavedClearanceInfo;
 class ClearanceFactory{
 
     public static function getSavedClearanceInfo($req){
-        $id = $req->get('corpId');
+        $corpseId = $req->get('corpId');
+        $paymentId = $req->get('id');
         return new SavedClearanceInfo(
-            "",
-            isset($id)?$id:"",
+            isset($paymentId)?$paymentId:"",
+            isset($corpseId)?$corpseId:"",
             is_null($req->get('state'))?"":$req->get('state') ,
-            is_null($req->get('datecreated'))?"":$req->get('datecreated') ,
+            is_null($req->get('datecreated'))?"":$req->get('datecreated'),
             ""
-            
         );
 
     }

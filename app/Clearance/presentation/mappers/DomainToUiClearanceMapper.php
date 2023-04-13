@@ -7,7 +7,7 @@ class DomainTOUiClearanceMapper{
             $clearance->getClearanceId(),
             $clearance->getStatus(),
             $clearance->getCreatedAt(),
-            
+            $clearance->getCorpseCode(),
         );
     }
 }

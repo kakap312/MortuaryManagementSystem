@@ -179,16 +179,9 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="fas fa-file"></i><span>Report</span><i class="fas fa-caret-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" href="#">
+          <i class="fas fa-file"></i><span>Report</span>
         </a>
-        <ul id="" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
       </li><!-- End Icons Nav -->
 
     </ul>
@@ -224,6 +217,7 @@
           <?php echo $__env->make('payment.viewpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.addclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.viewclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('clearance.clearancedetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           </div>
 
         </div><!-- End Left side columns -->

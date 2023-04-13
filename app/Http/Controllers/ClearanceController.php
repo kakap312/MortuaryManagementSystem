@@ -50,6 +50,16 @@ class ClearanceController extends Controller
        
        
     }
+    public function updateClearance(Request $req){
+        $savedClearanceInfo =  CLearanceFactory::getSavedClearanceInfo($req);
+        $clearanceFieldValidation = new ClearanceFieldValidation($savedClearanceInfo);
+        if($clearanceFieldValidation->isAllFieldValid()){
+            $result = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->updateClearance($req->get('id'),$savedClearanceInfo);
+            return response()->json(MapOfUIModel::mapOfSuccess($result->getSuccess()));
+        }else{
+            return response()->json(MapOfUIModel::mapOfValidation($clearanceFieldValidation->mapOfFieldValidation()));
+        }
+    }
 
     public function viewAllClearance(){
         $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchAllClearance();

@@ -7,14 +7,14 @@
     <form id='createclearanceform' data-action="<?php echo e(route('createclearance')); ?>"  enctype="multipart/form-data">
     <div class='forminstructon'>
     <p id='topdecoration' ></p>
-    <h2 id='corpseregistrationtext'>Corpse Clearnace Form</h2>
-    <p id='billinfinstruction'>Complete the Clearance  form below to clear a corpse.</p>
+    <h2 class='corpseregistrationtext'>Corpse Clearnace Form</h2>
+    <p class='billinfinstruction'>Complete the Clearance  form below to clear a corpse.</p>
     </div><hr/>
 
     <div class='form-row'>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Date</label>
-    <input class="form-control" type="date" id='datecreated' name="datecreated" required>
+    <input class="form-control datecreated" type="date" id='datecreated' name="datecreated" required>
     <p id='dateerror' class='dateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, date is invalid</p>
     </div>
     </div>
@@ -26,7 +26,7 @@
     </div>
     
 
-    <div class='form-row' id='fetchservices' data-action="<?php echo e(route('fetchservices')); ?>">
+    <div class='form-row' id='updateclearance' data-action="<?php echo e(route('updateclearance')); ?>">
     <div class="form-floating mb-3 col">
     <label for="floatingInput">State</label>
     <!-- <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='servicefee'></input> -->
@@ -40,7 +40,7 @@
 
     <div class="form-floating mb-3">
     <div class="form-button">
-    <button type='button' id="clearcorpsebtn"  class="ibtn btn-primary">Clear Corpse</button>
+    <button type='button' id="clearcorpsebtn"  class="ibtn btn-primary clearcorpsebtn">Add Clearance</button>
     </div>      
     </div>
     </form>   

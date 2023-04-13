@@ -25,7 +25,7 @@ class ClearanceDao{
 
     static function updateClearance($id,$dbClearance){
         try {
-            DbClearance::where('corpseId','=',$id)->update($dbClearance);
+            DbClearance::where('clearanceId','=',$id)->update($dbClearance);
             return true;
         } catch (\Throwable $th) {
            return $th->getMessage();

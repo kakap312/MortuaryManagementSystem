@@ -5,12 +5,14 @@ class Clearance{
     private $corpseId;
     private $status;
     private $createdAt;
+    private $corpseCode;
 
-    public function __construct($clearanceId,$corpseId,$status,$createdAt){
+    public function __construct($clearanceId,$corpseId,$status,$createdAt,$corpseCode){
         $this->clearanceId = $clearanceId;
         $this->corpseId = $corpseId;
         $this->status = $status;
         $this->createdAt = $createdAt;
+        $this->corpseCode = $corpseCode;
     }
 
     public function setClearanceId($id){$this->clearanceId = $id;}
@@ -21,4 +23,6 @@ class Clearance{
     public function getStatus(){return $this->status;}
     public function setCreatedAt($date){$this->createdAt = $date;}
     public function getCreatedAt(){return $this->createdAt;}
+    public function setCorpseCode($code){$this->corpseCode = $code;}
+    public function getCorpseCode(){return $this->corpseCode;}
 }

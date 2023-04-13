@@ -72,7 +72,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
+     var sections = ['.renamedrugssection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()

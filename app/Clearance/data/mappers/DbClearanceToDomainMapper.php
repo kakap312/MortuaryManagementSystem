@@ -9,14 +9,16 @@ class DbClearanceToDomainMapper{
                 $dbClearance['clearanceId'],
                 $dbClearance['corpseId'],
                 $dbClearance['createdAt'],
-                $dbClearance['status']
+                $dbClearance['status'],
+                $dbClearance['corpseId']
             );
         }else{
             return new Clearance(
                 $dbClearance->get('clearanceId'),
                 $dbClearance->get('corpseId'),
                 $dbClearance->get('createdAt'),
-                $dbClearance->get('status')
+                $dbClearance->get('status'),
+                $dbClearance->get('corpseId')
             );
         }
     }

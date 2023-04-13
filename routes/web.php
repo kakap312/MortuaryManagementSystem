@@ -70,3 +70,4 @@ Route::get('/userdashboard/statistic','StatisticController@getStatistics')->name
 Route::post('/userdashboard/clearance','ClearanceController@makeClearance')->name('createclearance');
 Route::get('/userdashboard/fetchclearance','ClearanceController@viewAllClearance')->name('allclearance');
 Route::post('/userdashboard/searchclearance','ClearanceController@searchClearance')->name('searchclearance');
+Route::post('/userdashboard/updateclearance','ClearanceController@updateClearance')->name('updateclearance');

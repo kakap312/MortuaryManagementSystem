@@ -28,12 +28,17 @@ $(document).ready(function(){
         
     });
     $('.printbtn').click(function(){
-        //printPageSection('#corpsecontent');
-        $('.billcontent').printThis({
-           importCSS:true,
-           loadCSS:"/css/style.css",
-           importStyle: true,
-           base:"http://localhost/MortuaryManagementSystem/public/"
+        var option = {
+            mode:"popup" , //printable window is either iframe or browser popup
+            popHt: 500 ,  // popup window height
+            popWd: 400,  // popup window width
+            popX: 500  , // popup window screen X position
+            popY: 600,  //popup window screen Y position
+            popTitle:"", // popup window title element
+            popClose: false,  // popup window close after printing
+            strict: false // strict or looseTransitional html 4.01 document standard or undefined to not include at all only for popup option
+         }
+         $('#billcontent').printArea( option );
        });
    });
     $('#corpseId').change(function(){

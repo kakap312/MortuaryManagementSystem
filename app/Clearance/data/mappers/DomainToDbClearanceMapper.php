@@ -12,13 +12,10 @@ class DomainToDbClearanceMapper {
             ];
         }else{
             return [
-                "clearanceId"=>$clearance->getId(),
                 "corpseId"=>$clearance->getCorpseId(),
                 "status"=>$clearance->getStatus(),
-                "createdAt"=>$clearance->getCreatedAt(),
-                "updatedAt"=>$clearance->getUpdatedAt()
+                "updatedAt"=>$clearance->getCreatedAt()
             ];
         }
-
     }
 }
