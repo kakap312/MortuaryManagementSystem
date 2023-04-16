@@ -7,6 +7,7 @@
   <script src="js/payment.js" type='module'></script>
   <script src="js/statistics.js" type='module'></script>
   <script src="js/clearance.js" type='module'></script>
+  <script src="js/report.js" type='module'></script>
   
         <title><?php echo $__env->yieldContent('title'); ?></title>
         <meta charset="UTF-8">

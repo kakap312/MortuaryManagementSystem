@@ -52,4 +52,11 @@ class ClearanceDao{
         }
         
     }
+    static function totalCLearance(){
+        try {
+            return DbClearance::all()->count();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

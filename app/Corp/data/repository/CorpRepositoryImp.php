@@ -68,6 +68,30 @@ class CorpRepositoryImp implements CorpRepository{
             return new Result(null,true);
         }
     }
+     public static function findCorpseByDate($startDate,$endDate){
+        $dbCorps = CorpDao::fetchCorpseByDate($startDate,$endDate);
+        if(is_null($dbCorps)){
+            return new Result(null,false);
+        }else{
+            $corps = array();
+            foreach ($dbCorps as $dbcorp) {
+                array_push($corps,DbCorpToDomainMapper::map($dbcorp));
+            }
+            return new Result($corps,true);
+        }
+     }
+     public static function findCorpseByDateAndSex($startDate,$endDate,$sex){
+        $dbCorps = CorpDao::fetchCorpseByDateAndGender($startDate,$endDate,$sex);
+        if(is_null($dbCorps)){
+            return new Result(null,false);
+        }else{
+            $corps = array();
+            foreach ($dbCorps as $dbcorp) {
+                array_push($corps,DbCorpToDomainMapper::map($dbcorp));
+            }
+            return new Result($corps,true);
+        }
+     }
 
     
 }

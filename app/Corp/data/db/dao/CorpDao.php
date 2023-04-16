@@ -58,4 +58,31 @@ class CorpDao{
             return $th->getMessage();
         }
     }
+    static function fetchCorpseByDate($startDate,$endDate){
+        try {
+            $GLOBALS['startdate'] = $startDate;
+            $GLOBALS['enddate'] = $endDate;
+            return DbCorp::where(function($query){
+                $query->whereDate('admissionDate','>=',$GLOBALS['startdate'])
+                ->WhereDate('admissionDate','<=',$GLOBALS['enddate']);
+            })->get();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+    static function fetchCorpseByDateAndGender($startDate,$endDate,$sex){
+        try {
+            $GLOBALS['startdate'] = $startDate;
+            $GLOBALS['enddate'] = $endDate;
+            $GLOBALS['sex'] = $sex;
+
+            return DbCorp::where(function($query){
+                $query->whereDate('admissionDate','>=',$GLOBALS['startdate'])
+                ->WhereDate('admissionDate','<=',$GLOBALS['enddate'])->
+                Where('sex','<=',$GLOBALS['sex']);
+            })->get();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

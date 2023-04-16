@@ -14,6 +14,7 @@
 Route::get('/', function(){
     return "hello";
 });
+Route::get('/userdashboard/corpsereport','CorpController@viewCorpseByDateCreated')->name('corpsereport');
 Route::post('/userdashboard/createcorp','CorpController@registerCorp')->name('createcorp');
 Route::post('/userdashboard/update','CorpController@updateCorp')->name('updatecorp');
 Route::get('/userdashboard/fetchcorps','CorpController@viewAllCorps')->name('fetchcorps');
@@ -71,3 +72,6 @@ Route::post('/userdashboard/clearance','ClearanceController@makeClearance')->nam
 Route::get('/userdashboard/fetchclearance','ClearanceController@viewAllClearance')->name('allclearance');
 Route::post('/userdashboard/searchclearance','ClearanceController@searchClearance')->name('searchclearance');
 Route::post('/userdashboard/updateclearance','ClearanceController@updateClearance')->name('updateclearance');
+
+// report 
+Route::post('/userdashboard/report','ReportController@makeReport')->name('report');

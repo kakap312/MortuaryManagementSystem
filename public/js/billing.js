@@ -40,7 +40,6 @@ $(document).ready(function(){
          }
          $('#billcontent').printArea( option );
        });
-   });
     $('#corpseId').change(function(){
         $('#addbilling').attr('disabled',true);
         var corpseId = $('#corpseId').val();

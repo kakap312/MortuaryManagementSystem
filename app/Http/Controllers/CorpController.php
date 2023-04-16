@@ -142,6 +142,21 @@ class CorpController extends Controller
             return response()->json(CorpViewModel::mapOfSuccess($isSlotFree));
         }
     }
+    function viewCorpseByDateCreated(){
+        $corpseResult = CorpRepositoryImp::findCorpseByDateAndSex("2023-04-10","2023-04-15","M");
+        $uiCorps = array();
+        if($corpseResult->getSuccess()){
+            $corpse =  $corpseResult->getData(); 
+            foreach ($corpse as $corp) {
+                $fridge = (FridgeRepositoryImp::searchFridgeByNameOrId($corp->getFridgeId()))->getData();
+                $slot = (SlotRepositoryImp::searchSlotByNameOrId($corp->getSlotId()))->getData();
+               array_push($uiCorps,CorpToUiModelMapper::map($corp,$fridge->getName(),$slot->getName()));
+            }
+            return response()->json(CorpViewModel::mapOfCorpse($uiCorps));
+        }else{
+            return response()->json(CorpViewModel::mapOfCorpse($uiCorps));
+        }
+    }
     function totalcorpse(){
         $result = CorpRepositoryImp::totalCorpse();
         return response()->json(CorpViewModel::mapOfTotalCorpse($result->getData()));

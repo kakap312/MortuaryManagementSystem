@@ -179,7 +179,7 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" href="#">
+        <a class="nav-link collapsed reportlink" data-bs-target="#icons-nav" href="#">
           <i class="fas fa-file"></i><span>Report</span>
         </a>
       </li><!-- End Icons Nav -->
@@ -218,6 +218,7 @@
           <?php echo $__env->make('clearance.addclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.viewclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.clearancedetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('report.viewreport', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           </div>
 
         </div><!-- End Left side columns -->

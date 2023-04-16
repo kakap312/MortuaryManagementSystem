@@ -219,6 +219,7 @@
           @include ('clearance.addclearance')
           @include ('clearance.viewclearance')
           @include ('clearance.clearancedetails')
+          @include ('report.viewreport')
           </div>
 
         </div><!-- End Left side columns -->

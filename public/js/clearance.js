@@ -8,8 +8,9 @@ $(document).ready(function(){
     fetchClearance();
 
 $('#clearacnelink').click(function(){
-    $('#createclearanceform').reset();
     showOrHideSection('.addclearancesection');
+    $('#createclearanceform').reset();
+    
     $('.corpseregistrationtext').html('');
     $('.billinfinstruction').html('');
     $('.corpseregistrationtext').html('Clearance  Form');

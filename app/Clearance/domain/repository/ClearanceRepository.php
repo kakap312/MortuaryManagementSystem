@@ -6,6 +6,5 @@ interface ClearanceRepository{
     public function updateClearance($id,$dbClearance);
     public function deleteClearance($id);
     public function fetchClearanceById($id);
-
-
+    public function totalNumberOfClearance();
 }

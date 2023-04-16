@@ -72,7 +72,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
+     var sections = ['.renamedrugssection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()
@@ -109,6 +109,7 @@ export function stringValue(name){
         ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"],
         ["CLEAR_CORPSE_CONFIRMATION","Are you sure you want to clear this corpse?"],
         ["CORPSE_CLEARED_ERROR","sorry, corpse already cleared"],
+        ["GENERATE_REPORT_CONFIRMATION","sorry, you want to generate a report"],
     ]
         )
     return stringMap.get(name);
