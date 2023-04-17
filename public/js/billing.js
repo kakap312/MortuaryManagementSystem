@@ -38,7 +38,7 @@ $(document).ready(function(){
             popClose: false,  // popup window close after printing
             strict: false // strict or looseTransitional html 4.01 document standard or undefined to not include at all only for popup option
          }
-         $('#billcontent').printArea( option );
+         $('.billcontent').printArea( option );
        });
     $('#corpseId').change(function(){
         $('#addbilling').attr('disabled',true);

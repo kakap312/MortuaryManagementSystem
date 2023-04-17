@@ -20,6 +20,19 @@ $(document).ready(function(){
         showOrHideSection('.viewpaymentsection');
         populatePaymentView();
     });
+    $('.paymentprintbtn').click(function(){
+        var option = {
+            mode:"popup" , //printable window is either iframe or browser popup
+            popHt: 500 ,  // popup window height
+            popWd: 400,  // popup window width
+            popX: 500  , // popup window screen X position
+            popY: 600,  //popup window screen Y position
+            popTitle:"", // popup window title element
+            popClose: false,  // popup window close after printing
+            strict: false // strict or looseTransitional html 4.01 document standard or undefined to not include at all only for popup option
+         }
+         $('.paymentcontent').printArea( option );
+       });
     $('#billId').change(function(){
         $('#addpayment').attr('disabled',true);
             var billId = $('#billId').val();
@@ -124,22 +137,14 @@ function viewPaymentInformation(payment,position) {
         payment.dateCreated +"</td><td>"+
         payment.billId +"</td><td>"+
         parseInt(payment.amount).toFixed(2) +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option></select></td></tr>"
+        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Detail</option></select></td></tr>"
         )
 
         $('.choose').change(function(){
-            if(($(this).val() == "Delete")){
-                if(confirm("Are you sure you want to delete this payment")){
-                    var deleteBillUrl = $('#deletepayment').attr('data-action');
-                    paymentId = getPaymentId(parseInt($(this).parent().siblings('.sn').html())-1);
-                    console.log(paymentId)
-                  var  response = requestData(deleteBillUrl,"POST",createFormData(null,['id'],[paymentId]));
-                  if(response.success){
-                    showMessage(response.success,"DELETE_SUCCESS",null,true);
-                    fetchPayments();
-                    populatePaymentView();
-                }
-            }
+            if(($(this).val() == "Detail")){
+                showOrHideSection('.paymentdetailsection');
+                var currentIndex = parseInt($(this).parent().siblings('.sn').html())-1;
+                populatePaymentDetail(currentIndex);
             }else if(($(this).val() == "Update")){
                 showOrHideSection('.addPaymentsection');
                 $('.addpaymentbtn').html('Update Payment');
@@ -151,6 +156,14 @@ function viewPaymentInformation(payment,position) {
                 //console.log(payment)
             }
         });
+}
+function populatePaymentDetail(index){
+    payment = payments[index];
+    console.log(index);
+    $('.date').html(new Date().toISOString().slice(0,10))
+    $('.paymentId').html(payment.paymentId)  
+    $('.billid').html(payment.billId)
+    $('.amount').html(payment.amount)
 }
 function getPaymentId(index){
     return  payments[index].paymentId;

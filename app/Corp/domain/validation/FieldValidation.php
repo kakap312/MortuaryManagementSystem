@@ -26,8 +26,8 @@ class FieldValidation {
         $this->isReleasedByValid = Validator::validateName($fieldData->getReleasedBy());
         $this->isAgeValid = Validator::validateAge($fieldData->getAge());
         $this->isSexValid = Validator::validateSex($fieldData->getSex());
-        $this->isContactOneValid = Validator::validateContact($fieldData->getRelativeContactOne());
-        $this->isContactTwoValid = Validator::validateContact($fieldData->getRelativeContactTwo());
+        $this->isContactOneValid = Validator::validateContactOne($fieldData->getRelativeContactOne());
+        $this->isContactTwoValid = Validator::validateContactTwo($fieldData->getRelativeContactTwo());
         $this->isCommentValid = Validator::validateRemarks($fieldData->getRemarks());
         $this->isSlotValid = Validator::validateSlot($fieldData->getSlotId());
         $this->isFridgeValid = Validator::validateFridge($fieldData->getFridgeId());;

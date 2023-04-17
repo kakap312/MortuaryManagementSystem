@@ -2353,9 +2353,13 @@ input.sm-content {
 }
 
 /* add corp styling*/
-.addcorpsection, .viewreportsection , .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
+.addcorpsection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
     padding-bottom: 20px;
     display: none;
+}
+.compulsoryindicator{
+    color:red;
+    padding-bottom: 0px;
 }
 
 .forminstructon {

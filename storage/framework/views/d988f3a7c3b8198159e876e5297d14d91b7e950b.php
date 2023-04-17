@@ -215,6 +215,7 @@
           <?php echo $__env->make('billing.billdetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('payment.addpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('payment.viewpayment', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('payment.paymentdetail', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.addclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.viewclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.clearancedetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

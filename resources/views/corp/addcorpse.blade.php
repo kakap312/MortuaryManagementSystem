@@ -12,29 +12,29 @@
     </div><hr/>
     <div class='form-row'>
     <div class="form-floating mb-3 col fetchcorpse" data-action="{{route('fetchcorps')}}">
-    <label for="floatingInput">Admission Date</label>
+    <label for="floatingInput">Admission Date <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="date" id='admissionDate' name="admissionDate" required>
     <p id="admissiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Collection Date</label>
+    <label for="floatingInput">Collection Date <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="date" id='collectionDate' name="collectionDate" required>
     <p id="collectiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     </div>
     <div class="form-floating mb-3 validatename"  data-action="{{ route('validatename')}}">
-    <label for="floatingInput">Name Of Corp</label>
+    <label for="floatingInput">Name Of Corp <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control"  type="text" id='name' name="name" required>
     <p id='nameError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, Name must be 30 characters and must not contain numbers</p>
     </div>
     <div class='form-row' id='validateage' data-action="{{ route('validateage')}}">
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Age</label>
+    <label for="floatingInput">Age <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="number" id='age' name="age" required>
     <p id='ageError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, Age shouldnt contain letters and must not be empty.</p>
     </div>
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Sex</label>
+    <label for="floatingInput">Sex <sup class='compulsoryindicator'>*</sup></label>
     <select class="druglocation js-example-basic-single form-control" id='sex' name='sex'>
     <option value='M'>M</option>
     <option value='F'>F</option>
@@ -44,12 +44,12 @@
     </div>
     <div class='form-row'>
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Hometown</label>
+    <label for="floatingInput">Hometown <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="text" id='hometown' name="hometown" required>
     <p id='hometownError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, hometown must be 30 characters and must not contain numbers</p>
     </div>
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Category</label>
+    <label for="floatingInput">Category <sup class='compulsoryindicator'>*</sup></label>
     <select class="js-example-basic-single form-control"  name='category'>
     <option value='VIP'>VIP</option>
     <option value='Normal'>Regular</option>
@@ -60,14 +60,14 @@
 
     <div class='form-row'>
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Fridge Name</label>
+    <label for="floatingInput">Fridge Name <sup class='compulsoryindicator'>*</sup></label>
     <select class="fridgename js-example-basic-single form-control" data-action="{{ route('fetchfridges')}}" id='fridges' name='fridgename'>
     <option diabled>choose a fridge</option>    
     </select>
     <p id='fridgeerrormessage' style='display:none; color:red;'>Please choose a  Fridge</p>
     </div>
     <div class="form-floating mb-3 col" id='slotsurl' >
-    <label for="floatingInput">Available Slots</label>
+    <label for="floatingInput">Available Slots <sup class='compulsoryindicator'>*</sup></label>
     <select  class="availableslots js-example-basic-single form-control" id='slots' name='availableslots' data-action="{{route('fetchavailableslots')}}">
     </select><br>
     <p id='sloterrormessage' style='display:none; color:red;'>No Slot available for the Fridge Selected.</p>
@@ -75,14 +75,14 @@
     </div>
     </div>
     <div class="form-floating mb-3">
-    <label for="floatingInput">Relative Name</label>
+    <label for="floatingInput">Relative Name <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="text" id='relativeName' name="relativeName" required>
     <p id='relativeNameError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, name must be 30 characters and must not be empty.</p>
     </div>
     
     <div class='form-row' id='contactURL' data-action="{{route('validatecontact')}}">
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Relative Contact One</label>
+    <label for="floatingInput">Relative Contact One <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="number" id='relativeContactOne' name="relativeContactOne" required>
     <p id='contactOneError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, contact must have a maximum of 10 characters and must not be empty</p>
     </div>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="form-floating mb-3">
-    <label for="floatingInput">Received By</label>
+    <label for="floatingInput">Received By <sup class='compulsoryindicator'>*</sup></label>
     <input class="form-control" type="text" id='releasedBy' name="releasedBy" required>
     <p id='releasedByError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, remarks must have a maximum of 100 characters and must not be empty</p>
     </div>

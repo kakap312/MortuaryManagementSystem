@@ -55,7 +55,7 @@ class Validator{
         }
         return $isValid;
     }
-    static function validateContact($contact){
+    static function validateContactOne($contact){
         $isValid=true;
         if($contact == ""){
             $isValid = false;
@@ -64,11 +64,18 @@ class Validator{
         }
         return $isValid;
     }
+    static function validateContactTwo($contact){
+        $isValid=true;
+        if($contact == ""){
+            $isValid = true;
+        }else if(strlen($contact)>10 || strlen($contact)<10){
+            $isValid = false;
+        }
+        return $isValid;
+    }
     static function validateRemarks($remarks){
         $isValid = true;
-        if($remarks == ""){
-            $isValid = false;
-        }else if(strlen($remarks)>100){
+        if(strlen($remarks)>100){
             $isValid = false;
         }
         return $isValid;

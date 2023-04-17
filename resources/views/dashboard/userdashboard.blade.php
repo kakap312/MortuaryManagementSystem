@@ -216,6 +216,7 @@
           @include ('billing.billdetails')
           @include ('payment.addpayment')
           @include ('payment.viewpayment')
+          @include ('payment.paymentdetail')
           @include ('clearance.addclearance')
           @include ('clearance.viewclearance')
           @include ('clearance.clearancedetails')
