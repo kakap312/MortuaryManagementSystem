@@ -82,7 +82,7 @@ class CorpRepositoryImp implements CorpRepository{
      }
      public static function findCorpseByDateAndSex($startDate,$endDate,$sex){
         $dbCorps = CorpDao::fetchCorpseByDateAndGender($startDate,$endDate,$sex);
-        if(is_null($dbCorps)){
+        if(is_null($dbCorps) || $dbCorps->count() == 0){
             return new Result(null,false);
         }else{
             $corps = array();

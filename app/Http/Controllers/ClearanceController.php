@@ -30,18 +30,17 @@ class ClearanceController extends Controller
         $savedClearanceInfo =  CLearanceFactory::getSavedClearanceInfo($req);
         $clearanceFieldValidation = new ClearanceFieldValidation($savedClearanceInfo);
         if($clearanceFieldValidation->isAllFieldValid()){
-            $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()-> fetchClearanceById($savedClearanceInfo->getCorpseId());
+            $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($savedClearanceInfo->getCorpseId());
             if($resultSet->getSuccess()){
+                return response()->json(MapOfUIModel::mapOfClearanceExit(true));
+            }else{
                 $outstandingAmount = self::getOutsandingAmount( $savedClearanceInfo);
                 if($outstandingAmount == 0){
                     $result = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->createClearance($savedClearanceInfo);
-                    return response()->json(MapOfUIModel::mapOfSuccess($resultSet->getSuccess()));
+                    return response()->json(MapOfUIModel::mapOfSuccess($result->getSuccess()));
                 }else{
                     return response()->json(MapOfUIModel::mapOfOutandingAmount($outstandingAmount));
                 }
-                
-            }else{
-                return response()->json(MapOfUIModel::mapOfClearanceExit(true));
             }
 
         }else{
@@ -62,7 +61,7 @@ class ClearanceController extends Controller
     }
 
     public function viewAllClearance(){
-        $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchAllClearance();
+        $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceLimit5();
         if($resultSet->getSuccess()){
             $uiClearance = array_map(function($clearance){
                 return DomainTOUiClearanceMapper::map($clearance);

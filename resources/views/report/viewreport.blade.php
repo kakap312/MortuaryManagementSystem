@@ -29,7 +29,7 @@
     </div>
 
     <div style='display:none;' class='financialreportview reportview'>
-        <div class='row printarea'>
+        <div class='row financialreportprintarea'>
             <div class='col-md-12 '><hr/> 
                 <div class="corpsedetailheader">
                     <img style='width:150px; height:150px;' src='img/companylogo.jpg'alt="Company Logo"/>
@@ -54,42 +54,64 @@
                         </tr>
                         <tr>
                             <td>Captured: </td>
-                            <td>12/04/2023 to 15/04/2023</td>
+                            <td class='captured'>12/04/2023 to 15/04/2023</td>
                         </tr>
                     </table>
                 </div>
                 <div class='details'>
+                <div class='details table-responsive'>
                     <h2>Details of report</h2>
-                    <table class='table-sm' style='margin-left:20px; width:95%;' border='1'>
-                        <tr>
-                            <td>Number of corpse discharge: </td>
-                            <td>50</td>
-                        </tr>
-                        <tr>
-                            <td>Number of corpse still remaining: </td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>Number of corpse admitted: </td>
-                            <td>150</td>
-                        </tr>
+                    <table class='table-sm corpsviewtable' style='margin-left:20px;margin-bottom:20px; width:95%;' border='1'>
+                    <tr class='table-primary'>
+                        <th>S/N</th>
+                        <th>ID</th>
+                        <th>CORPSE_NAME</th>
+                        <th>ADMIN_DATE</th>
+                        <th>DISC_DATE</th>
+                        <th>SERVICE_TYPE</th>
+                        <th>DAYS</th>
+                        <th>AMT_PAID</th>
+                        <th>AMT_DUE</th>
+                        <th>OUT_AMT</th>
+                    </tr>
                     </table>
+                </div>
+
                 </div>
 
                 <div class='details'>
                     <h2>Summary</h2>
                     <table class='table-sm table-striped' style='margin-left:20px;' >
+                    
                         <tr>
-                            <td>Number of corpse discharge: </td>
-                            <td>50</td>
+                        
+                        <td>
+                        <ol>
+                            <li>
+                            Amount Paid: 
+                            </li>
+                        </ol>
+                        </td>
+                        <td class='totalcorpse'></td>
+                            
                         </tr>
                         <tr>
-                            <td>Number of corpse still remaining: </td>
-                            <td>100</td>
+                            <td>
+                            <ol start='2'>
+                                <li>
+                                    Amount Due: 
+                                </li>
+                            </ol>
+                            </td>
+                            <td class='corpsedischarged'></td>
                         </tr>
                         <tr>
-                            <td>Number of corpse admitted: </td>
-                            <td>150</td>
+                            <td>
+                            <ol start='3'>
+                                <li>Total Amount:</li>
+                            </ol>        
+                            </td>
+                            <td class='malecorpse'></td>
                         </tr>
                     </table>
                 </div><br><br>
@@ -102,7 +124,7 @@
             </div>
             <div class="form-floating mb-3 col reportprint">
             <label for="floatingInput" style='margin-bottom:25px;'></label>
-            <button type='button' id="reportprintbtn"  class="ibtn btn-primary form-control reportprintbtn" data-action="{{ route('searchclearance')}}">Print</button>
+            <button type='button' id="reportprintbtn"  class="ibtn btn-primary form-control financialreportbtn" data-action="{{ route('searchclearance')}}">Print</button>
             </div>
         </div>
        
@@ -124,6 +146,7 @@
             <h5>CORPSE REPORT</h5>
                 <div class='ginfo'>
                     <h2>General Information</h2>
+                    <div class='table-responsive'>
                     <table class='table-sm' style='margin-left:20px;'>
                         <tr>
                             <td>Date: </td>
@@ -139,7 +162,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class='details'>
+                <div class='details table-responsive'>
                     <h2>Details of report</h2>
                     <table class='table-sm corpsviewtable' style='margin-left:20px; width:95%;' border='1'>
                     <tr class='table-primary'>
@@ -147,34 +170,67 @@
                         <th>ID</th>
                         <th>CORP NAME</th>
                         <th>SEX</th>
-                        <th>DISCHARGED</th>
-                        <th>In</th>
+                        <th>Service Type</th>
+                        <th>Status</th>
                         <th>REL NAME</th>
                         <th>REL #1</th>
                         <th>REL #2</th>
                     </tr>
                     </table>
+                    </div>          
                 </div><br>
 
                 <div class='details'>
                     <h2>Summary</h2>
                     <table class='table-sm table-striped' style='margin-left:20px;' >
+                    
                         <tr>
-                            <td>Number of corpse in Morgue: </td>
-                            <td class='totalcorpse'></td>
+                        
+                        <td>
+                        <ol>
+                            <li>
+                            Number of corpse in Morgue: 
+                            </li>
+                        </ol>
+                        </td>
+                        <td class='totalcorpse'></td>
+                            
                         </tr>
                         <tr>
-                            <td>Number of corpse Discharged: </td>
+                            <td>
+                            <ol start='2'>
+                                <li>
+                                    Number of corpse Discharged: 
+                                </li>
+                            </ol>
+                            </td>
                             <td class='corpsedischarged'></td>
                         </tr>
                         <tr>
-                            <td>Number of Male Corpse: </td>
+                            <td>
+                            <ol start='3'>
+                                <li>Number of Male Corpse:</li>
+                            </ol>        
+                            </td>
                             <td class='malecorpse'></td>
                         </tr>
                         <tr>
-                            <td>Number of Female Corpse: </td>
+                            <td>
+                            <ol start='4'>
+                                <li>Number of Female Corpse:</li>
+                            </ol> 
+                            </td>
                             <td class='femalecorpse'></td>
                         </tr>
+                        <tr>
+                            <td>
+                            <ol start='5'>
+                                <li>To number corpse received </li>
+                            </ol> 
+                            </td>
+                            <td class='femalecorpse'></td>
+                        </tr>
+                    
                     </table>
                 </div><br><br>
 

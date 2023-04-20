@@ -2361,6 +2361,9 @@ input.sm-content {
     color:red;
     padding-bottom: 0px;
 }
+ol {
+    margin: 0px;
+}
 
 .forminstructon {
    text-align: center;

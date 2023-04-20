@@ -51,6 +51,18 @@ class PaymentDao {
         }
 
     }
+    static function fetchPaymentByDate($startDate,$endDate){
+        try {
+            $GLOBALS['startdate'] = $startDate;
+            $GLOBALS['enddate'] = $endDate;
+            return DbCorp::where(function($query){
+                $query->whereDate('admissionDate','>=',$GLOBALS['startdate'])
+                ->WhereDate('admissionDate','<=',$GLOBALS['enddate']);
+            })->get();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
     static function totalPayment(){
         return DbPayment::all()->count();
     }

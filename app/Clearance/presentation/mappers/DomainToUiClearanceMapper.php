@@ -5,8 +5,8 @@ class DomainTOUiClearanceMapper{
     public static function map($clearance){
         return new UiClearance(
             $clearance->getClearanceId(),
-            $clearance->getStatus(),
             $clearance->getCreatedAt(),
+            $clearance->getStatus(),
             $clearance->getCorpseCode(),
         );
     }

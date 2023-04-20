@@ -12,7 +12,7 @@ class ClearanceDao{
            return $th->getMessage();
         }
     }
-    static function findAllClearance(){
+    static function findAllClearanceLimitFive(){
         try {
             //code...
             return DbClearance::skip(0)->take(5)->get();
@@ -21,6 +21,15 @@ class ClearanceDao{
             return $th->getMessage();
         }
         
+    }
+    static function findClearances(){
+        try {
+            //code...
+            return DbClearance::all();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th->getMessage();
+        }
     }
 
     static function updateClearance($id,$dbClearance){
@@ -46,6 +55,17 @@ class ClearanceDao{
             return DbClearance::where(function($query){
                 $query->where('clearanceId','=',$GLOBALS['id'])
                 ->orWhere('corpseId','=',$GLOBALS['id']);
+            })->get();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+        
+    }
+    static function findClearanceStatus($status){
+        try {
+            $GLOBALS['status'] = $status;
+            return DbClearance::where(function($query){
+                $query->where('status','=',$GLOBALS['status']);
             })->get();
         } catch (\Throwable $th) {
             return $th->getMessage();

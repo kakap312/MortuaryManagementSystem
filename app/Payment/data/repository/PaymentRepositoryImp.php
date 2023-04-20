@@ -25,19 +25,17 @@ class PaymentRepositoryImp implements PaymentRepository {
         }
     }
     public  function fetchPaymentById($id){
-        $result = PaymentDao::findPaymentById($id);
-        if(is_null($result) || count($result) == 0 ){
-            return new Result($result,false);
+        $dbPayments = PaymentDao::findPaymentById($id);
+        if(is_null($dbPayments) || $dbPayments->count() == 0 ){
+            return new Result($null,false);
         }else{
-            if(count($result) > 1){
-                $payments = array_map(function($dbPayment){
-                   return  DbPaymentToDomainMapper::map($dbPayment);
-                },$result->toArray());
-            }else{
-                $payments = DbPaymentToDomainMapper::map($result);
-            }
-            
-            return new Result($payments,true);
+            if($dbPayments->count() >= 1){
+                $payments = array();
+                foreach ($dbPayments->toArray() as $dbpayment) {
+                    array_push($payments,DbPaymentToDomainMapper::map($dbpayment));
+                }
+                return new Result($payments,true);
+            } 
         }
     }
     public  function deletePayment($id){
@@ -48,4 +46,5 @@ class PaymentRepositoryImp implements PaymentRepository {
         $result = PaymentDao::updatePayment(DomainToDbPaymentMapper::map($savedPaymentInfo),$id);
         return (($result))?new Result(null,true): new Result(null,false);
     }
+
 }

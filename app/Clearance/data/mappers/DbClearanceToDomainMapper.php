@@ -7,18 +7,16 @@ class DbClearanceToDomainMapper{
         if(is_array($dbClearance)){
             return new Clearance(
                 $dbClearance['clearanceId'],
-                $dbClearance['corpseId'],
-                $dbClearance['createdAt'],
                 $dbClearance['status'],
-                $dbClearance['corpseId']
+                $dbClearance['createdAt'],
+                $dbClearance['corpseId'],
             );
         }else{
             return new Clearance(
                 $dbClearance->get('clearanceId'),
-                $dbClearance->get('corpseId'),
-                $dbClearance->get('createdAt'),
                 $dbClearance->get('status'),
-                $dbClearance->get('corpseId')
+                $dbClearance->get('createdAt'),
+                $dbClearance->get('corpseId'),
             );
         }
     }

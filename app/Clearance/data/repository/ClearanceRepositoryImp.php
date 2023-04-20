@@ -13,8 +13,19 @@ class ClearanceRepositoryImp implements CLearanceRepository{
        $result =  ClearanceDao::insertClearance(DomainToDbClearanceMapper::map($savedClearanceInfo));
        return ($result)?new Result(null,true): new Result(null,false);
     }
+    public function fetchClearanceLimit5(){
+        $dbClearances = ClearanceDao::findAllClearanceLimitFive();
+        if(is_null($dbClearances) || $dbClearances->count() == 0){
+            return new Result(null,false);
+        }else{
+            $clearance = array_map(function($dbClearance){
+                return DbClearanceToDomainMapper::map($dbClearance);
+            }, $dbClearances->toArray());
+            return new Result($clearance,true);
+        }
+    }
     public function fetchAllClearance(){
-        $dbClearances = ClearanceDao::findAllClearance();
+        $dbClearances = ClearanceDao::findClearances();
         if(is_null($dbClearances) || $dbClearances->count() == 0){
             return new Result(null,false);
         }else{
@@ -42,9 +53,17 @@ class ClearanceRepositoryImp implements CLearanceRepository{
     }
    
     public function fetchClearanceById($id){
-        $dbClearance =  ClearanceDao::findClearanceBy($id);
-        return (is_null($dbClearance) || $dbClearance->count() == 0 )?new Result(null,false):
-         new Result(DbClearanceToDomainMapper::map($dbClearance),true);
+        $dbClearances =  ClearanceDao::findClearanceBy($id);
+        if (is_null($dbClearances) || $dbClearances->count() == 0){
+            return new Result(null,false);
+        }else{
+            $clearance = array();
+            foreach ($dbClearances->toArray() as $dbClearance) {
+                array_push($clearance,DbClearanceToDomainMapper::map($dbClearance));
+            }
+            return new Result($clearance,true);
+            
+            
+        }
     }
-
 }

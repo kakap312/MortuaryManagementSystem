@@ -4,15 +4,27 @@ use App\Corp\presentation\mappers\CorpToUiModelMapper;
 use App\Report\presentation\model\UiCorpseReport;
 class DomainToCorpseReportUiMapper{
 
-    public static function map($corpse,$totalNumberOfCorpseDischarged,$totalNumberFemaleCorpse,$totalNumberOfMaleCorpse){
-        $corpseUiModel = array_map(function($corpse){
-            return CorpToUiModelMapper::map($corpse,null,null);
-        },$corpse->getData());
+    public static function map($corpse,$clearanceStatus,$totalNumberOfCorpseDischarged,$femaleCorpse,$maleCorpse){
+        if(! is_null($clearanceStatus)){
+            foreach ($clearanceStatus as $clearance){
+                $clearanceStatus = $clearance->getStatus();
+            };
+        }else{
+            $clearanceStatus = "false";
+        }
+        
         return new UiCorpseReport(
-            $corpseUiModel,
+            $corpse->getCorpseCode(),
+            $corpse->getName(),
+            $corpse->getSex(),
+            $clearanceStatus == "true" ? "Discharged":"in Morgue",
+            $corpse->getCategory(),
+            $corpse->getRelativeName(),
+            $corpse->getRelativeContactOne(),
+            $corpse->getRelativeContactTwo(),
             $totalNumberOfCorpseDischarged->getData(),
-            count($totalNumberFemaleCorpse->getData()),
-            count($totalNumberOfMaleCorpse->getData())
+            count($femaleCorpse),
+            count($maleCorpse)
             
         );
     }

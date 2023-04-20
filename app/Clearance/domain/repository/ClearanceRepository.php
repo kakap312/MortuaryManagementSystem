@@ -7,4 +7,5 @@ interface ClearanceRepository{
     public function deleteClearance($id);
     public function fetchClearanceById($id);
     public function totalNumberOfClearance();
+    public function fetchClearanceLimit5();
 }

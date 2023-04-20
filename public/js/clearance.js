@@ -32,6 +32,7 @@ $('.printbtn').click(function(){
 })
 
 $('#viewclearancelink').click(function(){
+    fetchClearance();
     showOrHideSection('.viewclearancesection');
     populateClearanceView();
 });
@@ -69,7 +70,7 @@ $('.clearcorpsebtn').click(function(){
             var response = requestData(ClearcorpseURL,"POST",createFormData($("#createclearanceform")[0],[''],['']));
             if(response.success){
                 showMessage(response.success,"CORPSE_CLEARED_SUCCESS",null,true);
-                resetForm('#createbillingform');
+                resetForm('#createclearanceform');
             }else if(response.isExisting){
                 showMessage(response.success,"CORPSE_CLEARED_ERROR",null,true);
             }else if(response.outsandingamount > 0){
@@ -125,7 +126,7 @@ function viewCorpseInformation(clearance,position) {
     $('.billsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         clearance.date +"</td><td>"+
-        clearance.id +"</td><td>"+
+        clearance.corpseCode +"</td><td>"+
         clearance.state +"</td>"+
         "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Details</option></select></td></tr>"
         )
