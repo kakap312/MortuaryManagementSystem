@@ -18,9 +18,10 @@ class ClearanceRepositoryImp implements CLearanceRepository{
         if(is_null($dbClearances) || $dbClearances->count() == 0){
             return new Result(null,false);
         }else{
-            $clearance = array_map(function($dbClearance){
-                return DbClearanceToDomainMapper::map($dbClearance);
-            }, $dbClearances->toArray());
+            $clearance = array();
+            foreach ($dbClearances->toArray() as $dbClearance) {
+                array_push($clearance,DbClearanceToDomainMapper::map($dbClearance));
+            }
             return new Result($clearance,true);
         }
     }
@@ -29,10 +30,12 @@ class ClearanceRepositoryImp implements CLearanceRepository{
         if(is_null($dbClearances) || $dbClearances->count() == 0){
             return new Result(null,false);
         }else{
-            $clearance = array_map(function($dbClearance){
-                return DbClearanceToDomainMapper::map($dbClearance);
-            }, $dbClearances->toArray());
+            $clearance = array();
+            foreach ($dbClearances->toArray() as $dbClearance) {
+                array_push($clearance,DbClearanceToDomainMapper::map($dbClearance));
+            }
             return new Result($clearance,true);
+            
         }
     }
     public function updateClearance($id,$savedClearanceInfo){

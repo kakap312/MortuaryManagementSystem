@@ -103,13 +103,13 @@ export function stringValue(name){
         ["ACCOUNT_NOT_FOUND","Sorry Account is not found"],
         ["CONFIRM_FREE_SLOT","Are you sure you want to free slot"],
         ["CREATE_PAYMENT_CONFIRMATION","Are you sure you want to make Payment?"],
-        ["PAYMENT_CREATION_SUCCESS","Congratulation Payment created successfully?"],
-        ["PAYMENT_UPDATION_SUCCESS","Congratulation payment updation successfully?"],
+        ["PAYMENT_CREATION_SUCCESS","Congratulation Payment created successfully"],
+        ["PAYMENT_UPDATION_SUCCESS","Congratulation payment updation successfully"],
         ["CORPSE_CLEARED_SUCCESS","Congratulation corpse  cleared  successfully."],
         ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"],
         ["CLEAR_CORPSE_CONFIRMATION","Are you sure you want to clear this corpse?"],
         ["CORPSE_CLEARED_ERROR","sorry, corpse already cleared"],
-        ["GENERATE_REPORT_CONFIRMATION","Are you want to generate a report"],
+        ["GENERATE_REPORT_CONFIRMATION","Are you sure you want to generate a report?"],
     ]
         )
     return stringMap.get(name);

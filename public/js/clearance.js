@@ -40,7 +40,6 @@ $('#viewclearancelink').click(function(){
 $('.corpseCode').change(function(){
     $('#clearcorpsebtn').attr('disabled',true);
     var corpseId = $('.corpseCode').val();
-    alert(corpseId)
         var searchCorpUrl = $('.searchcorp').attr('data-action');
         var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
         if(response.corps != null){
@@ -80,7 +79,6 @@ $('.clearcorpsebtn').click(function(){
             }
         }
     }else if(state == 'Update Clearance'){
-        alert('called me ')
         if(confirm(stringValue("CLEAR_CORPSE_CONFIRMATION"))){
             var updateURL = $('#updateclearance').attr('data-action')
             var response = requestData(updateURL,"POST",createFormData($("#createclearanceform")[0],['id'],[clearanceId])); 

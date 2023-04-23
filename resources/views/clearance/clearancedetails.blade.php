@@ -9,7 +9,7 @@
         <h2>O.V. OHIO MORTUARY</h2>
         <h4>P.O.BOX ,24  BREKUM.OPPOSITE DEVINE CHURCH</h4>
         <h4>0540-425-85 / 0254-8697-789 / 0548-254-897</h4>
-        <h4>caring for your corpse</h4>
+        <h4> caring for the dead </h4>
         </div><hr/>
         <div class='coprsedetails'>
             <h5>CLEARANCE DETAILS</h5>
