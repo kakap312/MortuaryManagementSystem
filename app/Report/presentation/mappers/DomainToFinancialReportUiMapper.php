@@ -3,7 +3,7 @@ namespace App\Report\presentation\mappers;
 use App\Report\presentation\model\UiFinancialReport;
 class DomainToFinancialReportUiMapper{
 
-    public static function map($corpse,$dischargeDate,$totalDays,$amountPaid,$amountDue){
+    public static function map($corpse,$dischargeDate,$totalDays,$amountPaid,$amountDue,$totalAmountDue,$totalAmountPaid){
         
         return new UiFinancialReport(
             $corpse->getCorpseCode(),
@@ -14,8 +14,9 @@ class DomainToFinancialReportUiMapper{
             $totalDays,
             $amountPaid,
             $amountDue,
-            ($amountDue - $amountPaid)
-            
+            ($amountDue - $amountPaid),
+            $totalAmountDue,
+            $totalAmountPaid
         );
        
     }

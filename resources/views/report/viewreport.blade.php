@@ -11,14 +11,17 @@
         <option value='Financial'>Financial</option>
         <option value='Corpse'>Corpse</option>
         </select>
+        <p id='reporttypeerror' style='display:none; color:red;'>Please select a report type</p>
         </div>
         <div class="form-floating mb-3 col">
         <label for="floatingInput">From</label>
         <input class="form-control fromdate" type="date" id='fromdate' name="from" required>
+        <p id='fromdateerror' style='display:none; color:red;'>Please select a date</p>
         </div>
         <div class="form-floating mb-3 col">
         <label for="floatingInput">To</label>
         <input class="form-control todate" type="date" id='fromdate' name="to" required>
+        <p id='fromtoerror' style='display:none; color:red;'>Please select a date</p>
         </div>
         <div class="form-floating mb-3 col">
         <label for="floatingInput" style='margin-bottom:25px;'></label>
@@ -68,11 +71,12 @@
                         <th>CORPSE_NAME</th>
                         <th>ADMIN_DATE</th>
                         <th>DISC_DATE</th>
-                        <th>SERVICE_TYPE</th>
+                        <th>SER_TYPE</th>
                         <th>DAYS</th>
                         <th>AMT_PAID</th>
-                        <th>AMT_DUE</th>
                         <th>OUT_AMT</th>
+                        <th>AMT_DUE</th>
+                        
                     </tr>
                     </table>
                 </div>
@@ -92,7 +96,7 @@
                             </li>
                         </ol>
                         </td>
-                        <td class='totalcorpse'></td>
+                        <td class='totalamountpaid'></td>
                             
                         </tr>
                         <tr>
@@ -103,21 +107,21 @@
                                 </li>
                             </ol>
                             </td>
-                            <td class='corpsedischarged'></td>
+                            <td class='totalamountdue'></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>
                             <ol start='3'>
                                 <li>Total Amount:</li>
                             </ol>        
                             </td>
                             <td class='malecorpse'></td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div><br><br>
 
                 <div class='endorsement'>
-                <h3>..................................................</h3>
+                <h3>.....................................</h3>
                 <p>Endorsed by:<br>Managing Director<br>(Kofi Frimpong Nimo)</p>
                 </div>
 
@@ -228,14 +232,14 @@
                                 <li>To number corpse received </li>
                             </ol> 
                             </td>
-                            <td class='femalecorpse'></td>
+                            <td class='corpsereceived'></td>
                         </tr>
                     
                     </table>
                 </div><br><br>
 
                 <div class='endorsement'>
-                <h3>..................................................</h3>
+                <h3>.....................................</h3>
                 <p>Endorsed by:<br>Managing Director<br>(Kofi Frimpong Nimo)</p>
                 </div>
 

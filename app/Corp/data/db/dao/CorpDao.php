@@ -79,7 +79,7 @@ class CorpDao{
             return DbCorp::where(function($query){
                 $query->whereDate('admissionDate','>=',$GLOBALS['startdate'])
                 ->WhereDate('admissionDate','<=',$GLOBALS['enddate'])->
-                Where('sex','<=',$GLOBALS['sex']);
+                Where('sex','=',$GLOBALS['sex']);
             })->get();
         } catch (\Throwable $th) {
             return $th->getMessage();

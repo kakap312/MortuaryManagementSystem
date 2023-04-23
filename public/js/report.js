@@ -4,7 +4,8 @@ $(document).ready(function(){
 $('.reportlink').click(function(){
     showOrHideSection('.viewreportsection')
     $('.corpsereportview').hide();
-    $('.financialreportview').hide()
+    resetErrorMessage();
+    $('.financialreportview').hide();
 })
 $('.reportprintbtn').click(function(){
     var option = {
@@ -43,9 +44,10 @@ $('.reportbtn').click(function(){
         if(response.report != null){
             $('.financialreportview').hide();
             $('.corpsereportview').show();
+            resetErrorMessage();
             displayCorpseReportInfo(response.report,reporttype);
         }else{
-            showErrorMessage(response.validationresult)
+            showErrorMessage(response.validation)
         }
         }else{
             var generateReportUrl = $('.reportbtn').attr('data-action');
@@ -54,9 +56,10 @@ $('.reportbtn').click(function(){
         if(response.report != null){
             $('.financialreportview').show();
             $('.corpsereportview').hide();
+            resetErrorMessage()
             displayCorpseReportInfo(response.report,reporttype);
         }else{
-            showErrorMessage(response.validationresult)
+            showErrorMessage(response.validation)
         }
         }
         
@@ -68,10 +71,16 @@ function displayCorpseReportInfo(data,reportType){
     $('.reportDate').html(new Date().toISOString().slice(0,10));
     $('.type').html($('.reportType').val());
     $('.captured').html($('.fromdate').val() + " to " + $('.todate').val() );
-    $('.totalcorpse').html(data.length)
-    $('.corpsedischarged').html(data[0].totalNumberOfCorpseDischarged)
-    $('.malecorpse').html(data[0].totalNumberOfMaleCorpse);
-    $('.femalecorpse').html(data[0].totalNumberOfFemaleCorpse);
+    if(reportType == "Corpse"){
+        $('.totalcorpse').html(data.length)
+        $('.corpsedischarged').html(data[0].totalNumberOfCorpseDischarged)
+        $('.malecorpse').html(data[0].totalNumberOfMaleCorpse);
+        $('.femalecorpse').html(data[0].totalNumberOfFemaleCorpse);
+        $('.corpsereceived').html(data.length + data[0].totalNumberOfCorpseDischarged);
+    }else if(reportType == "Financial"){
+        $('.totalamountpaid').html(parseInt(data[data.length-1].totalAmountPaid).toFixed(2))
+        $('.totalamountdue').html(parseInt(data[data.length-1].totalAmountDue).toFixed(2))
+    }
     populateCorpView(data,reportType)
 }
 function populateCorpView(corps,reportType){
@@ -100,9 +109,9 @@ function viewFinancialReportInfo(corpse,position){
         corpse.dischargeDate +"</td><td>"+
         corpse.serviceType + "</td><td>"+
         corpse.totalNumberOfDays + "</td><td>"+
-        parseInt(corpse.amountPaid).toFixed(2) + "</td><td>"+
-        parseInt(corpse.amountDue).toFixed(2) + "</td><td style='color:red;'>"+
-        parseInt(corpse.outstandingAmount).toFixed(2) + "</td>"
+        parseInt(corpse.amountPaid).toFixed(2) + "</td><td style='color:red;'>"+
+        parseInt(corpse.outstandingAmount).toFixed(2) + "</td><td>"+
+        parseInt(corpse.amountDue).toFixed(2) + "</td>"
         )
 }
 function viewCorpseInformation(corpse,position) {
@@ -117,4 +126,14 @@ function viewCorpseInformation(corpse,position) {
         corpse.relativeNumberOne + "</td><td>"+
         corpse.relativeNumberTwo + "</rd>"
         )
+}
+function showErrorMessage(validationData){
+    validationData.isEndDateValid ?$("#fromtoerror").hide():$("#fromtoerror").show()
+    validationData.isReportTypeValid?$("#reporttypeerror").hide():$("#reporttypeerror").show()
+    validationData.isStartedDateValid?$("#fromdateerror").hide():$("#fromdateerror").show()
+}
+function resetErrorMessage(){
+    $("#fromtoerror").hide()
+    $("#reporttypeerror").hide()
+    $("#fromdateerror").hide()
 }

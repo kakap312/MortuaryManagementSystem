@@ -49,6 +49,8 @@ class ReportController extends Controller
     public function makeFinancialReport($startDate,$endDate){
         $serviceFee = 30;
         $totalPaymentMadeByCorpse = 0;
+        $totalAmountPaidByAllCorpse = 0;
+        $totalAmountDueByAllCorpse = 0;
         $corpseDateDischarged = null;
         $uiFinancial = array();
         $corpse = CorpRepositoryImp::findCorpseByDate($startDate,$endDate)->getData();
@@ -71,13 +73,15 @@ class ReportController extends Controller
                         foreach ($payments as $payment) {
                             $totalPaymentMadeByCorpse += $payment->getAmount();
                         }
+                        $totalAmountPaidByAllCorpse += $totalPaymentMadeByCorpse;
                     }
                 }
             }
             $extraDays = DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d")) < 0 ? 0:DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d"));
             $dueDays = DateToDaysConversion::convert($corp->getAdmissionDate(),$corp->getCollectionDate());
             $amountDue = ($extraDays + $dueDays) * $serviceFee;
-            array_push($uiFinancial,DomainToFinancialReportUiMapper::map($corp,$corpseDateDischarged,($extraDays + $dueDays),$totalPaymentMadeByCorpse,$amountDue));
+            $totalAmountDueByAllCorpse += $amountDue;
+            array_push($uiFinancial,DomainToFinancialReportUiMapper::map($corp,$corpseDateDischarged,($extraDays + $dueDays),$totalPaymentMadeByCorpse,$amountDue,$totalAmountDueByAllCorpse,$totalAmountPaidByAllCorpse));
             $totalPaymentMadeByCorpse = 0;
         }
         return $uiFinancial;

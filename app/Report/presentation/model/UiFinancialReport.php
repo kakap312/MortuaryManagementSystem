@@ -11,7 +11,7 @@ class UiFinancialReport{
     public $amountDue;
     public $outstandingAmount;
     public $totalAmountDue;
-    public $subtotal; // amountAmountPaid
+    public $totalAmountPaid; // amountAmountPaid
 
     public function __construct(
         $corpseCode,
@@ -22,7 +22,9 @@ class UiFinancialReport{
         $totalNumberOfDays,
         $amountPaid,
         $amountDue,
-        $outstandingAmount
+        $outstandingAmount,
+        $totalAmountDue,
+        $totalAmountPaid
         )
         {
             $this->corpseCode = $corpseCode ;
@@ -34,6 +36,8 @@ class UiFinancialReport{
             $this->amountPaid = $amountPaid;
             $this->amountDue = $amountDue;
             $this->outstandingAmount = $outstandingAmount;
+            $this->totalAmountDue = $totalAmountDue;
+            $this->totalAmountPaid = $totalAmountPaid;
 
         }
 }
