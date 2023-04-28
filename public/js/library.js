@@ -3,6 +3,14 @@ parameters - these are attribute sent to the functions on server.
 values - these are values attached to parameters
 existingFormData - is an already existing formData which needs an append
 */
+export var userType = "s";
+
+export function setUserType(value){
+    userType = value;
+}
+export function getUserType(){
+    return userType;
+}
 
 export function createFormData(existingFormData,parameters,values){
         let  createdFormData;
@@ -72,7 +80,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.paymentdetailsection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection']
+     var sections = ['.renamedrugssection','.paymentdetailsection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection','.addservicesection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()
@@ -106,9 +114,12 @@ export function stringValue(name){
         ["PAYMENT_CREATION_SUCCESS","Congratulation Payment created successfully"],
         ["PAYMENT_UPDATION_SUCCESS","Congratulation payment updation successfully"],
         ["CORPSE_CLEARED_SUCCESS","Congratulation corpse  cleared  successfully."],
+        ["SERVICE_CREATED_SUCCESS","Congratulation service  created  successfully."],
         ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"],
         ["CLEAR_CORPSE_CONFIRMATION","Are you sure you want to clear this corpse?"],
+        ["CREATE_SERVICE_CONFIRMATION","Are you sure you want to create a service?"],
         ["CORPSE_CLEARED_ERROR","sorry, corpse already cleared"],
+        ["SERVICE_CREATED_ERROR","sorry, service was unsuccessful, Plz try again!"],
         ["GENERATE_REPORT_CONFIRMATION","Are you sure you want to generate a report?"],
     ]
         )

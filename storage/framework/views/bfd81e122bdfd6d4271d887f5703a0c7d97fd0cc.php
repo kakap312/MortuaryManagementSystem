@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <script src="js/corpse.js" type='module'></script>
-  <!-- <script src="js/bill.js" type='module'></script> -->
-  <script src="js/billing.js" type='module'></script>
-  <script src="js/payment.js" type='module'></script>
-  <script src="js/statistics.js" type='module'></script>
-  <script src="js/clearance.js" type='module'></script>
-  <script src="js/report.js" type='module'></script>
+   
   
         <title><?php echo $__env->yieldContent('title'); ?></title>
         <meta charset="UTF-8">
@@ -50,8 +44,9 @@
         <script src="js/tinymce.min.js"></script>
         <script src="js/validate.js"></script>
         <script src="js/jquery.PrintArea.js"></script>
-        <script src="js/account.js" type='module'></script>
-        <script src="js/clearance.js"></script>
+        <script src="js/accountjs.js" type='module'></script>
+        
+        
         
 
   <!-- Template Main JS File -->

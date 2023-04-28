@@ -76,7 +76,7 @@
     </div>
     <div class="form-floating mb-3">
     <label for="floatingInput">Relative Name <sup class='compulsoryindicator'>*</sup></label>
-    <input class="form-control" type="text" id='relativeName' name="relativeName" required>
+    <input class="form-control acctype" type="text" data-action="<?php echo e(route('accounttype')); ?>" id='relativeName' name="relativeName" required>
     <p id='relativeNameError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, name must be 30 characters and must not be empty.</p>
     </div>
     

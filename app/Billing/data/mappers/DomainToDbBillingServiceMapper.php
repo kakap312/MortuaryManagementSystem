@@ -1,11 +1,11 @@
 <?php
 namespace App\Billing\data\mappers;
 class DomainToDbBillingServiceMapper{
-    static function map($savedBillingService){
+    static function map($savedBillingService,$serviceId){
         return  [
-            'billServiceId'=> uniqid(),
+            'billServiceId'=>uniqid(),
             'billId'=>$savedBillingService->getBillingId(),
-            'serviceId'=>$savedBillingService->getServiceId()
+            'serviceId'=>$serviceId
         ];
     }
 

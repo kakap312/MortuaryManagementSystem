@@ -9,8 +9,8 @@ class BillingServiceDao{
             DbBillingService::create($dbBillingService);
             return true;
         } catch (\Throwable $th) {
-            return false;
-           //return $th->getMessage();
+            //return false;
+           return $th->getMessage();
         }
     }
     static function findBillingServiceById($billId){

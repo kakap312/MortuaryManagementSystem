@@ -3,7 +3,7 @@ namespace App\Billing\data\mappers;
 class DomainToDbBillingMapper{
     static function map($savedBillingInfo){
         return  [
-            'billId'=>uniqid(),
+            'billId'=>$savedBillingInfo->getBillingId(),
             'corpId'=>$savedBillingInfo->getCorpseId(),
             'billfor'=>$savedBillingInfo->getBillFor(),
             'amount'=>$savedBillingInfo->getAmount(),

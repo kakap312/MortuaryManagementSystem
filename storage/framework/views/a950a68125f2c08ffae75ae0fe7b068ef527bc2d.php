@@ -7,7 +7,7 @@
     <form id='createbillingform' data-action="<?php echo e(route('createbill')); ?>"  enctype="multipart/form-data">
     <div class='forminstructon'>
     <p id='topdecoration' ></p>
-    <h2 id='corpseregistrationtext'>Corpse Billing Form</h2>
+    <h2 id='billingregistrationtext'>Corpse Billing Form</h2>
     <p id='billinfinstruction'>Complete the billing  form below to create a new Bill.</p>
     </div><hr/>
 
@@ -28,10 +28,10 @@
 
     <div class='form-row' id='fetchservices' data-action="<?php echo e(route('fetchservices')); ?>">
     <div class="form-floating mb-3 col">
-    <label for="floatingInput">Service Fee</label>
-    <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='servicefee'></input>
-    <!-- <select class="form-control js-example-basic-multiple" id='services' name='services' multiple='multiple' style='width:100%;'>
-    </select> -->
+    <label for="floatingInput">Service</label>
+    <!-- <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='servicefee'></input> -->
+    <select class="form-control js-example-basic-multiple services" id='services' name='services' multiple='multiple' style='width:100%;'>
+    </select>
     <p id='feeerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
     </div>
     </div>
@@ -66,7 +66,7 @@
     
     <div class="form-floating mb-3">
     <div class="form-button">
-    <button type='button' id="addbilling"  class="ibtn btn-primary">Add Billing</button>
+    <button type='button' id="addbilling"  class="ibtn btn-primary addbilling">Add Billing</button>
     </div>      
     </div>
     </form>   

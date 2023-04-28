@@ -178,9 +178,51 @@
         </ul>
       </li><!-- End Icons Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item admin-menu">
         <a class="nav-link collapsed reportlink" data-bs-target="#icons-nav" href="#">
           <i class="fas fa-file"></i><span>Report</span>
+        </a>
+      </li><!-- End Icons Nav -->
+      
+      <li class="nav-item admin-menu">
+        <a class="nav-link collapsed" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
+          <i class="fas fa-money"></i><span>Users</span><i class="fas fa-caret-down ms-auto"></i>
+        </a>
+        <ul id="users-nav" class="nav-content collapse">
+          <li>
+            <a id='addpayment' href="#">
+              <i class="bi bi-circle"></i><span>Add Users</span>
+            </a>
+          </li>
+          <li>
+            <a id='viewpayment' href="#">
+              <i class="bi bi-circle"></i><span>view users</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Icons Nav -->
+
+      <li class="nav-item admin-menu">
+        <a class="nav-link collapsed" data-bs-target="#service-nav" data-bs-toggle="collapse" href="#">
+          <i class="fas fa-money"></i><span>Services</span><i class="fas fa-caret-down ms-auto"></i>
+        </a>
+        <ul id="service-nav" class="nav-content collapse">
+          <li>
+            <a id='addservicelink' href="#">
+              <i class="bi bi-circle"></i><span>Add Service</span>
+            </a>
+          </li>
+          <li>
+            <a id='viewpayment' href="#">
+              <i class="bi bi-circle"></i><span>view Service</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Icons Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" href="<?php echo e(route('logout')); ?>">
+          <i class="fas fa-file"></i><span>Logout</span>
         </a>
       </li><!-- End Icons Nav -->
 
@@ -219,7 +261,9 @@
           <?php echo $__env->make('clearance.addclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.viewclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.clearancedetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('service.addservices', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('report.viewreport', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          
           </div>
 
         </div><!-- End Left side columns -->
@@ -242,6 +286,15 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   
-  
+
+  <!-- <script src="js/bill.js" type='module'></script> -->
+  <script src="js/accountjs.js" type='module'></script>
+  <script src="js/corpse.js" type='module'></script>
+  <script src="js/billing.js" type='module'></script>
+  <script src="js/payment.js" type='module'></script>
+  <script src="js/statistics.js" type='module'></script>
+  <script src="js/clearance.js" type='module'></script>
+  <script src="js/report.js" type='module'></script>
+  <script src="js/service.js" type='module'></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('masterview', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

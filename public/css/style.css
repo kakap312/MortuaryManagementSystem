@@ -444,7 +444,7 @@ html, body {
 
 .form-content input, .form-content .dropdown-toggle.btn-default {
     width: 100%;
-    padding: 9px 20px;
+    padding: 9px 9px;
     text-align: left;
     border: 0;
     outline: 0;
@@ -715,7 +715,7 @@ html, body {
     border-radius: 6px;
     border: 0;
     padding: 6px 28px;
-    background-color: #fff;
+    background-color: #c92222;
     color: #29A4FF;
     font-size: 14px;
     font-weight: 700;
@@ -2344,22 +2344,28 @@ input.sm-content {
 #registerForm {
     display: none;
 }
+.passwordmessage{
+    margin-top:-20px;
+}
 .password-eye{
     width:20px;
     height:20px;
     margin-left:90%;
-    margin-top:-18%;
+    margin-top:-37%;
     cursor: pointer;
 }
 
 /* add corp styling*/
-.addcorpsection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
+.addcorpsection, .addservicesection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
     padding-bottom: 20px;
     display: none;
 }
 .compulsoryindicator{
     color:red;
     padding-bottom: 0px;
+}
+.admin-menu{
+    display: none;
 }
 ol {
     margin: 0px;
@@ -2464,6 +2470,28 @@ border:2px solid gainsboro;
     height: 50px;
     margin:auto;
  
+}
+.loginbtn:hover{
+    background-color: #d89f03;
+}
+.loginbtn{
+    width:100%; 
+    border-radius: 6px;
+    border: 0;
+    padding: 6px 18px;
+    background-color: #fdbb03;
+    color: #0b66a3;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top:20px;
+    outline: none;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
 }
 .reportdetails h5{
     text-align: center;

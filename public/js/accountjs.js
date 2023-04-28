@@ -1,8 +1,7 @@
-import {requestData,createFormData,showMessage} from '../js/library.js';
-
+import {requestData,createFormData,showMessage,setUserType} from '../js/library.js';
+var accounttype;
 $(document).ready(function(){
     var requestMethod = "POST";
-
     $(".password-eye").click(function(){
         var typeValue = $('.password').attr('type') === 'password' ? 'text' : 'password';
         $('.password').attr('type',typeValue);
@@ -13,8 +12,9 @@ $(document).ready(function(){
         var accountUsernameValidationRoute = $('#username').attr('data-action');
         var formData = createFormData(null,['username'],[$("#username").val()]);
         var response = requestData(accountUsernameValidationRoute,requestMethod,formData);
-        showMessage(response.isUsernameValid,"USERNAME_VALIDATION_ERROR",'.usernamemessage');
-        
+        if(!response.isUsernameValid){
+            showMessage(response.isUsernameValid,"USERNAME_VALIDATION_ERROR",'',true);
+        }
         
     });
 
@@ -22,7 +22,10 @@ $(document).ready(function(){
         var accountPasswordValidationRoute = $('.password').attr('data-action');
         var formData = createFormData(null,['password'],[$(".password").val()]);
         var response = requestData(accountPasswordValidationRoute,requestMethod,formData);
-        showMessage(response.isPasswordValid,"PASSWORD_VALIDATION_ERROR",'.passwordmessage'); 
+        if(!response.isUsernameValid){
+            showMessage(response.isPasswordValid,"PASSWORD_VALIDATION_ERROR",'',true); 
+        }
+        
     });
 
     // login , register call
@@ -31,11 +34,13 @@ $(document).ready(function(){
         var accountLoginRoute = $('#loginform').attr('data-action');
        var formData = createFormData($("#loginform")[0],['action'],['login']);
        var response =  requestData(accountLoginRoute,requestMethod,formData);
-        if(response.content.length == 1){
+        if(response.success){
             window.location.href = $('#dashboardroute').attr('data-action');
+            windows.acctype = ($('.type').val());
         }else{
             showMessage(response.isAccountFound,"ACCOUNT_NOT_FOUND","",true);
         }
         
     });//end of loginformsubmit
 });
+

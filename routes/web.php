@@ -36,6 +36,7 @@ Route::post('/userdashboard/viewbillings','BillingController@viewBills')->name('
 Route::post('/userdashboard/viewbillingsbycorpsid','BillingController@viewBillsByCorpseId');
 Route::post('/userdashboard/deletebill','BillingController@deleteBillById')->name('deletebill');
 Route::post('/userdashboard/searchbill','BillingController@searchBillById')->name('searchbill');
+
 //Account Route
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
 Route::get('/account','AccountController@renderAccountView')->name('account');
@@ -45,6 +46,7 @@ Route::get('/logout',function(){
 })->name('logout');
 Route::post('/account/validateusername','AccountController@validateUsername')->name('username');
 Route::post('/account/validatepassword','AccountController@validatePassword')->name('validatepassword');
+Route::get('/account/userType','AccountController@accountType')->name('accounttype');
 Route::get('/userdashboard',function(){
     if(Session::get('username')){
         return view('dashboard.userdashboard');
@@ -56,6 +58,7 @@ Route::get('/userdashboard',function(){
 
 // route for services 
 Route::get('/userdashboard/fetchservices','ServiceController@viewServices')->name('fetchservices');
+Route::post('/userdashboard/createservice','ServiceController@createService')->name('addservice');
 
 // route for payment
 Route::post('/userdashboard/createpayment','PaymentController@createPayment')->name('makepayment');

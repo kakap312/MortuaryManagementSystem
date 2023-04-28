@@ -7,7 +7,7 @@
                 <div class="bg"></div>
                 <div class="info-holder">
                     <img style='width:150px; height:150px; margin-top:50px; margin-bottom:10px;' src="{{ asset('img/companylogo.jpg')}}" />
-                    <h3>O.V OHIO Mortuary Management System</h3>
+                    <h3>O.V. OHIOS Mortuary Management System</h3>
                     <p>Access to the most powerfull tool to manage your Mortuary shop</p>
                     <img src="{{ asset('img/mortuary.png')}}" alt="">
                 </div>
@@ -33,8 +33,13 @@
                                 <input class="form-control password" data-action="account/validatepassword" type="password" name="password" placeholder="Password" required>
                                 <img class='password-eye' src="{{ asset('img/passwordeye.png')}}"/>
                                 <p class='passwordmessage'></p>
+                                <select class='form-control type' name='accounttype'>
+                                <option disabled default>Choose account type</option>
+                                <option value='admin'>Admin</option>
+                                <option value='user'>User</option>
+                                </select>
                                 <div class="form-button">
-                                    <button id="submit" type="submit" class="ibtn">Login</button> <a href="forget9.html">Forget password?</a>
+                                    <button id="submit" type="submit" class=" loginbtn">Login</button>
                                 </div>
                         </form>
                     </div>

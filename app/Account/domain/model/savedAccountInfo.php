@@ -1,13 +1,13 @@
 <?php
-
+namespace App\Account\domain\model;
 class SavedAccountInfo{
-    private $fullName;
+    private $accountType;
     private $userName;
     private $password;
-    public function __construct($fullName,$userName,$password){
+    public function __construct($userName,$password,$accountType){
         $this->userName = $userName;
         $this->password = $password;
-        $this->fullName = $fullName;
+        $this->accountType = $accountType;
     }
 
     public function setUserName($userName){
@@ -22,10 +22,10 @@ class SavedAccountInfo{
     public function getPassword(){
         return $this->password;
     }
-    public function setFullName($fullName){
-        $this->fullName = $fullName;
+    public function setAccountType($accountType){
+        $this->accountType = $accountType;
     }
-    public function getFullName(){
-        return $this->fullName;
+    public function getAccountType(){
+        return $this->accountType;
     }
 }

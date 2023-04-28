@@ -1,16 +1,24 @@
 <?php
 namespace App\Account\presentation;
 class AccountViewModel {
-
-    public $isUsernameValid;
-    public $isPasswordValid;
-    public $isAccountFound;
-    public $content;
-
-    public function __construct($isUsernameValid,$isPasswordValid,$isAccountFound,$content){
-        $this->isUsernameValid = $isUsernameValid;
-        $this->isPasswordValid = $isPasswordValid;
-        $this->content = $content;
-        $this->isAccountFound = $isAccountFound;
+    
+    static function mapOfAccounts($data){
+        return ["account"=>$data];
+    }
+    static function mapOfSuccess($data){
+        return ["success"=>$data];
+    }
+    static function mapOfFridges($data){
+        return ["fridges"=>$data];
+    }
+    static function mapOfAccoubtType($data){
+        return ["acctype"=>$data];
+    }
+    static function mapOfPasswordValidator($data){
+        return ["isPasswordValid"=>$data];
+    }
+    static function mapOfUsernameValidator($data){
+        return ["isUsernameValid"=>$data];
     }
 }
+?>

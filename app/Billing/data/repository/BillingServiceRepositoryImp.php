@@ -9,7 +9,10 @@ use App\core\domain\Result;
 class BillingServiceRepositoryImp implements BillingServiceRepository {
     
     public static function createBillingService($billingServiceInfo){
-       return BillingServiceDao::insert(DomainToDbBillingServiceMapper::map($billingServiceInfo))?  new Result(null,true):  new Result(null,false);
+        foreach ($billingServiceInfo->getServiceId() as $serviceId) {
+           $result = BillingServiceDao::insert(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId));
+        }
+        return $result == true? new Result(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId),true):  new Result($result,false);
     }
     public static function updateBillingService($id,$dbBilling){
 

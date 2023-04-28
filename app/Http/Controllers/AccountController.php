@@ -7,6 +7,8 @@ use App\Account\data\AccountRepositoryImp;
 use App\Account\domain\validators\PasswordValidation;
 use App\Account\domain\validators\UsernameValidation;
 use App\Account\presentation\AccountViewModel;
+use App\Account\presentation\model\AccountLoginUiModel;
+use App\Account\domain\factory\AccountFactory;
 
 
 class AccountController extends Controller
@@ -16,25 +18,27 @@ class AccountController extends Controller
         return view('accountview.account');
     }
     function accountLogin(Request $req){
-
-        $result = (new AccountRepositoryImp())->Login($req->get('username'),$req->get('password'));
-        if(is_null($result->getData())){
-            $accountViewModel = new AccountViewModel(false,false,false,null);
-            return response()->json(json_decode(json_encode($accountViewModel),true));
+        $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
+        $accountResult = (new AccountRepositoryImp())->Login($savedAccountInfo);
+        if(!is_null($accountResult->getData())){
+            Session::put("username",$savedAccountInfo->getUserName());
+            Session::put("usertype", $savedAccountInfo->getAccountType());
+            return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
         }else{
-            $accountViewModel = new AccountViewModel(false,false,false,$result->getData());
-            Session::put("username",$req->get('username'));
-            return response()->json(json_decode(json_encode($accountViewModel),true));
-
+            return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
         }
     }
     function validateUsername(Request $req){
-        $accountViewModel = new AccountViewModel(
-            UsernameValidation::validate($req->get('username')),false,false,null);
-        return response()->json(json_decode(json_encode($accountViewModel),true));
+        $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
+        $isUsernameValid = UsernameValidation::validate($savedAccountInfo->getUserName());
+        return response()->json((AccountViewModel::mapOfUsernameValidator($isUsernameValid)));
     }
     function validatePassword(Request $req){
-        $accountViewModel = new AccountViewModel(false,PasswordValidation::validate($req->get('password')),false,null);
-        return response()->json(json_decode(json_encode($accountViewModel),true));
+        $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
+        $isPasswordValid = UsernameValidation::validate($savedAccountInfo->getPassword());
+        return response()->json((AccountViewModel::mapOfUsernameValidator($isPasswordValid)));
+    }
+    function accountType(){
+        return  response()->json((AccountViewModel::mapOfAccoubtType(Session::get("usertype")))); ;
     }
 }

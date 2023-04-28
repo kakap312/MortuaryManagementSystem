@@ -8,6 +8,8 @@ use App\Billing\data\factory\BillRepositoryFactory;
 use App\Billing\presentation\MapOfUIModel;
 use App\Billing\presentation\mapper\DomainBillingToUiMapper;
 use App\Billing\domain\validator\BillingFieldsValidator;
+use App\Billing\data\repository\BillingServiceRepositoryImp;
+use App\Billing\domain\model\SavedBillingServiceInfo;
 class BillingController extends Controller
 {
     private $repositoryFactory;
@@ -18,10 +20,24 @@ class BillingController extends Controller
     function createBill(Request $req){
         $savedBillingInfo =  BillingFactory::makeSavedBillingInfo($req);
         // validate inputs
-        $fieldValidation = new BillingFieldsValidator( $savedBillingInfo);
+        $fieldValidation = new BillingFieldsValidator($savedBillingInfo);
         if($fieldValidation->isAllFieldValid()){
             $resultSet = $this->repositoryFactory->getBillingRepositoryImp()->createBilling($savedBillingInfo);
-            return response()->json(MapOfUIModel::mapOfSuccess($resultSet->getSuccess()));
+            if($resultSet->getSuccess()){
+                // after bill has been added, we add the bill id and the listof service ids to the bill service table
+                $billingResult = BillingServiceRepositoryImp::createBillingService(new SavedBillingServiceInfo(
+                    "",
+                    $savedBillingInfo->getBillingId(),
+                    $savedBillingInfo->getServiceIds()
+
+                ));
+                if($billingResult->getSuccess()){
+                    return response()->json(MapOfUIModel::mapOfSuccess($billingResult->getSuccess()));
+                }else{
+                    return response()->json(MapOfUIModel::mapOfSuccess($billingResult->getData()));
+                }
+            }
+            
         }else{
             return response()->json(MapOfUIModel::mapOfValidation( $fieldValidation->mapOfFieldValidation()));
         }
@@ -42,7 +58,11 @@ class BillingController extends Controller
             // }, $resultSet->getData());
             // convert domain billing to ui billing
             $uiBilling = array_map(function($billing){
-                return DomainBillingToUiMapper::map($billing);
+                $billserviceresult = BillingServiceRepositoryImp::fetchBillingServiceByBillingId($billing->getBillId());
+                $serviceId = array_map(function($billingService){
+                    return $billingService->getServiceId();
+                },$billserviceresult->getData());
+                return DomainBillingToUiMapper::map($billing,$serviceId);
             },$resultSet->getData());
             return response()->json(MapOfUIModel::mapOfBillings($uiBilling));// return a uibiling model to the ui element to display
         }else{

@@ -10,6 +10,6 @@ class BillingService{
     }
     function setId($id){$this->id = $id;}
     function getId(){return $this->id;}
-    function setbService($service){$this->serviceId = $service;}
-    function getService(){return $this->serviceId;}
+    function setServiceId($service){$this->serviceId = $service;}
+    function getServiceId(){return $this->serviceId;}
 }

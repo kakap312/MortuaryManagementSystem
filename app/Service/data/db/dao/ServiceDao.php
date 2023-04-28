@@ -31,7 +31,12 @@ class ServiceDao{
         }
     }
     static function fetchAllServices(){
-        return DbService::all();
+        try {
+            return DbService::all();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+       
         
     }
 

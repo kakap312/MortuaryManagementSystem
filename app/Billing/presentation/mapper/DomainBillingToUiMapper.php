@@ -4,13 +4,13 @@ use App\Billing\presentation\model\UiBilling;
 
 class DomainBillingToUiMapper {
 
-    static function map($billing){
+    static function map($billing,$serviceIds){
         return new UiBilling(
             $billing->getBillId(),
             $billing->getCreatedAt(),
             $billing->getAmount(),
             //self::getServiceName($billing->getService()),
-            $billing->getServiceFee(),
+            $serviceIds,
             $billing->getCorpseCode(),
             $billing->getExtraDays(),
             $billing->getDueDays(),

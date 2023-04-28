@@ -1,5 +1,6 @@
 
-import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,getUserType,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+
 var corps;
 var fridges;
 var slots;
@@ -7,6 +8,7 @@ var corpId;
 var slotId;
 var totalCorpse;
 $(document).ready(function(){
+    fetchAccountType() == "admin"?$(".admin-menu").show():$(".admin-menu").hide();
     fetchFridges();
     fetchCorpse();
     fetchSlots();
@@ -249,6 +251,12 @@ function fetchAvailableSlotByFidgeId(fridgeId){
     var availableSlotUrl = $('#slots').attr('data-action'); 
     var response = requestData(availableSlotUrl,"POST",createFormData(null,['fridgeid'],[fridgeId]));
     (response.length == 0 || response==null)?$('.sloterrormessage').show():populateAvailableSlots(response.slots);  
+}
+function fetchAccountType(){
+    var acctypeUrl = $('.acctype').attr('data-action');
+    var formData = createFormData(null,[''],['']);
+    var response = requestData(acctypeUrl,"get",formData);
+    return response.acctype;
 }
 function fetchFridges(){
     var fridgesUrl = $('#fridges').attr('data-action');
