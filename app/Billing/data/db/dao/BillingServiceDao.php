@@ -13,6 +13,15 @@ class BillingServiceDao{
            return $th->getMessage();
         }
     }
+    static function updateBillingServices($id,$dbBillingService){
+        try {
+            DbBillingService::where('billServiceId','=',$billId)->update($dbBilling);
+            return true;
+        } catch (\Throwable $th) {
+            //return false;
+           return $th->getMessage();
+        }
+    }
     static function findBillingServiceById($billId){
         try {
             $GLOBALS['id'] = $billId;
@@ -25,6 +34,14 @@ class BillingServiceDao{
     }
     static function fetchAllBillings(){
         
+    }
+    static function deleteBillingServiceByBillingId($id){
+        try {
+            DbBillingService::where('billId',$id)->delete();
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
 }

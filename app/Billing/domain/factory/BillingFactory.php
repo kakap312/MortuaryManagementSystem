@@ -6,7 +6,7 @@ class BillingFactory{
     static function makeSavedBillingInfo($req){
         $billId = ($req->get('billId'));
         return new SavedBillingInfo(
-            is_null($billId)?"":$billId,
+            isset($billId)?$billId:"",
             $req->get('datecreated'),
             $req->get('corpseId'),
             $req->get('billfor'),

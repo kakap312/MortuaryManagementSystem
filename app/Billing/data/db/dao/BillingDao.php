@@ -23,8 +23,14 @@ class BillingDao{
         }
 
     }
-    static function update($billId){
-
+    static function updateBill($billId,$dbBilling){
+        try {
+            DbBilling::where('billId','=',$billId)->update($dbBilling);
+            return true;
+        } catch (\Throwable $th) {
+            //return false;
+           return $th->getMessage();
+        }
     }
     static function findBillingById($id){
 

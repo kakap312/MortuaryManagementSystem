@@ -2,7 +2,8 @@
 namespace App\Billing\data\mappers;
 class DomainToDbBillingMapper{
     static function map($savedBillingInfo){
-        return  [
+        
+            return [
             'billId'=>$savedBillingInfo->getBillingId(),
             'corpId'=>$savedBillingInfo->getCorpseId(),
             'billfor'=>$savedBillingInfo->getBillFor(),
@@ -12,7 +13,8 @@ class DomainToDbBillingMapper{
             'fee'=>$savedBillingInfo->getServiceFee(),
             'createdAt'=>$savedBillingInfo->getCreatedAt(),
             'updatedAt'=>$savedBillingInfo->getCreatedAt()
-        ];
+            ];
+        
     }
 
 

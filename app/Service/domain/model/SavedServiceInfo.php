@@ -4,16 +4,18 @@ class SavedServiceInfo{
     private $id;
     private $serviceName;
     private $serviceFee;
+    private $per;
     private $createdAt;
     private $updatedAt;
 
 
-    public function __construct($id,$serviceName,$serviceFee,$createdAt,$updatedAt){
+    public function __construct($id,$serviceName,$serviceFee,$createdAt,$updatedAt,$per){
         $this->id = $id == "" ?uniqid():$id;
         $this->serviceName = $serviceName;
         $this->serviceFee = $serviceFee;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->per = $per;
     }
 
     public function setId($id){$this->id = $id;}
@@ -26,4 +28,6 @@ class SavedServiceInfo{
     public function getCreatedAt(){return $this->createdAt;}
     public function setUpdatedAt(){$this->updatedAt = $updatedAt;}
     public function getUpdatedAt(){return $this->updatedAt;}
+    public function getPer(){return $this->per;}
+    public function setPer($per){$this->per = $per;}
 }

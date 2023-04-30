@@ -14,8 +14,13 @@ class BillingServiceRepositoryImp implements BillingServiceRepository {
         }
         return $result == true? new Result(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId),true):  new Result($result,false);
     }
-    public static function updateBillingService($id,$dbBilling){
-
+    public static function updateBillingService($billId,$billingServiceInfo){
+       if( BillingServiceDao::deleteBillingServiceByBillingId($billId)){
+        foreach ($billingServiceInfo->getServiceId() as $serviceId) {
+            $result = BillingServiceDao::insert(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId));
+         }
+         return $result == true? new Result(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId),true):  new Result($result,false);
+       }
     }
     public static function fetchBillingServiceByBillingId($billingId){
         //return a list of dbbillings.

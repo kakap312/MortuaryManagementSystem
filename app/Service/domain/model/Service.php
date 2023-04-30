@@ -4,11 +4,13 @@ class Service{
     private $id;
     private $name;
     private $serviceFee;
+    private $per;
 
-    public function __construct($id,$name,$serviceFee){
+    public function __construct($id,$name,$serviceFee,$per){
         $this->id = $id;
         $this->name = $name;
         $this->serviceFee = $serviceFee;
+        $this->per = $per;
     }
 
     public function setId($id){$this->id = $id;}
@@ -17,4 +19,6 @@ class Service{
     public function getName(){return $this->name;}
     public function setServiceFee($serviceFee){$this->serveceFee = $serviceFee;}
     public function getServiceFee(){return $this->serviceFee;}
+    public function getPer(){return $this->per;}
+    public function setPer($per){$this->per = $per;}
 }

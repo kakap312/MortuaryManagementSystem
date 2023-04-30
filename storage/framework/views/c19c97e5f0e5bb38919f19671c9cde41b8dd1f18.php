@@ -24,6 +24,15 @@
     <input class="form-control searchcorp servicename"  type="text" id='servicename' name="servicename" data-action="<?php echo e(route('searchcorp')); ?>" required>
     <p class='servicenameError' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
     </div>
+
+    <div class="form-floating mb-3 validatename"  data-action="<?php echo e(route('validatename')); ?>">
+    <label for="floatingInput">Charged Per</label>
+    <select class="form-control per" name='per'>
+        <option value="daily">Daily</option>
+        <option value ='once'>Once</option>
+    </select>
+    <p class='servicenameError' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
+    </div>
     
 
     <div class='form-row' id='updateclearance' data-action="<?php echo e(route('updateclearance')); ?>">

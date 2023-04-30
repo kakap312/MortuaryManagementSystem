@@ -10,7 +10,8 @@ class ServiceFactory{
             is_null($req->get('servicename'))?"":$req->get('servicename') ,
             is_null($req->get('servicefee'))?"":$req->get('servicefee'),
             is_null($req->get('datecreated'))?"":$req->get('datecreated'),
-            ""
+            "",
+            is_null($req->get('per'))?"":$req->get('per'),
         );
     }
 }

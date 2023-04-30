@@ -6,7 +6,8 @@ class DbServiceToDomainMapper{
         return new Service(
             $dbService['serviceId'],
             $dbService['name'],
-            $dbService['fee']
+            $dbService['fee'],
+            $dbService['per']
         );
     }
 }

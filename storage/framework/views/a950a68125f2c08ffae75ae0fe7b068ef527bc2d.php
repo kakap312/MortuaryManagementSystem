@@ -47,20 +47,20 @@
     </div>
 
     <div class='form-row'>
-    <div class="form-floating mb-3 col">
+    <div class="form-floating mb-3 col updateBillingUrl" data-action="<?php echo e(route('updatebill')); ?>">
     <label for="floatingInput">Due Amount(GHC)</label>
-    <input class="form-control" type="text" id='duedays' name="days" disabled>
+    <input class="form-control duedaysamount" type="text" id='duedaysamount' name="days" disabled>
     </div>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Extra Amount(GHC)</label>
-    <input class="form-control" type="text" id='extradays' name="extradays" disabled>
+    <input class="form-control" type="text" id='extradaysamount' name="extradays" disabled>
     <p id='ageError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, Age shouldnt contain letters and must not be empty.</p>
     </div>
     </div>
 
     <div class="form-floating mb-3">
     <label for="floatingInput">Sub-Total (GHC)</label>
-    <input class="form-control" type="text" id='subtotal' name="amount" disabled>
+    <input class="form-control billsubtotal" type="text" id='billsubtotal' name="amount" disabled>
     <p id='billamounterror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, amount is invalid.</p>
     </div>
     

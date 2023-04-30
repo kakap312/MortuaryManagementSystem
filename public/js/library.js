@@ -116,6 +116,8 @@ export function stringValue(name){
         ["CORPSE_CLEARED_SUCCESS","Congratulation corpse  cleared  successfully."],
         ["SERVICE_CREATED_SUCCESS","Congratulation service  created  successfully."],
         ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"],
+        ["UPDATE_BILLING_CONFIRMATION","Are you sure you want to update Billing?"],
+        ["BILL_UPDATE_SUCCESS","Congratulation, you have successfully updated this bill"],
         ["CLEAR_CORPSE_CONFIRMATION","Are you sure you want to clear this corpse?"],
         ["CREATE_SERVICE_CONFIRMATION","Are you sure you want to create a service?"],
         ["CORPSE_CLEARED_ERROR","sorry, corpse already cleared"],

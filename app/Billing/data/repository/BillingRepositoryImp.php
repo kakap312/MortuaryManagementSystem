@@ -71,7 +71,16 @@ class BillingRepositoryImp implements BillingRepository{
         }
     }
     
-    public  function updateBilling($id,$dbBilling){}
+    public  function updateBilling($billId,$savedBillingInfo){
+        $savedBillingInfo->setBillingId($billId);
+        $dbBilling = DomainToDbBillingMapper::map($savedBillingInfo);
+        if(BillingDao::updateBill($billId,$dbBilling)){
+            return new Result( null,true);
+        }else{
+            return new Result( null,false);
+        }
+        
+    }
     
     public  function fetchBilling($corpse){}
 

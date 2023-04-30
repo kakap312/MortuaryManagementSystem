@@ -6,7 +6,7 @@ class DomainToDbServiceMapper{
             'serviceId'=>$savedServiceInfo->getid() ==""?uniqid():$savedServiceInfo->getid(),
             'name'=>$savedServiceInfo->getServiceName(),
             'fee'=>$savedServiceInfo->getServiceFee(),
-            'per'=>"",
+            'per'=>$savedServiceInfo->getPer(),
             'createdAt'=>$savedServiceInfo->getCreatedAt(),
             'updatedAt'=>$savedServiceInfo->getCreatedAt()
         ];
