@@ -213,7 +213,7 @@
             </a>
           </li>
           <li>
-            <a id='viewpayment' href="#">
+            <a id='viewserviceslink' href="#">
               <i class="bi bi-circle"></i><span>view Service</span>
             </a>
           </li>
@@ -262,6 +262,8 @@
           <?php echo $__env->make('clearance.viewclearance', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('clearance.clearancedetails', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('service.addservices', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('service.viewservices', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('service.servicedetail', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('report.viewreport', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           
           </div>

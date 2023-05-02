@@ -80,7 +80,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.paymentdetailsection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection','.addservicesection']
+     var sections = ['.renamedrugssection','.servicedetailsection','.viewservicesection','.paymentdetailsection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection','.addservicesection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()
@@ -100,6 +100,7 @@ export function stringValue(name){
         ["REGISTERED_SUCCESS","Congratulation!, Registration is done successfully"],
         ["REGISTERED_ERROR","Sorry!, Registration was unsuccessful. Kindly check your data inputted and try again"],
         ["CORP_NOT_FOUND","Sorry No corp was found. Kindly Try again"],
+        ["SERVICE_NOT_FOUND","Sorry No service was found. Kindly Try again"],
         ["DELETE_SUCCESS","Congratulation, you have successfully deleted the corpse"],
         ["SLOT_FREE","Congratulation, you have successfully freed this slot"],
         ["UPDATE_SUCCESS","Congratulation, you have successfully updated this corpse"],
@@ -117,7 +118,9 @@ export function stringValue(name){
         ["SERVICE_CREATED_SUCCESS","Congratulation service  created  successfully."],
         ["UPDATE_PAYMENT_CONFIRMATION","Are you sure you want to update Payment?"],
         ["UPDATE_BILLING_CONFIRMATION","Are you sure you want to update Billing?"],
+        ["UPDATE_SERVICE_CONFIRMATION","Are you sure you want to update service ?"],
         ["BILL_UPDATE_SUCCESS","Congratulation, you have successfully updated this bill"],
+        ["SERVICE_UPDATE_SUCCESS","Congratulation, you have successfully updated this service"],
         ["CLEAR_CORPSE_CONFIRMATION","Are you sure you want to clear this corpse?"],
         ["CREATE_SERVICE_CONFIRMATION","Are you sure you want to create a service?"],
         ["CORPSE_CLEARED_ERROR","sorry, corpse already cleared"],

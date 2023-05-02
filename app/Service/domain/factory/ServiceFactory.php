@@ -4,13 +4,14 @@ use App\Service\domain\model\SavedServiceInfo;
 class ServiceFactory{
 
     static function makeSavedServiceInfo($req){
-        $serviceId = $req->get('id');
+        $serviceId = $req->get('serviceId');
+        $updatedAt = $req->get('updatedat');
         return new SavedServiceInfo(
             isset($serviceId)?$serviceId:"",
             is_null($req->get('servicename'))?"":$req->get('servicename') ,
             is_null($req->get('servicefee'))?"":$req->get('servicefee'),
             is_null($req->get('datecreated'))?"":$req->get('datecreated'),
-            "",
+            isset($updatedAt)?$updatedAt:"",
             is_null($req->get('per'))?"":$req->get('per'),
         );
     }

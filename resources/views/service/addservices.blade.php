@@ -7,8 +7,8 @@
     <form id='createserviceform' data-action="{{ route('addservice')}}"  enctype="multipart/form-data">
     <div class='forminstructon'>
     <p id='topdecoration' ></p>
-    <h2 class='corpseregistrationtext'>Service Form</h2>
-    <p class='billinfinstruction'>Complete the Service form below to add a service.</p>
+    <h2 class='serviceregistrationtext' id='serviceregistrationtext'>Service Form</h2>
+    <p class='serviceinstruction' id='serviceinstruction'>Complete the Service form below to add a service.</p>
     </div><hr/>
 
     <div class='form-row'>
@@ -21,7 +21,7 @@
 
     <div class="form-floating mb-3 validatename"  data-action="{{ route('validatename')}}">
     <label for="floatingInput">Service Name</label>
-    <input class="form-control searchcorp servicename"  type="text" id='servicename' name="servicename" data-action="{{ route('searchcorp')}}" required>
+    <input class="form-control  servicename"  type="text" id='servicename' name="servicename" required>
     <p class='servicenameError' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
     </div>
 
@@ -35,7 +35,7 @@
     </div>
     
 
-    <div class='form-row' id='updateclearance' data-action="{{ route('updateclearance')}}">
+    <div class='form-row' id='updateservice' data-action="{{ route('updateservice')}}">
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Fee</label>
     <input type='number' class="form-control" placeholder='Please Enter service Fee' id='servicefee' name='servicefee'></input>

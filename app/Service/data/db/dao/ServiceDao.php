@@ -20,12 +20,22 @@ class ServiceDao{
     static function update($billId){
 
     }
+    static function findServiceLimitOfFive(){
+        try {
+            return DbService::skip(0)->take(5)->get();
+        } catch (\Throwable $th) {
+            return false;
+           // return $th->getMessage();
+        }
+       
+    }
     static function findServiceById($id){
         try {
             $GLOBALS['id'] = $id;
             return DbService::where(function($query){
-                $query->where('serviceId','=',$GLOBALS['id']);
-            })->get()->first();
+                $query->where('serviceId','=',$GLOBALS['id'])->
+                orWhere('name','=',$GLOBALS['id']);
+            })->get();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -36,8 +46,15 @@ class ServiceDao{
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
-       
-        
+    }
+    static function updateService($id,$dbService){
+        try {
+            DbService::where('serviceId','=',$id)->update($dbService);
+            return true;
+        } catch (\Throwable $th) {
+            //return false;
+           return $th->getMessage();
+        }
     }
 
 }

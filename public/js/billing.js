@@ -62,8 +62,8 @@ $(document).ready(function(){
                 clearForm();
             }    
     })
-    $('.searchbtn').click(function(){
-        var searchBillUrl = $('.searchbtn').attr('data-action');
+    $('.searchbillbtn').click(function(){
+        var searchBillUrl = $('.searchbillbtn').attr('data-action');
         var response = requestData(searchBillUrl,"POST",createFormData(null,['id'],[$('.searbill').val()]));
         if(response.bill == null){
             showMessage(true,"CORP_NOT_FOUND",null,true)

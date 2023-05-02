@@ -2356,7 +2356,7 @@ input.sm-content {
 }
 
 /* add corp styling*/
-.addcorpsection, .addservicesection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
+.addcorpsection,.servicedetailsection,.viewservicesection, .addservicesection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
     padding-bottom: 20px;
     display: none;
 }
@@ -2513,7 +2513,7 @@ border:2px solid gainsboro;
     float:right;
     display: block;
 }
-#searchbtn{
+.searchbtn, .searchservicebtn{
     float: right;
     display: block;
     margin:5px;

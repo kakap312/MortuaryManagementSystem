@@ -69,7 +69,7 @@ class ReportController extends Controller
                 foreach ($bills as $bill) {
                     //$serviceFee = $bill->getServiceFee();
                     $payments =  $this->paymentRepositoryImp->fetchPaymentById($bill->getBillId())->getData();
-                    if((!is_null($payments)) || count($payments) != 0){
+                    if((!is_null($payments))){
                         foreach ($payments as $payment) {
                             $totalPaymentMadeByCorpse += $payment->getAmount();
                         }

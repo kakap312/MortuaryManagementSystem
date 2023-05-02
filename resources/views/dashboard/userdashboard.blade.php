@@ -214,7 +214,7 @@
             </a>
           </li>
           <li>
-            <a id='viewpayment' href="#">
+            <a id='viewserviceslink' href="#">
               <i class="bi bi-circle"></i><span>view Service</span>
             </a>
           </li>
@@ -263,6 +263,8 @@
           @include ('clearance.viewclearance')
           @include ('clearance.clearancedetails')
           @include ('service.addservices')
+          @include ('service.viewservices')
+          @include ('service.servicedetail')
           @include ('report.viewreport')
           
           </div>

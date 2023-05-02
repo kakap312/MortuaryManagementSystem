@@ -27,6 +27,16 @@ class ServiceController extends Controller
             return  response()->json(MapOfViewModel::mapOfValidation($this->serviceFieldValidator->mapOfFieldValidation()));
         }
     }
+    function updateService(Request $req){
+        $savedServiceInfo = ServiceFactory::makeSavedServiceInfo($req);
+        $this->serviceFieldValidator = new ServiceFieldValidation($savedServiceInfo);
+        if($this->serviceFieldValidator->isAllFieldValid($savedServiceInfo)){
+            $result = ServiceRepositoryImp::updateService($req->get('serviceId'),$savedServiceInfo);
+            return response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
+        }else{
+            return response()->json(MapOfViewModel::mapOfValidation($this->serviceFieldValidator->mapOfFieldValidation()));
+        }
+    }
     function viewServices(Request $req){
         $services = ServiceRepositoryImp::fetchAllServices();
         if(is_null($services->getData())){
@@ -38,7 +48,31 @@ class ServiceController extends Controller
             }
         return response()->json(MapOfViewModel::mapOfServices($uiServices));
         }
-        
-
     }
+    function searchService(Request $req){
+        $services =  ServiceRepositoryImp::fetchServiceById($req->get('serviceId'));
+        if(is_null($services->getData())){
+            return response()->json(MapOfViewModel::mapOfSuccess($services->getSuccess()));
+        }else{
+            $uiServices = array();
+            foreach($services->getData() as $service){
+                array_push($uiServices, DomainToUiModelMapper::map($service));
+            }
+        return response()->json(MapOfViewModel::mapOfServices($uiServices));
+        } 
+    }
+    function viewServicesLimitfive(){
+        
+        $services = ServiceRepositoryImp::fetchAllServicesLimitFive();
+        if(is_null($services->getData())){
+            return response()->json(MapOfViewModel::mapOfSuccess($services->getSuccess()));
+        }else{
+            $uiServices = array();
+            foreach($services->getData() as $service){
+                array_push($uiServices, DomainToUiModelMapper::map($service));
+            }
+        return response()->json(MapOfViewModel::mapOfServices($uiServices));
+        }
+    }
+    
 }

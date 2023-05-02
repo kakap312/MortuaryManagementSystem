@@ -6,4 +6,5 @@ interface ServiceRepository{
     public static function fetchService($corpseId);
     public static function fetchServiceById($id);
     public static function fetchAllServices();
+    public static function fetchAllServicesLimitFive();
 }

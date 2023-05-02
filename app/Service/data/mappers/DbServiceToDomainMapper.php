@@ -7,7 +7,8 @@ class DbServiceToDomainMapper{
             $dbService['serviceId'],
             $dbService['name'],
             $dbService['fee'],
-            $dbService['per']
+            $dbService['per'],
+            $dbService['createdAt']
         );
     }
 }

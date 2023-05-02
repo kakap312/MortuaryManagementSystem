@@ -26,4 +26,10 @@ use App\Account\data\db\model\DbAccount;
         
         // return list of dbAccount
     }
+    public static function insertAccount($dbAccount){
+
+    }
+    public static function deleteAccount(){
+        
+    }
 }

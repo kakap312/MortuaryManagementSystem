@@ -7,7 +7,8 @@ class DomainToUiModelMapper{
             $service->getId(),
             $service->getName(),
             $service->getServiceFee(),
-            $service->getPer()
+            $service->getPer(),
+            $service->getDateCreated()
         );
     }
 }

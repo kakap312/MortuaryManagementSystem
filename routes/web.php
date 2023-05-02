@@ -59,6 +59,9 @@ Route::get('/userdashboard',function(){
 
 // route for services 
 Route::get('/userdashboard/fetchservices','ServiceController@viewServices')->name('fetchservices');
+Route::post('/userdashboard/searchservice','ServiceController@searchService')->name('searchservice');
+Route::post('/userdashboard/updateservice','ServiceController@updateService')->name('updateservice');
+Route::get('/userdashboard/services','ServiceController@viewServicesLimitfive')->name('fetchserviceslimitfive');
 Route::post('/userdashboard/createservice','ServiceController@createService')->name('addservice');
 
 // route for payment

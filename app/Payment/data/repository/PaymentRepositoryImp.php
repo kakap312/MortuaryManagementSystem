@@ -27,7 +27,7 @@ class PaymentRepositoryImp implements PaymentRepository {
     public  function fetchPaymentById($id){
         $dbPayments = PaymentDao::findPaymentById($id);
         if(is_null($dbPayments) || $dbPayments->count() == 0 ){
-            return new Result($null,false);
+            return new Result(null,false);
         }else{
             if($dbPayments->count() >= 1){
                 $payments = array();
