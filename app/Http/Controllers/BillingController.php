@@ -130,7 +130,11 @@ class BillingController extends Controller
         $result = $this->repositoryFactory->getBillingRepositoryImp()->fetchBillingByCorpseId($req->get('id'));
         if($result->getSuccess()){
             $uiBillings = array_map(function($billing){
-                return DomainBillingToUiMapper::map($billing);
+                $billserviceresult = BillingServiceRepositoryImp::fetchBillingServiceByBillingId($billing->getBillId());
+                $serviceId = array_map(function($billingService){
+                    return $billingService->getServiceId();
+                },$billserviceresult->getData());
+                return DomainBillingToUiMapper::map($billing,$serviceId);
             },$result->getData());
             return response()->json(MapOfUIModel::mapOfBilling($uiBillings));
         }else{

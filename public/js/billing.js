@@ -34,6 +34,7 @@ $(document).ready(function(){
         populateBillView();
         
     });
+
     $('.printbtn').click(function(){
         var option = {
             mode:"popup" , //printable window is either iframe or browser popup
@@ -47,21 +48,7 @@ $(document).ready(function(){
          }
          $('.billcontent').printArea( option );
        });
-    $('#corpseId').change(function(){
-        $('#addbilling').attr('disabled',true);
-        var corpseId = $('#corpseId').val();
-            var searchCorpUrl = $('.searchcorp').attr('data-action');
-            var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
-            if(response.corps != null){
-                $('#corpseIdError').hide();
-                corpse = response.corps;
-                fetchBillByCorpseId(corpseId);
-                $('#addbilling').attr('disabled',false);
-            }else{
-                $('#corpseIdError').show();
-                clearForm();
-            }    
-    })
+    
     $('.searchbillbtn').click(function(){
         var searchBillUrl = $('.searchbillbtn').attr('data-action');
         var response = requestData(searchBillUrl,"POST",createFormData(null,['id'],[$('.searbill').val()]));
@@ -73,6 +60,22 @@ $(document).ready(function(){
         }
         $('.searchcorp').val("");
     });
+    $('#corpseseachId').change(function(){
+        $('#addbilling').attr('disabled',true);
+        var corpseId = $('.corpseseachId').val();
+            var searchCorpUrl = $('.searchcorp').attr('data-action');
+            var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
+            console.log(response.corps)
+            if(response.corps != null){
+                $('#corpseIdError').hide();
+                corpse = response.corps;
+                fetchBillByCorpseId(corpseId);
+                $('#addbilling').attr('disabled',false);
+            }else{
+                $('#corpseIdError').show();
+                clearForm();
+            }
+    })
     
 
     $('#services').on('change',function(){

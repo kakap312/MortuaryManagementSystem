@@ -3,7 +3,7 @@
     <div class="card info-card sales-card">
     <div class="card-body ">
     <div id='corpsearchbar'>
-        <button type='button' id="searchservicebtn searchbtn"  class="ibtn btn-primary searchservicebtn searchbtn" data-action="{{ route('searchservice')}}">Search</button>
+        <button type='button' id="searchservicebtn"  class="ibtn btn-primary searchservicebtn" data-action="{{ route('searchservice')}}">Search</button>
         <input  class='form-control searchservice'   type='text' placeholder='Service id/name'/>
     </div>
         <div class='table-responsive-lg'>

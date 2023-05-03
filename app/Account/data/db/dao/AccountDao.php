@@ -26,10 +26,30 @@ use App\Account\data\db\model\DbAccount;
         
         // return list of dbAccount
     }
+    public static function findAccountByUsername($username){
+        try {
+            $GLOBALS['id'] = $username;
+            return DbAccount::where(function($query){
+                $query->where('username','=',$GLOBALS['id']);
+            })->get()->toArray();
+            
+        } catch (\Throwable $th) {
+            return false;
+          // return $th->getMessage();
+        }
+
+    }
     public static function insertAccount($dbAccount){
+        try {
+            DbAccount::create($dbAccount);
+            return true;
+        } catch (\Throwable $th) {
+            //return false;
+           return $th->getMessage();
+        }
 
     }
     public static function deleteAccount(){
-        
+
     }
 }

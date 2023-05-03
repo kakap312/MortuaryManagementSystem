@@ -9,17 +9,24 @@ use App\Account\domain\validators\UsernameValidation;
 use App\Account\presentation\AccountViewModel;
 use App\Account\presentation\model\AccountLoginUiModel;
 use App\Account\domain\factory\AccountFactory;
+use App\Account\domain\validators\AccountFieldValidator;
 
 
 class AccountController extends Controller
 {
+    private $accountFieldValidator;
+    private $accountRepositoryImp;
     //
+
+    public function __construct(){
+        $this->accountRepositoryImp = new AccountRepositoryImp();
+    }
     function renderAccountView(){
         return view('accountview.account');
     }
     function accountLogin(Request $req){
         $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
-        $accountResult = (new AccountRepositoryImp())->Login($savedAccountInfo);
+        $accountResult = $this->accountRepositoryImp->Login($savedAccountInfo);
         if(!is_null($accountResult->getData())){
             Session::put("username",$savedAccountInfo->getUserName());
             Session::put("usertype", $savedAccountInfo->getAccountType());
@@ -27,6 +34,10 @@ class AccountController extends Controller
         }else{
             return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
         }
+    }
+    function isAccountFound($username){
+        $result =  $this->accountRepositoryImp->fetchAccount($username); 
+        return $result->getSuccess();
     }
     function validateUsername(Request $req){
         $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
@@ -40,5 +51,25 @@ class AccountController extends Controller
     }
     function accountType(){
         return  response()->json((AccountViewModel::mapOfAccoubtType(Session::get("usertype")))); ;
+    }
+    function createAccount(Request $req){
+        $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
+        $this->accountFieldValidator = new AccountFieldValidator($savedAccountInfo);
+        if($this->accountFieldValidator->isAllFieldValid()){
+            if(self::isAccountFound($savedAccountInfo->getUserName())){
+                $accountResult = $this->accountRepositoryImp->createAccount($savedAccountInfo);
+                if($accountResult->getSuccess()){
+                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getData()));
+                }else{
+                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getData()));
+                }
+            }else{
+                return response()->json(AccountViewModel::mapOfAccountExisting(self::isAccountFound($savedAccountInfo->getUsername())));
+            }
+            
+        }else{
+            return response()->json(AccountViewModel::mapOfValidation($this->accountFieldValidator->mapOfFieldValidation()));
+        }
+
     }
 }

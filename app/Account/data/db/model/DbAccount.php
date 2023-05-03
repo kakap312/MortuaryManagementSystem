@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class DbAccount extends Model
 {
     //
-    protected $primaryKey = 'acc_id';
+    public $timestamps =false;
     public $incrementing = false;
-    protected $keyType = 'string';
+    protected $primaryKey = 'accId';
     protected $table = 'accounts';
+    protected $fillable =['accId','username','password','type','createdAt','updatedAt'];
+    protected $hidden = ['created_at','updated_at'];
 }

@@ -40,6 +40,7 @@ Route::post('/userdashboard/searchbill','BillingController@searchBillById')->nam
 
 //Account Route
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
+Route::post('/account/createaccount','AccountController@createAccount')->name('createaccount');
 Route::get('/account','AccountController@renderAccountView')->name('account');
 Route::get('/logout',function(){
     Session::forget('username');

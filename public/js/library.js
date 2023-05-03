@@ -80,7 +80,7 @@ export function requestData(url,method,formdata){
         return response;
 }
 export function showOrHideSection(sectionname){
-     var sections = ['.renamedrugssection','.servicedetailsection','.viewservicesection','.paymentdetailsection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection','.addservicesection']
+     var sections = ['.renamedrugssection','.addaccountsection','.servicedetailsection','.viewservicesection','.paymentdetailsection','.viewreportsection','.clearancedetailsection','.viewclearancesection','.addbillingsection','.addclearancesection','.viewpaymentsection','.addPaymentsection','.viewbillingsection','.viewcorpsection','.billdetailsection','.addcorpsection','.statisticssection','.corpdetailsection','.addservicesection']
     for (let index = 0; index < sections.length; index++) {
         if(sectionname == sections[index]){
             $(sections[index]).show()
@@ -107,8 +107,10 @@ export function stringValue(name){
         ["UPDATE_ERROR","sorry, update was unsuccessfully.Plz try again"],
         ["CREATE_CORPSE_CONFIRMATION","Are you sure you want to add Corpse"],
         ["CREATE_BILLING_CONFIRMATION","Are you sure you want to add Bill"],
+        ["CREATE_ACCOUNT_CONFIRMATION","Are you sure you want to add account"],
         ["UPDATE_CORPSE_CONFIRMATION","Are you sure you want to update Corpse"],
         ["BILL_CREATION_SUCCESS","Congratulation Bill created successfully"],
+        ["ACCOUNT_CREATION_SUCCESS","Congratulation account created successfully"],
         ["ACCOUNT_NOT_FOUND","Sorry Account is not found"],
         ["CONFIRM_FREE_SLOT","Are you sure you want to free slot"],
         ["CREATE_PAYMENT_CONFIRMATION","Are you sure you want to make Payment?"],

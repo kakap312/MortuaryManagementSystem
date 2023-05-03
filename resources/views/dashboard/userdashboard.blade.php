@@ -191,7 +191,7 @@
         </a>
         <ul id="users-nav" class="nav-content collapse">
           <li>
-            <a id='addpayment' href="#">
+            <a id='adduserlink' href="#">
               <i class="bi bi-circle"></i><span>Add Users</span>
             </a>
           </li>
@@ -250,6 +250,7 @@
         <div class="col-lg-12">
           <div class="row">
           @include ('dashboard.home')
+          @include ('accountview.addaccount')
           @include ('corp.addcorpse')
           @include ('corp.viewcorps')
           @include ('corp.corpdetail')

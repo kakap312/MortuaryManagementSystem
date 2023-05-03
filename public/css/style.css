@@ -2356,7 +2356,7 @@ input.sm-content {
 }
 
 /* add corp styling*/
-.addcorpsection,.servicedetailsection,.viewservicesection, .addservicesection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
+.addcorpsection,.addaccountsection,.servicedetailsection,.viewservicesection, .addservicesection, .viewreportsection, .paymentdetailsection, .addclearancesection, .clearancedetailsection, .viewclearancesection, .billdetailsection, .viewpaymentsection, .addPaymentsection, .renamedrugssection,.viewbillingsection,.viewcorpsection,.createordersession,.corpdetailsection,.addbillingsection{
     padding-bottom: 20px;
     display: none;
 }

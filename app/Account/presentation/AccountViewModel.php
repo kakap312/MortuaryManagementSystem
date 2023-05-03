@@ -8,8 +8,14 @@ class AccountViewModel {
     static function mapOfSuccess($data){
         return ["success"=>$data];
     }
+    static function mapOfValidation($data){
+        return ["validationresult"=>$data];
+    }
     static function mapOfFridges($data){
         return ["fridges"=>$data];
+    }
+    static function mapOfAccountExisting($data){
+        return ["isExisting"=>$data];
     }
     static function mapOfAccoubtType($data){
         return ["acctype"=>$data];

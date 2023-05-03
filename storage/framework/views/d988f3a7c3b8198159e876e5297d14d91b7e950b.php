@@ -190,7 +190,7 @@
         </a>
         <ul id="users-nav" class="nav-content collapse">
           <li>
-            <a id='addpayment' href="#">
+            <a id='adduserlink' href="#">
               <i class="bi bi-circle"></i><span>Add Users</span>
             </a>
           </li>
@@ -249,6 +249,7 @@
         <div class="col-lg-12">
           <div class="row">
           <?php echo $__env->make('dashboard.home', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('accountview.addaccount', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('corp.addcorpse', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('corp.viewcorps', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('corp.corpdetail', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

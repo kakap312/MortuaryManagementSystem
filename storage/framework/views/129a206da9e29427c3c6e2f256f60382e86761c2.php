@@ -32,7 +32,7 @@
                                 <input class="form-control password" data-action="account/validatepassword" type="password" name="password" placeholder="Password" required>
                                 <img class='password-eye' src="<?php echo e(asset('img/passwordeye.png')); ?>"/>
                                 <p class='passwordmessage'></p>
-                                <select class='form-control type' name='accounttype'>
+                                <select class='form-control type' name='type'>
                                 <option disabled default>Choose account type</option>
                                 <option value='admin'>Admin</option>
                                 <option value='user'>User</option>

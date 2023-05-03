@@ -4,10 +4,13 @@ use App\Account\data\db\dao\AccountDao;
 use App\Account\domain\repository\AccountRepository;
 use App\core\domain\Result;
 use App\Account\data\mappers\DbAccountToDomainMapper;
+use App\Account\data\mappers\DomainToDbAccountMapper;
 
 class AccountRepositoryImp implements AccountRepository {
+    
 
-    public function __construct(){}
+    public function __construct(){
+    }
     public function Login($savedAccountInfo)
     {
         $dbAccounts = AccountDao::findAccountByPasswordAndUsername($savedAccountInfo);
@@ -23,5 +26,21 @@ class AccountRepositoryImp implements AccountRepository {
         }
         return $account == null ? new Result(null,false): new Result($account,true);
     }
-    public  function createAccount($savedAccountInfo){}
+    public  function createAccount($savedAccountInfo){
+        $dbAccount = DomainToDbAccountMapper::map($savedAccountInfo);
+        $result =  AccountDao::insertAccount($dbAccount);
+        return new Result($result,false);
+    }
+    public function fetchAccount($username){
+        $dbAccounts = AccountDao::findAccountByUsername($username);
+        if(is_null($dbAccounts)){
+            return new Result(null,false);
+        }else{
+            $accounts = array();
+            foreach ($dbAccounts as $dbAccount) {
+                array_push($accounts,DbAccountToDomainMapper::map($dbAccount));
+            }
+            return new Result($accounts,true);
+        }
+    }
 }

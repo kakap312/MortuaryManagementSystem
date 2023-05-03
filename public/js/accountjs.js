@@ -1,5 +1,6 @@
-import {requestData,createFormData,showMessage,setUserType} from '../js/library.js';
+import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from '../js/library.js';
 var accounttype;
+var state;
 $(document).ready(function(){
     var requestMethod = "POST";
     $(".password-eye").click(function(){
@@ -16,6 +17,9 @@ $(document).ready(function(){
             showMessage(response.isUsernameValid,"USERNAME_VALIDATION_ERROR",'',true);
         }
         
+    });
+    $("#adduserlink").click(function(){
+        showOrHideSection('.addaccountsection');
     });
 
     $('.password').change(function(){
@@ -42,5 +46,35 @@ $(document).ready(function(){
         }
         
     });//end of loginformsubmit
+
+    $('.createaccountbtn').click(function(){
+        state = $('.createaccountbtn').html();
+        if(state == "Add Account"){
+            if(confirm(stringValue("CREATE_ACCOUNT_CONFIRMATION"))){
+                var createBillingURL = $('#createaccountform').attr('data-action');
+                var response = requestData(createBillingURL,"POST",createFormData($("#createaccountform")[0],[''],['']));
+                if(response.success){
+                    showMessage(response.success,"ACCOUNT_CREATION_SUCCESS",null,true);
+                    resetForm('#createaccountform');
+                }else{
+                    showErrorMessage(response.validationresult)
+                }
+            }
+        }else if(state == "Update Billing"){
+            if(confirm(stringValue("UPDATE_BILLING_CONFIRMATION"))){
+                var updateBillingURL = $('.updateBillingUrl').attr('data-action');
+                var serviceIds = getServiceIds($('#services').val());
+                var bill = getBillById(billId)
+                var dueDays = bill.dueDays;
+                var extraDays = bill.extraDays;
+                var response = requestData(updateBillingURL,"POST",createFormData($("#createbillingform")[0],['amount','extraDays','dueDays','serviceids','billId'],[$('.billsubtotal').val(),extraDays,dueDays,serviceIds,billId]));
+                if(response.success){
+                    showMessage(response.success,"BILL_UPDATE_SUCCESS",null,true);
+                }else{
+                    showErrorMessage(response.validationresult)
+                }
+            }
+        }
+    })
 });
 

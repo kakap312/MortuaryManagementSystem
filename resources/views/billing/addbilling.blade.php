@@ -21,7 +21,7 @@
 
     <div class="form-floating mb-3 validatename"  data-action="{{ route('validatename')}}">
     <label for="floatingInput">coprse ID:</label>
-    <input class="form-control searchcorp"  type="text" id='corpseId' name="corpseId" data-action="{{ route('searchcorp')}}" required>
+    <input class="form-control searchcorp corpseseachId"  type="text" id='corpseseachId' name="corpseId" data-action="{{ route('searchcorp')}}" required>
     <p id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
     </div>
     
