@@ -52,4 +52,18 @@ use App\Account\data\db\model\DbAccount;
     public static function deleteAccount(){
 
     }
+    public static function findAllAccount(){
+        try {
+            DbAccount::all();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+    public static function findAccountLimitFive(){
+        try {
+           return DbAccount::skip(0)->take(5)->get();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

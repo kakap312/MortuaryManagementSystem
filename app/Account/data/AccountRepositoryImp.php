@@ -43,4 +43,16 @@ class AccountRepositoryImp implements AccountRepository {
             return new Result($accounts,true);
         }
     }
+    public function fetchAccountLimitFive(){
+        $dbAccounts = AccountDao::findAccountLimitFive(); 
+        if(is_null($dbAccounts)){
+            return new Result(null,false);
+        }else{
+            $accounts = array();
+            foreach ($dbAccounts as $dbAccount) {
+                array_push($accounts,DbAccountToDomainMapper::map($dbAccount));
+            }
+            return new Result($accounts,true);
+        }
+    }
 }

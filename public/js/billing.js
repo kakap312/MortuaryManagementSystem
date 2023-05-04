@@ -1,6 +1,6 @@
 
 
-import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,showOrHideSection,stringValue,getActionMenu,resetForm} from './library.js';
 var services;
 var corpse;
 var bill;
@@ -302,7 +302,7 @@ function viewCorpseInformation(bill,position) {
         bill.date +"</td><td>"+
         bill.corpseCode +"</td><td>"+
         parseInt(bill.amount).toFixed(2) +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Details</option></select></td></tr>"
+        getActionMenu()
         )
 }
  

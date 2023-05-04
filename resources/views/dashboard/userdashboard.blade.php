@@ -196,7 +196,7 @@
             </a>
           </li>
           <li>
-            <a id='viewpayment' href="#">
+            <a id='viewaccountlink' href="#">
               <i class="bi bi-circle"></i><span>view users</span>
             </a>
           </li>
@@ -251,6 +251,8 @@
           <div class="row">
           @include ('dashboard.home')
           @include ('accountview.addaccount')
+          @include ('accountview.accountdetail')
+          @include ('accountview.viewaccount')
           @include ('corp.addcorpse')
           @include ('corp.viewcorps')
           @include ('corp.corpdetail')

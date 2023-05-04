@@ -10,6 +10,7 @@ use App\Account\presentation\AccountViewModel;
 use App\Account\presentation\model\AccountLoginUiModel;
 use App\Account\domain\factory\AccountFactory;
 use App\Account\domain\validators\AccountFieldValidator;
+use App\Account\presentation\mappers\DomainToAccountUiMapper;
 
 
 class AccountController extends Controller
@@ -35,6 +36,18 @@ class AccountController extends Controller
             return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
         }
     }
+    function viewAccountLimitFive(){
+        $result = $this->accountRepositoryImp->fetchAccountLimitFive();
+        if($result->getSuccess()){
+            $uiModel = array();
+            foreach ($result->getData() as $account) {
+                array_push($uiModel,DomainToAccountUiMapper::map($account));
+            }
+            return response()->json((AccountViewModel::mapOfAccounts($uiModel)));
+        }else{
+            return response()->json((AccountViewModel::mapOfSuccess($result->getSuccess())));
+        }
+    }
     function isAccountFound($username){
         $result =  $this->accountRepositoryImp->fetchAccount($username); 
         return $result->getSuccess();
@@ -57,10 +70,14 @@ class AccountController extends Controller
         $this->accountFieldValidator = new AccountFieldValidator($savedAccountInfo);
         if($this->accountFieldValidator->isAllFieldValid()){
             if(self::isAccountFound($savedAccountInfo->getUserName())){
-                
-            }else{
-                
                 return response()->json(AccountViewModel::mapOfAccountExisting(self::isAccountFound($savedAccountInfo->getUsername())));
+            }else{
+                $accountResult = $this->accountRepositoryImp->createAccount($savedAccountInfo);
+                if($accountResult->getSuccess()){
+                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getData()));
+                }else{
+                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getData()));
+                }
             }
             
         }else{

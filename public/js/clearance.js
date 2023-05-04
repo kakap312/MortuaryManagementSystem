@@ -1,4 +1,4 @@
-import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,getActionMenu,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
 var corpse;
 var clearance;
 var clearanceId;
@@ -126,7 +126,7 @@ function viewCorpseInformation(clearance,position) {
         clearance.date +"</td><td>"+
         clearance.corpseCode +"</td><td>"+
         clearance.state +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Details</option></select></td></tr>"
+        getActionMenu()
         )
 
         $('.choose').change(function(){

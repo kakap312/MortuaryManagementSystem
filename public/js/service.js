@@ -1,4 +1,4 @@
-import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,showOrHideSection,stringValue,getActionMenu,resetForm} from './library.js';
 var services;
 var service;
 var serviceId;
@@ -115,7 +115,7 @@ function viewServicesInformation(service,position){
         service.name +"</td><td>"+
         parseInt(service.fee).toFixed(2) +"</td><td>"+
         service.per +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Details</option></select></td></tr>"
+        getActionMenu()
         )
 
  

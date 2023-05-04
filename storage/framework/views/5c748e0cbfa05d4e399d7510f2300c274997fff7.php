@@ -3,7 +3,7 @@
     <div class="card info-card sales-card viewvillurl" data-action="<?php echo e(route('viewbills')); ?>">
     <div class="card-body ">
     <div id='corpsearchbar'>
-        <button type='button' id="searchbtn"  class="ibtn btn-primary searchclearancebtn" data-action="<?php echo e(route('searchclearance')); ?>">Search</button>
+        <button type='button' id="searchbtn"  class="ibtn btn-primary searchclearancebtn searchbtn" data-action="<?php echo e(route('searchclearance')); ?>">Search</button>
         <input  class='form-control searchClearance'   type='text' placeholder='Enter corpseId' />
     </div>
         <div class='table-responsive-lg' id='deletebill' data-action= "<?php echo e(route('deletebill')); ?>">

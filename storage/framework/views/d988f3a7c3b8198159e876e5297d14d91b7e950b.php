@@ -195,7 +195,7 @@
             </a>
           </li>
           <li>
-            <a id='viewpayment' href="#">
+            <a id='viewaccountlink' href="#">
               <i class="bi bi-circle"></i><span>view users</span>
             </a>
           </li>
@@ -250,6 +250,8 @@
           <div class="row">
           <?php echo $__env->make('dashboard.home', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('accountview.addaccount', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('accountview.accountdetail', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('accountview.viewaccount', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('corp.addcorpse', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('corp.viewcorps', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
           <?php echo $__env->make('corp.corpdetail', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

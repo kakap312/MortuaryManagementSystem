@@ -4,7 +4,7 @@
     <div class="card info-card sales-card deletecorp" data-action="<?php echo e(route('deletecorp')); ?>">
     <div class="card-body ">
     <div id='corpsearchbar'>
-        <button type='button' id="searchbtn"  class="ibtn btn-primary">Search</button>
+        <button type='button' id="searchbtn"  class="ibtn btn-primary searchbtn">Search</button>
         <input  class='form-control searchcorp' data-action="<?php echo e(route('searchcorp')); ?>" type='text' placeholder='Search corps by Id' />
     </div>
         <div class='table-responsive'>

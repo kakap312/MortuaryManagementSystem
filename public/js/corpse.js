@@ -1,5 +1,5 @@
 
-import {requestData,createFormData,showMessage,getUserType,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,getActionMenu,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
 
 var corps;
 var fridges;
@@ -293,6 +293,7 @@ function populateCorpView(){
         showMessage("" ,"CORP_NOT_FOUND",null,true);
     }
 function viewCorpseInformation(corpse,position) {
+    
     $('.corpsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         corpse.corpseCode +"</td><td>"+
@@ -305,7 +306,7 @@ function viewCorpseInformation(corpse,position) {
         corpse.relativeName + "</td><td>"+
         corpse.relativeContactOne + "</td><td>"+
         corpse.relativeContactTwo+
-        "</td><td><select class='choose form-control'><option disabled selected>choose</option><option>Delete</option><option>Update</option><option>Details</option></select></td></tr>"
+        getActionMenu()
         )
 }
  

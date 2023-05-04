@@ -1,4 +1,4 @@
-import {requestData,createFormData,showMessage,showOrHideSection,stringValue,printPageSection,resetForm} from './library.js';
+import {requestData,createFormData,showMessage,showOrHideSection,stringValue,getActionMenu,resetForm} from './library.js';
 var bill;
 var payments;
 var paymentId;
@@ -137,7 +137,7 @@ function viewPaymentInformation(payment,position) {
         payment.dateCreated +"</td><td>"+
         payment.billId +"</td><td>"+
         parseInt(payment.amount).toFixed(2) +"</td>"+
-        "<td><select class='choose form-control'><option disabled selected>choose</option><option>Update</option><option>Detail</option></select></td></tr>"
+        getActionMenu()
         )
 
         $('.choose').change(function(){

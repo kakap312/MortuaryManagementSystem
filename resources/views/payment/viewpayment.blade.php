@@ -3,7 +3,7 @@
     <div class="card info-card sales-card viewvillurl" data-action="{{ route('viewbills')}}">
     <div class="card-body ">
     <div id='corpsearchbar'>
-        <button type='button' id="searchbtn"  class="ibtn btn-primary searchpaymentbtn" data-action="{{ route('searchpayment')}}">Search</button>
+        <button type='button' id="searchbtn"  class="ibtn btn-primary searchpaymentbtn searchbtn" data-action="{{ route('searchpayment')}}">Search</button>
         <input  class='form-control searchpayment' style='height:35px;'   type='text' placeholder='Bill Id / PaymentId' />
     </div>
         <div class='table-responsive-lg' id='deletepayment' data-action= "{{route('deletepayment')}}">
