@@ -25,8 +25,8 @@
                     <td class="corpseId"></td>
                 </tr>
                 <tr>
-                    <td>Fee:  </td>
-                    <td id='fee'>M</td>
+                    <td>Service/Fee:  </td>
+                    <td id='serviceFee'></td>
                 </tr>
                 <tr>
                     <td>Days:</td>

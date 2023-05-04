@@ -8,6 +8,8 @@ var bills;
 var billId;
 var state;
 var totalServiceFeeForOneTimeServices;
+var remainingExtraDays = 0;
+var remainingDueDays = 0;
 
 $(document).ready(function(){
    fetchServices();
@@ -65,14 +67,13 @@ $(document).ready(function(){
         var corpseId = $('.corpseseachId').val();
             var searchCorpUrl = $('.searchcorp').attr('data-action');
             var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
-            console.log(response.corps)
             if(response.corps != null){
-                $('#corpseIdError').hide();
+                $('.billIdError').hide();
                 corpse = response.corps;
                 fetchBillByCorpseId(corpseId);
                 $('#addbilling').attr('disabled',false);
             }else{
-                $('#corpseIdError').show();
+                $('.billIdError').show();
                 clearForm();
             }
     })
@@ -96,18 +97,16 @@ $(document).ready(function(){
             if(confirm(stringValue("CREATE_BILLING_CONFIRMATION"))){
                 var createBillingURL = $('#createbillingform').attr('data-action');
                 var serviceIds = getServiceIds($('#services').val());
-                var dueDays = 0;
-                var extraDays = 0;
-                if(bill == null){
-                    dueDays = corpse.dueDays;
-                    extraDays = corpse.extraDays;
-                }
-                var response = requestData(createBillingURL,"POST",createFormData($("#createbillingform")[0],['amount','extraDays','dueDays','serviceids'],[$('.billsubtotal').val(),extraDays,dueDays,serviceIds]));
+                
+                
+                var response = requestData(createBillingURL,"POST",createFormData($("#createbillingform")[0],['amount','extraDays','dueDays','serviceids'],[$('.billsubtotal').val(),remainingExtraDays,remainingDueDays,serviceIds]));
                 if(response.success){
                     showMessage(response.success,"BILL_CREATION_SUCCESS",null,true);
                     resetForm('#createbillingform');
+                    $('.addbilling').html('Add Billing');
                     $('.js-example-basic-multiple').empty();
                     populateServices();
+                    showErrorMessage(response.validationresult)
                     
                 }else{
                     showErrorMessage(response.validationresult)
@@ -163,12 +162,20 @@ function fetchAllBills(){
     bills = response.bills;
 }
 function showErrorMessage(validationData){
-    (validationData.isBillAmountValid)?$('#billamounterror').hide():$('#billamounterror').show()
-    (validationData.isBillDescriptionValid)?$('#descriptionerror').hide():$('#descriptionerror').show()
-    (validationData.isCorpseIdValid)?$('#corpseIdError').hide():$('#corpseIdError').show()
-    (validationData.isDateValid)?$('#dateerror').hide():$('#dateerror').show()
-    (validationData.isServiceFeeValid)?$('#feeerror').hide():$('#feeerror').show()
-
+    if(validationData == null){
+        $('#servideiderror').hide()
+        $('.billamounterror').hide()
+        $('.billIdError').hide()
+        $('.dateerror').hide()
+    }else{
+        if(validationData.isServiceIdValid){$('#servideiderror').hide()}else{$('#servideiderror').show()}
+        if(validationData.isBillAmountValid){$('.billamounterror').hide()}else{$('.billamounterror').show()}
+        // if(validationData.isBillDescriptionValid){$('.billdescriptionerror').hide()}else{$('.billdescriptionerror').show()}
+        if(validationData.isCorpseIdValid){$('.billIdError').hide()}else{$('.billIdError').show()}
+        if(validationData.isDateValid){$('.dateerror').hide()}else{$('.dateerror').show()}
+    }
+    
+    
 }
 function fetchBillByCorpseId(id){
     var serviceUrl = 'userdashboard/viewbillingsbycorpsid'; 
@@ -219,7 +226,6 @@ function  calculateBillSubTotal(serviceFees,days) {
     var sumOfExtra = 0;
     var sumOfDueDays = 0;
     var subTotal = 0;
-    var remainingDays = 0;
     if(state == "Add Billing"){
         if(bill != null){
             bill.forEach(bil=>{
@@ -228,16 +234,15 @@ function  calculateBillSubTotal(serviceFees,days) {
             });
         }
         if(days == "extra"){
-            remainingDays = corpse.extraDays - sumOfExtra;
-            subTotal = serviceFees * remainingDays;
+            remainingExtraDays = corpse.extraDays - sumOfExtra;
+            subTotal = serviceFees * remainingExtraDays;
             return subTotal;
         }else if(days =="due"){
-            remainingDays =  corpse.dueDays - sumOfDueDays;
-            subTotal = serviceFees*remainingDays;
+            remainingDueDays =  corpse.dueDays - sumOfDueDays;
+            subTotal = serviceFees*remainingDueDays;
             return subTotal;
         } 
     }else if(state == "Update Billing"){
-        console.log(state)
         var currentBill = getBillById(billId);
         if(days == "extra"){
             subTotal = serviceFees * currentBill.extraDays;
@@ -336,9 +341,20 @@ function viewCorpseInformation(bill,position) {
             $('.date').html(new Date().toISOString().slice(0,10))
                 $('.billId').html(bills[index].id)  
                 $('.corpseId').html(bills[index].corpseCode)
-                $('#fee').html(bills[index].servicefee)
+                $('#serviceFee').html(getServiceAndFeeString(bills[index].servicesIds))
                 $('#day').html(bills[index].dueDays + bills[index].extraDays);
                 $('#total').html(parseInt(bills[index].amount).toFixed(2));
+    }
+    function getServiceAndFeeString(serviceIds){
+        var serviceAndFeeString = "";
+        serviceIds.forEach(id => {
+            services.forEach(service => {
+                if(id == service.id){
+                    serviceAndFeeString += service.name + " (" + parseInt(service.fee).toFixed(2) + ") " + " ,"
+                } 
+            });  
+        });
+        return serviceAndFeeString;
     }
     function populateBillForm(bill){
         resetForm('#createbillingform');

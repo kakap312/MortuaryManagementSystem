@@ -4,23 +4,24 @@ use App\core\domain\validation\Validator;
 class BillingFieldsValidator {
     private $isDateCreatedValid=false;
     private $isCorpseIdValid=false;
-    private $isServiceFeeValid=false;
-    private $isBillDescriptionValid=false;
+    private $isServiceIdValid=false;
+    //private $isBillDescriptionValid=false;
     private $isBillAmountValid=false;
 
     public function __construct($fieldData){
         $this->isDateCreatedValid = Validator::validateDate($fieldData->getCreatedAt());
         $this->isCorpseIdValid = Validator::validateDate($fieldData->getCorpseId()) ;
-        $this->isServiceFeeValid = Validator::validateDate($fieldData->getServiceFee()) ;
-        $this->isBillDescriptionValid =  Validator::validateDate($fieldData->getBillFor());
-        $this->isBillAmountValid = Validator::validateDate($fieldData->getBillFor());
+        $this->isServiceIdValid = Validator::validateServiceId($fieldData->getServiceIds()) ;
+        //$this->isBillDescriptionValid =  Validator::validateDate($fieldData->getBillFor());
+        $this->isBillAmountValid = Validator::validateDate($fieldData->getAmount());
+
     }
     public function mapOfFieldValidation(){
         return [
             'isDateValid'=>$this->isDateCreatedValid,
             'isCorpseIdValid'=>$this->isCorpseIdValid,
-            'isServiceFeeValid'=>$this->isServiceFeeValid,
-            'isBillDescriptionValid'=>$this->isBillDescriptionValid,
+            'isServiceIdValid'=>$this->isServiceIdValid,
+            //'isBillDescriptionValid'=>$this->isBillDescriptionValid,
             'isBillAmountValid'=>$this->isBillAmountValid
         ];
     }

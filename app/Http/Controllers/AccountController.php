@@ -57,13 +57,9 @@ class AccountController extends Controller
         $this->accountFieldValidator = new AccountFieldValidator($savedAccountInfo);
         if($this->accountFieldValidator->isAllFieldValid()){
             if(self::isAccountFound($savedAccountInfo->getUserName())){
-                $accountResult = $this->accountRepositoryImp->createAccount($savedAccountInfo);
-                if($accountResult->getSuccess()){
-                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getData()));
-                }else{
-                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getData()));
-                }
+                
             }else{
+                
                 return response()->json(AccountViewModel::mapOfAccountExisting(self::isAccountFound($savedAccountInfo->getUsername())));
             }
             

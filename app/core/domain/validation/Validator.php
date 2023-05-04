@@ -25,6 +25,13 @@ class Validator{
         }
         return $isValid;
     }
+    static function validateServiceId($id){
+        $isValid=true;
+        if(count($id) == 0 || $id[0] == "" || !isset($id)){
+            $isValid = false;
+        }
+        return $isValid;
+    }
     static function validateSex($sex){
         $isValid = true;
         if($sex == ""){

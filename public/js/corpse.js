@@ -9,15 +9,11 @@ var slotId;
 var totalCorpse;
 $(document).ready(function(){
     fetchAccountType() == "admin"?$(".admin-menu").show():$(".admin-menu").hide();
+    $('#header').attr('data-action',fetchAccountType());
     fetchFridges();
     fetchCorpse();
     fetchSlots();
     fetchTotalCorpse();
-    //validation();
-    var list = [1,2,3,4,5,6,7,8,4,7,9,3];
-    var maximumDisplayDigit = 5; 
-    var startDisplayFrom = maximumDisplayDigit; //2
-
 
     // $('.next').click(function(){
     //     var currentNumberOfElementInList = list.length - startDisplayFrom // (12) - (5) = 7; //3

@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <header id="header" class="header fixed-top d-flex align-items-center" data-action="">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
@@ -291,7 +291,6 @@
   
 
   <!-- <script src="js/bill.js" type='module'></script> -->
-  <script src="js/accountjs.js" type='module'></script>
   <script src="js/corpse.js" type='module'></script>
   <script src="js/billing.js" type='module'></script>
   <script src="js/payment.js" type='module'></script>

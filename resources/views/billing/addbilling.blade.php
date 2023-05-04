@@ -15,14 +15,14 @@
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Date</label>
     <input class="form-control" type="date" id='datecreated' name="datecreated" required>
-    <p id='dateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, date is invalid</p>
+    <p class='dateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, date is invalid</p>
     </div>
     </div>
 
     <div class="form-floating mb-3 validatename"  data-action="{{ route('validatename')}}">
     <label for="floatingInput">coprse ID:</label>
     <input class="form-control searchcorp corpseseachId"  type="text" id='corpseseachId' name="corpseId" data-action="{{ route('searchcorp')}}" required>
-    <p id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
+    <p class='billIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
     </div>
     
 
@@ -32,7 +32,7 @@
     <!-- <input type='number' class="form-control" placeholder='Please Enter service Fee' id='services' name='servicefee'></input> -->
     <select class="form-control js-example-basic-multiple services" id='services' name='services' multiple='multiple' style='width:100%;'>
     </select>
-    <p id='feeerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
+    <p id='servideiderror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, service is invalid</p>
     </div>
     </div>
 
@@ -40,9 +40,8 @@
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Bill Purpose</label>
     <textarea class="form-control" id='billfor' name='billfor' style='width:100%;'>
-        
     </textarea>
-    <p id='descriptionerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, your description is invalid.</p>
+    <p class='billdescriptionerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, your description is invalid.</p>
     </div>
     </div>
 
@@ -61,7 +60,7 @@
     <div class="form-floating mb-3">
     <label for="floatingInput">Sub-Total (GHC)</label>
     <input class="form-control billsubtotal" type="text" id='billsubtotal' name="amount" disabled>
-    <p id='billamounterror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, amount is invalid.</p>
+    <p class='billamounterror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, amount is invalid.</p>
     </div>
     
     <div class="form-floating mb-3">
