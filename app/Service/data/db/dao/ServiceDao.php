@@ -14,8 +14,13 @@ class ServiceDao{
         }
 
     }
-    static function delete($billId){
-
+    static function delete($id){
+        try {
+            DbService::where('serviceId',$id)->delete();
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
     static function update($billId){
 

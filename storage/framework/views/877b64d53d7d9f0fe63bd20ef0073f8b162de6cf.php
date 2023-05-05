@@ -7,7 +7,7 @@
         <input  class='form-control searchservice'   type='text' placeholder='Service id/name'/>
     </div>
         <div class='table-responsive-lg'>
-    <table class='table-lg table-striped servicesviewtable' border=1 style='width:100%'>
+    <table class='table-lg table-striped servicesviewtable deleteserviceURL' data-action="<?php echo e(route('deleteservice')); ?>" border=1 style='width:100%'>
     <tr class='table-primary' style='padding:10px;'>
     <th >S/N</th>
     <th>Date</th>

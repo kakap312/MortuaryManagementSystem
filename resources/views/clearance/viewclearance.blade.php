@@ -6,7 +6,7 @@
         <button type='button' id="searchbtn"  class="ibtn btn-primary searchclearancebtn searchbtn" data-action="{{ route('searchclearance')}}">Search</button>
         <input  class='form-control searchClearance'   type='text' placeholder='Enter corpseId' />
     </div>
-        <div class='table-responsive-lg' id='deletebill' data-action= "{{route('deletebill')}}">
+        <div class='table-responsive-lg' id='deleteclearance' data-action= "{{route('deleteclearance')}}">
     <table class='table-lg table-striped billsviewtable' border=1 style='width:100%'>
     <tr class='table-primary' style='padding:10px;'>
     <th >S/N</th>

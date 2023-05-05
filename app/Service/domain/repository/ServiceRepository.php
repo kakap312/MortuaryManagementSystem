@@ -7,4 +7,5 @@ interface ServiceRepository{
     public static function fetchServiceById($id);
     public static function fetchAllServices();
     public static function fetchAllServicesLimitFive();
+    public static function deleteService($id);
 }

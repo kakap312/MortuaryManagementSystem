@@ -120,4 +120,12 @@ class ClearanceController extends Controller
         }
 
     }
+    function deleteClearance(Request $req){
+        $clearanceResult = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->deleteClearance($req->get('id'));
+        if($clearanceResult->getSuccess()){
+            return response()->json(MapOfUIModel::mapOfSuccess($clearanceResult->getSuccess()));
+        }else{
+            return response()->json(MapOfUIModel::mapOfSuccess($clearanceResult->getSuccess()));
+        }
+    }
 }

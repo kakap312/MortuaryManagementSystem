@@ -312,17 +312,16 @@ function viewCorpseInformation(corpse,position) {
  
     $('.choose').change(function(){
         if(($(this).val() == "Delete")){
-            if(confirm("Are you sure you want to delete corp")){
-                var deleteCorpUrl = 'userdashboard/deletecorp';
+            if(confirm("Are you sure you want to delete this Payment")){
+                var deleteBillUrl = $('.deletecorp').attr('data-action');
                 corpId = getCorpIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
-                requestData(deleteCorpUrl,"POST",createFormData(null,['corpid'],[corpId])).
-                then((data)=>{
-                    if(data.success){
-                        showMessage(data.success,"DELETE_SUCCESS",null,true);
-                        populateCorpView();
-                    }
-                })
+              var  response = requestData(deleteBillUrl,"POST",createFormData(null,['corpid'],[corpId]));
+              if(response.success){
+                showMessage(response.success,"DELETE_SUCCESS",null,true);
+                fetchCorpse();
+                populateCorpView();
             }
+        }
         }else if(($(this).val() == "Update")){
             fetchSlots();
             showOrHideSection('.addcorpsection');
@@ -343,6 +342,9 @@ function viewCorpseInformation(corpse,position) {
         }
     });
     
+}
+function getCorpseId(index){
+    return  corps[index].id;
 }
 function populateFridges(){
     

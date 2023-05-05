@@ -37,6 +37,14 @@ class ServiceController extends Controller
             return response()->json(MapOfViewModel::mapOfValidation($this->serviceFieldValidator->mapOfFieldValidation()));
         }
     }
+    function deleteService(Request $req){
+        $result = ServiceRepositoryImp::deleteService($req->get('serviceId'));
+        if($result->getSuccess()){
+            return response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
+        }else{
+            return response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
+        }
+    }
     function viewServices(Request $req){
         $services = ServiceRepositoryImp::fetchAllServices();
         if(is_null($services->getData())){

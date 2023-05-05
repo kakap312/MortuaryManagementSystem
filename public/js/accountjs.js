@@ -2,6 +2,7 @@ import {requestData,createFormData,showMessage,showOrHideSection,stringValue,get
 var accounttype;
 var accounts;
 var state;
+var accountId;
 $(document).ready(function(){
     
     var requestMethod = "POST";
@@ -70,16 +71,12 @@ $(document).ready(function(){
                     showErrorMessage(response.validationresult)
                 }
             }
-        }else if(state == "Update Billing"){
-            if(confirm(stringValue("UPDATE_BILLING_CONFIRMATION"))){
-                var updateBillingURL = $('.updateBillingUrl').attr('data-action');
-                var serviceIds = getServiceIds($('#services').val());
-                var bill = getBillById(billId)
-                var dueDays = bill.dueDays;
-                var extraDays = bill.extraDays;
-                var response = requestData(updateBillingURL,"POST",createFormData($("#createbillingform")[0],['amount','extraDays','dueDays','serviceids','billId'],[$('.billsubtotal').val(),extraDays,dueDays,serviceIds,billId]));
+        }else if(state == "Update Account"){
+            if(confirm(stringValue("UPDATE_ACCOUNT_CONFIRMATION"))){
+                var updateAccountURL = $('.updateaccount').attr('data-action');
+                var response = requestData(updateAccountURL,"POST",createFormData($("#createaccountform")[0],['accountId'],[accountId]));
                 if(response.success){
-                    showMessage(response.success,"BILL_UPDATE_SUCCESS",null,true);
+                    showMessage(response.success,"ACCOUNT_UPDATE_SUCCESS",null,true);
                 }else{
                     showErrorMessage(response.validationresult)
                 }
@@ -87,6 +84,15 @@ $(document).ready(function(){
         }
     })
 });
+function showErrorMessage(validationresult){
+    if(validationresult == null){
+        $('.dateerror').hide();
+        $('.usernameerror').hide();
+        $('.passworderror').hide();
+        $('.privillege').hide();
+    }
+
+}
  function fetchAccount (){
     var accountUrl = $('.viewaccountsection').attr("data-action");
     var response = requestData(accountUrl,"GET",createFormData(null,[''],['']));
@@ -141,18 +147,28 @@ function viewAccountInformation(account,position) {
             populateAccountDetail(currentIndexOfBill);
         }else if (($(this).val() == "Update")){
             showOrHideSection('.addaccountsection');
-            $('.addbilling').html('Update Billing');
-            state = $('.addbilling').html();
-            $('#billingregistrationtext').html("Update Billing")
-            $('#billinfinstruction').html('Complete the form below to update this Bill.');
-            billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
-            bill = getBillById(billId)
+            $('.createaccountbtn').html('Update Account');
+            state = $('#createaccountbtn').html();
+            $('.accountregistrationtext').html("Update Account")
+            $('.accountinstruction').html('Complete the form below to update this Account.');
+            accountId = getAccountId(parseInt($(this).parent().siblings('.sn').html())-1);
+           account = getAccountById(accountId)
             var currentCorpIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;
-            populateBillForm(bills[currentCorpIndexNumber]);
-            var serviceFees = getServiceFees($('#services').val());
-            performBillingCalculation(serviceFees)
+            populateAccountForm(accounts[currentCorpIndexNumber]);
         }
     });
+}
+function populateAccountForm(account){
+    resetForm('#createaccountform');
+    $('.datecreated').val(account.date);
+    $('.username').val(account.username)
+    $('.password').val(account.password)
+    $('.previllege').val(account.accountType)
+   
+
+}
+function getAccountId(index){
+    return  accounts[index].id;
 }
 function populateAccountDetail(index){
     fetchAccount();
@@ -161,5 +177,14 @@ function populateAccountDetail(index){
             $('.username').html(accounts[index].username)
             $('.password').html(accounts[index].password)
             $('.accounttype').html(accounts[index].accountType)
+}
+function getAccountById(id){
+    var currentAccount;
+    accounts.forEach(account => {
+        if(account.id == id){
+            currentAccount = account
+        }
+    });
+    return currentAccount;
 }
 

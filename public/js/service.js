@@ -121,14 +121,14 @@ function viewServicesInformation(service,position){
  
     $('.choose').change(function(){
         if(($(this).val() == "Delete")){
-            if(confirm("Are you sure you want to delete this Bill")){
-                var deleteBillUrl = $('#deletebill').attr('data-action');
-                console.log(parseInt($(this).parent().siblings('.sn').html())-1)
-                billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
-              var  response = requestData(deleteBillUrl,"POST",createFormData(null,['billId'],[billId]));
+            if(confirm("Are you sure you want to delete this Service")){
+                var deleteBillUrl = $('.deleteserviceURL').attr('data-action');
+                serviceId = getServiceId(parseInt($(this).parent().siblings('.sn').html())-1);
+              var  response = requestData(deleteBillUrl,"POST",createFormData(null,['serviceId'],[serviceId]));
               if(response.success){
                 showMessage(response.success,"DELETE_SUCCESS",null,true);
-                populateBillView();
+                fetchServices();
+                populateServiceView();
             }
         }
         }else if(($(this).val() == "Details")){
@@ -145,7 +145,6 @@ function viewServicesInformation(service,position){
             service = getServiceById(serviceId)
             var currentCorpIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;
             populateServiceForm(service);
-            console.log(service)
         }
     })
 }

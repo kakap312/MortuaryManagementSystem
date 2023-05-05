@@ -47,7 +47,12 @@ class ClearanceRepositoryImp implements CLearanceRepository{
         }
     }
     public function deleteClearance($id){
-
+        $dbClearances = ClearanceDao::deleteClearanceById($id);
+        if(! $dbClearances){
+            return new Result(null,false);
+        }else{
+            return new Result(null,true);
+        }
     }
     public function totalNumberOfClearance(){
         $dbClearance =  ClearanceDao::totalCLearance();

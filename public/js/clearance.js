@@ -130,7 +130,19 @@ function viewCorpseInformation(clearance,position) {
         )
 
         $('.choose').change(function(){
-            if(($(this).val() == "Update")){
+
+            if(($(this).val() == "Delete")){
+                if(confirm("Are you sure you want to delete this clearance")){
+                    var deleteBillUrl = $('#deleteclearance').attr('data-action');
+                    clearanceId = getClearanceIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
+                    var  response = requestData(deleteBillUrl,"POST",createFormData(null,['id'],[clearanceId]));
+                  if(response.success){
+                    showMessage(response.success,"CLEARANCE_DELETE_SUCCESS",null,true);
+                    fetchClearance();
+                    populateClearanceView();
+                }
+            }
+        }else if(($(this).val() == "Update")){
                 showOrHideSection('.addclearancesection');
                 $('#clearcorpsebtn').html('Update Clearance');
                 var currentCorpIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;

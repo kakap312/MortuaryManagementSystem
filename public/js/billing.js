@@ -310,11 +310,11 @@ function viewCorpseInformation(bill,position) {
         if(($(this).val() == "Delete")){
             if(confirm("Are you sure you want to delete this Bill")){
                 var deleteBillUrl = $('#deletebill').attr('data-action');
-                console.log(parseInt($(this).parent().siblings('.sn').html())-1)
                 billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
               var  response = requestData(deleteBillUrl,"POST",createFormData(null,['billId'],[billId]));
               if(response.success){
                 showMessage(response.success,"DELETE_SUCCESS",null,true);
+                fetchAllBills();
                 populateBillView();
             }
         }
@@ -366,8 +366,8 @@ function viewCorpseInformation(bill,position) {
         $('#extradaysamount').val(bill.extraDays * getServiceFees($('#services').val()))
         $('.billsubtotal').val(bill.amount)
         $('#billfor').val(bill.billPurpose)
-
     }
+
     function getBillId(index){
         return  bills[index].id;
     }

@@ -58,7 +58,14 @@ class ServiceRepositoryImp implements ServiceRepository{
            return new Result($services,true);
         }
 
-
+    public static function deleteService($id){
+        $result = ServiceDao::delete($id);
+        if(is_null($result)){
+            return new Result(null,false);
+        }else{
+            return new Result(null,true);
+        }
+    }
     public static function fetchService($corpseId){}
 
     

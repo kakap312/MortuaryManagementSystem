@@ -52,6 +52,7 @@ $(document).ready(function(){
         var response = requestData(searchBillUrl,"POST",createFormData(null,['id'],[$('.searchpayment').val()]));
         if(response.payments == null){
             showMessage(true,"CORP_NOT_FOUND",null,true)
+            populatePaymentView();
         }else{
             payments = response.payments;
             populatePaymentView();
@@ -145,6 +146,17 @@ function viewPaymentInformation(payment,position) {
                 showOrHideSection('.paymentdetailsection');
                 var currentIndex = parseInt($(this).parent().siblings('.sn').html())-1;
                 populatePaymentDetail(currentIndex);
+            }else if(($(this).val() == "Delete")){
+                if(confirm("Are you sure you want to delete this payment")){
+                    var deleteBillUrl = $('#deletepayment').attr('data-action');
+                    paymentId = getPaymentId(parseInt($(this).parent().siblings('.sn').html())-1);
+                  var  response = requestData(deleteBillUrl,"POST",createFormData(null,['id'],[paymentId]));
+                  if(response.success){
+                    showMessage(response.success,"DELETE_SUCCESS",null,true);
+                    fetchPayments();
+                    populatePaymentView();
+                }
+            }
             }else if(($(this).val() == "Update")){
                 showOrHideSection('.addPaymentsection');
                 $('.addpaymentbtn').html('Update Payment');

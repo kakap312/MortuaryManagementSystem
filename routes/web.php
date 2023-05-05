@@ -42,6 +42,7 @@ Route::post('/userdashboard/searchbill','BillingController@searchBillById')->nam
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
 Route::post('/account/createaccount','AccountController@createAccount')->name('createaccount');
 Route::get('/account','AccountController@renderAccountView')->name('account');
+Route::get('/userdashboard/update','AccountController@updateAccount')->name('updateaccount');
 Route::get('/userdashboard/allaccounts','AccountController@viewAccountLimitFive')->name('accounts');
 Route::get('/logout',function(){
     Session::forget('username');
@@ -65,6 +66,7 @@ Route::post('/userdashboard/searchservice','ServiceController@searchService')->n
 Route::post('/userdashboard/updateservice','ServiceController@updateService')->name('updateservice');
 Route::get('/userdashboard/services','ServiceController@viewServicesLimitfive')->name('fetchserviceslimitfive');
 Route::post('/userdashboard/createservice','ServiceController@createService')->name('addservice');
+Route::post('/userdashboard/deleteservice','ServiceController@deleteService')->name('deleteservice');
 
 // route for payment
 Route::post('/userdashboard/createpayment','PaymentController@createPayment')->name('makepayment');
@@ -81,6 +83,7 @@ Route::post('/userdashboard/clearance','ClearanceController@makeClearance')->nam
 Route::get('/userdashboard/fetchclearance','ClearanceController@viewAllClearance')->name('allclearance');
 Route::post('/userdashboard/searchclearance','ClearanceController@searchClearance')->name('searchclearance');
 Route::post('/userdashboard/updateclearance','ClearanceController@updateClearance')->name('updateclearance');
+Route::post('/userdashboard/deleteclearance','ClearanceController@deleteClearance')->name('deleteclearance');
 
 // report 
 Route::post('/userdashboard/report','ReportController@makeReport')->name('report');
