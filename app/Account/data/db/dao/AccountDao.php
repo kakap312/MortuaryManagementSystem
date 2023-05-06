@@ -49,8 +49,13 @@ use App\Account\data\db\model\DbAccount;
         }
 
     }
-    public static function deleteAccount(){
-
+    public static function delete($id){
+        try {
+            DbAccount::where('accId',$id)->delete();
+            return true;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
     public static function findAllAccount(){
         try {

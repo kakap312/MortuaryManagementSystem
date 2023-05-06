@@ -7,7 +7,7 @@
         <input  class='form-control searchpayment' style='height:35px;'   type='text' placeholder='Bill Id / PaymentId' />
     </div>
         <div class='table-responsive-lg' id='deletepayment' data-action= "{{route('deletepayment')}}">
-    <table class='table-lg table-striped billsviewtable' border=1 style='width:100%'>
+    <table class='table-lg table-striped paymentsviewtable' border=1 style='width:100%'>
     <tr class='table-primary' style='padding:10px;'>
     <th >S/N</th>
     <th>Date Created</th>

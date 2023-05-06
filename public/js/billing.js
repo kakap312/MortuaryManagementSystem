@@ -27,11 +27,14 @@ $(document).ready(function(){
             state = $('.addbilling').html();
             $('#billingregistrationtext').html("Create Billing")
             $('#billinfinstruction').html('Complete the form below to create a Bill.');
-        fetchServices();
         resetForm('#createbillingform');
+        fetchServices();
+       $('.services').empty()
+        populateServices();
     });
     $('#viewbillinglink').click(function() {
         fetchAllBills();
+        
         showOrHideSection('.viewbillingsection');
         populateBillView();
         
@@ -86,7 +89,6 @@ $(document).ready(function(){
            performBillingCalculation(serviceFees)
         }else{
             performBillingCalculation(serviceFees)
-           
         }
 
        
@@ -358,8 +360,8 @@ function viewCorpseInformation(bill,position) {
     }
     function populateBillForm(bill){
         resetForm('#createbillingform');
-        $('#datecreated').val(bill.date);
-        $('#corpseId').val(bill.corpseCode).trigger('change')
+        $('.datecreated').val(bill.date);
+        $('#corpseseachId').val(bill.corpseCode).trigger('change')
         $('#services').val(getServiceNamesById(bill.servicesIds))
         $('#services').select2().trigger('change');
         $('.duedaysamount').val(bill.dueDays * getServiceFees($('#services').val()))

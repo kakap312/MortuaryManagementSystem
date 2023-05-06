@@ -31,7 +31,7 @@
         <option value="daily">Daily</option>
         <option value ='once'>Once</option>
     </select>
-    <p class='servicenameError' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
+    <p class='chargedper' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
     </div>
     
 
@@ -43,7 +43,7 @@
     <option value='true'>Cleared</option>
     <option value='false'>not Cleared</option>
     </select> -->
-    <p id='stateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
+    <p id='stateerror' class='stateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
     </div>
     </div>
 

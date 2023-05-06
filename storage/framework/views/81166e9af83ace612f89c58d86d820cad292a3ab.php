@@ -21,14 +21,14 @@
 
     <div class="form-floating mb-3 validatename"  data-action="<?php echo e(route('validatename')); ?>">
     <label for="floatingInput">Username:</label>
-    <input class="form-control username"  type="text"  name="username" required>
-    <p class='usernameerror' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
+    <input class="form-control username deleteaccountUrl"  type="text" data-action="<?php echo e(route('deleteaccount')); ?>"  name="username" required>
+    <p class='usernameerror' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, username is invalid</p>
     </div>
 
     <div class="form-floating mb-3 validatename"  data-action="<?php echo e(route('validatename')); ?>">
     <label for="floatingInput">Password:</label>
     <input class="form-control password"  type="text" name="password" required>
-    <p class='passworderror' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, corpse not found</p>
+    <p class='passworderror' id='corpseIdError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, password is invalid</p>
     </div>
 
     <div class='form-row' id='updateaccount' data-action="<?php echo e(route('updateaccount')); ?>">
@@ -39,7 +39,7 @@
     <option value='admin'>Admin</option>
     <option value='user'>User</option>
     </select>
-    <p id='privillege' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, type is invalid</p>
+    <p id='privillege' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, privillege is invalid</p>
     </div>
     </div>
 

@@ -55,4 +55,12 @@ class AccountRepositoryImp implements AccountRepository {
             return new Result($accounts,true);
         }
     }
+    public function deleteAccount($id){
+        $dbAccounts = AccountDao::delete($id);
+        if(is_null($dbAccounts)){
+            return new Result(null,false);
+        }else{
+            return new Result(null,true);
+        }
+    }
 }

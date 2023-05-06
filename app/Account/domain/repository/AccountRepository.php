@@ -5,5 +5,6 @@ interface AccountRepository{
     public function login($savedAccountInfo);
     function fetchAccount($username);
     function fetchAccountLimitFive();
+    public function deleteAccount($id);
 }
 ?>

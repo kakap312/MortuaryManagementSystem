@@ -6,8 +6,6 @@ var payment;
 
 $(document).ready(function(){
     fetchPayments();
-
-
     $('#addpayment').click(function(){
         showOrHideSection('.addPaymentsection');
         resetForm('.createPaymentform');
@@ -121,7 +119,7 @@ function showErrors(validationResult){
     // $('#displayNumber').html(corps.length);
     // $('#totalNumber').html(totalCorpse);
     var position = 0;
-    if(payments.length >=1 ){
+    if(payments.length >=1 || payments != null){
         payments.forEach(payment => {
             viewPaymentInformation(payment,position)
             position++;
@@ -133,7 +131,7 @@ function showErrors(validationResult){
     
 }
 function viewPaymentInformation(payment,position) {
-    $('.billsviewtable').append(
+    $('.paymentsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         payment.dateCreated +"</td><td>"+
         payment.billId +"</td><td>"+

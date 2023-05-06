@@ -111,6 +111,7 @@ export function stringValue(name){
         ["CORP_NOT_FOUND","Sorry No corp was found. Kindly Try again"],
         ["SERVICE_NOT_FOUND","Sorry No service was found. Kindly Try again"],
         ["DELETE_SUCCESS","Congratulation, you have successfully deleted the corpse"],
+        ["DELETE_ERROR","Sorry, delete was unsuccessful"],
         ["CLEARANCE_DELETE_SUCCESS","Congratulation, you have successfully deleted this clearance"],
         ["SERVICE_DELETE_SUCCESS","Congratulation, you have successfully deleted this service"],
         ["SLOT_FREE","Congratulation, you have successfully freed this slot"],

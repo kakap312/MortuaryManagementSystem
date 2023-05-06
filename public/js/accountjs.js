@@ -24,6 +24,7 @@ $(document).ready(function(){
     $("#adduserlink").click(function(){
         showOrHideSection('.addaccountsection');
         resetForm('#createaccountform');
+        showErrorMessage(null)
     });
     $('#viewaccountlink').click(function(){
         fetchAccount();
@@ -67,6 +68,7 @@ $(document).ready(function(){
                     resetForm('#createaccountform');
                 }else if(response.isExisting){
                     showMessage(response.isExisting,"USERNAME_TAKEN",null,true);
+                    showErrorMessage(response.validationresult)
                 }else{
                     showErrorMessage(response.validationresult)
                 }
@@ -90,6 +92,10 @@ function showErrorMessage(validationresult){
         $('.usernameerror').hide();
         $('.passworderror').hide();
         $('.privillege').hide();
+    }else{
+        if(validationresult.isDateValid){$('.dateerror').hide();}else{$('.dateerror').show();}
+        if(validationresult.isPasswordValid){ $('.passworderror').hide();}else{ $('.passworderror').show();}
+        if(validationresult.isUsernameValid){ $('.usernameerror').hide();}else{$('.usernameerror').show();}
     }
 
 }
@@ -131,14 +137,15 @@ function viewAccountInformation(account,position) {
  
     $('.choose').change(function(){
         if(($(this).val() == "Delete")){
-            if(confirm("Are you sure you want to delete this Bill")){
-                var deleteBillUrl = $('#deletebill').attr('data-action');
-                console.log(parseInt($(this).parent().siblings('.sn').html())-1)
-                billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
-              var  response = requestData(deleteBillUrl,"POST",createFormData(null,['billId'],[billId]));
+            if(confirm("Are you sure you want to delete this account")){
+                var deleteBillUrl = $('.deleteaccountUrl').attr('data-action');
+                accountId = getAccountId(parseInt($(this).parent().siblings('.sn').html())-1);
+                var  response = requestData(deleteBillUrl,"POST",createFormData(null,['id'],[accountId]));
               if(response.success){
                 showMessage(response.success,"DELETE_SUCCESS",null,true);
-                populateBillView();
+                populateAccountView();
+            }else{
+                showMessage(response.success,"DELETE_ERROR",null,true);
             }
         }
         }else if(($(this).val() == "Details")){
@@ -147,6 +154,7 @@ function viewAccountInformation(account,position) {
             populateAccountDetail(currentIndexOfBill);
         }else if (($(this).val() == "Update")){
             showOrHideSection('.addaccountsection');
+            showErrorMessage(null)
             $('.createaccountbtn').html('Update Account');
             state = $('#createaccountbtn').html();
             $('.accountregistrationtext').html("Update Account")

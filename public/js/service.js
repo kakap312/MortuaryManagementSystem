@@ -77,6 +77,17 @@ $(document).ready(function(){
     });
     
 })
+function showErrorMessage(validationData){
+    if(validationData == null){
+        $('.dateerror').hide()
+        $('.servicenameError').hide()
+        $('#stateerror').hide()
+    }else{
+        if(validationData.isDateValid){$('.dateerror').hide()}else{$('.dateerror').show()}
+        if(validationData.isServiceFeeValid){$('.stateerror').hide()}else{$('.stateerror').show()}
+        if(validationData.isServiceNameValid){$('.servicenameError').hide()}else{$('.servicenameError').show()}
+    }
+}
 function populateServiceDetail(index){
         $('.date').html(new Date().toISOString().slice(0,10))
             $('.servideid').html(services[index].id)  

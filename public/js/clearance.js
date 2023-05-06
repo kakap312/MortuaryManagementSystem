@@ -121,7 +121,7 @@ function populateClearanceView(){
     }
 }
 function viewCorpseInformation(clearance,position) {
-    $('.billsviewtable').append(
+    $('.clearanceviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         clearance.date +"</td><td>"+
         clearance.corpseCode +"</td><td>"+

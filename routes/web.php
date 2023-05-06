@@ -43,6 +43,7 @@ Route::post('/account/login','AccountController@accountLogin')->name('userlogin'
 Route::post('/account/createaccount','AccountController@createAccount')->name('createaccount');
 Route::get('/account','AccountController@renderAccountView')->name('account');
 Route::get('/userdashboard/update','AccountController@updateAccount')->name('updateaccount');
+Route::post('/userdashboard/deleteaccount','AccountController@deleteAccount')->name('deleteaccount');
 Route::get('/userdashboard/allaccounts','AccountController@viewAccountLimitFive')->name('accounts');
 Route::get('/logout',function(){
     Session::forget('username');

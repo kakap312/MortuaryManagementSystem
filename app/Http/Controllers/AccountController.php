@@ -85,4 +85,12 @@ class AccountController extends Controller
         }
 
     }
+    function deleteAccount(Request $req){
+        $accountResult = $this->accountRepositoryImp->deleteAccount($req->get('id'));
+        if($accountResult->getSuccess()){
+            return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
+        }else{
+            return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
+        }
+    }
 }

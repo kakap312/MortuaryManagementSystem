@@ -14,7 +14,7 @@
     <div class='form-row'>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Date</label>
-    <input class="form-control" type="date" id='datecreated' name="datecreated" required>
+    <input class="form-control datecreated" type="date" id='datecreated' name="datecreated" required>
     <p class='dateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, date is invalid</p>
     </div>
     </div>
