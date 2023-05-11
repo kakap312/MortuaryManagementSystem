@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 07:17 PM
+-- Generation Time: May 12, 2023 at 01:36 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -42,8 +42,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`accId`, `username`, `password`, `type`, `createdAt`, `updatedAt`) VALUES
-('1', 'stephen12', 'flow1995', 'admin', '0000-00-00', '0000-00-00'),
-('2', 'stephen13', 'flow1995', 'user', '0000-00-00', '0000-00-00');
+('64521efec6c0a', 'stephen13', 'flow1995', 'user', '2023-05-03', '2023-05-03'),
+('64521efec6c0q', 'stephen12', 'flow1995', 'admin', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -52,8 +52,9 @@ INSERT INTO `accounts` (`accId`, `username`, `password`, `type`, `createdAt`, `u
 --
 
 CREATE TABLE `billings` (
-  `billId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `corpId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `billId` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corpId` bigint(20) UNSIGNED NOT NULL,
   `billfor` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dueDays` smallint(6) NOT NULL,
   `extraDays` smallint(6) NOT NULL,
@@ -67,9 +68,8 @@ CREATE TABLE `billings` (
 -- Dumping data for table `billings`
 --
 
-INSERT INTO `billings` (`billId`, `corpId`, `billfor`, `dueDays`, `extraDays`, `fee`, `amount`, `createdAt`, `updatedAt`) VALUES
-('644d9216ba1d3', 'OVM-N-FRG-A-A2', 'for both daily and extra', 5, 8, 0.00, 312.00, '2023-04-22', '2023-04-22'),
-('644ea1bb70f8e', 'OVM-K-FRG-A-A4', 'no purpose', 1, 15, 0.00, 274.00, '2023-04-19', '2023-04-19');
+INSERT INTO `billings` (`id`, `billId`, `corpId`, `billfor`, `dueDays`, `extraDays`, `fee`, `amount`, `createdAt`, `updatedAt`) VALUES
+(27, '645d6733352a5', 18, 'ds', 9, 0, 0.00, 980.00, '2023-05-12', '2023-05-12');
 
 -- --------------------------------------------------------
 
@@ -78,25 +78,13 @@ INSERT INTO `billings` (`billId`, `corpId`, `billfor`, `dueDays`, `extraDays`, `
 --
 
 CREATE TABLE `billingservices` (
-  `billServiceId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `billId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `serviceId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `billServiceId` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `billId` bigint(20) UNSIGNED NOT NULL,
+  `serviceId` bigint(20) UNSIGNED NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `billingservices`
---
-
-INSERT INTO `billingservices` (`billServiceId`, `billId`, `serviceId`, `createdAt`, `updatedAt`) VALUES
-('644d90bdb1dae', '644d90bd7ec42', '644d846f46129', '0000-00-00', '0000-00-00'),
-('644d90bdbca70', '644d90bd7ec42', '644d849678345', '0000-00-00', '0000-00-00'),
-('644e978845b1a', '644d9216ba1d3', '644d846f46129', '0000-00-00', '0000-00-00'),
-('644e978864f81', '644d9216ba1d3', '644d849678345', '0000-00-00', '0000-00-00'),
-('644e978870a5b', '644d9216ba1d3', '644e97103f605', '0000-00-00', '0000-00-00'),
-('644ea25bde96a', '644ea1bb70f8e', '644d849678345', '0000-00-00', '0000-00-00'),
-('644ea25c063f1', '644ea1bb70f8e', '644e97103f605', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -105,21 +93,13 @@ INSERT INTO `billingservices` (`billServiceId`, `billId`, `serviceId`, `createdA
 --
 
 CREATE TABLE `clearance` (
-  `clearanceId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `corpseId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `clearanceId` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corpseId` bigint(20) UNSIGNED NOT NULL,
   `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `clearance`
---
-
-INSERT INTO `clearance` (`clearanceId`, `corpseId`, `status`, `createdAt`, `updatedAt`) VALUES
-('64385d9a7443c', 'OVM-K-FRG-A-A1', 'true', '2023-04-13', '2023-04-13'),
-('64402a6f3eb85', 'OVM-K-FRG-A-A10', 'true', '2023-04-19', '0000-00-00'),
-('6440ef17e8caa', 'OVM-N-FRG-A-A2', 'true', '2023-04-20', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -128,6 +108,7 @@ INSERT INTO `clearance` (`clearanceId`, `corpseId`, `status`, `createdAt`, `upda
 --
 
 CREATE TABLE `corps` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `corpId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `corpseCode` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `admissionDate` date NOT NULL,
@@ -142,8 +123,8 @@ CREATE TABLE `corps` (
   `remarks` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `releasedBy` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `updatedAt` date NOT NULL,
-  `fridgeId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slotId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fridgeId` bigint(20) UNSIGNED NOT NULL,
+  `slotId` bigint(20) UNSIGNED NOT NULL,
   `category` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -151,11 +132,8 @@ CREATE TABLE `corps` (
 -- Dumping data for table `corps`
 --
 
-INSERT INTO `corps` (`corpId`, `corpseCode`, `admissionDate`, `name`, `age`, `sex`, `hometown`, `relativeName`, `relativeContactOne`, `relativeContactTwo`, `collectionDate`, `remarks`, `releasedBy`, `updatedAt`, `fridgeId`, `slotId`, `category`) VALUES
-('6431fbf60a1d1', 'OVM-K-FRG-A-A1', '2023-04-08', 'Kofi minta Mintin', 23, 'M', 'Kwemuman', 'stephany', '0540533008', '0540533008', '2023-04-09', 'no remarks', 'Stephen Odiodiodio', '0000-00-00', '6429635a440b6', '642963e3997fb', 'VIP'),
-('6431fc518b40b', 'OVM-K-FRG-A-A10', '2023-04-08', 'Ken Agyakum Kufio', 45, 'F', 'Nima Manobi road', 'Konte', '0241705289', '0248759658', '2023-04-12', 'no commment', 'ggg', '0000-00-00', '6429635a440b6', '642963e41b432', 'VIP'),
-('6439d39a2b19f', 'OVM-K-FRG-A-A4', '2023-04-14', 'Kweku Minta', 34, 'M', 'Twifo', 'Eva Atingule', '0540533008', '0540533008', '2023-04-15', 'no comment', 'Mr. Edu Jamfi', '0000-00-00', '6429635a440b6', '642963e3d9560', 'VIP'),
-('643c8a74bcc4c', 'OVM-N-FRG-A-A2', '2023-04-16', 'Nimo Frimpong', 34, 'M', 'Tono', 'Kofi Abanga', '0540533008', '0540533008', '2023-04-21', '', 'Akupama Mandof', '0000-00-00', '6429635a440b6', '642963e3b7589', 'Normal');
+INSERT INTO `corps` (`id`, `corpId`, `corpseCode`, `admissionDate`, `name`, `age`, `sex`, `hometown`, `relativeName`, `relativeContactOne`, `relativeContactTwo`, `collectionDate`, `remarks`, `releasedBy`, `updatedAt`, `fridgeId`, `slotId`, `category`) VALUES
+(18, '645c298528368', 'OVM-K-FRG-B-B4', '2023-05-03', 'Kofi Aponsah', 25, 'M', 'Tweebreeooo', 'Adasababa', '0540533008', '', '2023-05-12', '', 'no name', '0000-00-00', 3, 405, 'VIP');
 
 -- --------------------------------------------------------
 
@@ -164,6 +142,7 @@ INSERT INTO `corps` (`corpId`, `corpseCode`, `admissionDate`, `name`, `age`, `se
 --
 
 CREATE TABLE `fridges` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `fridgeId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `location` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -174,9 +153,9 @@ CREATE TABLE `fridges` (
 -- Dumping data for table `fridges`
 --
 
-INSERT INTO `fridges` (`fridgeId`, `name`, `location`, `state`) VALUES
-('6429635a440b6', 'A', 'first floor room 4', 'free'),
-('642963889c50f', 'B', 'first floor room 4', 'free');
+INSERT INTO `fridges` (`id`, `fridgeId`, `name`, `location`, `state`) VALUES
+(2, '645a3b837f927', 'A', 'first floor room 4', 'free'),
+(3, '645a3c5421014', 'B', 'first floor room 4', 'free');
 
 -- --------------------------------------------------------
 
@@ -201,7 +180,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2022_12_11_181027_accounts', 4),
 (5, '2022_12_13_133010_fridge', 5),
 (6, '2022_12_13_164511_slot', 6),
-(7, '2022_12_11_181007_accounts', 7);
+(7, '2022_12_11_181007_accounts', 7),
+(8, '2022_12_11_182007_accounts', 8),
+(9, '2022_12_13_133210_fridge', 9),
+(10, '2022_12_13_103210_fridge', 10),
+(11, '2022_12_13_111611_slot', 11),
+(12, '2022_12_11_988913_Corps', 12),
+(13, '2022_12_21_182809_service', 13),
+(14, '2022_12_21_182909_service', 14),
+(15, '2022_12_21_282909_service', 15),
+(16, '2022_12_21_108304_billing', 16),
+(17, '2023_04_01_221008_Payments', 17),
+(18, '2023_04_07_113003_Clearance', 18);
 
 -- --------------------------------------------------------
 
@@ -210,24 +200,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `paymentId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` double(8,2) NOT NULL,
-  `billId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `billId` bigint(20) UNSIGNED NOT NULL,
   `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`paymentId`, `amount`, `billId`, `description`, `createdAt`, `updatedAt`) VALUES
-('6435d76da23b5', 12.00, '64354246026be', 'yes description', '2023-04-12', '0000-00-00'),
-('643675d5d66aa', 90.00, '64354246026be', 'payment for extra', '2023-04-13', '0000-00-00'),
-('64373365c23d0', 34.00, '64354246026be', 'paid in full', '2023-04-12', '0000-00-00'),
-('64401449d4450', 132.00, '6440118d350f0', 'payment for bills', '2023-04-19', '0000-00-00'),
-('6440ee75e9539', 60.00, '6440edfb38f82', 'bill fees', '2023-04-13', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -236,24 +216,14 @@ INSERT INTO `payments` (`paymentId`, `amount`, `billId`, `description`, `created
 --
 
 CREATE TABLE `services` (
-  `serviceId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `serviceId` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fee` double(8,2) NOT NULL,
   `per` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` date NOT NULL,
   `updatedAt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `services`
---
-
-INSERT INTO `services` (`serviceId`, `name`, `fee`, `per`, `createdAt`, `updatedAt`) VALUES
-('644d846f46129', 'Bathing', 80.00, 'once', '2023-05-06', '2023-05-06'),
-('644d849678345', 'Keeping in fridge', 14.00, 'daily', '2023-05-06', '2023-05-06'),
-('644e97103f605', 'Embalmment', 50.00, 'once', '2023-04-30', '2023-04-30'),
-('644e97361804b', 'Pant for Male', 20.00, 'once', '2023-04-30', '2023-04-30'),
-('644e9742b874e', 'Pant for Female', 20.00, 'once', '2023-04-30', '2023-04-30');
 
 -- --------------------------------------------------------
 
@@ -262,9 +232,10 @@ INSERT INTO `services` (`serviceId`, `name`, `fee`, `per`, `createdAt`, `updated
 --
 
 CREATE TABLE `slots` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `slotId` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fridgeId` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fridgeId` bigint(20) UNSIGNED NOT NULL,
   `state` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'free'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -272,357 +243,407 @@ CREATE TABLE `slots` (
 -- Dumping data for table `slots`
 --
 
-INSERT INTO `slots` (`slotId`, `name`, `fridgeId`, `state`) VALUES
-('642963e3997fb', 'A1', '6429635a440b6', 'used'),
-('642963e3b7589', 'A2', '6429635a440b6', 'used'),
-('642963e3c1ef7', 'A3', '6429635a440b6', 'free'),
-('642963e3d9560', 'A4', '6429635a440b6', 'used'),
-('642963e3e51d6', 'A5', '6429635a440b6', 'free'),
-('642963e3ec4cc', 'A6', '6429635a440b6', 'free'),
-('642963e40130e', 'A7', '6429635a440b6', 'free'),
-('642963e40859a', 'A8', '6429635a440b6', 'free'),
-('642963e4141c0', 'A9', '6429635a440b6', 'free'),
-('642963e41b432', 'A10', '6429635a440b6', 'used'),
-('642963e424315', 'A11', '6429635a440b6', 'free'),
-('642963e42b75c', 'A12', '6429635a440b6', 'free'),
-('642963e4346c3', 'A13', '6429635a440b6', 'free'),
-('642963e43bb3c', 'A14', '6429635a440b6', 'free'),
-('642963e444b4f', 'A15', '6429635a440b6', 'free'),
-('642963e44f75e', 'A16', '6429635a440b6', 'free'),
-('642963e456b8a', 'A17', '6429635a440b6', 'free'),
-('642963e45fa6c', 'A18', '6429635a440b6', 'free'),
-('642963e466ef1', 'A19', '6429635a440b6', 'free'),
-('642963e46fdfd', 'A20', '6429635a440b6', 'free'),
-('642963e4773a7', 'A21', '6429635a440b6', 'free'),
-('642963e47ffba', 'A22', '6429635a440b6', 'free'),
-('642963e48758d', 'A23', '6429635a440b6', 'free'),
-('642963e4904ee', 'A24', '6429635a440b6', 'free'),
-('642963e49793b', 'A25', '6429635a440b6', 'free'),
-('642963e4a06d4', 'A26', '6429635a440b6', 'free'),
-('642963e4b0ca9', 'A27', '6429635a440b6', 'free'),
-('642963e4b80a4', 'A28', '6429635a440b6', 'free'),
-('642963e4c11e7', 'A29', '6429635a440b6', 'free'),
-('642963e4cd2c4', 'A30', '6429635a440b6', 'free'),
-('642963e4d6c9e', 'A31', '6429635a440b6', 'free'),
-('642963e4dddf5', 'A32', '6429635a440b6', 'free'),
-('642963e4e6f0d', 'A33', '6429635a440b6', 'free'),
-('642963e4ee190', 'A34', '6429635a440b6', 'free'),
-('642963e502f9f', 'A35', '6429635a440b6', 'free'),
-('642963e50a321', 'A36', '6429635a440b6', 'free'),
-('642963e513499', 'A37', '6429635a440b6', 'free'),
-('642963e51a667', 'A38', '6429635a440b6', 'free'),
-('642963e523602', 'A39', '6429635a440b6', 'free'),
-('642963e52a7c9', 'A40', '6429635a440b6', 'free'),
-('642963e533aac', 'A41', '6429635a440b6', 'free'),
-('642963e53add6', 'A42', '6429635a440b6', 'free'),
-('642963e543c84', 'A43', '6429635a440b6', 'free'),
-('642963e54b158', 'A44', '6429635a440b6', 'free'),
-('642963e5542bf', 'A45', '6429635a440b6', 'free'),
-('642963e55b4b1', 'A46', '6429635a440b6', 'free'),
-('642963e56443c', 'A47', '6429635a440b6', 'free'),
-('642963e56b81d', 'A48', '6429635a440b6', 'free'),
-('642963e574997', 'A49', '6429635a440b6', 'free'),
-('642963e57bba0', 'A50', '6429635a440b6', 'free'),
-('642963e584d2c', 'A51', '6429635a440b6', 'free'),
-('642963e58bf10', 'A52', '6429635a440b6', 'free'),
-('642963e59522e', 'A53', '6429635a440b6', 'free'),
-('642963e59c281', 'A54', '6429635a440b6', 'free'),
-('642963e5a5221', 'A55', '6429635a440b6', 'free'),
-('642963e5ac636', 'A56', '6429635a440b6', 'free'),
-('642963e5b57a6', 'A57', '6429635a440b6', 'free'),
-('642963e5bc98a', 'A58', '6429635a440b6', 'free'),
-('642963e5c5afe', 'A59', '6429635a440b6', 'free'),
-('642963e5cccbb', 'A60', '6429635a440b6', 'free'),
-('642963e5d5ccf', 'A61', '6429635a440b6', 'free'),
-('642963e5dd06b', 'A62', '6429635a440b6', 'free'),
-('642963e5e61fc', 'A63', '6429635a440b6', 'free'),
-('642963e5ed1a6', 'A64', '6429635a440b6', 'free'),
-('642963e606a7b', 'A65', '6429635a440b6', 'free'),
-('642963e60f9c4', 'A66', '6429635a440b6', 'free'),
-('642963e616c5e', 'A67', '6429635a440b6', 'free'),
-('642963e61fb2a', 'A68', '6429635a440b6', 'free'),
-('642963e626f1b', 'A69', '6429635a440b6', 'free'),
-('642963e62fe74', 'A70', '6429635a440b6', 'free'),
-('642963e637428', 'A71', '6429635a440b6', 'free'),
-('642963e640268', 'A72', '6429635a440b6', 'free'),
-('642963e6477b0', 'A73', '6429635a440b6', 'free'),
-('642963e65044c', 'A74', '6429635a440b6', 'free'),
-('642963e657b0f', 'A75', '6429635a440b6', 'free'),
-('642963e660988', 'A76', '6429635a440b6', 'free'),
-('642963e667ea4', 'A77', '6429635a440b6', 'free'),
-('642963e670ce8', 'A78', '6429635a440b6', 'free'),
-('642963e67821e', 'A79', '6429635a440b6', 'free'),
-('642963e681022', 'A80', '6429635a440b6', 'free'),
-('642963e688540', 'A81', '6429635a440b6', 'free'),
-('642963e6912f5', 'A82', '6429635a440b6', 'free'),
-('642963e6988f7', 'A83', '6429635a440b6', 'free'),
-('642963e6a15b9', 'A84', '6429635a440b6', 'free'),
-('642963e6a8ae3', 'A85', '6429635a440b6', 'free'),
-('642963e6b1af8', 'A86', '6429635a440b6', 'free'),
-('642963e6b8e29', 'A87', '6429635a440b6', 'free'),
-('642963e6c1d5e', 'A88', '6429635a440b6', 'free'),
-('642963e6c93ba', 'A89', '6429635a440b6', 'free'),
-('642963e6d22f0', 'A90', '6429635a440b6', 'free'),
-('642963e6d96f9', 'A91', '6429635a440b6', 'free'),
-('642963e6e2498', 'A92', '6429635a440b6', 'free'),
-('642963e6e9a8a', 'A93', '6429635a440b6', 'free'),
-('642963e6f2907', 'A94', '6429635a440b6', 'free'),
-('642963e705b99', 'A95', '6429635a440b6', 'free'),
-('642963e70ea7f', 'A96', '6429635a440b6', 'free'),
-('642963e715f2d', 'A97', '6429635a440b6', 'free'),
-('642963e71ec8e', 'A98', '6429635a440b6', 'free'),
-('642963e726249', 'A99', '6429635a440b6', 'free'),
-('642963e72ef89', 'A100', '6429635a440b6', 'free'),
-('642963e736704', 'A101', '6429635a440b6', 'free'),
-('642963e73f4b8', 'A102', '6429635a440b6', 'free'),
-('642963e7467b8', 'A103', '6429635a440b6', 'free'),
-('642963e74f725', 'A104', '6429635a440b6', 'free'),
-('642963e75d14b', 'A105', '6429635a440b6', 'free'),
-('642963e764522', 'A106', '6429635a440b6', 'free'),
-('642963e76d60c', 'A107', '6429635a440b6', 'free'),
-('642963e774899', 'A108', '6429635a440b6', 'free'),
-('642963e77d998', 'A109', '6429635a440b6', 'free'),
-('642963e784c0a', 'A110', '6429635a440b6', 'free'),
-('642963e78de56', 'A111', '6429635a440b6', 'free'),
-('642963e794f81', 'A112', '6429635a440b6', 'free'),
-('642963e79e07e', 'A113', '6429635a440b6', 'free'),
-('642963e7a50fc', 'A114', '6429635a440b6', 'free'),
-('642963e7ae401', 'A115', '6429635a440b6', 'free'),
-('642963e7b5660', 'A116', '6429635a440b6', 'free'),
-('642963e7be7b2', 'A117', '6429635a440b6', 'free'),
-('642963e7c59d9', 'A118', '6429635a440b6', 'free'),
-('642963e7cead6', 'A119', '6429635a440b6', 'free'),
-('642963e7d5d72', 'A120', '6429635a440b6', 'free'),
-('642963e7dee67', 'A121', '6429635a440b6', 'free'),
-('642963e7e60b9', 'A122', '6429635a440b6', 'free'),
-('642963e7ef1db', 'A123', '6429635a440b6', 'free'),
-('642963e8021ea', 'A124', '6429635a440b6', 'free'),
-('642963e80b316', 'A125', '6429635a440b6', 'free'),
-('642963e81255f', 'A126', '6429635a440b6', 'free'),
-('642963e81b4b5', 'A127', '6429635a440b6', 'free'),
-('642963e8228d7', 'A128', '6429635a440b6', 'free'),
-('642963e82ba1c', 'A129', '6429635a440b6', 'free'),
-('642963e832a57', 'A130', '6429635a440b6', 'free'),
-('642963e83bdb6', 'A131', '6429635a440b6', 'free'),
-('642963e842faf', 'A132', '6429635a440b6', 'free'),
-('642963e84c127', 'A133', '6429635a440b6', 'free'),
-('642963e85312c', 'A134', '6429635a440b6', 'free'),
-('642963e85ee7b', 'A135', '6429635a440b6', 'free'),
-('642963e868cc0', 'A136', '6429635a440b6', 'free'),
-('642963e871ca6', 'A137', '6429635a440b6', 'free'),
-('642963e8790dd', 'A138', '6429635a440b6', 'free'),
-('642963e88220f', 'A139', '6429635a440b6', 'free'),
-('642963e88944b', 'A140', '6429635a440b6', 'free'),
-('642963e8923f9', 'A141', '6429635a440b6', 'free'),
-('642963e899789', 'A142', '6429635a440b6', 'free'),
-('642963e8a291d', 'A143', '6429635a440b6', 'free'),
-('642963e8a98e2', 'A144', '6429635a440b6', 'free'),
-('642963e8b2b3f', 'A145', '6429635a440b6', 'free'),
-('642963e8b9ca1', 'A146', '6429635a440b6', 'free'),
-('642963e8c3026', 'A147', '6429635a440b6', 'free'),
-('642963e8ca1d2', 'A148', '6429635a440b6', 'free'),
-('642963e8d339e', 'A149', '6429635a440b6', 'free'),
-('642963e8da4d4', 'A150', '6429635a440b6', 'free'),
-('642963e8e3706', 'A151', '6429635a440b6', 'free'),
-('642963e8ea8b8', 'A152', '6429635a440b6', 'free'),
-('642963e8f3897', 'A153', '6429635a440b6', 'free'),
-('642963e906a1e', 'A154', '6429635a440b6', 'free'),
-('642963e90f9b1', 'A155', '6429635a440b6', 'free'),
-('642963e916d98', 'A156', '6429635a440b6', 'free'),
-('642963e91fb8d', 'A157', '6429635a440b6', 'free'),
-('642963e92bec9', 'A158', '6429635a440b6', 'free'),
-('642963e93550e', 'A159', '6429635a440b6', 'free'),
-('642963e93ca8e', 'A160', '6429635a440b6', 'free'),
-('642963e9458ce', 'A161', '6429635a440b6', 'free'),
-('642963e94ce6c', 'A162', '6429635a440b6', 'free'),
-('642963e955e16', 'A163', '6429635a440b6', 'free'),
-('642963e95d1e0', 'A164', '6429635a440b6', 'free'),
-('642963e968335', 'A165', '6429635a440b6', 'free'),
-('642963e970cb8', 'A166', '6429635a440b6', 'free'),
-('642963e978234', 'A167', '6429635a440b6', 'free'),
-('642963e980fb0', 'A168', '6429635a440b6', 'free'),
-('642963e9885ae', 'A169', '6429635a440b6', 'free'),
-('642963e9913cd', 'A170', '6429635a440b6', 'free'),
-('642963e99891b', 'A171', '6429635a440b6', 'free'),
-('642963e9a15c0', 'A172', '6429635a440b6', 'free'),
-('642963e9a8c8e', 'A173', '6429635a440b6', 'free'),
-('642963e9b18e6', 'A174', '6429635a440b6', 'free'),
-('642963e9b90d6', 'A175', '6429635a440b6', 'free'),
-('642964d113153', 'B1', '642963889c50f', 'free'),
-('642964d12aaa6', 'B2', '642963889c50f', 'free'),
-('642964d131723', 'B3', '642963889c50f', 'free'),
-('642964d13a87d', 'B4', '642963889c50f', 'free'),
-('642964d141c9f', 'B5', '642963889c50f', 'free'),
-('642964d14ac05', 'B6', '642963889c50f', 'free'),
-('642964d152053', 'B7', '642963889c50f', 'free'),
-('642964d15af8d', 'B8', '642963889c50f', 'free'),
-('642964d1622c7', 'B9', '642963889c50f', 'free'),
-('642964d16b497', 'B10', '642963889c50f', 'free'),
-('642964d17267c', 'B11', '642963889c50f', 'free'),
-('642964d17b697', 'B12', '642963889c50f', 'free'),
-('642964d188fa8', 'B13', '642963889c50f', 'free'),
-('642964d196805', 'B14', '642963889c50f', 'free'),
-('642964d19da68', 'B15', '642963889c50f', 'free'),
-('642964d1a6c3d', 'B16', '642963889c50f', 'free'),
-('642964d1adc2d', 'B17', '642963889c50f', 'free'),
-('642964d1b6e0d', 'B18', '642963889c50f', 'free'),
-('642964d1be14f', 'B19', '642963889c50f', 'free'),
-('642964d1c7054', 'B20', '642963889c50f', 'free'),
-('642964d1ce4c9', 'B21', '642963889c50f', 'free'),
-('642964d1d8f94', 'B22', '642963889c50f', 'free'),
-('642964d200c6f', 'B23', '642963889c50f', 'free'),
-('642964d208248', 'B24', '642963889c50f', 'free'),
-('642964d210ff1', 'B25', '642963889c50f', 'free'),
-('642964d218549', 'B26', '642963889c50f', 'free'),
-('642964d221368', 'B27', '642963889c50f', 'free'),
-('642964d2288b6', 'B28', '642963889c50f', 'free'),
-('642964d231545', 'B29', '642963889c50f', 'free'),
-('642964d238ad0', 'B30', '642963889c50f', 'free'),
-('642964d241a5c', 'B31', '642963889c50f', 'free'),
-('642964d248f89', 'B32', '642963889c50f', 'free'),
-('642964d251ddb', 'B33', '642963889c50f', 'free'),
-('642964d259331', 'B34', '642963889c50f', 'free'),
-('642964d262178', 'B35', '642963889c50f', 'free'),
-('642964d2696a3', 'B36', '642963889c50f', 'free'),
-('642964d272501', 'B37', '642963889c50f', 'free'),
-('642964d279a0d', 'B38', '642963889c50f', 'free'),
-('642964d282890', 'B39', '642963889c50f', 'free'),
-('642964d29570f', 'B40', '642963889c50f', 'free'),
-('642964d2a06b8', 'B41', '642963889c50f', 'free'),
-('642964d2a7929', 'B42', '642963889c50f', 'free'),
-('642964d2b0813', 'B43', '642963889c50f', 'free'),
-('642964d2b7d2f', 'B44', '642963889c50f', 'free'),
-('642964d2c0b3f', 'B45', '642963889c50f', 'free'),
-('642964d2c8009', 'B46', '642963889c50f', 'free'),
-('642964d2d10a8', 'B47', '642963889c50f', 'free'),
-('642964d2d837f', 'B48', '642963889c50f', 'free'),
-('642964d2e1309', 'B49', '642963889c50f', 'free'),
-('642964d2e86f9', 'B50', '642963889c50f', 'free'),
-('642964d2f17d0', 'B51', '642963889c50f', 'free'),
-('642964d30482d', 'B52', '642963889c50f', 'free'),
-('642964d30d8db', 'B53', '642963889c50f', 'free'),
-('642964d314a79', 'B54', '642963889c50f', 'free'),
-('642964d31da8b', 'B55', '642963889c50f', 'free'),
-('642964d324f2f', 'B56', '642963889c50f', 'free'),
-('642964d32dfeb', 'B57', '642963889c50f', 'free'),
-('642964d335100', 'B58', '642963889c50f', 'free'),
-('642964d33e41b', 'B59', '642963889c50f', 'free'),
-('642964d348d99', 'B60', '642963889c50f', 'free'),
-('642964d35030e', 'B61', '642963889c50f', 'free'),
-('642964d3591c3', 'B62', '642963889c50f', 'free'),
-('642964d36072f', 'B63', '642963889c50f', 'free'),
-('642964d36952d', 'B64', '642963889c50f', 'free'),
-('642964d370a0a', 'B65', '642963889c50f', 'free'),
-('642964d3798bf', 'B66', '642963889c50f', 'free'),
-('642964d383ac9', 'B67', '642963889c50f', 'free'),
-('642964d391f46', 'B68', '642963889c50f', 'free'),
-('642964d39f631', 'B69', '642963889c50f', 'free'),
-('642964d3a68aa', 'B70', '642963889c50f', 'free'),
-('642964d3af9e1', 'B71', '642963889c50f', 'free'),
-('642964d3b6cc7', 'B72', '642963889c50f', 'free'),
-('642964d3bfd19', 'B73', '642963889c50f', 'free'),
-('642964d3c71a6', 'B74', '642963889c50f', 'free'),
-('642964d3d00a2', 'B75', '642963889c50f', 'free'),
-('642964d3d74f1', 'B76', '642963889c50f', 'free'),
-('642964d3e045d', 'B77', '642963889c50f', 'free'),
-('642964d3e78b5', 'B78', '642963889c50f', 'free'),
-('642964d3f07b1', 'B79', '642963889c50f', 'free'),
-('642964d4039ec', 'B80', '642963889c50f', 'free'),
-('642964d410876', 'B81', '642963889c50f', 'free'),
-('642964d419f14', 'B82', '642963889c50f', 'free'),
-('642964d42158c', 'B83', '642963889c50f', 'free'),
-('642964d42a2a4', 'B84', '642963889c50f', 'free'),
-('642964d431986', 'B85', '642963889c50f', 'free'),
-('642964d43a45e', 'B86', '642963889c50f', 'free'),
-('642964d441d28', 'B87', '642963889c50f', 'free'),
-('642964d44aa00', 'B88', '642963889c50f', 'free'),
-('642964d451fd9', 'B89', '642963889c50f', 'free'),
-('642964d45adf7', 'B90', '642963889c50f', 'free'),
-('642964d46d0d8', 'B91', '642963889c50f', 'free'),
-('642964d480a24', 'B92', '642963889c50f', 'free'),
-('642964d48ac65', 'B93', '642963889c50f', 'free'),
-('642964d4a441e', 'B94', '642963889c50f', 'free'),
-('642964d4b1681', 'B95', '642963889c50f', 'free'),
-('642964d4c1761', 'B96', '642963889c50f', 'free'),
-('642964d4d1ee6', 'B97', '642963889c50f', 'free'),
-('642964d4e482b', 'B98', '642963889c50f', 'free'),
-('642964d4f350e', 'B99', '642963889c50f', 'free'),
-('642964d50e445', 'B100', '642963889c50f', 'free'),
-('642964d515b10', 'B101', '642963889c50f', 'free'),
-('642964d51e7ea', 'B102', '642963889c50f', 'free'),
-('642964d525e45', 'B103', '642963889c50f', 'free'),
-('642964d52ea0d', 'B104', '642963889c50f', 'free'),
-('642964d5361a8', 'B105', '642963889c50f', 'free'),
-('642964d53ecc1', 'B106', '642963889c50f', 'free'),
-('642964d54651c', 'B107', '642963889c50f', 'free'),
-('642964d54f234', 'B108', '642963889c50f', 'free'),
-('642964d556873', 'B109', '642963889c50f', 'free'),
-('642964d55f3ca', 'B110', '642963889c50f', 'free'),
-('642964d566bfe', 'B111', '642963889c50f', 'free'),
-('642964d56f927', 'B112', '642963889c50f', 'free'),
-('642964d577080', 'B113', '642963889c50f', 'free'),
-('642964d5847f7', 'B114', '642963889c50f', 'free'),
-('642964d58d460', 'B115', '642963889c50f', 'free'),
-('642964d5a2e9e', 'B116', '642963889c50f', 'free'),
-('642964d5b30c7', 'B117', '642963889c50f', 'free'),
-('642964d5c0933', 'B118', '642963889c50f', 'free'),
-('642964d5c80e9', 'B119', '642963889c50f', 'free'),
-('642964d5d0ef7', 'B120', '642963889c50f', 'free'),
-('642964d5d8420', 'B121', '642963889c50f', 'free'),
-('642964d5e1409', 'B122', '642963889c50f', 'free'),
-('642964d5e87be', 'B123', '642963889c50f', 'free'),
-('642964d5f1602', 'B124', '642963889c50f', 'free'),
-('642964d604911', 'B125', '642963889c50f', 'free'),
-('642964d60d72d', 'B126', '642963889c50f', 'free'),
-('642964d614c8b', 'B127', '642963889c50f', 'free'),
-('642964d61dad2', 'B128', '642963889c50f', 'free'),
-('642964d624fcf', 'B129', '642963889c50f', 'free'),
-('642964d62dcdc', 'B130', '642963889c50f', 'free'),
-('642964d635340', 'B131', '642963889c50f', 'free'),
-('642964d63e1a9', 'B132', '642963889c50f', 'free'),
-('642964d6454bc', 'B133', '642963889c50f', 'free'),
-('642964d64e530', 'B134', '642963889c50f', 'free'),
-('642964d655a1a', 'B135', '642963889c50f', 'free'),
-('642964d65e8e5', 'B136', '642963889c50f', 'free'),
-('642964d665bf8', 'B137', '642963889c50f', 'free'),
-('642964d66ec59', 'B138', '642963889c50f', 'free'),
-('642964d676110', 'B139', '642963889c50f', 'free'),
-('642964d67efbb', 'B140', '642963889c50f', 'free'),
-('642964d686483', 'B141', '642963889c50f', 'free'),
-('642964d68f3ec', 'B142', '642963889c50f', 'free'),
-('642964d69cd49', 'B143', '642963889c50f', 'free'),
-('642964d6acefc', 'B144', '642963889c50f', 'free'),
-('642964d6b43a3', 'B145', '642963889c50f', 'free'),
-('642964d6bd05e', 'B146', '642963889c50f', 'free'),
-('642964d6c4717', 'B147', '642963889c50f', 'free'),
-('642964d6cd5ec', 'B148', '642963889c50f', 'free'),
-('642964d6d4a66', 'B149', '642963889c50f', 'free'),
-('642964d6dd834', 'B150', '642963889c50f', 'free'),
-('642964d6e4dea', 'B151', '642963889c50f', 'free'),
-('642964d6edce2', 'B152', '642963889c50f', 'free'),
-('642964d700f1b', 'B153', '642963889c50f', 'free'),
-('642964d709fa9', 'B154', '642963889c50f', 'free'),
-('642964d7112ab', 'B155', '642963889c50f', 'free'),
-('642964d71a1bc', 'B156', '642963889c50f', 'free'),
-('642964d72162e', 'B157', '642963889c50f', 'free'),
-('642964d72a3ac', 'B158', '642963889c50f', 'free'),
-('642964d731996', 'B159', '642963889c50f', 'free'),
-('642964d73a893', 'B160', '642963889c50f', 'free'),
-('642964d741b40', 'B161', '642963889c50f', 'free'),
-('642964d74aade', 'B162', '642963889c50f', 'free'),
-('642964d751f5c', 'B163', '642963889c50f', 'free'),
-('642964d75af7f', 'B164', '642963889c50f', 'free'),
-('642964d7623f5', 'B165', '642963889c50f', 'free'),
-('642964d76b1f9', 'B166', '642963889c50f', 'free'),
-('642964d77276e', 'B167', '642963889c50f', 'free'),
-('642964d77b67e', 'B168', '642963889c50f', 'free'),
-('642964d78292b', 'B169', '642963889c50f', 'free'),
-('642964d78b9fb', 'B170', '642963889c50f', 'free'),
-('642964d7a5e95', 'B171', '642963889c50f', 'free'),
-('642964d7b40bb', 'B172', '642963889c50f', 'free'),
-('642964d7bb6e3', 'B173', '642963889c50f', 'free'),
-('642964d7c4487', 'B174', '642963889c50f', 'free'),
-('642964d7cba95', 'B175', '642963889c50f', 'free');
+INSERT INTO `slots` (`id`, `slotId`, `name`, `fridgeId`, `state`) VALUES
+(202, '645a3cd205ba0', 'A1', 2, 'used'),
+(203, '645a3cd210879', 'A2', 2, 'used'),
+(204, '645a3cd224366', 'A3', 2, 'used'),
+(205, '645a3cd24f334', 'A4', 2, 'used'),
+(206, '645a3cd256eb8', 'A5', 2, 'used'),
+(207, '645a3cd277f61', 'A6', 2, 'used'),
+(208, '645a3cd27f7c5', 'A7', 2, 'used'),
+(209, '645a3cd2880f4', 'A8', 2, 'used'),
+(210, '645a3cd28f914', 'A9', 2, 'free'),
+(211, '645a3cd298550', 'A10', 2, 'free'),
+(212, '645a3cd29fd40', 'A11', 2, 'free'),
+(213, '645a3cd2a8a3d', 'A12', 2, 'free'),
+(214, '645a3cd2b01e5', 'A13', 2, 'free'),
+(215, '645a3cd2b89e3', 'A14', 2, 'free'),
+(216, '645a3cd2c0372', 'A15', 2, 'free'),
+(217, '645a3cd2cddde', 'A16', 2, 'free'),
+(218, '645a3cd2d6749', 'A17', 2, 'free'),
+(219, '645a3cd2de030', 'A18', 2, 'free'),
+(220, '645a3cd2e6afa', 'A19', 2, 'free'),
+(221, '645a3cd2ee4bc', 'A20', 2, 'free'),
+(222, '645a3cd309716', 'A21', 2, 'free'),
+(223, '645a3cd312be3', 'A22', 2, 'free'),
+(224, '645a3cd31a9f4', 'A23', 2, 'free'),
+(225, '645a3cd322efe', 'A24', 2, 'free'),
+(226, '645a3cd32ab06', 'A25', 2, 'free'),
+(227, '645a3cd333171', 'A26', 2, 'free'),
+(228, '645a3cd33b549', 'A27', 2, 'free'),
+(229, '645a3cd3433f5', 'A28', 2, 'free'),
+(230, '645a3cd351247', 'A29', 2, 'free'),
+(231, '645a3cd37152c', 'A30', 2, 'free'),
+(232, '645a3cd37c47c', 'A31', 2, 'free'),
+(233, '645a3cd38402b', 'A32', 2, 'free'),
+(234, '645a3cd38c6d2', 'A33', 2, 'free'),
+(235, '645a3cd39a2dc', 'A34', 2, 'free'),
+(236, '645a3cd3a1c25', 'A35', 2, 'free'),
+(237, '645a3cd3b2214', 'A36', 2, 'free'),
+(238, '645a3cd3ba8f3', 'A37', 2, 'free'),
+(239, '645a3cd3c7f41', 'A38', 2, 'free'),
+(240, '645a3cd3cf9a6', 'A39', 2, 'free'),
+(241, '645a3cd3e046c', 'A40', 2, 'free'),
+(242, '645a3cd3f09ef', 'A41', 2, 'free'),
+(243, '645a3cd409ce4', 'A42', 2, 'free'),
+(244, '645a3cd4119f7', 'A43', 2, 'free'),
+(245, '645a3cd41f850', 'A44', 2, 'free'),
+(246, '645a3cd429efe', 'A45', 2, 'free'),
+(247, '645a3cd43a5dc', 'A46', 2, 'free'),
+(248, '645a3cd442027', 'A47', 2, 'free'),
+(249, '645a3cd44a7f8', 'A48', 2, 'free'),
+(250, '645a3cd452cbb', 'A49', 2, 'free'),
+(251, '645a3cd45aa1f', 'A50', 2, 'free'),
+(252, '645a3cd478cba', 'A51', 2, 'free'),
+(253, '645a3cd486410', 'A52', 2, 'free'),
+(254, '645a3cd49104d', 'A53', 2, 'free'),
+(255, '645a3cd498ba8', 'A54', 2, 'free'),
+(256, '645a3cd4a15d0', 'A55', 2, 'free'),
+(257, '645a3cd4b1142', 'A56', 2, 'free'),
+(258, '645a3cd4c7baa', 'A57', 2, 'free'),
+(259, '645a3cd4dd2c0', 'A58', 2, 'free'),
+(260, '645a3cd503af5', 'A59', 2, 'free'),
+(261, '645a3cd51654a', 'A60', 2, 'free'),
+(262, '645a3cd51e22e', 'A61', 2, 'free'),
+(263, '645a3cd526a5d', 'A62', 2, 'free'),
+(264, '645a3cd52e612', 'A63', 2, 'free'),
+(265, '645a3cd536e0a', 'A64', 2, 'free'),
+(266, '645a3cd53e82d', 'A65', 2, 'free'),
+(267, '645a3cd54c771', 'A66', 2, 'free'),
+(268, '645a3cd55a267', 'A67', 2, 'free'),
+(269, '645a3cd57275f', 'A68', 2, 'free'),
+(270, '645a3cd57a17f', 'A69', 2, 'free'),
+(271, '645a3cd582ae6', 'A70', 2, 'free'),
+(272, '645a3cd58ff41', 'A71', 2, 'free'),
+(273, '645a3cd59b02d', 'A72', 2, 'free'),
+(274, '645a3cd5a2bad', 'A73', 2, 'free'),
+(275, '645a3cd5ab213', 'A74', 2, 'free'),
+(276, '645a3cd5b5d16', 'A75', 2, 'free'),
+(277, '645a3cd5bd69a', 'A76', 2, 'free'),
+(278, '645a3cd5c6269', 'A77', 2, 'free'),
+(279, '645a3cd5cddfd', 'A78', 2, 'free'),
+(280, '645a3cd5d65cd', 'A79', 2, 'free'),
+(281, '645a3cd5de160', 'A80', 2, 'free'),
+(282, '645a3cd5ebfef', 'A81', 2, 'free'),
+(283, '645a3cd5f3c24', 'A82', 2, 'free'),
+(284, '645a3cd608119', 'A83', 2, 'free'),
+(285, '645a3cd60fcff', 'A84', 2, 'free'),
+(286, '645a3cd61b2ab', 'A85', 2, 'free'),
+(287, '645a3cd6287e2', 'A86', 2, 'free'),
+(288, '645a3cd63023f', 'A87', 2, 'free'),
+(289, '645a3cd638a12', 'A88', 2, 'free'),
+(290, '645a3cd6403d5', 'A89', 2, 'free'),
+(291, '645a3cd648bac', 'A90', 2, 'free'),
+(292, '645a3cd6511ac', 'A91', 2, 'free'),
+(293, '645a3cd658a42', 'A92', 2, 'free'),
+(294, '645a3cd669596', 'A93', 2, 'free'),
+(295, '645a3cd679a22', 'A94', 2, 'free'),
+(296, '645a3cd687382', 'A95', 2, 'free'),
+(297, '645a3cd69499c', 'A96', 2, 'free'),
+(298, '645a3cd6a23b6', 'A97', 2, 'free'),
+(299, '645a3cd6b254a', 'A98', 2, 'free'),
+(300, '645a3cd6bfd90', 'A99', 2, 'free'),
+(301, '645a3cd6c7843', 'A100', 2, 'free'),
+(302, '645a3cd6d01e3', 'A101', 2, 'free'),
+(303, '645a3cd6d7c20', 'A102', 2, 'free'),
+(304, '645a3cd6e070a', 'A103', 2, 'free'),
+(305, '645a3cd6e7ef6', 'A104', 2, 'free'),
+(306, '645a3cd6f09fa', 'A105', 2, 'free'),
+(307, '645a3cd704119', 'A106', 2, 'free'),
+(308, '645a3cd70f694', 'A107', 2, 'free'),
+(309, '645a3cd716f82', 'A108', 2, 'free'),
+(310, '645a3cd71f9c9', 'A109', 2, 'free'),
+(311, '645a3cd727231', 'A110', 2, 'free'),
+(312, '645a3cd72fdbd', 'A111', 2, 'free'),
+(313, '645a3cd73d1d9', 'A112', 2, 'free'),
+(314, '645a3cd744b57', 'A113', 2, 'free'),
+(315, '645a3cd74d599', 'A114', 2, 'free'),
+(316, '645a3cd755992', 'A115', 2, 'free'),
+(317, '645a3cd773775', 'A116', 2, 'free'),
+(318, '645a3cd780ce0', 'A117', 2, 'free'),
+(319, '645a3cd7887bc', 'A118', 2, 'free'),
+(320, '645a3cd79110c', 'A119', 2, 'free'),
+(321, '645a3cd7989b3', 'A120', 2, 'free'),
+(322, '645a3cd7a170a', 'A121', 2, 'free'),
+(323, '645a3cd7a8faf', 'A122', 2, 'free'),
+(324, '645a3cd7b1844', 'A123', 2, 'free'),
+(325, '645a3cd7b9061', 'A124', 2, 'free'),
+(326, '645a3cd7c19bc', 'A125', 2, 'free'),
+(327, '645a3cd7cc439', 'A126', 2, 'free'),
+(328, '645a3cd7d49c8', 'A127', 2, 'free'),
+(329, '645a3cd7dc489', 'A128', 2, 'free'),
+(330, '645a3cd7e4dfb', 'A129', 2, 'free'),
+(331, '645a3cd7ec809', 'A130', 2, 'free'),
+(332, '645a3cd800e70', 'A131', 2, 'free'),
+(333, '645a3cd808935', 'A132', 2, 'free'),
+(334, '645a3cd811219', 'A133', 2, 'free'),
+(335, '645a3cd818cbe', 'A134', 2, 'free'),
+(336, '645a3cd82157f', 'A135', 2, 'free'),
+(337, '645a3cd828e00', 'A136', 2, 'free'),
+(338, '645a3cd831834', 'A137', 2, 'free'),
+(339, '645a3cd839874', 'A138', 2, 'free'),
+(340, '645a3cd841370', 'A139', 2, 'free'),
+(341, '645a3cd849a6f', 'A140', 2, 'free'),
+(342, '645a3cd851572', 'A141', 2, 'free'),
+(343, '645a3cd859d84', 'A142', 2, 'free'),
+(344, '645a3cd86a38a', 'A143', 2, 'free'),
+(345, '645a3cd87a7b9', 'A144', 2, 'free'),
+(346, '645a3cd882353', 'A145', 2, 'free'),
+(347, '645a3cd88a8b8', 'A146', 2, 'free'),
+(348, '645a3cd892653', 'A147', 2, 'free'),
+(349, '645a3cd89ad62', 'A148', 2, 'free'),
+(350, '645a3cd8a6ef9', 'A149', 2, 'free'),
+(351, '645a3cd8b0830', 'A150', 2, 'free'),
+(352, '645a3cd8b81c8', 'A151', 2, 'free'),
+(353, '645a3cd8c0948', 'A152', 2, 'free'),
+(354, '645a3cd8c861f', 'A153', 2, 'free'),
+(355, '645a3cd8d0baf', 'A154', 2, 'free'),
+(356, '645a3cd8d9038', 'A155', 2, 'free'),
+(357, '645a3cd8e0a9b', 'A156', 2, 'free'),
+(358, '645a3cd8e945d', 'A157', 2, 'free'),
+(359, '645a3cd8f0e44', 'A158', 2, 'free'),
+(360, '645a3cd905673', 'A159', 2, 'free'),
+(361, '645a3cd90d26c', 'A160', 2, 'free'),
+(362, '645a3cd91583f', 'A161', 2, 'free'),
+(363, '645a3cd91d2db', 'A162', 2, 'free'),
+(364, '645a3cd925ef1', 'A163', 2, 'free'),
+(365, '645a3cd92da68', 'A164', 2, 'free'),
+(366, '645a3cd935edc', 'A165', 2, 'free'),
+(367, '645a3cd93db8c', 'A166', 2, 'free'),
+(368, '645a3cd9460ba', 'A167', 2, 'free'),
+(369, '645a3cd94e06d', 'A168', 2, 'free'),
+(370, '645a3cd956848', 'A169', 2, 'free'),
+(371, '645a3cd95e3c2', 'A170', 2, 'free'),
+(372, '645a3cd96ed44', 'A171', 2, 'free'),
+(373, '645a3cd97c164', 'A172', 2, 'free'),
+(374, '645a3cd98450c', 'A173', 2, 'free'),
+(375, '645a3cd98c03f', 'A174', 2, 'free'),
+(376, '645a3cd9948af', 'A175', 2, 'free'),
+(377, '645a3cd99c2e0', 'A176', 2, 'free'),
+(378, '645a3cd9a4ce3', 'A177', 2, 'free'),
+(379, '645a3cd9ac754', 'A178', 2, 'free'),
+(380, '645a3cd9b4fae', 'A179', 2, 'free'),
+(381, '645a3cd9bca1c', 'A180', 2, 'free'),
+(382, '645a3cd9c526d', 'A181', 2, 'free'),
+(383, '645a3cd9cd4e0', 'A182', 2, 'free'),
+(384, '645a3cd9d5132', 'A183', 2, 'free'),
+(385, '645a3cd9dd7a5', 'A184', 2, 'free'),
+(386, '645a3cd9eb09e', 'A185', 2, 'free'),
+(387, '645a3cd9f2aae', 'A186', 2, 'free'),
+(388, '645a3cda073c5', 'A187', 2, 'free'),
+(389, '645a3cda0ee2f', 'A188', 2, 'free'),
+(390, '645a3cda1775b', 'A189', 2, 'free'),
+(391, '645a3cda1f177', 'A190', 2, 'free'),
+(392, '645a3cda279c3', 'A191', 2, 'free'),
+(393, '645a3cda2f3f6', 'A192', 2, 'free'),
+(394, '645a3cda37e5d', 'A193', 2, 'free'),
+(395, '645a3cda3f95b', 'A194', 2, 'free'),
+(396, '645a3cda4800f', 'A195', 2, 'free'),
+(397, '645a3cda4fa84', 'A196', 2, 'free'),
+(398, '645a3cda5857e', 'A197', 2, 'free'),
+(399, '645a3cda5ffce', 'A198', 2, 'free'),
+(400, '645a3cda78b77', 'A199', 2, 'free'),
+(401, '645a3cda839d9', 'A200', 2, 'free'),
+(402, '645a3d09e73ed', 'B1', 3, 'used'),
+(403, '645a3d09f2524', 'B2', 3, 'used'),
+(404, '645a3d0a06b50', 'B3', 3, 'used'),
+(405, '645a3d0a0e5a7', 'B4', 3, 'used'),
+(406, '645a3d0a16d02', 'B5', 3, 'free'),
+(407, '645a3d0a1ebed', 'B6', 3, 'free'),
+(408, '645a3d0a27120', 'B7', 3, 'free'),
+(409, '645a3d0a2ec48', 'B8', 3, 'free'),
+(410, '645a3d0a375e9', 'B9', 3, 'free'),
+(411, '645a3d0a44b29', 'B10', 3, 'free'),
+(412, '645a3d0a4c8c9', 'B11', 3, 'free'),
+(413, '645a3d0a54e05', 'B12', 3, 'free'),
+(414, '645a3d0a5cb52', 'B13', 3, 'free'),
+(415, '645a3d0a65223', 'B14', 3, 'free'),
+(416, '645a3d0a6d62d', 'B15', 3, 'free'),
+(417, '645a3d0a7509d', 'B16', 3, 'free'),
+(418, '645a3d0a7d9ce', 'B17', 3, 'free'),
+(419, '645a3d0a855b5', 'B18', 3, 'free'),
+(420, '645a3d0a8db4b', 'B19', 3, 'free'),
+(421, '645a3d0a95ce4', 'B20', 3, 'free'),
+(422, '645a3d0a9e0c4', 'B21', 3, 'free'),
+(423, '645a3d0aa5b5b', 'B22', 3, 'free'),
+(424, '645a3d0aae3a6', 'B23', 3, 'free'),
+(425, '645a3d0ab633b', 'B24', 3, 'free'),
+(426, '645a3d0abe718', 'B25', 3, 'free'),
+(427, '645a3d0aef2cb', 'B26', 3, 'free'),
+(428, '645a3d0b02a48', 'B27', 3, 'free'),
+(429, '645a3d0b1331b', 'B28', 3, 'free'),
+(430, '645a3d0b1b45a', 'B29', 3, 'free'),
+(431, '645a3d0b23352', 'B30', 3, 'free'),
+(432, '645a3d0b2badc', 'B31', 3, 'free'),
+(433, '645a3d0b33653', 'B32', 3, 'free'),
+(434, '645a3d0b3bb23', 'B33', 3, 'free'),
+(435, '645a3d0b43a58', 'B34', 3, 'free'),
+(436, '645a3d0b4bf97', 'B35', 3, 'free'),
+(437, '645a3d0b53c04', 'B36', 3, 'free'),
+(438, '645a3d0b5c2b9', 'B37', 3, 'free'),
+(439, '645a3d0b6469c', 'B38', 3, 'free'),
+(440, '645a3d0b6c159', 'B39', 3, 'free'),
+(441, '645a3d0b74a0c', 'B40', 3, 'free'),
+(442, '645a3d0b7cb88', 'B41', 3, 'free'),
+(443, '645a3d0b84753', 'B42', 3, 'free'),
+(444, '645a3d0b8caed', 'B43', 3, 'free'),
+(445, '645a3d0b9517d', 'B44', 3, 'free'),
+(446, '645a3d0b9cbce', 'B45', 3, 'free'),
+(447, '645a3d0ba55e5', 'B46', 3, 'free'),
+(448, '645a3d0bacf7e', 'B47', 3, 'free'),
+(449, '645a3d0bb5679', 'B48', 3, 'free'),
+(450, '645a3d0bbd74c', 'B49', 3, 'free'),
+(451, '645a3d0bcdc2a', 'B50', 3, 'free'),
+(452, '645a3d0be36c8', 'B51', 3, 'free'),
+(453, '645a3d0bee290', 'B52', 3, 'free'),
+(454, '645a3d0c01d56', 'B53', 3, 'free'),
+(455, '645a3d0c0a27d', 'B54', 3, 'free'),
+(456, '645a3d0c11f87', 'B55', 3, 'free'),
+(457, '645a3d0c1a497', 'B56', 3, 'free'),
+(458, '645a3d0c229aa', 'B57', 3, 'free'),
+(459, '645a3d0c2a41d', 'B58', 3, 'free'),
+(460, '645a3d0c32eb4', 'B59', 3, 'free'),
+(461, '645a3d0c3a8d4', 'B60', 3, 'free'),
+(462, '645a3d0c4315e', 'B61', 3, 'free'),
+(463, '645a3d0c4a9f3', 'B62', 3, 'free'),
+(464, '645a3d0c667cf', 'B63', 3, 'free'),
+(465, '645a3d0c70bf1', 'B64', 3, 'free'),
+(466, '645a3d0c7e6e0', 'B65', 3, 'free'),
+(467, '645a3d0c8684f', 'B66', 3, 'free'),
+(468, '645a3d0c8e500', 'B67', 3, 'free'),
+(469, '645a3d0c96c39', 'B68', 3, 'free'),
+(470, '645a3d0c9e955', 'B69', 3, 'free'),
+(471, '645a3d0ca9d92', 'B70', 3, 'free'),
+(472, '645a3d0cb1934', 'B71', 3, 'free'),
+(473, '645a3d0cb9e6b', 'B72', 3, 'free'),
+(474, '645a3d0cc1b7d', 'B73', 3, 'free'),
+(475, '645a3d0cca206', 'B74', 3, 'free'),
+(476, '645a3d0cdaae5', 'B75', 3, 'free'),
+(477, '645a3d0cea790', 'B76', 3, 'free'),
+(478, '645a3d0cf2d2d', 'B77', 3, 'free'),
+(479, '645a3d0d064a5', 'B78', 3, 'free'),
+(480, '645a3d0d0ed75', 'B79', 3, 'free'),
+(481, '645a3d0d19ef7', 'B80', 3, 'free'),
+(482, '645a3d0d21580', 'B81', 3, 'free'),
+(483, '645a3d0d29bf3', 'B82', 3, 'free'),
+(484, '645a3d0d31ac1', 'B83', 3, 'free'),
+(485, '645a3d0d39d91', 'B84', 3, 'free'),
+(486, '645a3d0d4210a', 'B85', 3, 'free'),
+(487, '645a3d0d49fba', 'B86', 3, 'free'),
+(488, '645a3d0d52671', 'B87', 3, 'free'),
+(489, '645a3d0d5a1c3', 'B88', 3, 'free'),
+(490, '645a3d0d629db', 'B89', 3, 'free'),
+(491, '645a3d0d6a6ce', 'B90', 3, 'free'),
+(492, '645a3d0d72e1f', 'B91', 3, 'free'),
+(493, '645a3d0d82e98', 'B92', 3, 'free'),
+(494, '645a3d0d8ab0d', 'B93', 3, 'free'),
+(495, '645a3d0d92f71', 'B94', 3, 'free'),
+(496, '645a3d0d9b318', 'B95', 3, 'free'),
+(497, '645a3d0da35a6', 'B96', 3, 'free'),
+(498, '645a3d0daea24', 'B97', 3, 'free'),
+(499, '645a3d0db6147', 'B98', 3, 'free'),
+(500, '645a3d0dbe7cf', 'B99', 3, 'free'),
+(501, '645a3d0dc6401', 'B100', 3, 'free'),
+(502, '645a3d0dcec67', 'B101', 3, 'free'),
+(503, '645a3d0ddf790', 'B102', 3, 'free'),
+(504, '645a3d0e02dbd', 'B103', 3, 'free'),
+(505, '645a3d0e0d97d', 'B104', 3, 'free'),
+(506, '645a3d0e15d53', 'B105', 3, 'free'),
+(507, '645a3d0e1df51', 'B106', 3, 'free'),
+(508, '645a3d0e25f4e', 'B107', 3, 'free'),
+(509, '645a3d0e2e25c', 'B108', 3, 'free'),
+(510, '645a3d0e367b2', 'B109', 3, 'free'),
+(511, '645a3d0e3e470', 'B110', 3, 'free'),
+(512, '645a3d0e469f4', 'B111', 3, 'free'),
+(513, '645a3d0e4e6bf', 'B112', 3, 'free'),
+(514, '645a3d0e56cea', 'B113', 3, 'free'),
+(515, '645a3d0e5ebfa', 'B114', 3, 'free'),
+(516, '645a3d0e67396', 'B115', 3, 'free'),
+(517, '645a3d0e6ed2c', 'B116', 3, 'free'),
+(518, '645a3d0e775ae', 'B117', 3, 'free'),
+(519, '645a3d0e7f22a', 'B118', 3, 'free'),
+(520, '645a3d0e8773f', 'B119', 3, 'free'),
+(521, '645a3d0e8f233', 'B120', 3, 'free'),
+(522, '645a3d0e97b22', 'B121', 3, 'free'),
+(523, '645a3d0e9fa35', 'B122', 3, 'free'),
+(524, '645a3d0ea7f74', 'B123', 3, 'free'),
+(525, '645a3d0eafba3', 'B124', 3, 'free'),
+(526, '645a3d0eb8187', 'B125', 3, 'free'),
+(527, '645a3d0ebfd96', 'B126', 3, 'free'),
+(528, '645a3d0ec86a5', 'B127', 3, 'free'),
+(529, '645a3d0ed0171', 'B128', 3, 'free'),
+(530, '645a3d0eebd7a', 'B129', 3, 'free'),
+(531, '645a3d0f04d07', 'B130', 3, 'free'),
+(532, '645a3d0f0cd11', 'B131', 3, 'free'),
+(533, '645a3d0f14ee5', 'B132', 3, 'free'),
+(534, '645a3d0f1d0c8', 'B133', 3, 'free'),
+(535, '645a3d0f256cb', 'B134', 3, 'free'),
+(536, '645a3d0f2d121', 'B135', 3, 'free'),
+(537, '645a3d0f35832', 'B136', 3, 'free'),
+(538, '645a3d0f3d6f5', 'B137', 3, 'free'),
+(539, '645a3d0f45ba5', 'B138', 3, 'free'),
+(540, '645a3d0f4d85d', 'B139', 3, 'free'),
+(541, '645a3d0f560cb', 'B140', 3, 'free'),
+(542, '645a3d0f5ddfa', 'B141', 3, 'free'),
+(543, '645a3d0f66326', 'B142', 3, 'free'),
+(544, '645a3d0f6e040', 'B143', 3, 'free'),
+(545, '645a3d0f768c2', 'B144', 3, 'free'),
+(546, '645a3d0f7e1e9', 'B145', 3, 'free'),
+(547, '645a3d0f86c79', 'B146', 3, 'free'),
+(548, '645a3d0f8e54c', 'B147', 3, 'free'),
+(549, '645a3d0f96b50', 'B148', 3, 'free'),
+(550, '645a3d0f9ee7d', 'B149', 3, 'free'),
+(551, '645a3d0fa6c74', 'B150', 3, 'free'),
+(552, '645a3d0faf1da', 'B151', 3, 'free'),
+(553, '645a3d0fb6ffb', 'B152', 3, 'free'),
+(554, '645a3d0fbf586', 'B153', 3, 'free'),
+(555, '645a3d0fc7370', 'B154', 3, 'free'),
+(556, '645a3d0fcf986', 'B155', 3, 'free'),
+(557, '645a3d100140c', 'B156', 3, 'free'),
+(558, '645a3d1009037', 'B157', 3, 'free'),
+(559, '645a3d1011bf6', 'B158', 3, 'free'),
+(560, '645a3d101942a', 'B159', 3, 'free'),
+(561, '645a3d102195c', 'B160', 3, 'free'),
+(562, '645a3d1029cde', 'B161', 3, 'free'),
+(563, '645a3d1031b88', 'B162', 3, 'free'),
+(564, '645a3d1039c82', 'B163', 3, 'free'),
+(565, '645a3d104224e', 'B164', 3, 'free'),
+(566, '645a3d104a570', 'B165', 3, 'free'),
+(567, '645a3d10521f5', 'B166', 3, 'free'),
+(568, '645a3d105a788', 'B167', 3, 'free'),
+(569, '645a3d10624f1', 'B168', 3, 'free'),
+(570, '645a3d106ab2b', 'B169', 3, 'free'),
+(571, '645a3d107284b', 'B170', 3, 'free'),
+(572, '645a3d107ae72', 'B171', 3, 'free'),
+(573, '645a3d1082bdf', 'B172', 3, 'free'),
+(574, '645a3d108b1dc', 'B173', 3, 'free'),
+(575, '645a3d1092d65', 'B174', 3, 'free'),
+(576, '645a3d109b318', 'B175', 3, 'free'),
+(577, '645a3d10a38b8', 'B176', 3, 'free'),
+(578, '645a3d10ab410', 'B177', 3, 'free'),
+(579, '645a3d10b3c83', 'B178', 3, 'free'),
+(580, '645a3d10bf0b6', 'B179', 3, 'free'),
+(581, '645a3d10c62f6', 'B180', 3, 'free'),
+(582, '645a3d10ce952', 'B181', 3, 'free'),
+(583, '645a3d10df75e', 'B182', 3, 'free'),
+(584, '645a3d1105c88', 'B183', 3, 'free'),
+(585, '645a3d110d9b1', 'B184', 3, 'free'),
+(586, '645a3d1116018', 'B185', 3, 'free'),
+(587, '645a3d111db41', 'B186', 3, 'free'),
+(588, '645a3d112a14e', 'B187', 3, 'free'),
+(589, '645a3d11337fa', 'B188', 3, 'free'),
+(590, '645a3d113bbfb', 'B189', 3, 'free'),
+(591, '645a3d1143d39', 'B190', 3, 'free'),
+(592, '645a3d114bc98', 'B191', 3, 'free'),
+(593, '645a3d1153e40', 'B192', 3, 'free'),
+(594, '645a3d115c172', 'B193', 3, 'free'),
+(595, '645a3d116428e', 'B194', 3, 'free'),
+(596, '645a3d116f198', 'B195', 3, 'free'),
+(597, '645a3d1177050', 'B196', 3, 'free'),
+(598, '645a3d117f4f5', 'B197', 3, 'free'),
+(599, '645a3d11873cf', 'B198', 3, 'free'),
+(600, '645a3d118f88a', 'B199', 3, 'free'),
+(601, '645a3d1197551', 'B200', 3, 'free');
 
 --
 -- Indexes for dumped tables
@@ -636,10 +657,47 @@ ALTER TABLE `accounts`
   ADD KEY `accounts_username_index` (`username`);
 
 --
+-- Indexes for table `billings`
+--
+ALTER TABLE `billings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `billings_corpid_foreign` (`corpId`),
+  ADD KEY `billings_billid_index` (`billId`(191));
+
+--
+-- Indexes for table `billingservices`
+--
+ALTER TABLE `billingservices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `billingservices_billid_foreign` (`billId`),
+  ADD KEY `billingservices_serviceid_foreign` (`serviceId`),
+  ADD KEY `billingservices_billserviceid_index` (`billServiceId`(191));
+
+--
+-- Indexes for table `clearance`
+--
+ALTER TABLE `clearance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clearance_corpseid_foreign` (`corpseId`),
+  ADD KEY `clearance_clearanceid_index` (`clearanceId`(191));
+
+--
+-- Indexes for table `corps`
+--
+ALTER TABLE `corps`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `corps_slotid_foreign` (`slotId`),
+  ADD KEY `corps_fridgeid_foreign` (`fridgeId`),
+  ADD KEY `corps_corpid_index` (`corpId`),
+  ADD KEY `corps_corpsecode_index` (`corpseCode`),
+  ADD KEY `corps_name_index` (`name`);
+
+--
 -- Indexes for table `fridges`
 --
 ALTER TABLE `fridges`
-  ADD PRIMARY KEY (`fridgeId`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fridges_fridgeid_index` (`fridgeId`),
   ADD KEY `fridges_name_index` (`name`);
 
 --
@@ -649,38 +707,128 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `payments_billid_foreign` (`billId`),
+  ADD KEY `payments_paymentid_index` (`paymentId`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
-  ADD PRIMARY KEY (`serviceId`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `services_serviceid_index` (`serviceId`(191));
 
 --
 -- Indexes for table `slots`
 --
 ALTER TABLE `slots`
-  ADD PRIMARY KEY (`slotId`),
-  ADD KEY `slots_name_index` (`name`),
-  ADD KEY `slots_fridgeid_index` (`fridgeId`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `slots_fridgeid_foreign` (`fridgeId`),
+  ADD KEY `slots_slotid_index` (`slotId`),
+  ADD KEY `slots_name_index` (`name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `billings`
+--
+ALTER TABLE `billings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `billingservices`
+--
+ALTER TABLE `billingservices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `clearance`
+--
+ALTER TABLE `clearance`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `corps`
+--
+ALTER TABLE `corps`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `fridges`
+--
+ALTER TABLE `fridges`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `slots`
+--
+ALTER TABLE `slots`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=602;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `billings`
+--
+ALTER TABLE `billings`
+  ADD CONSTRAINT `billings_corpid_foreign` FOREIGN KEY (`corpId`) REFERENCES `corps` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `billingservices`
+--
+ALTER TABLE `billingservices`
+  ADD CONSTRAINT `billingservices_billid_foreign` FOREIGN KEY (`billId`) REFERENCES `billings` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `billingservices_serviceid_foreign` FOREIGN KEY (`serviceId`) REFERENCES `services` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `clearance`
+--
+ALTER TABLE `clearance`
+  ADD CONSTRAINT `clearance_corpseid_foreign` FOREIGN KEY (`corpseId`) REFERENCES `corps` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `corps`
+--
+ALTER TABLE `corps`
+  ADD CONSTRAINT `corps_fridgeid_foreign` FOREIGN KEY (`fridgeId`) REFERENCES `fridges` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `corps_slotid_foreign` FOREIGN KEY (`slotId`) REFERENCES `slots` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_billid_foreign` FOREIGN KEY (`billId`) REFERENCES `billings` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `slots`
 --
 ALTER TABLE `slots`
-  ADD CONSTRAINT `slots_fridgeid_foreign` FOREIGN KEY (`fridgeId`) REFERENCES `fridges` (`fridgeId`) ON DELETE CASCADE;
+  ADD CONSTRAINT `slots_fridgeid_foreign` FOREIGN KEY (`fridgeId`) REFERENCES `fridges` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
