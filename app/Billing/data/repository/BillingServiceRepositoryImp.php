@@ -4,6 +4,7 @@ use App\Billing\data\db\dao\BillingServiceDao;
 use App\Billing\domain\repository\BillingServiceRepository;
 use App\Billing\data\mappers\DomainToDbBillingServiceMapper;
 use App\Billing\data\mappers\DbBillingServiceToDomainMapper; 
+use App\Billing\data\repository\BillingRepositoryImp;
 use App\core\domain\Result;
 
 class BillingServiceRepositoryImp implements BillingServiceRepository {
@@ -12,10 +13,11 @@ class BillingServiceRepositoryImp implements BillingServiceRepository {
         foreach ($billingServiceInfo->getServiceId() as $serviceId) {
            $result = BillingServiceDao::insert(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId));
         }
-        return $result == true? new Result(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId),true):  new Result($result,false);
+        return $result == true? new Result($result,true):  new Result($result,false);
     }
     public static function updateBillingService($billId,$billingServiceInfo){
-       if( BillingServiceDao::deleteBillingServiceByBillingId($billId)){
+        $id = (new BillingRepositoryImp)->fetchBillingByCorpseId($billId)->getData()[0]->getId();
+       if( BillingServiceDao::deleteBillingServiceByBillingId($id)){
         foreach ($billingServiceInfo->getServiceId() as $serviceId) {
             $result = BillingServiceDao::insert(DomainToDbBillingServiceMapper::map($billingServiceInfo,$serviceId));
          }

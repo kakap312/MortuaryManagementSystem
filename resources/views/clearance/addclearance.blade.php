@@ -4,7 +4,7 @@
     <div class="card info-card sales-card">
     <div class="card-body">
     
-    <form id='createclearanceform' data-action="{{ route('createclearance')}}"  enctype="multipart/form-data">
+    <form id='createclearanceform' class='createclearanceform' data-action="{{ route('createclearance')}}"  enctype="multipart/form-data">
     <div class='forminstructon'>
     <p id='topdecoration' ></p>
     <h2 class='corpseregistrationtext'>Corpse Clearnace Form</h2>

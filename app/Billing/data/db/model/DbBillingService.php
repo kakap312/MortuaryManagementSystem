@@ -8,9 +8,8 @@ class DbBillingService extends Model
 {
     //
     public $timestamps =false;
-    public $incrementing = false;
-    protected $primaryKey = 'billServiceId';
+    protected $primaryKey = 'id';
     protected $table = 'billingservices';
-    protected $fillable =['billServiceId','billId','serviceId'];
+    protected $fillable =['id','billServiceId','billId','serviceId'];
     protected $hidden = ['created_at','updated_at'];
 }

@@ -1,12 +1,16 @@
 <?php
 namespace App\Corp\domain\factory;
 use App\Corp\domain\model\SavedCorpInfo;
+use  App\Corp\data\repository\SlotRepositoryImp;
+use  App\Corp\data\repository\FridgeRepositoryImp;
 class CorpFactory{
 
     public static function makeSaveCorpInfo($rquest){
         $id = $rquest->get('corpId');
-        $sId = $rquest->get('slotId');
-        $frgId = $rquest->get('fridgeId');
+        $sId = SlotRepositoryImp::searchSlotByNameOrId($rquest->get('slotId'))->getData()->getId();
+        $frgId = FridgeRepositoryImp::searchFridgeByNameOrId($rquest->get('fridgeId'))->getData()->getId();
+        
+
         return new SavedCorpInfo(
             $id = isset($id)?$rquest->get('corpId'):"",
             $corpseCode = is_null($rquest->get('corpseCode'))?"":$rquest->get('corpseCode'),

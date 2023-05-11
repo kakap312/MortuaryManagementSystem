@@ -16,6 +16,7 @@ class FridgeDao{
             return DbFridge::where(function($query){
                 $query->where('fridgeId','=',$GLOBALS['id']);
                 $query->orWhere('name','=',$GLOBALS['id']);
+                $query->orWhere('id','=',$GLOBALS['id']);
             })->get()->first();
         } catch (\Throwable $th) {
             return $th->getMessage();

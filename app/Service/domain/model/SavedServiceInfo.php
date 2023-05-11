@@ -3,16 +3,18 @@ namespace App\Service\domain\model;
 class SavedServiceInfo{
     private $id;
     private $serviceName;
-    private $serviceFee;
+    private $regularFee;
+    private $vipFee;
     private $per;
     private $createdAt;
     private $updatedAt;
 
 
-    public function __construct($id,$serviceName,$serviceFee,$createdAt,$updatedAt,$per){
+    public function __construct($id,$serviceName,$regularFee,$vipFee,$createdAt,$updatedAt,$per){
         $this->id = $id == "" ?uniqid():$id;
         $this->serviceName = $serviceName;
-        $this->serviceFee = $serviceFee;
+        $this->regularFee = $regularFee;
+        $this->vipFee = $vipFee;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->per = $per;
@@ -22,8 +24,10 @@ class SavedServiceInfo{
     public function getId(){return $this->id;}
     public function setServiceName($name){$this->serviceName=$name;}
     public function getServiceName(){return $this->serviceName;} 
-    public function setServiceFee($serviceFee){$this->serveceFee = $serviceFee;}
-    public function getServiceFee(){return $this->serviceFee;}
+    public function setRegularFee($fee){$this->regularFee = $fee;}
+    public function getRegularFee(){return $this->$fee;}
+    public function setVipFee($fee){$this->vipFee = $fee;}
+    public function getVipFee(){return $this->vipFee;}
     public function setCreatedAt($date){$this->createdAt = $date;}
     public function getCreatedAt(){return $this->createdAt;}
     public function setUpdatedAt(){$this->updatedAt = $updatedAt;}

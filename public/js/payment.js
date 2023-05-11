@@ -140,7 +140,7 @@ function viewPaymentInformation(payment,position) {
         )
 
         $('.choose').change(function(){
-            if(($(this).val() == "Detail")){
+            if(($(this).val() == "Details")){
                 showOrHideSection('.paymentdetailsection');
                 var currentIndex = parseInt($(this).parent().siblings('.sn').html())-1;
                 populatePaymentDetail(currentIndex);

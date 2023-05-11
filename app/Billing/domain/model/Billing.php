@@ -2,6 +2,7 @@
 namespace App\Billing\domain\model;
 
 class Billing{
+    private $id;
     private $billId;
     //private $services; // list of billing services domain object
     private $amount;
@@ -12,7 +13,8 @@ class Billing{
     private $corpseCode;
     private $billPurpose;
 
-    public function __construct($billId,$amount,$createdAt,$dueDays,$extraDays,$servicefee,$corpseCode,$billPurpose){
+    public function __construct($id,$billId,$amount,$createdAt,$dueDays,$extraDays,$servicefee,$corpseCode,$billPurpose){
+        $this->id = $id;
         $this->billId = $billId;
         //$this->services = $services;
         $this->amount = $amount;
@@ -28,6 +30,8 @@ class Billing{
 
     function setBillId($billId){$this->billId = $billId;}
     function getBillId(){return $this->billId;}
+    function setId($id){$this->id = $id;}
+    function getId(){return $this->id;}
     function setServices($services){$this->services = $services;}
     function getService(){return $this->services;}
     function setCorpse($corpse){$this->corpse = $corpse;}

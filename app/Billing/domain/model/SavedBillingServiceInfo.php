@@ -1,9 +1,9 @@
 <?php
 namespace App\Billing\domain\model;
 class SavedBillingServiceInfo{
-    private $id;
-    private $billingId;
-    private $ServiceIds;
+    public  $id;
+    public $billingId;
+    public $ServiceIds;
 
     public function __construct($id,$billingId,$ServiceIds){
         $this->id = $id;

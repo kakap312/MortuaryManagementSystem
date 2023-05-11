@@ -9,13 +9,12 @@ $(document).ready(function(){
 
 $('#clearacnelink').click(function(){
     showOrHideSection('.addclearancesection');
-    $('#createclearanceform').reset();
-    
+    $('.createclearanceform')[0].reset();
     $('.corpseregistrationtext').html('');
     $('.billinfinstruction').html('');
     $('.corpseregistrationtext').html('Clearance  Form');
     $('.billinfinstruction').html('Complete the form below to clear a  corpse');
-    $('#clearcorpsebtn').html('Update Clearance');
+    $('.clearcorpsebtn').html('Add Clearance');
 })
 $('.printbtn').click(function(){
     var option = {
@@ -74,6 +73,8 @@ $('.clearcorpsebtn').click(function(){
                 showMessage(response.success,"CORPSE_CLEARED_ERROR",null,true);
             }else if(response.outsandingamount > 0){
                 alert("Sorry!, You have an oustanding amount of " + " GHC " + parseInt(response.outsandingamount ).toFixed(2) + " to pay.");
+            }else if(response.success == false){
+                alert("Sorry!, couldn't clear this corpse. Please add a bill and make payment.");
             }else{
                 showErrorMessage(response.validationresult);
             }

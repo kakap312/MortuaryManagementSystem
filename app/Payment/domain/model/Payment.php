@@ -2,6 +2,7 @@
 namespace App\Payment\domain\model;
 
 class Payment{
+    private $id;
     private $paymentId;
     private $billId;
     private $amount;
@@ -9,7 +10,8 @@ class Payment{
     private $createdAt;
     private $updatedAt;
 
-    public function __construct($paymentId,$billId,$amount,$description,$createdAt,$updatedAt){
+    public function __construct($id,$paymentId,$billId,$amount,$description,$createdAt,$updatedAt){
+        $this->id = $id;
         $this->paymentId = $paymentId;
         $this->billId = $billId;
         $this->amount = $amount;
@@ -18,8 +20,10 @@ class Payment{
         $this->description = $description;
     }
 
-    public function setId($billId){$this->billId = $billId;}
-    public function getId(){return $this->billId;}
+    public function setId($id){$this->id = $id;}
+    public function getId(){return $this->id;}
+    public function setBillId($billId){$this->billId = $billId;}
+    public function getBillId(){return $this->billId;}
     public function setAmount($amount){$this->amount = $amount;}
     public function getAmount(){return $this->amount;}
     public function getCreatedAt(){return $this->createdAt;}

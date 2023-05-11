@@ -12,6 +12,8 @@ use App\Clearance\domain\validation\ClearanceFieldValidation;
 use App\payment\data\repository\PaymentRepositoryImp;
 use App\Clearance\presentation\mappers\DomainTOUiClearanceMapper;
 use App\core\services\DateToDaysConversion;
+use App\Service\data\repository\ServiceRepositoryImp;
+use App\Billing\data\repository\BillingRepositoryImp;
 
 class ClearanceController extends Controller
 {
@@ -30,14 +32,17 @@ class ClearanceController extends Controller
         $savedClearanceInfo =  CLearanceFactory::getSavedClearanceInfo($req);
         $clearanceFieldValidation = new ClearanceFieldValidation($savedClearanceInfo);
         if($clearanceFieldValidation->isAllFieldValid()){
-            $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($savedClearanceInfo->getCorpseId());
+            $corpseId = (CorpRepositoryImp::searchCorpById($savedClearanceInfo->getCorpseId()))->getData()->getId();
+            $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($corpseId);
             if($resultSet->getSuccess()){
                 return response()->json(MapOfUIModel::mapOfClearanceExit(true));
             }else{
                 $outstandingAmount = self::getOutsandingAmount( $savedClearanceInfo);
                 if($outstandingAmount == 0){
                     $result = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->createClearance($savedClearanceInfo);
-                    return response()->json(MapOfUIModel::mapOfSuccess($result->getSuccess()));
+                    return response()->json(MapOfUIModel::mapOfSuccess($resultSet->getSuccess()));
+                }else if(($outstandingAmount) == -1){
+                    return response()->json(MapOfUIModel::mapOfSuccess(false));
                 }else{
                     return response()->json(MapOfUIModel::mapOfOutandingAmount($outstandingAmount));
                 }
@@ -87,37 +92,61 @@ class ClearanceController extends Controller
         
     public function getOutsandingAmount($savedClearanceInfo){
         $totalPayment = 0;
-        $serviceFee = 0;
-        $billResult = $this->billRepositoryFactory->getBillingRepositoryImp()->fetchBillingByCorpseId($savedClearanceInfo->getCorpseId());
+        $oneTimeServiceFee = 0;
+        $dailyServiceFee = 0;
         $corpseResult = CorpRepositoryImp::searchCorpById($savedClearanceInfo->getCorpseId());
+        $corpseId = $corpseResult->getData() == null ?"":$corpseResult->getData()->getId();
+        $billResult = (new BillingRepositoryImp)->fetchBillingByCorpseId($corpseId);
         $billId;
         $tempBillId = "";
-        if($billResult->getSuccess() && $corpseResult->getSuccess()){
-            $corpse = $corpseResult->getData();
-            foreach ($billResult->getData() as $billing) {
-                $billId = $billing->getBillId();
-                if($billId != $tempBillId){
-                    $tempBillId = $billId;
-                    $paymentResult = (new PaymentRepositoryImp())->fetchPaymentById($billId);
-                    foreach ($paymentResult->getData() as $payments) {
-                        if($paymentResult->getSuccess()){
-                            $totalPayment += $payments->getAmount();
-                        }
-                    
-                    }
-                }
-                $serviceFee = $billing->getServiceFee();
-            }
-               
-            $extraDays = DateToDaysConversion::convert($corpse->getCollectionDate(),date("Y-m-d"));
-            $dueDays = DateToDaysConversion::convert($corpse->getAdmissionDate(),$corpse->getCollectionDate());
-            $dueDays = ($dueDays < 0)? 0 : $dueDays;
-            $extraDays = ($extraDays < 0)? 0 : $extraDays;
-            $outstandingAmount = (($extraDays + $dueDays) * $serviceFee ) - $totalPayment;
-            return $outstandingAmount;
+        if(!$billResult->getSuccess()){
+            return -1;
         }else{
-            return null;
+            if($billResult->getSuccess() && $corpseResult->getSuccess()){
+                $corpse = $corpseResult->getData();
+                foreach ($billResult->getData() as $billing) {
+                    $billId = $billing->getId();
+                    if($billId != $tempBillId){
+                        $tempBillId = $billId;
+                        $paymentResult = (new PaymentRepositoryImp())->fetchPaymentById($billId);
+                        $billServices = $this->billRepositoryFactory->getBillingServiceRepositoryImp()->fetchBillingServiceByBillingId(
+                            (new BillingRepositoryImp)->fetchBillingByCorpseId($corpseId)->getData()[0]->getId()
+                        );
+                        foreach ($billServices->getData() as $billingservice ) {
+                            $service = ServiceRepositoryImp::fetchServiceById($billingservice->getServiceId())->getData()[0];
+                            if($service->getPer() == "daily"){
+                                $dailyServiceFee += $service->getServiceFee();
+                            }else{
+                                $oneTimeServiceFee += $service->getServiceFee();
+                            }
+                        }
+                        if(($paymentResult->getData())  == null){
+                            $totalPayment = 0;
+                        }else{
+                            foreach ($paymentResult->getData() as $payments) {
+                                if($paymentResult->getSuccess()){
+                                    $totalPayment += $payments->getAmount();
+                                }
+                            
+                            }
+                        }
+                        
+                    }
+                    //$serviceFee = $billing->getServiceFee();
+                }
+                   
+                $extraDays = DateToDaysConversion::convert($corpse->getCollectionDate(),date("Y-m-d"));
+                $dueDays = DateToDaysConversion::convert($corpse->getAdmissionDate(),$corpse->getCollectionDate());
+                $dueDays = ($dueDays < 0)? 0 : $dueDays;
+                $extraDays = ($extraDays < 0)? 0 : $extraDays;
+                $outstandingAmount = ((($extraDays + $dueDays) * $dailyServiceFee ) + $oneTimeServiceFee) - $totalPayment;
+                return $outstandingAmount;
+            }else{
+                return null;
+            }
+
         }
+        
 
     }
     function deleteClearance(Request $req){

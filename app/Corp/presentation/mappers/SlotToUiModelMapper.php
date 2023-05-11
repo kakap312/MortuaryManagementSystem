@@ -6,7 +6,7 @@ class SlotToUiModelMapper{
     public static function map($Slot)
     {
         return new SlotUiModel(
-            $Slot->getId(),
+            $Slot->getSlotId(),
             $Slot->getName(),
             $Slot->getState(),
         );

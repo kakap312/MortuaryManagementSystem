@@ -10,7 +10,7 @@ class PaymentFieldValidation {
 
     public function __construct($savedPaymentInfo){
         $this->isDateValid = Validator::validateDate($savedPaymentInfo->getCreatedAt());
-        $this->isIdValid = Validator::validateId($savedPaymentInfo->getId());
+        $this->isIdValid = Validator::validateId($savedPaymentInfo->getBillId());
         $this->isAmountValid = Validator::validateDate($savedPaymentInfo->getAmount());
         $this->isDescriptionValid = Validator::validateRemarks($savedPaymentInfo->getDescription());
     }

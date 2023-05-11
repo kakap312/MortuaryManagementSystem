@@ -5,6 +5,7 @@ use App\Corp\domain\model\Corp;
 class DbCorpToDomainMapper{
     static function map($dbCorp){
         return new  Corp(
+            $dbCorp->id,
             $dbCorp->corpId,
             $dbCorp->corpseCode,
             $dbCorp->admissionDate,

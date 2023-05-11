@@ -8,10 +8,9 @@ class DbService extends Model
 {
     //
     public $timestamps =false;
-    public $incrementing = false;
-    protected $primaryKey = 'serviceId';
+    protected $primaryKey = 'id';
     protected $table = 'services';
-    protected $fillable =['serviceId','name','fee','per','createdAt','updatedAt'];
+    protected $fillable =['id','serviceId','name','fee','per','createdAt','updatedAt'];
     protected $hidden = ['created_at','updated_at'];
 
 }

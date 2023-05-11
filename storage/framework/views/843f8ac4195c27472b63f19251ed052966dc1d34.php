@@ -3,7 +3,7 @@
 <div class="col-xxl-12 col-md-12 accountdetailssection " data-action= "<?php echo e(route('fetchcorps')); ?>">
     <div class="card info-card sales-card deletecorp" data-action="<?php echo e(route('deletecorp')); ?>">
     <div class="card-body ">
-    <div class='billcontent'>
+    <div class='accountcontent'>
         <div class="corpsedetailheader">
         <img style='width:150px; height:150px;' src='img/companylogo.jpg'alt="Company Logo"/>
         <h2>O.V. OHIO MORTUARY</h2>

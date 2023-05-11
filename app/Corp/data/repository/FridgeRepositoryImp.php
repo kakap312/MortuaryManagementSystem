@@ -24,7 +24,7 @@ class FridgeRepositoryImp implements FridgeRepository{
     public static function searchFridgeByNameOrId($idOrName){
         $dbFridge = FridgeDao::findFidgeByIdOrName($idOrName);
         if(is_null($dbFridge)){
-            return new Result(null,false);
+            return new Result($dbFridge,false);
         }else{
             $fridge = DbFridgeToDomainMapper::map($dbFridge);
             // $fridges = array();

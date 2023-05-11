@@ -6,8 +6,8 @@ class BillingDao{
 
     static function insert($dbBilling){
         try {
-            DbBilling::create($dbBilling);
-            return true;
+            return DbBilling::create($dbBilling);
+            //return true;
         } catch (\Throwable $th) {
             //return false;
            return $th->getMessage();
@@ -40,8 +40,9 @@ class BillingDao{
             $GLOBALS['id'] = $corpseId;
             return DbBilling::where(function($query){
                 $query->where('corpId','=',$GLOBALS['id'])
-                ->orWhere('billId','=',$GLOBALS['id']);
-            })->get()->toArray();
+                ->orWhere('billId','=',$GLOBALS['id'])
+                ->orWhere('id','=',$GLOBALS['id']);
+            })->get();
             // where(function($query){
             //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);
             // })->get()->toArray();

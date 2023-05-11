@@ -9,7 +9,7 @@ class CorpToUiModelMapper{
         $extraDays = DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d"));
         $dueDays = DateToDaysConversion::convert($corp->getAdmissionDate(),$corp->getCollectionDate());
         return new CorpUiModel(
-            $corp->getId(),
+            $corp->getCorpseId(),
             $corp->getCorpseCode(),
             $corp->getAdmissionDate(),
             $corp->getCollectionDate(),

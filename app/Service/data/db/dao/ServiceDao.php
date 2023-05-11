@@ -39,7 +39,8 @@ class ServiceDao{
             $GLOBALS['id'] = $id;
             return DbService::where(function($query){
                 $query->where('serviceId','=',$GLOBALS['id'])->
-                orWhere('name','=',$GLOBALS['id']);
+                orWhere('name','=',$GLOBALS['id'])->
+                orWhere('id','=',$GLOBALS['id']);
             })->get();
         } catch (\Throwable $th) {
             return $th->getMessage();

@@ -9,7 +9,7 @@ class BillingFactory{
             isset($billId)?$billId:"",
             $req->get('datecreated'),
             $req->get('corpseId'),
-            is_null($req->get('billfor'))?"": $req->get('billfor'),
+           is_null($req->get('billfor'))?"":$req->get('billfor'),
             number_format(doubleval($req->get('amount')),2,'.',''),
             $req->get('extraDays'),
             $req->get('dueDays'),

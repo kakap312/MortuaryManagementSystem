@@ -6,11 +6,11 @@ class CorpDao{
     public static function insertCorp($dbCorpInfo)
     {
         try {
-            DbCorp::create($dbCorpInfo);
-            return true;
+            return DbCorp::create($dbCorpInfo);
+            //return true;
         } catch (\Throwable $th) {
-            return false;
-           // return $th->getMessage();
+            //return false;
+           return $th->getMessage();
         }
     }
     public static function findAllCorps(){
@@ -31,7 +31,8 @@ class CorpDao{
             $GLOBALS['id'] = $id;
             return DbCorp::where(function($query){
                 $query->where('corpseCode','=',$GLOBALS['id'])
-                ->orWhere('name','=',$GLOBALS['id']);
+                ->orWhere('name','=',$GLOBALS['id'])
+                ->orWhere('id','=',$GLOBALS['id']);
             })->get()->first();
         } catch (\Throwable $th) {
             return $th->getMessage();

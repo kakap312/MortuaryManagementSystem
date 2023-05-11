@@ -8,10 +8,9 @@ class DbPayment extends Model
 {
      
      public $timestamps =false;
-     public $incrementing = false;
-     protected $primaryKey = 'paymentId';
+     protected $primaryKey = 'id';
      protected $table = 'payments';
-     protected $fillable =['paymentId','amount','description','billId','createdAt','updatedAt'];
+     protected $fillable =['id','paymentId','amount','description','billId','createdAt','updatedAt'];
      protected $hidden = ['created_at','updated_at'];
     
 }

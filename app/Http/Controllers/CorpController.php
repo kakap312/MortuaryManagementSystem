@@ -19,10 +19,12 @@ class CorpController extends Controller
     //
     function registerCorp(Request $req)
     {
+
         $savedCorpInfo = CorpFactory::makeSaveCorpInfo($req);
         $corpseFieldValidator = new FieldValidation($savedCorpInfo);
         if($corpseFieldValidator->isAllFieldValid()){
             $savedCorpInfo = CorpFactory::makeSaveCorpInfo($req);
+
             $isCorpCreated = CorpRepositoryImp::createCorp($savedCorpInfo)->getSuccess();
                 if($isCorpCreated){
                     if(SlotRepositoryImp::updateSlot($req->get('slotId'),['state'=>'used'])->getSuccess()){
@@ -103,8 +105,8 @@ class CorpController extends Controller
     }
     function viewAvailableSlot(Request $req)
     {
-       
-        $result = SlotRepositoryImp::fetchAvailableSlots($req->get("fridgeid"));
+       $fridgeResult = FridgeRepositoryImp::searchFridgeByNameOrId($req->get("fridgeid"));
+        $result = SlotRepositoryImp::fetchAvailableSlots($fridgeResult->getData()->getId());
         if($result->getSuccess()){
             $uiSlots = array();
             foreach ($result->getData() as $slot) {

@@ -9,9 +9,8 @@ class DbClearance extends Model
     //
      //
      public $timestamps =false;
-     public $incrementing = false;
-     protected $primaryKey = 'clearanceId';
+     protected $primaryKey = 'id';
      protected $table = 'clearance';
-     protected $fillable =['clearanceId','corpseId','status','createdAt','updatedAt'];
+     protected $fillable =['id','clearanceId','corpseId','status','createdAt','updatedAt'];
      protected $hidden = ['created_at','updated_at'];
 }

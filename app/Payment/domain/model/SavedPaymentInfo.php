@@ -17,8 +17,8 @@ class SavedPaymentInfo{
         $this->description = $description;
     }
 
-    public function setId($billId){$this->billId = $billId;}
-    public function getId(){return $this->billId;}
+    public function setBillId($billId){$this->billId = $billId;}
+    public function getBillId(){return $this->billId;}
     public function setAmount($amount){$this->amount = $amount;}
     public function getAmount(){return $this->amount;}
     public function getCreatedAt(){return $this->createdAt;}

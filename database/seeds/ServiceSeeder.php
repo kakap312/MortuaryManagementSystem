@@ -15,9 +15,9 @@ class ServiceSeeder extends Seeder
         $id = uniqid();
         DB::table('services')->insert([
             'serviceId'=> $id,
-            'name'=>"Corpse Dressing",
-            'fee'=>100.0,
-            'per'=>"day",
+            'name'=>"Bathing",
+            'fee'=>80,
+            'per'=>"once",
             'createdAt'=>"24/03/2022",
             'updatedAt'=>""
         ]);

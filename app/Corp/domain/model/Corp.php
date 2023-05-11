@@ -2,6 +2,7 @@
 namespace App\Corp\domain\model;
 class Corp{
     private $id;
+    private $corpseId;
     private $corpseCode;
     private $admissionDAte;
     private $collectionDate;
@@ -19,8 +20,9 @@ class Corp{
     private $slotId;
     private $category;
 
-    public function __construct($id,$corpseCode,$admissionDate,$collectionDate,$name,$age,$sex,$relativeName,$relativeContactOne,$relativeContactTwo,$remarks,$releasedBy,$updatedAt,$hometown,$fridgeId,$slotId,$category){
+    public function __construct($id,$corpseId,$corpseCode,$admissionDate,$collectionDate,$name,$age,$sex,$relativeName,$relativeContactOne,$relativeContactTwo,$remarks,$releasedBy,$updatedAt,$hometown,$fridgeId,$slotId,$category){
         $this->id = $id;
+        $this->corpseId = $corpseId;
         $this->corpseCode = $corpseCode;
         $this->category = $category;
         $this->admissionDate = $admissionDate;
@@ -40,6 +42,8 @@ class Corp{
     }
     public function setId($id){$this->id = $id;}
     public function getId(){return $this->id;}
+    public function setCorpseId($id){$this->corpseId = $id;}
+    public function getCorpseId(){return $this->corpseId;}
     public function setName($name){$this->name = $name;}
     public function getName(){return $this->name;}
     public function setAdmissionDAte($admissionDate){$this->admissionDAte = $admissionDate;}

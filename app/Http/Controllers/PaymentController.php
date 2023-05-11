@@ -6,6 +6,8 @@ use App\payment\domain\validation\PaymentFieldValidation;
 use App\payment\presentation\PaymentViewModel;
 use App\payment\domain\factory\RepositoryImpFactory;
 use App\Payment\presentation\mappers\DomainToUiPaymentMapper;
+use App\Billing\data\repository\BillingRepositoryImp;
+
 
 use Illuminate\Http\Request;
 
@@ -47,7 +49,8 @@ class PaymentController extends Controller
         
     }
     public function searchPayment(Request $req){
-        $result = $this->repositoryFactoryImp->makePaymentRepositoryImp()->fetchPaymentById($req->get('id'));
+        $billingId = (new BillingRepositoryImp)->fetchBillingByCorpseId($req->get('id'))->getData()[0]->getId();
+        $result = $this->repositoryFactoryImp->makePaymentRepositoryImp()->fetchPaymentById($billingId);
         if($result->getSuccess()){
             $payments = $result->getData();
             $uiPayments = array_map(function($payment){

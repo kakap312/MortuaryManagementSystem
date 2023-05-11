@@ -6,7 +6,7 @@ class FridgeToUiModelMapper{
     public static function map($fridge)
     {
         return new FridgeUiModel(
-            $fridge->getId(),
+            $fridge->getFridgeId(),
             $fridge->getName(),
         );
     }

@@ -196,7 +196,7 @@ function clearForm() {
     $('#services').val("").trigger('change');
 }
 function  populateServices() {
-    if(services.length != 0){
+    if(services != null){
         services.forEach(service=>{
             $('#services').append('<option>'+service.name+'</option>');
         })

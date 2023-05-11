@@ -6,6 +6,7 @@ class DbPaymentToDomainMapper{
     public static function map($dbPayment){
         if(is_array($dbPayment)){
             return new Payment(
+                $dbPayment['id'],
                 $dbPayment['paymentId'],
                 $dbPayment['billId'],
                 $dbPayment['amount'],
@@ -16,6 +17,7 @@ class DbPaymentToDomainMapper{
             
         }else{
             return new Payment(
+                $dbPayment['id'],
                 $dbPayment->get('paymentId'),
                 $dbPayment->get('billId'),
                 $dbPayment->get('amount'),

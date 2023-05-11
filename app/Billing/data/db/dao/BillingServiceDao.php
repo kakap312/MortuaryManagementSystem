@@ -6,8 +6,8 @@ class BillingServiceDao{
 
     static function insert($dbBillingService){
         try {
-            DbBillingService::create($dbBillingService);
-            return true;
+            return DbBillingService::create($dbBillingService);
+            //return true;
         } catch (\Throwable $th) {
             //return false;
            return $th->getMessage();

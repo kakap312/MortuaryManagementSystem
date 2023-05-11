@@ -29,13 +29,12 @@ class PaymentRepositoryImp implements PaymentRepository {
         if(is_null($dbPayments) || $dbPayments->count() == 0 ){
             return new Result(null,false);
         }else{
-            if($dbPayments->count() >= 1){
+            
                 $payments = array();
                 foreach ($dbPayments->toArray() as $dbpayment) {
                     array_push($payments,DbPaymentToDomainMapper::map($dbpayment));
                 }
                 return new Result($payments,true);
-            } 
         }
     }
     public  function deletePayment($id){
