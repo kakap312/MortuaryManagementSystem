@@ -102,7 +102,10 @@ function showErrorMessage(validation){
 function fetchClearance(){
     var clearanceUrl =  $('.viewclearancesection').attr('data-action');
     var response = requestData(clearanceUrl,"GET",createFormData(null,[''],['']));
-    clearance = response.clearance;
+    if(response.clearance != null){
+        clearance = response.clearance;
+    }
+
 }
 function populateClearanceView(){
     $('.displayNumber').html(clearance.length);

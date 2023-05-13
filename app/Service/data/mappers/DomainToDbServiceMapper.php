@@ -6,8 +6,8 @@ class DomainToDbServiceMapper{
             return  [
                 'serviceId'=>$savedServiceInfo->getid(),
                 'name'=>$savedServiceInfo->getServiceName(),
-                'regularFee'=>$savedServiceInfo->getServiceFee(),
-                'vipFee'=>$savedServiceInfo->getServiceFee(),
+                'regularFee'=>$savedServiceInfo->getRegularFee(),
+                'vipFee'=> $savedServiceInfo->getVipFee(),
                 'per'=>$savedServiceInfo->getPer(),
                 'createdAt'=>$savedServiceInfo->getCreatedAt(),
                 'updatedAt'=>$savedServiceInfo->getCreatedAt()
@@ -15,7 +15,8 @@ class DomainToDbServiceMapper{
         }else{
             return  [
                 'name'=>$savedServiceInfo->getServiceName(),
-                'fee'=>$savedServiceInfo->getServiceFee(),
+                'regularFee'=>$savedServiceInfo->getRegularFee(),
+                'vipFee'=> $savedServiceInfo->getVipFee(),
                 'per'=>$savedServiceInfo->getPer(),
                 'updatedAt'=>$savedServiceInfo->getUpdatedAt()
             ];

@@ -114,11 +114,23 @@ class ClearanceController extends Controller
                         );
                         foreach ($billServices->getData() as $billingservice ) {
                             $service = ServiceRepositoryImp::fetchServiceById($billingservice->getServiceId())->getData()[0];
-                            if($service->getPer() == "daily"){
-                                $dailyServiceFee += $service->getServiceFee();
+                            if($corpse->getCategory() == "Regular"){
+                                if($service->getPer() == "daily"){
+                            
+                                    $dailyServiceFee += $service->getRegularFee();
+                                }else{
+                                    $oneTimeServiceFee += $service->getRegularFee();
+                                }
                             }else{
-                                $oneTimeServiceFee += $service->getServiceFee();
+                                if($service->getPer() == "daily"){
+                            
+                                    $dailyServiceFee += $service->getVipFee();
+                                }else{
+                                    $oneTimeServiceFee += $service->getVipFee();
+                                }
+
                             }
+                            
                         }
                         if(($paymentResult->getData())  == null){
                             $totalPayment = 0;

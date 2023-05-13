@@ -21,8 +21,10 @@ $(document).ready(function(){
             if(response.success){
                 showMessage(response.success,"SERVICE_CREATED_SUCCESS",null,true);
                 resetForm('#createclearanceform');
+                showErrorMessage(response.validationresult);
             }else if(response.isExisting){
-                showMessage(response.success,"SERVICE_CREATED_ERROR",null,true);
+                showMessage(response.success,"SERVICE_EXIST",null,true);
+                showErrorMessage(response.validationresult);
             }else{
                 showErrorMessage(response.validationresult);
             }
@@ -81,11 +83,14 @@ function showErrorMessage(validationData){
     if(validationData == null){
         $('.dateerror').hide()
         $('.servicenameError').hide()
-        $('#stateerror').hide()
+        $('#regularfeeerror').hide()
+        $('#vipfeeerror').hide()
     }else{
         if(validationData.isDateValid){$('.dateerror').hide()}else{$('.dateerror').show()}
         if(validationData.isServiceFeeValid){$('.stateerror').hide()}else{$('.stateerror').show()}
         if(validationData.isServiceNameValid){$('.servicenameError').hide()}else{$('.servicenameError').show()}
+        if(validationData.isRegularFeeValid){$('#regularfeeerror').hide()}else{$('#regularfeeerror').show()}
+        if(validationData.isVipFeeValid){$('#vipfeeerror').hide()}else{$('#vipfeeerror').show()}
     }
 }
 function populateServiceDetail(index){
@@ -124,7 +129,8 @@ function viewServicesInformation(service,position){
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         service.dateCreated +"</td><td>"+
         service.name +"</td><td>"+
-        parseInt(service.fee).toFixed(2) +"</td><td>"+
+        parseInt(service.regularFee).toFixed(2) +"</td><td>"+
+        parseInt(service.vipFee).toFixed(2) +"</td><td>"+
         service.per +"</td>"+
         getActionMenu()
         )
@@ -176,7 +182,8 @@ function populateServiceForm(service){
     $('.datecreated').val(service.dateCreated);
     $('#servicename').val(service.name)
     $('.per').val(service.per)
-    $('#servicefee').val(service.fee);
+    $('#regularfee').val(service.regularFee);
+    $('#vipfee').val(service.vipFee);
     
 
 }

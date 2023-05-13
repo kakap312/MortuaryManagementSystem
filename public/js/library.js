@@ -127,6 +127,7 @@ export function stringValue(name){
         ["ACCOUNT_CREATION_SUCCESS","Congratulation account created successfully"],
         ["ACCOUNT_NOT_FOUND","Sorry Account is not found"],
         ["USERNAME_TAKEN","Sorry Username is taken"],
+        ["SERVICE_EXIST","Sorry service already exist"],
         ["CONFIRM_FREE_SLOT","Are you sure you want to free slot"],
         ["CREATE_PAYMENT_CONFIRMATION","Are you sure you want to make Payment?"],
         ["PAYMENT_CREATION_SUCCESS","Congratulation Payment created successfully"],

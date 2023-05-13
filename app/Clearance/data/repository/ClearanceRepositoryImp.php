@@ -15,7 +15,7 @@ class ClearanceRepositoryImp implements CLearanceRepository{
     }
     public function fetchClearanceLimit5(){
         $dbClearances = ClearanceDao::findAllClearanceLimitFive();
-        if(is_null($dbClearances) || $dbClearances->count() == 0){
+        if(is_null($dbClearances) ||$dbClearances == false){
             return new Result(null,false);
         }else{
             $clearance = array();
@@ -62,16 +62,22 @@ class ClearanceRepositoryImp implements CLearanceRepository{
    
     public function fetchClearanceById($id){
         $dbClearances =  ClearanceDao::findClearanceBy($id);
-        if (is_null($dbClearances) || $dbClearances->count() == 0){
-            return new Result(null,false);
-        }else{
-            $clearance = array();
-            foreach ($dbClearances->toArray() as $dbClearance) {
-                array_push($clearance,DbClearanceToDomainMapper::map($dbClearance));
+        if($dbClearances != false){
+            if (is_null($dbClearances) || $dbClearances->count() == 0){
+                return new Result(null,false);
+            }else{
+                $clearance = array();
+                foreach ($dbClearances->toArray() as $dbClearance) {
+                    array_push($clearance,DbClearanceToDomainMapper::map($dbClearance));
+                }
+                return new Result($clearance,true);
+                
+                
             }
-            return new Result($clearance,true);
-            
-            
+
+        }else{
+            return new Result(null,false);
         }
+        
     }
 }

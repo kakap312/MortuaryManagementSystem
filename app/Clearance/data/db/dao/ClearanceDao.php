@@ -18,7 +18,7 @@ class ClearanceDao{
             return DbClearance::skip(0)->take(5)->get();
         } catch (\Throwable $th) {
             //throw $th;
-            return $th->getMessage();
+            return false ;// $th->getMessage();
         }
         
     }
@@ -57,7 +57,8 @@ class ClearanceDao{
                 ->orWhere('corpseId','=',$GLOBALS['id']);
             })->get();
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            //return $th->getMessage();
+            return false;
         }
         
     }

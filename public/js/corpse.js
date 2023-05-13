@@ -180,7 +180,7 @@ $(document).ready(function(){
             
         }
     }else if(state == 'Update'){
-       var  createCorpUrl = $('.forminstructon').attr('data-action');
+       var  createCorpUrl = $('#corpseupdateurl').attr('data-action');
         if(confirm(stringValue('UPDATE_CORPSE_CONFIRMATION'))){
             slotId = getSlotIdByName($('.availableslots').val());
             // if($('.availableslots').val() != null){
@@ -398,7 +398,7 @@ function populateCoprsForm(corp,status){
     $('#name').val(corp.name);
     $('#age').val(corp.age);
     $('#hometown').val(corp.hometown);
-    $('#fridgename').val(corp.fridgeName);
+    $('.fridgename').val(corp.fridgeName);
     $('#remarks').val(corp.remarks);
     $('#sex').val(corp.sex);
     $('#relativeName').val(corp.relativeName);
@@ -406,6 +406,8 @@ function populateCoprsForm(corp,status){
     $('#relativeContactTwo').val(corp.relativeContactTwo);
     $('#releasedBy').val(corp.releasedBy);
     $('#registercorpbtn').html('Update');
+    $('.category').val(corp.category);
+    
     if(status){
         $('.availableslots').show()
         $('#freeslot').hide()

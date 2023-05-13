@@ -12,7 +12,8 @@
     <th >S/N</th>
     <th>Date</th>
     <th>Service Name</th>
-    <th>Fee Charged</th>
+    <th>Regular_Fee</th>
+    <th>Vip_Fee</th>
     <th>Per</th>
     <th>Action</th>
     </tr>

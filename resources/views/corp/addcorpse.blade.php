@@ -5,7 +5,7 @@
     <div class="card-body">
     
     <form id='registercorpform' data-action= "{{route('createcorp')}}"  enctype="multipart/form-data">
-    <div class='forminstructon' data-action= "{{route('updatecorp')}}" >
+    <div class='forminstructon' id="corpseupdateurl" data-action= "{{route('updatecorp')}}" >
     <p id='topdecoration' ></p>
     <h2 id='corpseregistrationtext' class='fetchslot' data-action= "{{route('fetchslots')}}">Corpse Registration Form</h2>
     <p id='corpseinstruction' class='totalcorpse' data-action= "{{route('totalcorpse')}}">Complete the registration below to create a new Corp registration</p>
@@ -50,9 +50,9 @@
     </div>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Category <sup class='compulsoryindicator'>*</sup></label>
-    <select class="js-example-basic-single form-control"  name='category'>
+    <select class="js-example-basic-single form-control category"  name='category'>
     <option value='VIP'>VIP</option>
-    <option value='Normal'>Regular</option>
+    <option value='Regular'>Regular</option>
     </select>
     <p id='hometownError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, hometown must be 30 characters and must not contain numbers</p>
     </div>

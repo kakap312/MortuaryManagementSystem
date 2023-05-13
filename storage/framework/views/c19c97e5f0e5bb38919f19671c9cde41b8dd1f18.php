@@ -38,24 +38,24 @@
     <div class='form-row' id='updateservice' data-action="<?php echo e(route('updateservice')); ?>">
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Regular Fee</label>
-    <input type='number' class="form-control" placeholder='Please Enter Regular Fee' id='servicefee' name='regularfee'></input>
+    <input type='number' class="form-control" placeholder='Please Enter Regular Fee' id='regularfee' name='regularfee'></input>
     <!-- <select class="form-control state" id='state' name='state' style='width:100%;'>
     <option value='true'>Cleared</option>
     <option value='false'>not Cleared</option>
     </select> -->
-    <p id='stateerror' class='stateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
+    <p id='regularfeeerror' class='stateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
     </div>
     </div>
 
     <div class='form-row'>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Vip Fee</label>
-    <input type='number' class="form-control" placeholder='Please Enter Vip Fee' id='servicefee' name='vipfee'></input>
+    <input type='number' class="form-control" placeholder='Please Enter Vip Fee' id='vipfee' name='vipfee'></input>
     <!-- <select class="form-control state" id='state' name='state' style='width:100%;'>
     <option value='true'>Cleared</option>
     <option value='false'>not Cleared</option>
     </select> -->
-    <p id='stateerror' class='stateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
+    <p id='vipfeeerror' class='stateerror' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, fee is invalid</p>
     </div>
     </div>
 

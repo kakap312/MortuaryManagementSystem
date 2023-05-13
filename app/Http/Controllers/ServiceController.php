@@ -16,23 +16,29 @@ class ServiceController extends Controller
     function createService(Request $req){
         $savedServiceInfo = ServiceFactory::makeSavedServiceInfo($req);
         $this->serviceFieldValidator = new ServiceFieldValidation($savedServiceInfo);
-        if($this->serviceFieldValidator->isAllFieldValid($savedServiceInfo)){
-            $result =  ServiceRepositoryImp::createService($savedServiceInfo);
-            if($result->getSuccess()){
-                return  response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
-            }else{
-                return  response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
-            }
+            if($this->serviceFieldValidator->isAllFieldValid($savedServiceInfo)){
+                if(self::isServiceFound($savedServiceInfo->getServiceName())){
+                    return response()->json(MapOfViewModel::mapOfExist(true)); 
+                }else{
+                    $result =  ServiceRepositoryImp::createService($savedServiceInfo);
+                    if($result->getSuccess()){
+                        return  response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
+                    }else{
+                        return  response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
+                    }
+                }
+            
+            
         }else{
             return  response()->json(MapOfViewModel::mapOfValidation($this->serviceFieldValidator->mapOfFieldValidation()));
         }
-    }
+}
     function updateService(Request $req){
         $savedServiceInfo = ServiceFactory::makeSavedServiceInfo($req);
         $this->serviceFieldValidator = new ServiceFieldValidation($savedServiceInfo);
         if($this->serviceFieldValidator->isAllFieldValid($savedServiceInfo)){
             $result = ServiceRepositoryImp::updateService($req->get('serviceId'),$savedServiceInfo);
-            return response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));
+            return response()->json(MapOfViewModel::mapOfSuccess($result->getSuccess()));  
         }else{
             return response()->json(MapOfViewModel::mapOfValidation($this->serviceFieldValidator->mapOfFieldValidation()));
         }
@@ -56,6 +62,10 @@ class ServiceController extends Controller
             }
         return response()->json(MapOfViewModel::mapOfServices($uiServices));
         }
+    }
+    function isServiceFound($serviceName){
+        $isServicesFound =  ServiceRepositoryImp::fetchServiceById($serviceName)->getSuccess();
+        return $isServicesFound;
     }
     function searchService(Request $req){
         $services =  ServiceRepositoryImp::fetchServiceById($req->get('serviceId'));
@@ -84,3 +94,4 @@ class ServiceController extends Controller
     }
     
 }
+

@@ -6,7 +6,8 @@ class DomainToUiModelMapper{
         return new ServiceViewModel(
             $service->getServiceId(),
             $service->getName(),
-            $service->getServiceFee(),
+            $service->getRegularFee(),
+            $service->getVipFee(),
             $service->getPer(),
             $service->getDateCreated()
         );

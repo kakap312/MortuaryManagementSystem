@@ -5,7 +5,6 @@ class DomainToDbcorpMapper{
         
         if($corp->getId() != ""){
             return array(
-                "corpseCode"=>$corp->getCorpseCode(),
                 "admissionDate"=>$corp->getAdmissionDate(),
                 "name"=>$corp->getName(),
                 "age"=>$corp->getAge(),

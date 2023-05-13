@@ -13,13 +13,23 @@ class SlotSeeder extends Seeder
     {
         //
        
+        for ($i=1; $i <= 175; $i++) {
+            $id = uniqid();
+            $name = 'A'.$i; 
+            DB::table('slots')->insert([
+                'slotId'=> $id,
+                'name'=>$name,
+                'fridgeId'=>4,
+                'state'=>"free"
+            ]);
+        }
         for ($i=1; $i <= 200; $i++) {
             $id = uniqid();
             $name = 'B'.$i; 
             DB::table('slots')->insert([
                 'slotId'=> $id,
                 'name'=>$name,
-                'fridgeId'=>3,
+                'fridgeId'=>1,
                 'state'=>"free"
             ]);
         }

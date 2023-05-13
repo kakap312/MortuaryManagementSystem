@@ -9,8 +9,8 @@ class ServiceFactory{
         return new SavedServiceInfo(
             isset($serviceId)?$serviceId:"",
             is_null($req->get('servicename'))?"":$req->get('servicename') ,
-            is_null($req->get('regularfee'))?"":$req->get('servicefee'),
-            is_null($req->get('vipfee'))?"":$req->get('vipfee'),
+            number_format(doubleval($req->get('regularfee')),2,'.',''),
+            number_format(doubleval($req->get('vipfee')),2,'.',''),
             is_null($req->get('datecreated'))?"":$req->get('datecreated'),
             isset($updatedAt)?$updatedAt:"",
             is_null($req->get('per'))?"":$req->get('per'),

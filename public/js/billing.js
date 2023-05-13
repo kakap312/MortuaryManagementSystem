@@ -262,11 +262,20 @@ function getServiceFees(serviceNames) {
     totalServiceFeeForOneTimeServices= 0;
     serviceNames.forEach(serviceName=>{
         services.forEach(service=>{
-            if(service.name == serviceName && service.per == "daily"){
-                serviceFees += service.fee;
-            }else if(service.name == serviceName && service.per == "once"){
-                totalServiceFeeForOneTimeServices += service.fee;
+            if(corpse.category == "Regular"){
+                if(service.name == serviceName && service.per == "daily"){
+                    serviceFees += service.regularFee;
+                }else if(service.name == serviceName && service.per == "once"){
+                    totalServiceFeeForOneTimeServices += service.regularFee;
+                }
+            }else{
+                if(service.name == serviceName && service.per == "daily"){
+                    serviceFees += service.vipFee;
+                }else if(service.name == serviceName && service.per == "once"){
+                    totalServiceFeeForOneTimeServices += service.vipFee;
+                }
             }
+            
         })
     })
     return serviceFees;

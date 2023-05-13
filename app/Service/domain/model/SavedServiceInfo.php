@@ -4,7 +4,7 @@ class SavedServiceInfo{
     private $id;
     private $serviceName;
     private $regularFee;
-    private $vipFee;
+    public $vipFee;
     private $per;
     private $createdAt;
     private $updatedAt;
@@ -25,7 +25,7 @@ class SavedServiceInfo{
     public function setServiceName($name){$this->serviceName=$name;}
     public function getServiceName(){return $this->serviceName;} 
     public function setRegularFee($fee){$this->regularFee = $fee;}
-    public function getRegularFee(){return $this->$fee;}
+    public function getRegularFee(){return $this->regularFee;}
     public function setVipFee($fee){$this->vipFee = $fee;}
     public function getVipFee(){return $this->vipFee;}
     public function setCreatedAt($date){$this->createdAt = $date;}
