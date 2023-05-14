@@ -229,7 +229,7 @@ $(document).ready(function(){
         }
         
     });
-    $('#searchbtn').click(function(){
+    $('.searchcorpbtn').click(function(){
         var searchCorpUrl = $('.searchcorp').attr('data-action');
         var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[$('.searchcorp').val()]));
         if(response.corps == null){

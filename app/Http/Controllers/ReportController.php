@@ -88,14 +88,20 @@ class ReportController extends Controller
        
     }
     public function makeCorpseReport($startDate,$endDate){
-
+        $totalNumberOfCorpseCleared = 0;
         $GLOBALS['corpse']  = CorpRepositoryImp::findCorpseByDate($startDate,$endDate)->getData();
-       $GLOBALS['totalNumberOfCorpseDischarged'] = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()-> totalNumberOfClearance();
-       $GLOBALS['femaleCorpse'] = (CorpRepositoryImp::findCorpseByDateAndSex($startDate,$endDate,"F"))->getData();
-       $GLOBALS['maleCorpse']  = (CorpRepositoryImp::findCorpseByDateAndSex($startDate,$endDate,"M"))->getData();
+       $GLOBALS['totalNumberOfCorpseDischarged'] =  0;
+       $femalecorpse = (CorpRepositoryImp::findCorpseByDateAndSex($startDate,$endDate,"F"))->getData();
+       $GLOBALS['femaleCorpse'] = is_null($femalecorpse)?0:count($femalecorpse);
+       $maleCorpse = (CorpRepositoryImp::findCorpseByDateAndSex($startDate,$endDate,"M"))->getData();
+       $GLOBALS['maleCorpse']  = is_null($maleCorpse)?0:count($maleCorpse);
         
         $uiCorpseReport = array_map(function($corp){
             $clearance = ($this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($corp->getCorpseCode()))->getData();
+            if($clearance != null){
+                $GLOBALS['totalNumberOfCorpseDischarged'] +=  1;
+            }
+            
            return DomainToCorpseReportUiMapper::map($corp,$clearance,$GLOBALS['totalNumberOfCorpseDischarged'],$GLOBALS['femaleCorpse'],$GLOBALS['maleCorpse']);
         },($GLOBALS['corpse']));
         

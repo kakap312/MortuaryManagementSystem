@@ -22,9 +22,9 @@ class DomainToCorpseReportUiMapper{
             $corpse->getRelativeName(),
             $corpse->getRelativeContactOne(),
             $corpse->getRelativeContactTwo(),
-            $totalNumberOfCorpseDischarged->getData(),
-            count($femaleCorpse),
-            count($maleCorpse)
+            $totalNumberOfCorpseDischarged,
+            $femaleCorpse,
+            $maleCorpse
             
         );
     }

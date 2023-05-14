@@ -8,4 +8,5 @@ interface ClearanceRepository{
     public function fetchClearanceById($id);
     public function totalNumberOfClearance();
     public function fetchClearanceLimit5();
+    public function fetchClearanceByDate($startDate,$endDate);
 }

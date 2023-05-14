@@ -49,7 +49,7 @@ class CorpRepositoryImp implements CorpRepository{
     public static function searchCorpById($nameOrId)
     {
         $dbCorp = CorpDao::findCoprById($nameOrId);
-        if(is_null($dbCorp) || ($dbCorp->count() === 0)){
+        if(is_null($dbCorp) || ($dbCorp->count() == 0)){
             return new Result(null,false);
         }else{
             $corp = DbCorpToDomainMapper::map($dbCorp);
@@ -70,7 +70,7 @@ class CorpRepositoryImp implements CorpRepository{
     }
      public static function findCorpseByDate($startDate,$endDate){
         $dbCorps = CorpDao::fetchCorpseByDate($startDate,$endDate);
-        if(is_null($dbCorps)){
+        if(is_null($dbCorps) || $dbCorps == false){
             return new Result(null,false);
         }else{
             $corps = array();

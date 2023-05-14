@@ -73,6 +73,19 @@ class ClearanceDao{
         }
         
     }
+    static function fetchClearanceByDate($startDate,$endDate){
+        try {
+            $GLOBALS['startdate'] = $startDate;
+            $GLOBALS['enddate'] = $endDate;
+            return DbClearance::where(function($query){
+                $query->whereDate('createdAt','>=',$GLOBALS['startdate'])
+                ->WhereDate('createdAt','<=',$GLOBALS['enddate']);
+            })->get();
+        } catch (\Throwable $th) {
+            //return $th->getMessage();
+            return false;
+        }
+    }
     static function totalCLearance(){
         try {
             return DbClearance::all()->count();

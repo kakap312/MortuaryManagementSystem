@@ -80,4 +80,23 @@ class ClearanceRepositoryImp implements CLearanceRepository{
         }
         
     }
+    public function fetchClearanceByDate($startDate,$endDate){
+        $dbClearances =  ClearanceDao::fetchClearanceByDate($startDate,$endDate);
+        if($dbClearances != false){
+            if (is_null($dbClearances) || $dbClearances->count() == 0){
+                return new Result(null,false);
+            }else{
+                $clearance = array();
+                foreach ($dbClearances->toArray() as $dbClearance) {
+                    array_push($clearance,DbClearanceToDomainMapper::map($dbClearance));
+                }
+                return new Result($clearance,true);
+                
+                
+            }
+
+        }else{
+            return new Result(null,false);
+        }
+    }
 }

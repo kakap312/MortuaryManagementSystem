@@ -11,6 +11,7 @@ use App\Billing\domain\validator\BillingFieldsValidator;
 use App\Billing\data\repository\BillingServiceRepositoryImp;
 use App\Billing\domain\model\SavedBillingServiceInfo;
 use App\Service\data\repository\ServiceRepositoryImp;
+use App\Corp\data\repository\CorpRepositoryImp;
 class BillingController extends Controller
 {
     private $repositoryFactory;
@@ -128,7 +129,13 @@ class BillingController extends Controller
         
     }
     function searchBillById(Request $req){
-        $result = $this->repositoryFactory->getBillingRepositoryImp()->fetchBillingByCorpseId($req->get('id'));
+        $corpseId = $req->get('corpseId');
+        if(isset($corpseId)){
+            $id  = (CorpRepositoryImp::searchCorpById($corpseId))->getData()->getId();
+        }else{
+            $id = $req->get('id');
+        }
+        $result = $this->repositoryFactory->getBillingRepositoryImp()->fetchBillingByCorpseId($id);
         if($result->getSuccess()){
             $uiBillings = array_map(function($billing){
                 $billserviceresult = BillingServiceRepositoryImp::fetchBillingServiceByBillingId($billing->getBillId());

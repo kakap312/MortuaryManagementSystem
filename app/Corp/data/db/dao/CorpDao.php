@@ -83,7 +83,8 @@ class CorpDao{
                 Where('sex','=',$GLOBALS['sex']);
             })->get();
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            //return $th->getMessage();
+            return false;
         }
     }
 }

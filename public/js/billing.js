@@ -180,7 +180,7 @@ function showErrorMessage(validationData){
     
 }
 function fetchBillByCorpseId(id){
-    var serviceUrl = 'userdashboard/viewbillingsbycorpsid'; 
+    var serviceUrl = $('.searchbillbtn').attr('data-action');
 var response = requestData(serviceUrl,"POST",createFormData(null,['corpseId'],[id]));
 bill = response.bill;
 }

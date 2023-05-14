@@ -40,8 +40,8 @@ class ClearanceController extends Controller
                 $outstandingAmount = self::getOutsandingAmount( $savedClearanceInfo);
                 if($outstandingAmount == 0){
                     $result = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->createClearance($savedClearanceInfo);
-                    return response()->json(MapOfUIModel::mapOfSuccess($resultSet->getSuccess()));
-                }else if(($outstandingAmount) == -1){
+                    return response()->json(MapOfUIModel::mapOfSuccess(true));
+                }else if(($outstandingAmount == -1)){
                     return response()->json(MapOfUIModel::mapOfSuccess(false));
                 }else{
                     return response()->json(MapOfUIModel::mapOfOutandingAmount($outstandingAmount));
@@ -94,9 +94,11 @@ class ClearanceController extends Controller
         $totalPayment = 0;
         $oneTimeServiceFee = 0;
         $dailyServiceFee = 0;
+        $dailyServiceName = "";
+        $oneTimeServiceName = "";
         $corpseResult = CorpRepositoryImp::searchCorpById($savedClearanceInfo->getCorpseId());
         $corpseId = $corpseResult->getData() == null ?"":$corpseResult->getData()->getId();
-        $billResult = (new BillingRepositoryImp)->fetchBillingByCorpseId($corpseId);
+        $billResult = (new BillingRepositoryImp())->fetchBillingByCorpseId($corpseId);
         $billId;
         $tempBillId = "";
         if(!$billResult->getSuccess()){
@@ -115,20 +117,21 @@ class ClearanceController extends Controller
                         foreach ($billServices->getData() as $billingservice ) {
                             $service = ServiceRepositoryImp::fetchServiceById($billingservice->getServiceId())->getData()[0];
                             if($corpse->getCategory() == "Regular"){
-                                if($service->getPer() == "daily"){
-                            
+                                if(($service->getPer() == "daily") &&  ( $service->getName()  != $dailyServiceName) ){
                                     $dailyServiceFee += $service->getRegularFee();
-                                }else{
+                                    $dailyServiceName = $service->getName();
+                                }else if(($service->getPer() == "once") &&  ($service->getName()  != $oneTimeServiceName) ){
                                     $oneTimeServiceFee += $service->getRegularFee();
+                                    $oneTimeServiceName = $service->getName();
                                 }
                             }else{
-                                if($service->getPer() == "daily"){
-                            
+                                if($service->getPer() == "daily" &&  ($dailyServiceName != $service->getName()) ){
                                     $dailyServiceFee += $service->getVipFee();
-                                }else{
+                                    $dailyServiceName = $service->getName();
+                                }else if($service->getPer() == "once" &&  ($oneTimeServiceName != $service->getName()) ){
                                     $oneTimeServiceFee += $service->getVipFee();
+                                    $oneTimeServiceName = $service->getName();
                                 }
-
                             }
                             
                         }
