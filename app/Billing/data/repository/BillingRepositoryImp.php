@@ -56,7 +56,7 @@ class BillingRepositoryImp implements BillingRepository{
     
     public  function fetchBillingByCorpseId($corpseId){
         $dbBilling = BillingDao::findBillingByCoprseId($corpseId);
-        if(is_null($dbBilling) || ($dbBilling)->count() == 0 ){
+        if(is_null($dbBilling) || ($dbBilling)->count() == 0 || $dbBilling == false ){
             return new Result(null,false);
         }else{
                 $billing = array();

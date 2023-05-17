@@ -32,7 +32,7 @@ class CorpController extends Controller
                 }
             }
         }else{
-            return response()->json($corpseFieldValidator->mapOfFieldValidation());
+            return response()->json(CorpViewModel::mapOfValidation($corpseFieldValidator->mapOfFieldValidation()));
         } 
     }
     function updateCorp(Request $req)

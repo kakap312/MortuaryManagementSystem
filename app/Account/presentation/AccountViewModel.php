@@ -17,8 +17,8 @@ class AccountViewModel {
     static function mapOfAccountExisting($data){
         return ["isExisting"=>$data];
     }
-    static function mapOfAccoubtType($data){
-        return ["acctype"=>$data];
+    static function mapOfAccoubtDetails($data){
+        return ["accountdetails"=>$data];
     }
     static function mapOfPasswordValidator($data){
         return ["isPasswordValid"=>$data];

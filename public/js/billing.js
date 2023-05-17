@@ -58,7 +58,7 @@ $(document).ready(function(){
         var searchBillUrl = $('.searchbillbtn').attr('data-action');
         var response = requestData(searchBillUrl,"POST",createFormData(null,['id'],[$('.searbill').val()]));
         if(response.bill == null){
-            showMessage(true,"CORP_NOT_FOUND",null,true)
+            showMessage(true,"BILL_NOT_FOUND",null,true)
         }else{
             bills = response.bill;
             populateBillView();
@@ -68,11 +68,10 @@ $(document).ready(function(){
     $('#corpseseachId').change(function(){
         $('#addbilling').attr('disabled',true);
         var corpseId = $('.corpseseachId').val();
-            var searchCorpUrl = $('.searchcorp').attr('data-action');
-            var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
-            if(response.corps != null){
+            fetchCorpseById(corpseId);
+            if(corpse != null){
                 $('.billIdError').hide();
-                corpse = response.corps;
+                
                 fetchBillByCorpseId(corpseId);
                 $('#addbilling').attr('disabled',false);
             }else{
@@ -158,6 +157,16 @@ function performBillingCalculation(serviceFees){
 //         }
 //     })
 // }
+function fetchCorpseById(corpseId){
+    var searchCorpUrl = $('.searchcorp').attr('data-action');
+    var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
+    if(response.corps != null){
+        corpse = response.corps;
+    }else{
+        corpse = {};
+    }
+   
+}
 function fetchAllBills(){
     var serviceUrl = 'userdashboard/viewbillings'
     var response = requestData(serviceUrl,"POST",createFormData(null,[''],['']));
@@ -241,6 +250,7 @@ function  calculateBillSubTotal(serviceFees,days) {
             return subTotal;
         }else if(days =="due"){
             remainingDueDays =  corpse.dueDays - sumOfDueDays;
+            console.log(corpse.dueDays)
             subTotal = serviceFees*remainingDueDays;
             return subTotal;
         } 
@@ -268,7 +278,7 @@ function getServiceFees(serviceNames) {
                 }else if(service.name == serviceName && service.per == "once"){
                     totalServiceFeeForOneTimeServices += service.regularFee;
                 }
-            }else{
+            }else if(corpse.category == "VIP"){
                 if(service.name == serviceName && service.per == "daily"){
                     serviceFees += service.vipFee;
                 }else if(service.name == serviceName && service.per == "once"){
@@ -332,6 +342,9 @@ function viewCorpseInformation(bill,position) {
         }else if(($(this).val() == "Details")){
             showOrHideSection('.billdetailsection');
             var currentIndexOfBill = parseInt($(this).parent().siblings('.sn').html())-1;
+            billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
+            bill = getBillById(billId)
+            fetchCorpseById(bill.corpseCode);
             populateBillDetail(currentIndexOfBill);
         }else if (($(this).val() == "Update")){
             showOrHideSection('.addbillingsection');
@@ -341,6 +354,7 @@ function viewCorpseInformation(bill,position) {
             $('#billinfinstruction').html('Complete the form below to update this Bill.');
             billId = getBillId(parseInt($(this).parent().siblings('.sn').html())-1);
             bill = getBillById(billId)
+            fetchCorpseById(bill.corpseCode);
             var currentCorpIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;
             populateBillForm(bills[currentCorpIndexNumber]);
             var serviceFees = getServiceFees($('#services').val());
@@ -361,7 +375,12 @@ function viewCorpseInformation(bill,position) {
         serviceIds.forEach(id => {
             services.forEach(service => {
                 if(id == service.id){
-                    serviceAndFeeString += service.name + " (" + parseInt(service.fee).toFixed(2) + ") " + " ,"
+                    if(corpse.category == "Regular"){
+                        serviceAndFeeString += service.name + " (" + parseInt(service.regularFee).toFixed(2) + ") " + " ,"
+                    }else{
+                        serviceAndFeeString += service.name + " (" + parseInt(service.vipFee).toFixed(2) + ") " + " ,"
+                    }
+                    
                 } 
             });  
         });

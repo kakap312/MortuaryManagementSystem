@@ -63,7 +63,7 @@ class AccountController extends Controller
         return response()->json((AccountViewModel::mapOfUsernameValidator($isPasswordValid)));
     }
     function accountType(){
-        return  response()->json((AccountViewModel::mapOfAccoubtType(Session::get("usertype")))); ;
+        return  response()->json((AccountViewModel::mapOfAccoubtDetails(["usertype"=>Session::get("usertype"),"username"=>Session::get("username")]))); ;
     }
     function createAccount(Request $req){
         $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);

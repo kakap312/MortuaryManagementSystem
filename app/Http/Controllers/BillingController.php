@@ -130,10 +130,13 @@ class BillingController extends Controller
     }
     function searchBillById(Request $req){
         $corpseId = $req->get('corpseId');
+        $billId = $req->get('billId');
         if(isset($corpseId)){
             $id  = (CorpRepositoryImp::searchCorpById($corpseId))->getData()->getId();
+        }else if(isset($billId)){
+            $id = ($req->get('billId'));
         }else{
-            $id = $req->get('id');
+            $id = (CorpRepositoryImp::searchCorpById($req->get('id')))->getData()->getId();
         }
         $result = $this->repositoryFactory->getBillingRepositoryImp()->fetchBillingByCorpseId($id);
         if($result->getSuccess()){

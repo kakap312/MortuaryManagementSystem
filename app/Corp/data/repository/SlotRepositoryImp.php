@@ -37,7 +37,7 @@ class SlotRepositoryImp implements SlotRepository{
         if(SlotDao::updateSlotById($id,$dbSlot)){
             return new Result(null,true);
         }else{
-            return new Result(SlotDao::updateSlotById($id,$dbSlot),false);
+            return new Result(null,false);
         }
     }
     public static function searchSlotByNameOrId($nameOrId){

@@ -40,14 +40,15 @@ class BillingDao{
             $GLOBALS['id'] = $corpseId;
             return DbBilling::where(function($query){
                 $query->where('corpId','=',$GLOBALS['id'])
-                ->orWhere('billId','=',$GLOBALS['id'])
-                ->orWhere('id','=',$GLOBALS['id']);
+                ->orWhere('billId','=',$GLOBALS['id']);
+                // ->orWhere('id','=',$GLOBALS['id']);
             })->get();
             // where(function($query){
             //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);
             // })->get()->toArray();
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            //return $th->getMessage();
+            return false;
         }
     }
     static function fetchAllBillings(){

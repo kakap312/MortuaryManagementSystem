@@ -17,5 +17,8 @@ class CorpViewModel {
     static function mapOfSuccess($data){
         return ["success"=>$data];
     }
+    static function mapOfValidation($data){
+        return ["validationResult"=>$data];
+    }
 }
 ?>

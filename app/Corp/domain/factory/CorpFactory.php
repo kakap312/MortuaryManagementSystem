@@ -6,9 +6,11 @@ use  App\Corp\data\repository\FridgeRepositoryImp;
 class CorpFactory{
 
     public static function makeSaveCorpInfo($rquest){
+        $slotResult = SlotRepositoryImp::searchSlotByNameOrId($rquest->get('slotId'));
+        $fridgeResult =  FridgeRepositoryImp::searchFridgeByNameOrId($rquest->get('fridgeId'));
         $id = $rquest->get('corpId');
-        $sId = SlotRepositoryImp::searchSlotByNameOrId($rquest->get('slotId'))->getData()->getId();
-        $frgId = FridgeRepositoryImp::searchFridgeByNameOrId($rquest->get('fridgeId'))->getData()->getId();
+        $sId = $slotResult->getData() == null?"":$slotResult->getData()->getId();
+        $frgId = $fridgeResult->getData() == null?"": $fridgeResult->getData()->getId();
         
 
         return new SavedCorpInfo(

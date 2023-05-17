@@ -35,7 +35,7 @@ $(document).ready(function(){
         $('#addpayment').attr('disabled',true);
             var billId = $('#billId').val();
             var searchBillUrl = $('.searchbill').attr('data-action');
-            var response = requestData(searchBillUrl,"POST",createFormData(null,['id'],[billId]));
+            var response = requestData(searchBillUrl,"POST",createFormData(null,['billId'],[billId]));
             if(response.bill != null){
                 $('#billIdError').hide();
                 bill = response.bill;

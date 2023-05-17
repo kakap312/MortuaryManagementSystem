@@ -42,7 +42,8 @@ class SlotDao{
             DbSlot::where('slotId','=',$id)->update($dbSlot);
             return true;
         } catch (\Throwable $th) {
-            return $th->getMessage();
+           // return $th->getMessage();
+           return false;
         }
     }
 }

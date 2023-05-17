@@ -6,10 +6,13 @@ var fridges;
 var slots;
 var corpId;
 var slotId;
+var corpse;
 var totalCorpse;
 $(document).ready(function(){
-    fetchAccountType() == "admin"?$(".admin-menu").show():$(".admin-menu").hide();
-    $('#header').attr('data-action',fetchAccountType());
+    var accountdetails = fetchAccountType();
+    accountdetails.usertype == "admin"?$(".admin-menu").show():$(".admin-menu").hide();
+    $('#header').attr('data-action',accountdetails.usertype);
+    $('.usernametext').html("Welcome " + accountdetails.username);
     fetchFridges();
     fetchCorpse();
     fetchSlots();
@@ -161,21 +164,9 @@ $(document).ready(function(){
                     showMessage(response.success,"REGISTERED_SUCCESS",null,true);
                     resetForm('#registercorpform');
                     fetchCorpse();
+                    showErrorMessage(response.validationResult)
                 }else{
-                    response.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
-                    response.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
-                    response.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
-                    response.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
-                    response.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
-                    response.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
-                    response.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
-                    response.isSexValid ?$('#sexError').hide(): $('#sexError').show();
-                    response.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
-                    response.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
-                    response.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
-                    response.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
-                    response.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
-                    showMessage(response.isCorpCreated,"REGISTERED_ERROR",null,true);
+                    showErrorMessage(response.validationResult)
                 }
             
         }
@@ -192,21 +183,11 @@ $(document).ready(function(){
                 fetchCorpse();
                 $('#freeslot').show()
                 $('.availableslots').hide();
+                showErrorMessage(response.validationResult)
             }else{
+                showErrorMessage(response.validationResult)
                 showMessage(response.isCorpCreated,"UPDATE_ERROR",null,true);
-                response.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
-                response.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
-                response.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
-                response.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
-                response.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
-                response.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
-                response.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
-                response.isSexValid ?$('#sexError').hide(): $('#sexError').show();
-                response.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
-                response.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
-                response.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
-                response.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
-                response.isFridgeValid ?$('#remarksError').hide(): $('#remarksError').show();
+               
                 
             }  
         }
@@ -243,6 +224,41 @@ $(document).ready(function(){
     
 }); // end of $(document).ready function
 
+function showErrorMessage(validationresult){
+    if(validationresult == null){
+        $('#admissiondateerror').hide()
+        $('#collectiondateerror').hide()
+        $('#nameError').hide()
+        $('#hometownError').hide()
+        $('#relativeNameError').hide()
+        $('#releasedByError').hide()
+        $('#ageError').hide()
+        $('#sexError').hide()
+        $('#contactOneError').hide()
+        $('#contactTwoError').hide()
+        //$('#remarksError').hide()
+        $('#sloterrormessage').hide()
+        $('#fridgeerrormessage').hide()
+        
+    }else{
+        validationresult.isAdmissionDateValid ?$('#admissiondateerror').hide(): $('#admissiondateerror').show();
+        validationresult.isCollectionDateValid ?$('#collectiondateerror').hide(): $('#collectiondateerror').show();
+        validationresult.isCorpseNameValid ?$('#nameError').hide(): $('#nameError').show();
+        validationresult.homeTownValidator ?$('#hometownError').hide(): $('#hometownError').show();
+        validationresult.isRelativeNameValid ?$('#relativeNameError').hide(): $('#relativeNameError').show();
+        validationresult.isReleasedByValid ?$('#releasedByError').hide(): $('#releasedByError').show();
+        validationresult.isAgeValid ?$('#ageError').hide(): $('#ageError').show();
+        validationresult.isSexValid ?$('#sexError').hide(): $('#sexError').show();
+        validationresult.isContactOneValid ?$('#contactOneError').hide(): $('#contactOneError').show();
+        validationresult.isContactTwoValid ?$('#contactTwoError').hide(): $('#contactTwoError').show();
+        //validationresult.isCommentValid ?$('#remarksError').hide(): $('#remarksError').show();
+        validationresult.isSlotValid ?$('#sloterrormessage').hide(): $('#sloterrormessage').show();
+        validationresult.isFridgeValid ?$('#fridgeerrormessage').hide(): $('#fridgeerrormessage').show();
+        
+    }
+    
+}
+
 function fetchAvailableSlotByFidgeId(fridgeId){
     var availableSlotUrl = $('#slots').attr('data-action'); 
     var response = requestData(availableSlotUrl,"POST",createFormData(null,['fridgeid'],[fridgeId]));
@@ -252,7 +268,7 @@ function fetchAccountType(){
     var acctypeUrl = $('.acctype').attr('data-action');
     var formData = createFormData(null,[''],['']);
     var response = requestData(acctypeUrl,"get",formData);
-    return response.acctype;
+    return response.accountdetails;
 }
 function fetchFridges(){
     var fridgesUrl = $('#fridges').attr('data-action');
@@ -312,7 +328,7 @@ function viewCorpseInformation(corpse,position) {
  
     $('.choose').change(function(){
         if(($(this).val() == "Delete")){
-            if(confirm("Are you sure you want to delete this Payment")){
+            if(confirm("Are you sure you want to delete this corpse")){
                 var deleteBillUrl = $('.deletecorp').attr('data-action');
                 corpId = getCorpIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
               var  response = requestData(deleteBillUrl,"POST",createFormData(null,['corpid'],[corpId]));
@@ -337,7 +353,9 @@ function viewCorpseInformation(corpse,position) {
             fetchAvailableSlotByFidgeId(getFridgeIdByName($('.fridgename').val()))
         }else if(($(this).val() == "Details")){
             showOrHideSection('.corpdetailsection');
-            corpId = getCorpIdByName(parseInt($(this).parent().siblings('.sn').html())-1);
+            var currentCorpIndexNumber = parseInt($(this).parent().siblings('.sn').html())-1;
+            corpId = getCorpIdByName(currentCorpIndexNumber);
+            corpse = corps[currentCorpIndexNumber];
             populateCorpDetail();
         }
     });
@@ -345,6 +363,13 @@ function viewCorpseInformation(corpse,position) {
 }
 function getCorpseId(index){
     return  corps[index].id;
+}
+function getCorpseById(id){
+    corps.forEach(corp => {
+        if(id == corp.corpseCode){
+            return corp;
+        }
+    })
 }
 function populateFridges(){
     
@@ -377,16 +402,16 @@ function populateAvailableSlots(data){
     }
 }
 function populateCorpDetail(){
-    corps.forEach(corp => {
+    
         $('#date').html(new Date().toISOString().slice(0,10))
-            $('#coprseId').html(corp.corpseCode)  
-            $('#corpName').html(corp.name)
-            $('#corpSex').html(corp.sex)
-            $('#corpCategory').html(corp.category)
-            $('#corpAdmissionDate').html(corp.admissionDate)
-            $('#corpCollectionDate').html(corp.collectionDate)
-            $('#dayInFridge').html(corp.dueDays);
-    });
+            $('#coprseId').html(corpse.corpseCode)  
+            $('#corpName').html(corpse.name)
+            $('#corpSex').html(corpse.sex)
+            $('#corpCategory').html(corpse.category)
+            $('#corpAdmissionDate').html(corpse.admissionDate)
+            $('#corpCollectionDate').html(corpse.collectionDate)
+            $('#dayInFridge').html(corpse.dueDays);
+
 }
 function populateCoprsForm(corp,status){
     $('#corpseregistrationtext').html('');
