@@ -240,7 +240,7 @@
 
                 <div class='endorsement'>
                 <h3>.....................................</h3>
-                <p>Endorsed by:<br>Managing Director<br>(Kofi Frimpong Nimo)</p>
+                <p>Endorsed by:<br>Managing Director<br>(Clement A. Boakye)</p>
                 </div>
 
             </div>

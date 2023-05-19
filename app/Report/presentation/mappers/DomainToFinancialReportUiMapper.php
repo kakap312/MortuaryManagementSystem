@@ -9,7 +9,7 @@ class DomainToFinancialReportUiMapper{
             $corpse->getCorpseCode(),
             $corpse->getName(),
             $corpse->getAdmissionDate(),
-            $dischargeDate,
+            is_null($dischargeDate)?'" "':$dischargeDate ,
             $corpse->getCategory(),
             $totalDays,
             $amountPaid,

@@ -72,11 +72,17 @@ function displayCorpseReportInfo(data,reportType){
     $('.type').html($('.reportType').val());
     $('.captured').html($('.fromdate').val() + " to " + $('.todate').val() );
     if(reportType == "Corpse"){
+        var totalCorpseDischarged = 0;
+        for(var a=0; a<data.length; a++){
+            if(data[a].totalNumberOfCorpseDischarged == true){
+                totalCorpseDischarged += 1;
+            }
+        }
         $('.totalcorpse').html(data.length)
-        $('.corpsedischarged').html(data[0].totalNumberOfCorpseDischarged)
+        $('.corpsedischarged').html(totalCorpseDischarged)
         $('.malecorpse').html(data[0].totalNumberOfMaleCorpse);
         $('.femalecorpse').html(data[0].totalNumberOfFemaleCorpse);
-        $('.corpsereceived').html(data.length + data[0].totalNumberOfCorpseDischarged);
+        $('.corpsereceived').html(data.length + totalCorpseDischarged);
     }else if(reportType == "Financial"){
         $('.totalamountpaid').html(parseInt(data[data.length-1].totalAmountPaid).toFixed(2))
         $('.totalamountdue').html(parseInt(data[data.length-1].totalAmountDue).toFixed(2))
@@ -121,7 +127,7 @@ function viewCorpseInformation(corpse,position) {
         corpse.corpseName +"</td><td>"+
         corpse.sex +"</td><td>"+
         corpse.serviceType +"</td><td>"+
-        corpse.status + "</td><td>"+
+        (corpse.status == "true"?"Discharged": "In Mogue") + "</td><td>"+
         corpse.relativeName + "</td><td>"+
         corpse.relativeNumberOne + "</td><td>"+
         corpse.relativeNumberTwo + "</rd>"

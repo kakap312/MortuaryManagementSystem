@@ -129,7 +129,7 @@ function viewCorpseInformation(clearance,position) {
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         clearance.date +"</td><td>"+
         clearance.corpseCode +"</td><td>"+
-        clearance.state +"</td>"+
+        (clearance.state?"Cleared":"Not Cleared") +"</td>"+
         getActionMenu()
         )
 
