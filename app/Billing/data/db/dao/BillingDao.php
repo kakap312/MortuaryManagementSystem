@@ -40,8 +40,8 @@ class BillingDao{
             $GLOBALS['id'] = $corpseId;
             return DbBilling::where(function($query){
                 $query->where('corpId','=',$GLOBALS['id'])
-                ->orWhere('billId','=',$GLOBALS['id']);
-                // ->orWhere('id','=',$GLOBALS['id']);
+                ->orWhere('billId','=',$GLOBALS['id'])
+                 ->orWhere('id','=',$GLOBALS['id']);
             })->get();
             // where(function($query){
             //     $query->where('corpId','=',$GLOBALS['id'])->orWhere('billId','=',$GLOBALS['id']);

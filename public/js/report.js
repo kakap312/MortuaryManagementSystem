@@ -78,11 +78,11 @@ function displayCorpseReportInfo(data,reportType){
                 totalCorpseDischarged += 1;
             }
         }
-        $('.totalcorpse').html(data.length)
+        $('.totalcorpse').html(data[0].totalCorpseRecieved - totalCorpseDischarged)
         $('.corpsedischarged').html(totalCorpseDischarged)
         $('.malecorpse').html(data[0].totalNumberOfMaleCorpse);
         $('.femalecorpse').html(data[0].totalNumberOfFemaleCorpse);
-        $('.corpsereceived').html(data.length + totalCorpseDischarged);
+        $('.corpsereceived').html(data[0].totalCorpseRecieved);
     }else if(reportType == "Financial"){
         $('.totalamountpaid').html(parseInt(data[data.length-1].totalAmountPaid).toFixed(2))
         $('.totalamountdue').html(parseInt(data[data.length-1].totalAmountDue).toFixed(2))

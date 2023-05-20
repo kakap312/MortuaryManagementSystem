@@ -8,6 +8,7 @@ class UiCorpseReport{
     public $status;
     public $serviceType;
     public $relativeName;
+    public $totalCorpseRecieved;
     public $relativeNumberOne;
     public $relativeNumberTwo;
     public $totalNumberOfCorpseDischarged;
@@ -25,7 +26,8 @@ class UiCorpseReport{
         $relativeNumberTwo,
         $totalNumberOfCorpseDischarged,
         $totalNumberOfFemaleCorpse,
-        $totalNumberOfMaleCorpse
+        $totalNumberOfMaleCorpse,
+        $totalCorpseRecieved
         ){
         $this->corpseCode = $corpseCode;
         $this->corpseName = $corpseName;
@@ -38,5 +40,6 @@ class UiCorpseReport{
         $this->totalNumberOfCorpseDischarged = $totalNumberOfCorpseDischarged;
         $this->totalNumberOfFemaleCorpse = $totalNumberOfFemaleCorpse;
         $this->totalNumberOfMaleCorpse = $totalNumberOfMaleCorpse;
+        $this->totalCorpseRecieved = $totalCorpseRecieved;
     }
 }

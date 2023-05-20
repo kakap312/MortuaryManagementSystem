@@ -4,7 +4,7 @@ use App\Corp\presentation\mappers\CorpToUiModelMapper;
 use App\Report\presentation\model\UiCorpseReport;
 class DomainToCorpseReportUiMapper{
 
-    public static function map($corpse,$clearanceStatus,$femaleCorpse,$maleCorpse){
+    public static function map($corpse,$clearanceStatus,$femaleCorpse,$maleCorpse,$corpseReceived){
         $totalNumberOfCorpseDischarged = 0;
         if(! is_null($clearanceStatus)){
             
@@ -27,7 +27,8 @@ class DomainToCorpseReportUiMapper{
             $corpse->getRelativeContactTwo(),
             $totalNumberOfCorpseDischarged,
             $femaleCorpse,
-            $maleCorpse
+            $maleCorpse,
+            $corpseReceived
             
         );
     }

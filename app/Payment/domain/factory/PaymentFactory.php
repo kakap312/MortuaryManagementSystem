@@ -6,7 +6,8 @@ class PaymentFactory{
 
     public static function makeSavedPaymentInfo($req){
         $paymentId = $req->get('id');
-        $billId = (new BillingRepositoryImp)->fetchBillingByCorpseId($req->get('billId'))->getData()[0]->getId();
+        $billId = ($req->get('billId'));
+        //$billId = (new BillingRepositoryImp)->fetchBillingByCorpseId($req->get('billId'))->getData()[0]->getId();
         return new SavedPaymentInfo(
             isset($paymentId)?$paymentId:"",
             is_null($req->get('billId')) ?"": $billId,

@@ -43,7 +43,7 @@ class CorpRepositoryImp implements CorpRepository{
         if(is_null($totalNumberOfCorpse)){
             return new Result(null,false);
         }else{
-            return new Result($totalNumberOfCorpse,false);
+            return new Result($totalNumberOfCorpse,true);
         }
     }
     public static function searchCorpById($nameOrId)

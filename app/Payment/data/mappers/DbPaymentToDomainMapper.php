@@ -1,6 +1,7 @@
 <?php
 namespace App\Payment\data\mappers;
 use App\payment\domain\model\Payment;
+use App\Billing\data\repository\BillingRepositoryImp;
 class DbPaymentToDomainMapper{
 
     public static function map($dbPayment){
@@ -8,7 +9,7 @@ class DbPaymentToDomainMapper{
             return new Payment(
                 $dbPayment['id'],
                 $dbPayment['paymentId'],
-                $dbPayment['billId'],
+                (new BillingRepositoryImp)->fetchBillingByCorpseId($dbPayment['billId'])->getData()[0]->getBillId(),
                 $dbPayment['amount'],
                 $dbPayment['description'],
                 $dbPayment['createdAt'],
@@ -19,7 +20,7 @@ class DbPaymentToDomainMapper{
             return new Payment(
                 $dbPayment['id'],
                 $dbPayment->get('paymentId'),
-                $dbPayment->get('billId'),
+                (new BillingRepositoryImp)->fetchBillingByCorpseId($dbPayment->get('billId'))->getData()[0]->getBillId(),
                 $dbPayment->get('amount'),
                 $dbPayment->get('description'),
                 $dbPayment->get('createdAt'),

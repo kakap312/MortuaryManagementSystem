@@ -36,7 +36,7 @@
             <div class='col-md-12 '><hr/> 
                 <div class="corpsedetailheader">
                     <img style='width:150px; height:150px;' src='img/companylogo.jpg'alt="Company Logo"/>
-                    <h2> O.V. OHIO MORTUARY</h2>
+                    <h2> O.V. OHIOS MORTUARY</h2>
                     <h4> P.O.BOX ,24  BREKUM.OPPOSITE DEVINE CHURCH</h4>
                     <h4> 0540-425-85 / 0254-8697-789 / 0548-254-897</h4>
                     <h4> caring for the dead </h4>
@@ -140,7 +140,7 @@
             <div class='col-md-12 '><hr/> 
                 <div class="corpsedetailheader">
                     <img style='width:150px; height:150px;' src='img/companylogo.jpg'alt="Company Logo"/>
-                    <h2> O.V. OHIO MORTUARY</h2>
+                    <h2> O.V. OHIOS MORTUARY</h2>
                     <h4> P.O.BOX ,24  BREKUM.OPPOSITE DEVINE CHURCH</h4>
                     <h4> 0540-425-85 / 0254-8697-789 / 0548-254-897</h4>
                     <h4> caring for the dead </h4>

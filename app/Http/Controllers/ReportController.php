@@ -65,11 +65,11 @@ class ReportController extends Controller
             $clearedCorpse = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($corp->getCorpseCode())->getData();
             $bills = $this->billingRepositoryImpFactory->getBillingRepositoryImp()->fetchBillingByCorpseId((CorpRepositoryImp::searchCorpById($corp->getCorpseCode()))->getData()->getId())->getData();
             
-            if(!is_null($clearedCorpse)){
-                foreach ($clearedCorpse as $clearance) {
-                    $corpseDateDischarged = $clearance->getCreatedAt();
-                 }
-            }
+            // if(!is_null($clearedCorpse)){
+            //     foreach ($clearedCorpse as $clearance) {
+            //         $corpseDateDischarged = $clearance->getCreatedAt();
+            //      }
+            // }
             
             if(! is_null($bills)){
                 foreach ($bills as $bill) {
@@ -112,7 +112,7 @@ class ReportController extends Controller
             $dueDays = DateToDaysConversion::convert($corp->getAdmissionDate(),$corp->getCollectionDate());
             $amountDue = (($dueDays + $extraDays) * $dailyServiceFee) + $oneTimeServiceFee ;
             $totalAmountDueByAllCorpse += $amountDue;
-            array_push($uiFinancial,DomainToFinancialReportUiMapper::map($corp,$corpseDateDischarged,($extraDays + $dueDays),$totalPaymentMadeByCorpse,$amountDue,$totalAmountDueByAllCorpse,$totalAmountPaidByAllCorpse));
+            array_push($uiFinancial,DomainToFinancialReportUiMapper::map($corp,($extraDays + $dueDays),$totalPaymentMadeByCorpse,$amountDue,$totalAmountDueByAllCorpse,$totalAmountPaidByAllCorpse));
             $totalPaymentMadeByCorpse = 0;
             $oneTimeServiceFee = 0;
             $dailyServiceFee = 0;
@@ -127,6 +127,7 @@ class ReportController extends Controller
         $GLOBALS['corpse']  = CorpRepositoryImp::findCorpseByDate($startDate,$endDate)->getData();
        $GLOBALS['totalNumberOfCorpseDischarged'] =  0;
        $femalecorpse = (CorpRepositoryImp::findCorpseByDateAndSex($startDate,$endDate,"F"))->getData();
+       $GLOBALS['totalcorpse'] = (CorpRepositoryImp::totalCorpse())->getData();
        $GLOBALS['femaleCorpse'] = is_null($femalecorpse)?0:count($femalecorpse);
        $maleCorpse = (CorpRepositoryImp::findCorpseByDateAndSex($startDate,$endDate,"M"))->getData();
        $GLOBALS['maleCorpse']  = is_null($maleCorpse)?0:count($maleCorpse);
@@ -134,11 +135,8 @@ class ReportController extends Controller
         $uiCorpseReport = array_map(function($corp){
             $corpseId = (CorpRepositoryImp::searchCorpById($corp->getCorpseCode()))->getData()->getId();
             $clearance = ($this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($corpseId))->getData();
-            if($clearance != null){
-                $GLOBALS['totalNumberOfCorpseDischarged'] +=  1;
-            }
             
-           return DomainToCorpseReportUiMapper::map($corp,$clearance,$GLOBALS['femaleCorpse'],$GLOBALS['maleCorpse']);
+           return DomainToCorpseReportUiMapper::map($corp,$clearance,$GLOBALS['femaleCorpse'],$GLOBALS['maleCorpse'],$GLOBALS['totalcorpse']);
         },($GLOBALS['corpse']));
         
         return $uiCorpseReport;

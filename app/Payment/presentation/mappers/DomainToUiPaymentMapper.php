@@ -7,7 +7,7 @@ class DomainToUiPaymentMapper{
     public static function map($payment){
         return new  UiPayment(
             $payment->getPaymentId(),
-            (new BillingRepositoryImp)->fetchBillingByCorpseId($payment->getBillId())->getData()[0]->getBillId(),
+            ($payment->getBillId()),
             $payment->getAmount(),
             $payment->getCreatedAt(),
             $payment->getDescription()
