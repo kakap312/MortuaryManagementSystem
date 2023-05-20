@@ -40,7 +40,7 @@ $(document).ready(function(){
         
     });
 
-    $('.printbtn').click(function(){
+    $('.printbillbtn').click(function(){
         var option = {
             mode:"popup" , //printable window is either iframe or browser popup
             popHt: 500 ,  // popup window height

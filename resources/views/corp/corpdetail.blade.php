@@ -49,7 +49,7 @@
         </div>
     </div>
     <center>
-    <button type='button' id='printbtn' class='btn-secondary'>Print</button>
+    <button type='button'  class=' ibtn btn-primary form-control reportprintbtn printbtn'>Print</button>
     </center>
     </div>
     </div>

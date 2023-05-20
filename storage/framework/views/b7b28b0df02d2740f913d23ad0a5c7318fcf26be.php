@@ -37,7 +37,7 @@
         </div>
     </div>
     <center>
-    <button type='button' class='serviceprintbtn' class='btn-secondary'>Print</button>
+    <button type='button' class='serviceprintbtn' class='ibtn btn-primary form-control reportprintbtn'>Print</button>
     </center>
     </div>
     </div>

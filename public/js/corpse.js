@@ -82,7 +82,7 @@ $(document).ready(function(){
         var fridgeId = getFridgeIdByName(($(this).val()));
         fetchAvailableSlotByFidgeId(fridgeId)
     });
-    $('#printbtn').click(function(){
+    $('.printbtn').click(function(){
          //printPageSection('#corpsecontent');
          var option = {
             mode:"popup" , //printable window is either iframe or browser popup

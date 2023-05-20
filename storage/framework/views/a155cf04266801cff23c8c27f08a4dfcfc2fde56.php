@@ -44,7 +44,7 @@
         </div>
     </div>
     <center>
-    <button type='button' class='printbtn' class='btn-secondary'>Print</button>
+    <button type='button'  class='ibtn btn-primary form-control printbillbtn'>Print</button>
     </center>
     </div>
     </div>

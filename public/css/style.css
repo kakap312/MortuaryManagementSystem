@@ -2392,12 +2392,13 @@ ol {
     float:right;
 
 }
-#printbtn,.printbtn{
+#printbtn{
     width:220px;
     height: 30px;
     margin: auto;  
 
 }
+
 .corpsecontent{
     padding: 30px;
     text-align: center;
