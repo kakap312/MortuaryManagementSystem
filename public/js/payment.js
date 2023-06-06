@@ -37,12 +37,12 @@ $(document).ready(function(){
             var searchBillUrl = $('.searchbill').attr('data-action');
             var response = requestData(searchBillUrl,"POST",createFormData(null,['billId'],[billId]));
             if(response.bill != null){
-                $('#billIdError').hide();
+                $('.billIdError').hide();
                 bill = response.bill;
                 $('#addpayment').attr('disabled',false);
             }else{
-                $('#billIdError').show();
-                clearForm();
+                $('.billIdError').show();
+                // clearForm();
             }    
     })
     $('.searchpaymentbtn').click(function(){
@@ -67,6 +67,7 @@ $(document).ready(function(){
                 if(response.success){
                     showMessage(response.success,"PAYMENT_CREATION_SUCCESS",null,true);
                     resetForm('#createPaymentform');
+                    $('.billIdError').hide();
                 }else{
                     showErrors(response.validation)
                 }
@@ -78,6 +79,7 @@ $(document).ready(function(){
                     var response = requestData(createPaymentUrl,"POST",createFormData($("#createPaymentform")[0],['id'],[paymentId]));
                     if(response.success){
                         showMessage(response.success,"PAYMENT_UPDATION_SUCCESS",null,true);
+                        
                     }else{
                         showErrors(response.validation)
                     }

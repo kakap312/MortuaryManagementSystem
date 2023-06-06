@@ -67,6 +67,7 @@ $(document).ready(function(){
         $('#corpseinstruction').html('Complete the registration below to create a new Corp registration');
         $('#freeslot').hide();
         $('.availableslot').hide();
+        $('#registerbtn').html('Register');
         $('.availableslots').show();
         populateFridges();
     });

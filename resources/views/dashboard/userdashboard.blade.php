@@ -286,7 +286,7 @@
       &copy; Copyright <strong><span>Perfect Web Ventures</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      Designed by <a href="">BootstrapMade</a>
+      Designed by <a href="#">Perfect Web Ventures</a>
     </div>
   </footer><!-- End Footer -->
 
