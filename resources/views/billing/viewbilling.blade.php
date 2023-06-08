@@ -12,6 +12,7 @@
     <th >S/N</th>
     <th>Date</th>
     <th>Corpse Code</th>
+    <th>Bill ID</th>
     <th>Bill Amount</th>
     <th>Action</th>
     </tr>

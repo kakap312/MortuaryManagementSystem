@@ -16,7 +16,7 @@ Route::get('/', function(){
 });
 Route::get('/userdashboard/corpsereport','CorpController@viewCorpseByDateCreated')->name('corpsereport');
 Route::post('/userdashboard/createcorp','CorpController@registerCorp')->name('createcorp');
-Route::post('/userdashboard/update','CorpController@updateCorp')->name('updatecorp');
+Route::post('/userdashboard/updatecorpse','CorpController@updateCorp')->name('updatecorp');
 Route::get('/userdashboard/fetchcorps','CorpController@viewAllCorps')->name('fetchcorps');
 Route::get('/userdashboard/totalcorpse','CorpController@totalCorpse')->name('totalcorpse');
 Route::post('/userdashboard/fetchfridges','CorpController@viewAllFridges')->name('fetchfridges');
@@ -42,7 +42,7 @@ Route::post('/userdashboard/searchbill','BillingController@searchBillById')->nam
 Route::post('/account/login','AccountController@accountLogin')->name('userlogin');
 Route::post('/account/createaccount','AccountController@createAccount')->name('createaccount');
 Route::get('/account','AccountController@renderAccountView')->name('account');
-Route::get('/userdashboard/update','AccountController@updateAccount')->name('updateaccount');
+Route::post('/userdashboard/updateaccount','AccountController@updateAccount')->name('updateaccount');
 Route::post('/userdashboard/deleteaccount','AccountController@deleteAccount')->name('deleteaccount');
 Route::get('/userdashboard/allaccounts','AccountController@viewAccountLimitFive')->name('accounts');
 Route::get('/logout',function(){

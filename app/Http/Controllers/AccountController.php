@@ -85,6 +85,20 @@ class AccountController extends Controller
         }
 
     }
+    function updateAccount(Request $req){
+        $savedAccountInfo = AccountFactory::makeSavedAccountInfo($req);
+        $this->accountFieldValidator = new AccountFieldValidator($savedAccountInfo);
+        if($this->accountFieldValidator->isAllFieldValid()){
+                $accountResult = $this->accountRepositoryImp->updateAccount($req->get('id'),$savedAccountInfo);
+                if($accountResult->getSuccess()){
+                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
+                }else{
+                    return response()->json(AccountViewModel::mapOfSuccess($accountResult->getSuccess()));
+                }
+        }else{
+            return response()->json(AccountViewModel::mapOfValidation($this->accountFieldValidator->mapOfFieldValidation()));
+        }
+    }
     function deleteAccount(Request $req){
         $accountResult = $this->accountRepositoryImp->deleteAccount($req->get('id'));
         if($accountResult->getSuccess()){

@@ -75,8 +75,8 @@ $(document).ready(function(){
             }
         }else if(state == "Update Account"){
             if(confirm(stringValue("UPDATE_ACCOUNT_CONFIRMATION"))){
-                var updateAccountURL = $('.updateaccount').attr('data-action');
-                var response = requestData(updateAccountURL,"POST",createFormData($("#createaccountform")[0],['accountId'],[accountId]));
+                var updateAccountURL = $('#updateaccount').attr('data-action');
+                var response = requestData(updateAccountURL,"POST",createFormData($("#createaccountform")[0],['id'],[accountId]));
                 if(response.success){
                     showMessage(response.success,"ACCOUNT_UPDATE_SUCCESS",null,true);
                 }else{

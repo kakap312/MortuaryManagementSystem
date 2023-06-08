@@ -22,6 +22,10 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style1.css" rel="stylesheet">
   <link href="css/style2.css" rel="stylesheet">
+  <link href="css/jquery-ui.css" rel="stylesheet">
+  <link href="css/jquery-ui.theme.css" rel="stylesheet">
+  
+  
 
         
     </head>
@@ -45,6 +49,9 @@
         <script src="js/validate.js"></script>
         <script src="js/jquery.PrintArea.js"></script>
         <script src="js/accountjs.js" type='module'></script>
+        <script src="js/jquery-ui.js" ></script>
+        <script src="js/picker.js" ></script>
+        <script src="js/picker.date.js"></script>
         
         
         

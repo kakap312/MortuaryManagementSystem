@@ -72,6 +72,19 @@ $(document).ready(function(){
         populateFridges();
     });
 
+    // $('input[type="date"]').change(function(){
+    //     var formattedDate = "";
+    //     var dateParts = ($(this).val().split("-").reverse());
+    //     for(var index=0; index < dateParts.length; index++){
+    //         if(index == 2){
+    //             formattedDate += dateParts[index]
+    //         }else{
+    //             formattedDate += dateParts[index] + "/";
+    //         }
+    //     }
+    //   ($(this).val(formattedDate))
+    // });
+
     $("#viewcorplink").click(function(){
         fetchCorpse();
         fetchTotalCorpse();

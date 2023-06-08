@@ -13,12 +13,12 @@
     <div class='form-row'>
     <div class="form-floating mb-3 col fetchcorpse" data-action="{{route('fetchcorps')}}">
     <label for="floatingInput">Admission Date <sup class='compulsoryindicator'>*</sup></label>
-    <input class="form-control" type="date" id='admissionDate' name="admissionDate" required>
+    <input class="form-control date" type="date" id='admissionDate' name="admissionDate" format='dd/mm/yyyy' required>
     <p id="admissiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     <div class="form-floating mb-3 col">
     <label for="floatingInput">Collection Date <sup class='compulsoryindicator'>*</sup></label>
-    <input class="form-control" type="date" id='collectionDate' name="collectionDate" required>
+    <input class="form-control date" type="date" id='collectionDate' name="collectionDate" required>
     <p id="collectiondateerror" style='display:none;color:red;font-size:15px;margin:10px;'>Sorry date must not be empty</p>
     </div>
     </div>

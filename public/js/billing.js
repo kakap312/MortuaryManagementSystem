@@ -321,7 +321,8 @@ function viewCorpseInformation(bill,position) {
     $('.billsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
         bill.date +"</td><td>"+
-        bill.corpseCode +"</td><td>"+
+        bill.corpseCode +"</td><td>" +
+        bill.id +"</td><td>"+
         parseInt(bill.amount).toFixed(2) +"</td>"+
         getActionMenu()
         )

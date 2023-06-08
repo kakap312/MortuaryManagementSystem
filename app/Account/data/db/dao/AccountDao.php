@@ -39,6 +39,15 @@ use App\Account\data\db\model\DbAccount;
         }
 
     }
+    public static function updateAccount($id,$dbAccount){
+        try {
+            DbAccount::where('accId','=',$id)->update($dbAccount);
+            return true;
+        } catch (\Throwable $th) {
+            //return false;
+           return $th->getMessage();
+        }
+    }
     public static function insertAccount($dbAccount){
         try {
             DbAccount::create($dbAccount);
