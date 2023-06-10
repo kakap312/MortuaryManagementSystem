@@ -38,8 +38,13 @@ class SlotDao{
         }
     }
     public static function updateSlotById($id,$dbSlot){
+        $GLOBALS['id'] = $id;
         try {
-            DbSlot::where('slotId','=',$id)->update($dbSlot);
+             DbSlot::where(function($query){
+                $query->where('slotId','=',$GLOBALS['id']);
+                $query->orWhere('id','=',$GLOBALS['id']);
+            })->update($dbSlot);
+           // DbSlot::where('slotId','=',$id)->update($dbSlot);
             return true;
         } catch (\Throwable $th) {
            // return $th->getMessage();
