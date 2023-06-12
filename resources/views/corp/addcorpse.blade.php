@@ -95,7 +95,11 @@
 
     <div class="form-floating mb-3">
     <label for="floatingInput">Received By <sup class='compulsoryindicator'>*</sup></label>
-    <input class="form-control" type="text" id='releasedBy' name="releasedBy" required>
+    <select class="form-control"  name="releasedBy" id='releasedBy'>
+    <option value="Kusi Peter">Kusi Peter</option>
+    <option value="Sixtus Addo">Sixtus Addo</option>    
+    </select>
+    <!-- <input class="form-control" type="text" id='releasedBy' name="releasedBy" required> -->
     <p id='releasedByError' style='display:none;color:red;font-size:15px;margin:10px;'>Sorry, remarks must have a maximum of 100 characters and must not be empty</p>
     </div>
 

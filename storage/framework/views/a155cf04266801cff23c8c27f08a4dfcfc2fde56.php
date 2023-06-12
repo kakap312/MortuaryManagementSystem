@@ -6,9 +6,9 @@
     <div class='billcontent'>
         <div class="corpsedetailheader">
         <img style='width:150px; height:150px;' src='img/companylogo.jpg'alt="Company Logo"/>
-        <h2> O.V. OHIOS MORTUARY</h2>
-        <h4>P.O.BOX ,24  BREKUM.OPPOSITE DEVINE CHURCH</h4>
-        <h4>0540-425-85 / 0254-8697-789 / 0548-254-897</h4>
+        <h2> O.V. OHIO'S MORTUARY</h2>
+        <h4>P.O.BOX 578,  BREKUM</h4>
+        <h4>0551-065-011 / 0543-414-393</h4>
         <h4> caring for the dead </h4>
         </div><hr/>
         <div class='coprsedetails'>
@@ -16,6 +16,10 @@
             <p>Date: <span class='date'></span></p>
             <center>
             <table  class='corpsedetailtable table'>
+            <tr>
+                    <td>Corpse Name:  </td>
+                    <td class='corpsename'></td>
+                </tr>
                 <tr>
                     <td>Bill ID:  </td>
                     <td class='billId'></td>
@@ -41,8 +45,13 @@
                 </tr>
             </table><br>
             </center>
+        </div> <br><br>
+        <div class='endorsement'>
+        <h3>.....................................</h3>
+        <p>Endorsed by:<br>Managing Director<br>(Clement A. Boakye)</p>
         </div>
     </div>
+    
     <center>
     <button type='button'  class='ibtn btn-primary form-control printbillbtn'>Print</button>
     </center>

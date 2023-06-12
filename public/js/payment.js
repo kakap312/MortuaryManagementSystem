@@ -1,5 +1,6 @@
 import {requestData,createFormData,showMessage,showOrHideSection,stringValue,getActionMenu,resetForm} from './library.js';
 var bill;
+var corpse;
 var payments;
 var paymentId;
 var payment;
@@ -90,9 +91,21 @@ $(document).ready(function(){
     })
 });
 function fetchBillById(id){
-var response = requestData(serviceUrl,"POST",createFormData(null,['billId'],[id]));
-bill = response.bill;
+    var serviceUrl = $('.searchbilling').attr('data-action');
+    var response = requestData(serviceUrl,"POST",createFormData(null,['billId'],[id]));
+    bill = response.bill;
 }
+function fetchCorpseById(corpseId){
+    var searchCorpUrl = $('.searchcorp').attr('data-action');
+    var response = requestData(searchCorpUrl,"POST",createFormData(null,['corpId'],[corpseId]));
+    if(response.corps != null){
+        corpse = response.corps;
+    }else{
+        corpse = {};
+    }
+   
+}
+
 function fetchPayments(){
     var paymentUrl = $('.viewpaymentsection').attr('data-action');
     var response = requestData(paymentUrl,"GET",createFormData(null,[''],['']))
@@ -145,6 +158,10 @@ function viewPaymentInformation(payment,position) {
             if(($(this).val() == "Details")){
                 showOrHideSection('.paymentdetailsection');
                 var currentIndex = parseInt($(this).parent().siblings('.sn').html())-1;
+                payment = getPaymentByIndex(currentIndex);
+                fetchBillById(payment.billId)
+                
+                fetchCorpseById(bill[0].corpseCode)
                 populatePaymentDetail(currentIndex);
             }else if(($(this).val() == "Delete")){
                 if(confirm("Are you sure you want to delete this payment")){
@@ -172,10 +189,15 @@ function viewPaymentInformation(payment,position) {
 function populatePaymentDetail(index){
     payment = payments[index];
     console.log(index);
+    
+    $('.corpsename').html(corpse.name) 
     $('.date').html(new Date().toISOString().slice(0,10))
     $('.paymentId').html(payment.paymentId)  
     $('.billid').html(payment.billId)
     $('.amount').html(payment.amount)
+}
+function getPaymentByIndex(index){
+    return payments[index];
 }
 function getPaymentId(index){
     return  payments[index].paymentId;

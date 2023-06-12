@@ -320,7 +320,7 @@ function populateBillView(){
 function viewCorpseInformation(bill,position) {
     $('.billsviewtable').append(
         "<tr class='datarow'><td class='sn'>"+(position+1)+"</td><td>"+
-        bill.date +"</td><td>"+
+        bill.date +"</td><td>" +
         bill.corpseCode +"</td><td>" +
         bill.id +"</td><td>"+
         parseInt(bill.amount).toFixed(2) +"</td>"+
@@ -365,6 +365,7 @@ function viewCorpseInformation(bill,position) {
     function populateBillDetail(index){
         fetchAllBills();
             $('.date').html(new Date().toISOString().slice(0,10))
+                $('.corpsename').html(corpse.name)
                 $('.billId').html(bills[index].id)  
                 $('.corpseId').html(bills[index].corpseCode)
                 $('#serviceFee').html(getServiceAndFeeString(bills[index].servicesIds))
@@ -377,9 +378,9 @@ function viewCorpseInformation(bill,position) {
             services.forEach(service => {
                 if(id == service.id){
                     if(corpse.category == "Regular"){
-                        serviceAndFeeString += service.name + " (" + parseInt(service.regularFee).toFixed(2) + ") " + " ,"
+                        serviceAndFeeString += service.name /*+ " (" + parseInt(service.regularFee).toFixed(2) + ") " */ + " ,"
                     }else{
-                        serviceAndFeeString += service.name + " (" + parseInt(service.vipFee).toFixed(2) + ") " + " ,"
+                        serviceAndFeeString += service.name  /* + " (" + parseInt(service.vipFee).toFixed(2) + ") " */ + " ,"
                     }
                     
                 } 
