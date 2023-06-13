@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clearance\data\factory\ClearanceRepositoryFactory;
+use  App\Corp\data\repository\SlotRepositoryImp;
 use App\Clearance\domain\factory\CLearanceFactory;
 use App\Corp\data\repository\CorpRepositoryImp;
 use App\Clearance\presentation\MapOfUIModel;
@@ -32,7 +33,8 @@ class ClearanceController extends Controller
         $savedClearanceInfo =  CLearanceFactory::getSavedClearanceInfo($req);
         $clearanceFieldValidation = new ClearanceFieldValidation($savedClearanceInfo);
         if($clearanceFieldValidation->isAllFieldValid()){
-            $corpseId = (CorpRepositoryImp::searchCorpById($savedClearanceInfo->getCorpseId()))->getData()->getId();
+            $corpseResult = CorpRepositoryImp::searchCorpById($savedClearanceInfo->getCorpseId())->getData();
+            $corpseId = $corpseResult->getId();
             $resultSet = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($corpseId);
             if($resultSet->getSuccess()){
                 return response()->json(MapOfUIModel::mapOfClearanceExit(true));
@@ -40,6 +42,7 @@ class ClearanceController extends Controller
                 $outstandingAmount = self::getOutsandingAmount( $savedClearanceInfo);
                 if($outstandingAmount == 0){
                     $result = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->createClearance($savedClearanceInfo);
+                    $isSlotFree = SlotRepositoryImp::updateSlot($corpseResult->getSlotId(),['state'=>'free'])->getSuccess();
                     return response()->json(MapOfUIModel::mapOfSuccess(true));
                 }else if(($outstandingAmount == -1)){
                     return response()->json(MapOfUIModel::mapOfSuccess(false));
