@@ -42,7 +42,7 @@
         <br><br>
         <div class='endorsement'>
         <h3>.....................................</h3>
-        <p>Endorsed by:<br>Faculty Manager<br>(Mr. Yaw Owusu Adjei Yeboah)</p>
+        <p>Endorsed by:<br> Facility Manager <br>(Mr. Yaw Owusu Adjei Yeboah)</p>
         </div>
     </div>
     <center>
