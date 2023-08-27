@@ -24,10 +24,7 @@
   <link href="css/style2.css" rel="stylesheet">
   <link href="css/jquery-ui.css" rel="stylesheet">
   <link href="css/jquery-ui.theme.css" rel="stylesheet">
-  
-  
-
-        
+ 
     </head>
     <body id='mainbody'>
         <?php echo $__env->yieldContent('content'); ?>
