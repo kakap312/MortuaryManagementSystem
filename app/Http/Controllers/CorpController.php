@@ -19,7 +19,6 @@ class CorpController extends Controller
     //
     function registerCorp(Request $req)
     {
-
         $savedCorpInfo = CorpFactory::makeSaveCorpInfo($req);
         $corpseFieldValidator = new FieldValidation($savedCorpInfo);
         if($corpseFieldValidator->isAllFieldValid()){

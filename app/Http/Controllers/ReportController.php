@@ -59,18 +59,12 @@ class ReportController extends Controller
         $totalAmountDueByAllCorpse = 0;
         $corpseDateDischarged = null;
         $uiFinancial = array();
+        $extraDays = 0;
         $corpse = CorpRepositoryImp::findCorpseByDate($startDate,$endDate)->getData();
         
         foreach ($corpse as $corp) {
-            $clearedCorpse = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById($corp->getCorpseCode())->getData();
+            $clearedCorpse = $this->clearanceRepositoryImpFactory->getClearanceRepositoryImp()->fetchClearanceById((CorpRepositoryImp::searchCorpById($corp->getCorpseCode()))->getData()->getId())->getData();
             $bills = $this->billingRepositoryImpFactory->getBillingRepositoryImp()->fetchBillingByCorpseId((CorpRepositoryImp::searchCorpById($corp->getCorpseCode()))->getData()->getId())->getData();
-            
-            // if(!is_null($clearedCorpse)){
-            //     foreach ($clearedCorpse as $clearance) {
-            //         $corpseDateDischarged = $clearance->getCreatedAt();
-            //      }
-            // }
-            
             if(! is_null($bills)){
                 foreach ($bills as $bill) {
                     //$serviceFee = $bill->getServiceFee();
@@ -108,7 +102,13 @@ class ReportController extends Controller
                     }
                 }
             }
-            $extraDays = DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d")) < 0 ? 0:DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d"));
+
+             if(is_null($clearedCorpse)){
+                $extraDays = DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d")) < 0 ? 0:DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d"));
+             }else{
+                $extraDays = DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d",strtotime($clearedCorpse[0]->getCreatedAt()))) < 0 ? 0:DateToDaysConversion::convert($corp->getCollectionDate(),date("Y-m-d",strtotime($clearedCorpse[0]->getCreatedAt())));
+             }
+           
             $dueDays = DateToDaysConversion::convert($corp->getAdmissionDate(),$corp->getCollectionDate());
             $amountDue = (($dueDays + $extraDays) * $dailyServiceFee) + $oneTimeServiceFee ;
             $totalAmountDueByAllCorpse += $amountDue;

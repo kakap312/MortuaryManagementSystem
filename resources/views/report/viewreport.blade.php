@@ -35,7 +35,7 @@
         <div class='row financialreportprintarea'>
             <div class='col-md-12 '><hr/> 
                 <div class="corpsedetailheader">
-                    <img style='width:150px; height:150px;' src='img/companylogo.jpg'alt="Company Logo"/>
+                    <img style='width:200px; height:180px;' src='img/companylogo.jpg'alt="Company Logo"/>
                     <h2> O.V. OHIO'S MORTUARY</h2>
                     <h4>P.O.BOX 578,  BREKUM</h4>
                     <h4>0551-065-011 / 0543-414-393</h4>
